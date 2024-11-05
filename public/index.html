@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="NovelView" />
+      <meta property="og:title" content="NovelView" />
+      <meta property="og:description" content="" />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="NovelView" />
+      <meta name="twitter:description" content="" />
+      <title>NovelView</title>
+
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <!--
+      <link
+         rel="apple-touch-icon"
+         sizes="180x180"
+         href="/static/assets/icons/favicons/apple-touch-icon.png"
+      />
+      <link
+         rel="icon"
+         type="image/png"
+         sizes="32x32"
+         href="/static/assets/icons/favicons/favicon-32x32.png"
+      />
+      <link
+         rel="icon"
+         type="image/png"
+         sizes="16x16"
+         href="/static/assets/icons/favicons/favicon-16x16.png"
+      />
+      <link
+         rel="preload"
+         href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+         as="style"
+         onload="this.rel='stylesheet'"
+      />
+      -->
+      <noscript>
+         <link
+            rel="stylesheet"
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+         />
+      </noscript>
+      <style></style>
+
+      <!--dev-->
+      <script defer src="/src/index.tsx"></script>
+      <!--prod-->
+      <!--<script defer type="module" src="/dist/index.js"></script>-->
+   </head>
+   <body>
+      <noscript>
+         <div id="n_script_c">
+            <div id="n_script_h">
+               Please enable JavaScript to view this website.
+            </div>
+         </div>
+      </noscript>
+      <script nomodule>
+         let d = document;
+
+         let cont = d.createElement("div");
+         cont.id = "n_script_c";
+         d.body.appendChild(cont);
+
+         let header = d.createElement("div");
+         header.id = "n_script_h";
+         header.textContent = "Please enable JavaScript to view this website.";
+         cont.appendChild(header);
+      </script>
+      <div id="root"></div>
+   </body>
+</html>
