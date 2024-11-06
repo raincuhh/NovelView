@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+}
+
+*,
+*::before,
+*::after {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   box-sizing: border-box;
+   background: transparent;
+   list-style: none;
+}
+
+article,
+aside,
+details,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+   display: block;
+}
+
+::-webkit-scrollbar {
+   display: none;
+}
+
+a {
+   text-decoration: none;
+}
