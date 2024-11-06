@@ -2,7 +2,16 @@
 module.exports = {
    content: ["./public/index.html", "./src/**/*.{js,jsx,ts,tsx}"],
    theme: {
-      extend: {},
+      extend: {
+         colors: {},
+         spacing: {},
+         fontSize: {},
+         fontFamily: {},
+         zIndex: {},
+         transitionProperty: {},
+         transitionTimingFunction: {},
+         transitionDuration: {},
+      },
    },
    plugins: [],
 };
