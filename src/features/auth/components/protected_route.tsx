@@ -2,7 +2,13 @@ import { PropsWithChildren, useEffect } from "react";
 import { use_auth } from "../lib/hooks";
 import { useLocation, useNavigate } from "react-router-dom";
 
-type ProtectedRouteProps = PropsWithChildren;
+enum ProtectedRouteTypes {
+   auth,
+   admin,
+   protected,
+}
+
+type ProtectedRouteProps = PropsWithChildren & { type?: ProtectedRouteTypes };
 
 export default function ProtectedRoute({
    children,

@@ -1,15 +1,21 @@
 import {
    HashRouter as Router,
    Route,
-   createBrowserRouter,
+   createHashRouter,
    createRoutesFromElements,
+   Navigate,
 } from "react-router-dom";
 import ProtectedRoute from "../../features/auth/components/protected_route";
 
 const routes = createRoutesFromElements(
    <>
-      <Route path="/" element={<ProtectedRoute>Hello World!</ProtectedRoute>} />
+      <Route path="*" element={<div>Error Not Found</div>} />
+      <Route path="/" element={<Navigate to={"/login"}></Navigate>} />
+      <Route
+         path="/login"
+         element={<ProtectedRoute>hello world!</ProtectedRoute>}
+      />
    </>
 );
 
-export const router = createBrowserRouter(routes);
+export const router = createHashRouter(routes);

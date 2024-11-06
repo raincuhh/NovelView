@@ -13,12 +13,15 @@ pub fn run() {
                 )?;
             }
 
-            let login_window =
-                WebviewWindowBuilder::new(app, "login", tauri::WebviewUrl::App("login".into()))
-                    .title("Login")
-                    .build()?;
+            let login_window: tauri::WebviewWindow = WebviewWindowBuilder::new(
+                app,
+                "login",
+                tauri::WebviewUrl::App("index.html#/login".into()),
+            )
+            .title("Login")
+            .build()?;
 
-            let main_window = WebviewWindowBuilder::new(
+            let main_window: tauri::WebviewWindow = WebviewWindowBuilder::new(
                 app,
                 "NovelView",
                 tauri::WebviewUrl::App("index.html#/main".into()),
