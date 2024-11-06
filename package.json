@@ -41,6 +41,10 @@
       "vite": "^5.4.10"
    },
    "dependencies": {
+      "@capacitor/android": "^6.1.2",
+      "@capacitor/cli": "^6.1.2",
+      "@capacitor/core": "^6.1.2",
+      "@capacitor/ios": "^6.1.2",
       "@gsap/react": "^2.1.1",
       "@supabase/supabase-js": "^2.46.1",
       "@tauri-apps/api": "^2.0.3",
