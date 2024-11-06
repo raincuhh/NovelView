@@ -1,4 +1,7 @@
+use tauri::Listener;
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
+use tauri::WebviewWindowBuilder;
+
 pub fn run() {
     tauri::Builder::default()
         .setup(|app| {
@@ -9,6 +12,26 @@ pub fn run() {
                         .build(),
                 )?;
             }
+
+            let login_window =
+                WebviewWindowBuilder::new(app, "login", tauri::WebviewUrl::App("login".into()))
+                    .title("Login")
+                    .build()?;
+
+            let main_window = WebviewWindowBuilder::new(
+                app,
+                "NovelView",
+                tauri::WebviewUrl::App("index.html#/main".into()),
+            )
+            .title("NovelView")
+            .visible(false)
+            .build()?;
+
+            app.listen_any("login_success", move |_| {
+                login_window.hide().unwrap();
+                main_window.show().unwrap();
+            });
+
             Ok(())
         })
         .run(tauri::generate_context!())

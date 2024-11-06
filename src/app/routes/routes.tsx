@@ -8,7 +8,7 @@ import ProtectedRoute from "../../features/auth/components/protected_route";
 
 const routes = createRoutesFromElements(
    <>
-      <Route path="/" element={<div>hello world!</div>} />
+      <Route path="/" element={<ProtectedRoute>Hello World!</ProtectedRoute>} />
    </>
 );
 

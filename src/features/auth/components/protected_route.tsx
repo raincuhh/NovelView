@@ -13,7 +13,7 @@ export default function ProtectedRoute({
 
    useEffect(() => {
       if (!is_authenticated) {
-         // redirect
+         console.log("is not authenticated, not redirecting for dev though");
       }
    }, [is_authenticated, navigate, loading, location.pathname]);
 
