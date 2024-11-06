@@ -11,10 +11,7 @@ const routes = createRoutesFromElements(
    <>
       <Route path="*" element={<div>Error Not Found</div>} />
       <Route path="/" element={<Navigate to={"/login"}></Navigate>} />
-      <Route
-         path="/login"
-         element={<ProtectedRoute>hello world!</ProtectedRoute>}
-      />
+      <Route path="/login" element={<ProtectedRoute>login!</ProtectedRoute>} />
    </>
 );
 

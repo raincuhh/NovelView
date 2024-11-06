@@ -13,7 +13,7 @@ type ProtectedRouteProps = PropsWithChildren & { type?: ProtectedRouteTypes };
 export default function ProtectedRoute({
    children,
 }: ProtectedRouteProps): JSX.Element {
-   const { is_authenticated, loading } = use_auth();
+   const { is_authenticated, loading, role } = use_auth();
    const navigate = useNavigate();
    const location = useLocation();
 
