@@ -1,5 +1,7 @@
 import { PropsWithChildren } from "react";
 
+import SplashScreen from "../utils/splash_screen";
+
 type RootLayoutProps = PropsWithChildren & {};
 
 export default function RootLayout({
@@ -7,7 +9,8 @@ export default function RootLayout({
 }: RootLayoutProps) {
    return (
       <>
-         <div>test</div>
+         <SplashScreen />
+         <div className="flex"></div>
          {children}
       </>
    );

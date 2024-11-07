@@ -8,7 +8,7 @@ import {
 import { EnvironmentContext } from "../../shared/lib/hooks";
 import MobileDetect from "mobile-detect";
 
-import TitleBar from "../../shared/components/title_bar";
+import TitleBar from "../../shared/components/ui/title_bar";
 import { TitleBarButtonState } from "../../shared/lib/types";
 
 type EnvironmentProviderProps = PropsWithChildren;

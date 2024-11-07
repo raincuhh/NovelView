@@ -13,6 +13,7 @@ import ProtectedRoute, {
 import NotFoundPage from "../../pages/error/not_found/page";
 import LoginPage from "../../pages/login/page";
 import RegisterPage from "../../pages/register/page";
+import PageLayout from "../../shared/components/layouts/page_layout";
 
 type RouteListProps = {
    path: string;
@@ -61,7 +62,9 @@ const routes = createRoutesFromElements(
                      <ProtectedRoute
                         type={route.protected_route_type}
                      >
-                        {route.element}
+                        <PageLayout>
+                           {route.element}
+                        </PageLayout>
                      </ProtectedRoute>
                   ) : (
                      route.element

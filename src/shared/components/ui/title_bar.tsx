@@ -1,5 +1,5 @@
-import { TitleBarButtonContainer } from "./title_bar_buttons";
-import { TitleBarButtonState } from "../lib/types";
+import { TitleBarButtonContainer } from "./title_bar_button_container";
+import { TitleBarButtonState } from "../../lib/types";
 
 type TitleBarProps = TitleBarButtonState;
 

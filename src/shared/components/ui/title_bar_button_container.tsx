@@ -1,24 +1,16 @@
-import { useCallback, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-   faXmark,
-   faMinus,
-} from "@fortawesome/free-solid-svg-icons";
+import { useCallback } from "react";
 import {
    TitleBarButtonState,
    TitleBarButtonTypes,
-} from "../lib/types";
+} from "../../lib/types";
 import {
    getCurrentWebviewWindow,
    WebviewWindow,
 } from "@tauri-apps/api/webviewWindow";
 
-type TitleBarButtonContainerProps = TitleBarButtonState;
+import TitleBarButton from "./title_bar_button";
 
-type TitlebarButtonProps = {
-   button_type: TitleBarButtonTypes;
-   on_click?: (event: string) => void;
-};
+type TitleBarButtonContainerProps = TitleBarButtonState;
 
 export function TitleBarButtonContainer({
    close_button,
@@ -26,7 +18,6 @@ export function TitleBarButtonContainer({
    minimize_button,
 }: TitleBarButtonContainerProps): JSX.Element {
    const window: WebviewWindow = getCurrentWebviewWindow();
-   console.log(window);
 
    const handle_btn_event = useCallback((event: string) => {
       switch (event) {
@@ -73,45 +64,5 @@ export function TitleBarButtonContainer({
             )}
          </div>
       </>
-   );
-}
-
-function TitleBarButton({
-   button_type,
-   on_click,
-}: TitlebarButtonProps): JSX.Element {
-   const button_hover = {
-      close: "bg-red-500",
-      minimize: "bg-neutral-300",
-      maximize: "bg-neutral-300",
-   };
-
-   const icons = {
-      close: faXmark,
-      minimize: faMinus,
-   };
-
-   return (
-      <div
-         className={`h-titlebar-height px-4 cursor-pointer flex items-center z-layer-menu bg-base-40 hover:bg-base-50 ${
-            "hover:" + button_hover[button_type]
-         }`}
-         onClick={() => {
-            console.log("clicked");
-            on_click?.(button_type);
-         }}
-      >
-         <div className="h-full flex justify-center items-center">
-            {button_type ===
-            TitleBarButtonTypes.maximize ? (
-               <i className="bx bx-rectangle text-white" />
-            ) : (
-               <FontAwesomeIcon
-                  icon={icons[button_type]}
-                  className="text-white"
-               />
-            )}
-         </div>
-      </div>
    );
 }

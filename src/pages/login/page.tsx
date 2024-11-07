@@ -1,3 +1,9 @@
 export default function LoginPage() {
-   return <>login</>;
+   return (
+      <>
+         <div id="login" className="h-full">
+            login
+         </div>
+      </>
+   );
 }

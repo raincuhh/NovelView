@@ -21,21 +21,27 @@ export default function ProtectedRoute({
    const location = useLocation();
 
    useEffect(() => {
-      if (!is_authenticated) {
-         console.log(
-            "is not authenticated, not redirecting for dev though"
-         );
-      }
-
       if (type === ProtectedRouteTypes.auth) {
+         // logic: if not authenticated and route is auth, stay.
+         // if authenticated, redirect to dashboard.
+
          console.log("auth route");
+         if (is_authenticated) {
+            console.log(
+               "is authenticated, not redirecting for dev rn though"
+            );
+         }
       }
 
       if (type === ProtectedRouteTypes.default) {
+         // logic: if not authenticated and route is protected route,
+         // redirect to auth route.
          console.log("protected route");
       }
 
       if (type === ProtectedRouteTypes.admin) {
+         // logic: if authenticated and role != admin.
+         // redirect with a 401 error no autherization
          console.log("admin route");
       }
    }, [

@@ -1,11 +1,11 @@
 type RenderListProps<T> = {
    data: T[];
-   render_item: (item: T) => React.ReactNode;
+   to_render: (item: T) => React.ReactNode;
 };
 
 export default function RenderList<T>({
    data,
-   render_item,
+   to_render,
 }: RenderListProps<T>) {
-   return <>{data.map((item) => render_item(item))}</>;
+   return <>{data.map((item) => to_render(item))}</>;
 }

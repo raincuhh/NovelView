@@ -3,6 +3,11 @@ const plugin = require("tailwindcss/plugin");
 
 module.exports = {
    content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+   safelist: [
+      //titlebar
+      "hover:bg-red-500",
+      "hover:bg-base-50",
+   ],
    theme: {
       extend: {
          colors: {
@@ -100,10 +105,24 @@ module.exports = {
             "layer-menu": 65,
             "layer-tooltip": 70,
             "layer-dragging": 80,
+            "layer-native": 90,
+            "layer-window": 100,
          },
-         transitionProperty: {},
-         transitionTimingFunction: {},
-         transitionDuration: {},
+         transitionProperty: {
+            "transition-all": "all",
+            "transition-color": "color",
+            "transition-bg": "background-color",
+            "transition-height": "height",
+            "transition-transform": "transform",
+            "transition-opacity": "opacity",
+         },
+         transitionTimingFunction: {
+            "ease-in": "cubic-bezier(0.4, 0, 1, 1)",
+            "ease-out": "cubic-bezier(0, 0, 0.2, 1)",
+            "ease-in-out": "cubic-bezier(0.4, 0, 0.2, 1)",
+            linear: "linear",
+            ease: "ease",
+         },
       },
    },
    plugins: [

@@ -6,6 +6,10 @@ const root: ReactDOM.Root = createRoot(
    document.getElementById("root") as HTMLElement
 );
 
+const html: HTMLElement | null =
+   document.querySelector("html");
+if (html) html.setAttribute("class", "dark");
+
 function render(strict: boolean = true) {
    if (strict) {
       root.render(
