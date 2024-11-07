@@ -58,7 +58,7 @@ export function TitlebarButtonContainer({
 
    return (
       <>
-         <div className="flex flex-row-reverse top-0 right-0">
+         <div className="flex flex-row-reverse top-0 right-0 pointer-events-none">
             {close_button === true ? (
                <TitlebarButton
                   button_type={TitlebarButtonTypes.close}
@@ -105,19 +105,22 @@ function TitlebarButton({
 
    return (
       <div
-         className={`w-12 h-titlebar-height cursor-pointer flex items-center justify-center ${
+         className={`w-12 h-titlebar-height cursor-pointer flex items-center z-layer-popup bg-base-40 justify-center ${
             "hover:" + button_hover[button_type]
          }`}
-         onClick={() => on_click?.(button_type)}
+         onClick={() => {
+            console.log("clicked");
+            on_click?.(button_type);
+         }}
       >
-         <div className="px-4">
+         <div className="px-4 pointer-events-none">
             {button_type ===
             TitlebarButtonTypes.maximize ? (
-               <i className="bx bx-rectangle text-white" />
+               <i className="bx bx-rectangle text-white pointer-events-none" />
             ) : (
                <FontAwesomeIcon
                   icon={icons[button_type]}
-                  className="text-white"
+                  className="text-white pointer-events-none"
                />
             )}
          </div>

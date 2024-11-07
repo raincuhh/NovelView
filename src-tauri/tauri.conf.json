@@ -12,7 +12,17 @@
    "app": {
       "windows": [],
       "security": {
-         "csp": null
+         "csp": null,
+         "capabilities": [
+            {
+               "identifier": "window-titlebar",
+               "windows": ["login", "main"],
+               "permissions": [
+                  "core:window:allow-start-dragging",
+                  "core:window:allow-internal-toggle-maximize"
+               ]
+            }
+         ]
       }
    },
    "bundle": {

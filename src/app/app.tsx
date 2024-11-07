@@ -9,12 +9,13 @@ import "boxicons";
 
 export default function App(): JSX.Element {
    return (
-      <div id="app">
+      <>
          <EnvironmentProvider>
             <AuthProvider>
                <RouterProvider router={router} />
             </AuthProvider>
          </EnvironmentProvider>
-      </div>
+      </>
    );
 }
+//awdwada
