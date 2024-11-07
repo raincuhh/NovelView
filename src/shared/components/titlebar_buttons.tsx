@@ -1,7 +1,10 @@
 import { invoke } from "@tauri-apps/api/core";
 import { useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faMinus } from "@fortawesome/free-solid-svg-icons";
+import {
+   faXmark,
+   faMinus,
+} from "@fortawesome/free-solid-svg-icons";
 import { TitlebarButtonTypes } from "../lib/types";
 
 type WindowState = {
@@ -9,7 +12,7 @@ type WindowState = {
    height?: number;
 };
 
-type TitlebarButtonsProps = {
+type TitlebarButtonContainerProps = {
    close_button?: boolean;
    maximize_button?: boolean;
    minimize_button?: boolean;
@@ -21,17 +24,19 @@ type TitlebarButtonProps = {
    on_click?: (event: string) => void;
 };
 
-export function TitlebarButtons({
+export function TitlebarButtonContainer({
    close_button,
    maximize_button,
    minimize_button,
    window_state,
-}: TitlebarButtonsProps): JSX.Element {
+}: TitlebarButtonContainerProps): JSX.Element {
    const handle_btn_event = useCallback(
       (event: string) => {
          switch (event) {
             case "minimize":
-               invoke("minimize_window", { window: window_state });
+               invoke("minimize_window", {
+                  window: window_state,
+               });
                break;
             case "maximize":
                invoke("maximize_window", {
@@ -40,7 +45,9 @@ export function TitlebarButtons({
                });
                break;
             case "close":
-               invoke("close_window", { window: window_state });
+               invoke("close_window", {
+                  window: window_state,
+               });
                break;
             default:
                break;
@@ -51,7 +58,7 @@ export function TitlebarButtons({
 
    return (
       <>
-         <div className="flex flex-row-reverse fixed top-0 right-0">
+         <div className="flex flex-row-reverse top-0 right-0">
             {close_button === true ? (
                <TitlebarButton
                   button_type={TitlebarButtonTypes.close}
@@ -98,13 +105,14 @@ function TitlebarButton({
 
    return (
       <div
-         className={`w-12 h-[26px] cursor-pointer bg-neutral-600   flex items-center justify-center ${
+         className={`w-12 h-titlebar-height cursor-pointer flex items-center justify-center ${
             "hover:" + button_hover[button_type]
          }`}
          onClick={() => on_click?.(button_type)}
       >
          <div className="px-4">
-            {button_type === TitlebarButtonTypes.maximize ? (
+            {button_type ===
+            TitlebarButtonTypes.maximize ? (
                <i className="bx bx-rectangle text-white" />
             ) : (
                <FontAwesomeIcon

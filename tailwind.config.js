@@ -6,7 +6,7 @@ module.exports = {
    theme: {
       extend: {
          colors: {
-            // Base colors
+            //base colors
             "base-00": "rgb(25, 25, 25)",
             "base-05": "rgb(28, 28, 28)",
             "base-10": "rgb(31, 31, 31)",
@@ -20,23 +20,29 @@ module.exports = {
             "base-70": "rgb(179, 179, 179)",
             "base-100": "rgb(218, 218, 218)",
 
-            // Accent colors
+            //accent colors
             "accent-primary": "hsl(258, 88%, 66%)",
             "accent-secondary": "hsl(255, 89%, 76%)",
             "accent-tertiary": "hsl(253, 92%, 85%)",
 
-            // Background colors
-            "background-form-field": "var(--base-25)",
-            "background-secondary": "var(--base-30)",
+            //background colors
+            "background-primary": "var(--base-00)",
+            "background-primary-alt": "var(--base-10)",
+            "background-secondary": "var(--base-20)",
+            "background-modifier-hover":
+               "rgba(var(--mono-rgb-100), 0.075)",
+            "background-modifier-active-hover":
+               "hsla(258, 88%, 66%, 0.15)",
+            "background-modifier-border": "var(--base-25)",
 
-            // Interactive states
+            //interactive states
             "interactive-normal": "var(--base-30)",
             "interactive-hover": "var(--base-35)",
             "interactive-accent": "var(--accent-primary)",
             "interactive-accent-hover":
                "var(--accent-secondary)",
 
-            // Text colors
+            //text colors
             "text-primary": "var(--text-normal)",
             "text-muted": "var(--text-muted)",
             "text-secondary": "var(--text-faint)",
@@ -46,7 +52,7 @@ module.exports = {
             "text-error": "var(--text-error)",
             "text-warning": "var(--text-warning)",
 
-            // Custom stuff
+            //custom stuff
             "titlebar-bg": "var(--background-secondary)",
          },
          boxShadow: {
@@ -122,6 +128,24 @@ module.exports = {
                "--accent-primary": "hsl(258, 88%, 66%)",
                "--accent-secondary": "hsl(255, 89%, 76%)",
                "--accent-tertiary": "hsl(253, 92%, 85%)",
+
+               //bgs
+               "--background-primary": "var(--base-00)",
+               "--background-primary-alt": "var(--base-10)",
+               "--background-secondary": "var(--base-20)",
+               "--background-modifier-hover":
+                  "rgba(var(--mono-rgb-100), 0.075)",
+               "--background-modifier-active-hover":
+                  "hsla(258, 88%, 66%, 0.15)",
+               "--background-modifier-border":
+                  "var(--base-25)",
+
+               "--interactive-normal": "var(--base-30)",
+               "--interactive-hover": "var(--base-35)",
+               "--interactive-accent":
+                  "var(--accent-primary)",
+               "--interactive-accent-hover":
+                  "var(--accent-secondary)",
 
                //primarys
                "--color-red": "rgb(255, 0, 0)",
