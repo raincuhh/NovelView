@@ -48,7 +48,6 @@ const route_list: RouteListProps[] = [
       protected_route_type: ProtectedRouteTypes.auth,
    },
 ];
-// todo add titlebar inside the environmentprovider with a hook to turn them on or off or enable certain ones.
 const routes = createRoutesFromElements(
    <>
       {route_list.map(
