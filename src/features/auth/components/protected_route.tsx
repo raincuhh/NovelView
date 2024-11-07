@@ -2,16 +2,19 @@ import { PropsWithChildren, useEffect } from "react";
 import { use_auth } from "../lib/hooks";
 import { useLocation, useNavigate } from "react-router-dom";
 
-enum ProtectedRouteTypes {
+export enum ProtectedRouteTypes {
    auth,
    admin,
-   protected,
+   default,
 }
 
-type ProtectedRouteProps = PropsWithChildren & { type?: ProtectedRouteTypes };
+type ProtectedRouteProps = PropsWithChildren & {
+   type?: ProtectedRouteTypes;
+};
 
 export default function ProtectedRoute({
    children,
+   type = ProtectedRouteTypes.default,
 }: ProtectedRouteProps): JSX.Element {
    const { is_authenticated, loading, role } = use_auth();
    const navigate = useNavigate();
@@ -19,9 +22,29 @@ export default function ProtectedRoute({
 
    useEffect(() => {
       if (!is_authenticated) {
-         console.log("is not authenticated, not redirecting for dev though");
+         console.log(
+            "is not authenticated, not redirecting for dev though"
+         );
       }
-   }, [is_authenticated, navigate, loading, location.pathname]);
+
+      if (type === ProtectedRouteTypes.auth) {
+         console.log("auth route");
+      }
+
+      if (type === ProtectedRouteTypes.default) {
+         console.log("protected route");
+      }
+
+      if (type === ProtectedRouteTypes.admin) {
+         console.log("admin route");
+      }
+   }, [
+      is_authenticated,
+      navigate,
+      loading,
+      role,
+      location.pathname,
+   ]);
 
    return <>{children}</>;
 }
