@@ -1,6 +1,6 @@
-use tauri::{command, Manager, WebviewWindow, Window};
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 use tauri::{AppHandle, Listener, WebviewWindowBuilder};
+use tauri::{Manager, WebviewWindow};
 
 pub fn run() {
     tauri::Builder::default()
@@ -55,15 +55,12 @@ pub fn run() {
 
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![
-            minimize_window,
-            close_window,
-            maximize_window
-        ])
+        .invoke_handler(tauri::generate_handler![])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
 
+/*
 #[command]
 fn minimize_window(window: Window) {
     window.minimize().unwrap();
@@ -90,6 +87,7 @@ fn maximize_window(window: Window, state: tauri::State<'_, std::sync::Mutex<Wind
 
         state.width = Some(size.width);
         state.height = Some(size.height);
+        drop(state);
 
         window.maximize().unwrap();
     }
@@ -99,6 +97,8 @@ fn maximize_window(window: Window, state: tauri::State<'_, std::sync::Mutex<Wind
 fn close_window(window: Window) {
     window.close().unwrap();
 }
+
+*/
 
 fn setup_window(
     app_handle: &AppHandle,

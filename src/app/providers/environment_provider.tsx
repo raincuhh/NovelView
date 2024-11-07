@@ -8,18 +8,33 @@ import {
 import { EnvironmentContext } from "../../shared/lib/hooks";
 import MobileDetect from "mobile-detect";
 
-import TitleBar from "../../shared/components/titlebar";
-import { TitlebarButtonTypes } from "../../shared/lib/types";
+import TitleBar from "../../shared/components/title_bar";
+import { TitleBarButtonState } from "../../shared/lib/types";
 
 type EnvironmentProviderProps = PropsWithChildren;
 
 export default function EnvironmentProvider({
    children,
 }: EnvironmentProviderProps): JSX.Element {
-   const [is_desktop, set_is_desktop] = useState(false);
-   const [is_mobile, set_is_mobile] = useState(false);
-   const [is_tauri, set_is_tauri] = useState(false);
+   // environment detection
+   const mobile_detect: MobileDetect = new MobileDetect(
+      window.navigator.userAgent
+   );
+   const is_tauri = useMemo(
+      () =>
+         process.env.NODE_ENV === "production" &&
+         "__TAURI__" in window,
+      []
+   );
+   const is_mobile = useMemo(
+      () =>
+         mobile_detect.mobile() !== null ||
+         mobile_detect.tablet() !== null,
+      []
+   );
+   const is_desktop = !is_mobile;
 
+   // title bar stuff TODO: make this less coupled? but dont do forwardref, that shits fucked
    const [
       titlebar_close_button,
       set_titlebar_close_button,
@@ -33,35 +48,8 @@ export default function EnvironmentProvider({
       set_titlebar_minimize_button,
    ] = useState(true);
 
-   useEffect(() => {
-      const mobile_detect: MobileDetect = new MobileDetect(
-         window.navigator.userAgent
-      );
-      const is_mobile_device =
-         mobile_detect.mobile() !== null ||
-         mobile_detect.tablet() !== null;
-
-      set_is_mobile(is_mobile_device);
-      set_is_desktop(!is_mobile_device);
-
-      const is_tauri_app =
-         process.env.NODE_ENV === "production" &&
-         "__TAURI__" in window;
-      set_is_tauri(is_tauri_app);
-
-      //console.log("is tauri app: ", is_tauri_app);
-      //console.log("is desktop: ", is_desktop);
-      //console.log("is mobile", is_mobile);
-   }, []);
-
-   type UpdateTitlebarButtons = {
-      close_button?: boolean;
-      maximize_button?: boolean;
-      minimize_button?: boolean;
-   };
-
    const update_titlebar_buttons = useCallback(
-      (buttons: UpdateTitlebarButtons) => {
+      (buttons: TitleBarButtonState) => {
          if (buttons.close_button !== undefined)
             set_titlebar_close_button(buttons.close_button);
          if (buttons.maximize_button !== undefined)
@@ -90,7 +78,6 @@ export default function EnvironmentProvider({
          update_titlebar_buttons,
       ]
    );
-   //titlebar beside {children}
    return (
       <EnvironmentContext.Provider value={context_value}>
          {is_desktop && !is_mobile && (

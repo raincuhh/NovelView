@@ -14,8 +14,14 @@ export type EnvironmentContextProps = {
    is_capacitor?: boolean;
 };
 
-export enum TitlebarButtonTypes {
+export enum TitleBarButtonTypes {
    close = "close",
    minimize = "minimize",
    maximize = "maximize",
 }
+
+export type TitleBarButtonState = {
+   close_button?: boolean;
+   maximize_button?: boolean;
+   minimize_button?: boolean;
+};

@@ -48,6 +48,7 @@ const route_list: RouteListProps[] = [
       protected_route_type: ProtectedRouteTypes.auth,
    },
 ];
+
 const routes = createRoutesFromElements(
    <>
       {route_list.map(

@@ -1,21 +1,20 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/routes";
-import AuthProvider from "./providers/auth_provider";
-import EnvironmentProvider from "./providers/environment_provider";
+import AppProviders from "./providers/app_providers";
 
 import "../../public/css/global.css";
 import "../shared/lib/fontawesome";
 import "boxicons";
+import RootLayout from "../shared/components/layouts/root_layout";
 
 export default function App(): JSX.Element {
    return (
       <>
-         <EnvironmentProvider>
-            <AuthProvider>
+         <AppProviders>
+            <RootLayout>
                <RouterProvider router={router} />
-            </AuthProvider>
-         </EnvironmentProvider>
+            </RootLayout>
+         </AppProviders>
       </>
    );
 }
-//awdwada

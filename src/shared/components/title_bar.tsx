@@ -1,11 +1,7 @@
-import { TitlebarButtonContainer } from "./titlebar_buttons";
-import { TitlebarButtonTypes } from "../lib/types";
+import { TitleBarButtonContainer } from "./title_bar_buttons";
+import { TitleBarButtonState } from "../lib/types";
 
-type TitleBarProps = {
-   close_button?: boolean;
-   maximize_button?: boolean;
-   minimize_button?: boolean;
-};
+type TitleBarProps = TitleBarButtonState;
 
 export default function TitleBar({
    close_button,
@@ -19,8 +15,8 @@ export default function TitleBar({
             className="h-titlebar-height w-full fixed top-0 left-0 right-0 z-layer-popup bg-transparent border-none"
             data-tauri-drag-region
          >
-            <div className="text-text-primary pointer-events-none">
-               <TitlebarButtonContainer
+            <div className="text-text-primary">
+               <TitleBarButtonContainer
                   close_button={close_button}
                   maximize_button={maximize_button}
                   minimize_button={minimize_button}
