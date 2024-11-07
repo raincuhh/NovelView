@@ -56,11 +56,13 @@
       "@types/node": "^22.9.0",
       "axios": "^1.7.7",
       "bcrypt": "^5.1.1",
+      "boxicons": "^2.1.4",
       "cors": "^2.8.5",
       "dotenv": "^16.4.5",
       "express": "^4.21.1",
       "gsap": "^3.12.5",
       "jsonwebtoken": "^9.0.2",
+      "mobile-detect": "^1.4.5",
       "react": "^18.3.1",
       "react-dom": "^18.3.1",
       "react-router-dom": "^6.27.0"

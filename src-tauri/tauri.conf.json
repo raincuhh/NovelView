@@ -9,7 +9,6 @@
       "beforeDevCommand": "npm run dev",
       "beforeBuildCommand": "npm run build"
    },
-
    "app": {
       "windows": [],
       "security": {

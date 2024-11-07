@@ -1,6 +1,8 @@
-import { PropsWithChildren, useEffect, useState } from "react";
-import { AuthContext } from "../lib/hooks";
-import { UserRoles } from "../../../shared/lib/types";
+import { PropsWithChildren, useEffect, useState, useMemo } from "react";
+import { listen } from "@tauri-apps/api/event";
+
+import { AuthContext } from "../../features/auth/lib/hooks";
+import { UserRoles } from "../../shared/lib/types";
 
 type AuthProviderProps = PropsWithChildren;
 
@@ -36,10 +38,21 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       }
    };
 
+   const context_value = useMemo(
+      () => ({
+         jwt_token,
+         is_authenticated,
+         role,
+         loading,
+         login,
+         logout,
+         handle_jwt_token,
+      }),
+      [jwt_token, is_authenticated, role, loading, login, logout]
+   );
+
    return (
-      <AuthContext.Provider
-         value={{ jwt_token, is_authenticated, role, loading, login, logout }}
-      >
+      <AuthContext.Provider value={context_value}>
          {children}
       </AuthContext.Provider>
    );

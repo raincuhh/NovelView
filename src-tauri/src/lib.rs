@@ -69,9 +69,30 @@ fn minimize_window(window: Window) {
     window.minimize().unwrap();
 }
 
+struct WindowState {
+    width: Option<u32>,
+    height: Option<u32>,
+}
+
 #[command]
-fn maximize_window(window: Window) {
-    window.maximize().unwrap();
+fn maximize_window(window: Window, state: tauri::State<'_, std::sync::Mutex<WindowState>>) {
+    let mut state = state.lock().unwrap();
+
+    if let Some(width) = state.width {
+        window
+            .set_size(tauri::Size::Physical(tauri::PhysicalSize {
+                width,
+                height: state.height.unwrap_or(600),
+            }))
+            .unwrap();
+    } else {
+        let size: tauri::PhysicalSize<u32> = window.inner_size().unwrap();
+
+        state.width = Some(size.width);
+        state.height = Some(size.height);
+
+        window.maximize().unwrap();
+    }
 }
 
 #[command]
