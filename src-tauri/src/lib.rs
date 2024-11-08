@@ -23,7 +23,7 @@ pub fn run() {
                 true,
                 false,
                 false,
-                800.0,
+                1100.0,
                 650.0,
             ) {
                 Ok(window) => window,
@@ -42,7 +42,7 @@ pub fn run() {
                 true,
                 false,
                 true,
-                800.0,
+                950.0,
                 650.0,
             ) {
                 Ok(window) => window,

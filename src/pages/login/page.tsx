@@ -2,9 +2,9 @@ import { tauri_get_current_webview_window } from "../../shared/lib/tauri_utils";
 import { useEffect, useState } from "react";
 import { use_environment } from "../../shared/lib/hooks";
 
-import LoginLayout from "../../widgets/login/login_layout";
+import LoginContent from "../../widgets/login/login_content";
 
-export default function LoginPage() {
+export default function LoginPage(): JSX.Element {
    const { update_titlebar_buttons } = use_environment();
 
    const [is_tauri_app, set_is_tauri_app] = useState(false);
@@ -32,7 +32,7 @@ export default function LoginPage() {
 
    return (
       <>
-         <LoginLayout />
+         <LoginContent />
       </>
    );
 }

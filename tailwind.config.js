@@ -15,6 +15,7 @@ module.exports = {
       extend: {
          colors: {
             //base colors
+            "base-black": "rgb(0, 0, 0)",
             "base-00": "rgb(25, 25, 25)",
             "base-05": "rgb(28, 28, 28)",
             "base-10": "rgb(31, 31, 31)",
@@ -133,6 +134,7 @@ module.exports = {
          addBase({
             ":root": {
                //base
+               "--base-black": "rgb(0, 0, 0)",
                "--base-00": "rgb(25, 25, 25)",
                "--base-05": "rgb(28, 28, 28)",
                "--base-10": "rgb(31, 31, 31)",

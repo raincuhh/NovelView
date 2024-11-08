@@ -10,6 +10,7 @@ import MobileDetect from "mobile-detect";
 
 import TitleBar from "../../shared/components/ui/title_bar";
 import { TitleBarButtonState } from "../../shared/lib/types";
+import { is_tauri } from "../../shared/lib/tauri_utils";
 
 type EnvironmentProviderProps = PropsWithChildren;
 
@@ -18,12 +19,6 @@ export default function EnvironmentProvider({
 }: EnvironmentProviderProps): JSX.Element {
    const mobile_detect: MobileDetect = new MobileDetect(
       window.navigator.userAgent
-   );
-   const is_tauri = useMemo(
-      () =>
-         process.env.NODE_ENV === "production" &&
-         "__TAURI__" in window,
-      []
    );
    const is_mobile = useMemo(
       () =>
@@ -66,19 +61,14 @@ export default function EnvironmentProvider({
       () => ({
          is_desktop,
          is_mobile,
-         is_tauri,
          update_titlebar_buttons,
       }),
-      [
-         is_desktop,
-         is_mobile,
-         is_tauri,
-         update_titlebar_buttons,
-      ]
+      [is_desktop, is_mobile, update_titlebar_buttons]
    );
+
    return (
       <EnvironmentContext.Provider value={context_value}>
-         {is_desktop && !is_mobile && (
+         {is_desktop && is_tauri && (
             <TitleBar
                close_button={titlebar_close_button}
                maximize_button={titlebar_maximize_button}

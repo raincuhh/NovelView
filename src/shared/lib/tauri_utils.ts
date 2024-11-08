@@ -4,12 +4,16 @@ import {
    WebviewWindow,
 } from "@tauri-apps/api/webviewWindow";
 
-const is_tauri = window.__TAURI__;
+//const is_tauri = window.__TAURI__;
+export const is_tauri =
+   typeof window !== "undefined" &&
+   "__TAURI_INTERNALS__" in window;
 
 export function tauri_get_current_webview_window(): WebviewWindow | null {
    if (is_tauri) {
       return getCurrentWebviewWindow();
    }
+
    console.log(is_tauri);
    return null;
 }
