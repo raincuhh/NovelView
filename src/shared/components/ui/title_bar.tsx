@@ -15,7 +15,7 @@ export default function TitleBar({
             className="h-titlebar-height w-full fixed top-0 left-0 right-0 z-layer-popup bg-transparent border-none"
             data-tauri-drag-region
          >
-            <div className="text-text-primary">
+            <div className="text-text-normal">
                <TitleBarButtonContainer
                   close_button={close_button}
                   maximize_button={maximize_button}

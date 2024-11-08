@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect } from "react";
-import { use_auth } from "../lib/hooks";
+import { use_auth } from "../../lib/hooks";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export enum ProtectedRouteTypes {

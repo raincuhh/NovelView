@@ -15,7 +15,7 @@ export default function PageLayout({
             <div className="h-[100dvh] min-h-[0px] w-full overflow-hidden">
                <div
                   id="out"
-                  className="h-full bg-background-primary text-text-primary"
+                  className="h-full bg-background-primary text-text-normal"
                >
                   {children}
                </div>

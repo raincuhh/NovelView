@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import ProtectedRoute, {
    ProtectedRouteTypes,
-} from "../../features/auth/components/protected_route";
+} from "../../features/auth/components/utils/protected_route";
 
 //pages
 import NotFoundPage from "../../pages/error/not_found/page";

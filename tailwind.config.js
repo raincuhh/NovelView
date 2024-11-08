@@ -5,6 +5,7 @@ module.exports = {
    content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
    safelist: [
       //titlebar
+      "bg-accent-primary",
       "hover:bg-red-500",
       "hover:bg-base-40",
       "text-fs-sm",
@@ -27,6 +28,8 @@ module.exports = {
             "base-50": "rgb(99, 99, 99)",
             "base-60": "rgb(153, 153, 153)",
             "base-70": "rgb(179, 179, 179)",
+            "base-80": "rgb(191, 191, 191)",
+            "base-90": "rgb(204, 204, 204)",
             "base-100": "rgb(218, 218, 218)",
 
             //accent colors
@@ -52,9 +55,9 @@ module.exports = {
                "var(--accent-secondary)",
 
             //text colors
-            "text-primary": "var(--text-normal)",
+            "text-normal": "var(--text-normal)",
             "text-muted": "var(--text-muted)",
-            "text-secondary": "var(--text-faint)",
+            "text-faint": "var(--text-faint)",
             "text-on-accent": "var(--text-on-accent)",
             "text-on-accent-inverted":
                "var(--text-on-accent-inverted)",
@@ -86,6 +89,10 @@ module.exports = {
          },
 
          fontSize: {
+            "fs-3xs":
+               "clamp(0.75rem, 2vw + 0.3rem, 0.875rem)",
+            "fs-2xs":
+               "clamp(0.8125rem, 2vw + 0.5rem, 1rem)",
             "fs-xs": "clamp(0.875rem, 2vw + 1rem, 1rem)",
             "fs-sm": "clamp(1rem, 2vw + 1.25rem, 1.25rem)",
             "fs-md": "clamp(1.25rem, 2vw + 1.5rem, 1.5rem)",
@@ -94,10 +101,13 @@ module.exports = {
             "fs-2xl": "clamp(2.5rem, 2vw + 3rem, 4rem)",
             "fs-3xl": "clamp(3rem, 2vw + 3.5rem, 5rem)",
          },
+         fontFamily: {
+            primary: ["Nuito Sans", "sans-serif"],
+            secondary: ['"Roboto"', "sans-serif"],
+         },
          height: {
             "titlebar-height": "30px",
          },
-         fontFamily: {},
          zIndex: {
             "layer-background": 5,
             "layer-sidebar": 10,
@@ -127,6 +137,12 @@ module.exports = {
             linear: "linear",
             ease: "ease",
          },
+         screens: {
+            "media-500": "500px",
+            "media-850": "850px",
+            "media-1150": "1150px",
+            "media-1400": "1400px",
+         },
       },
    },
    plugins: [
@@ -146,6 +162,8 @@ module.exports = {
                "--base-50": "rgb(99, 99, 99)",
                "--base-60": "rgb(153, 153, 153)",
                "--base-70": "rgb(179, 179, 179)",
+               "--base-80": "rgb(191, 191, 191)",
+               "--base-90": "rgb(204, 204, 204)",
                "--base-100": "rgb(218, 218, 218)",
 
                //accent
@@ -177,12 +195,17 @@ module.exports = {
 
                //text
                "--text-normal": "var(--base-100)",
-               "--text-muted": "var(--base-70)",
+               "--text-muted": "var(--base-60)",
                "--text-faint": "var(--base-50)",
                "--text-on-accent": "white",
                "--text-on-accent-inverted": "black",
                "--text-error": "var(--color-red)",
                "--text-warning": "var(--color-orange)",
+
+               //fonts
+               "--font-primary":
+                  '"Nunito Sans", sans-serif',
+               "--font-secondary": '"Roboto", sans-serif',
             },
          });
       }),

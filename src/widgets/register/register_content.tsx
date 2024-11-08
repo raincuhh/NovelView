@@ -1,12 +1,12 @@
-import LoginMain from "./login_main";
 import AuthPageAside from "../../features/auth/components/ui/auth_page_content_aside";
+import RegisterMain from "./register_main";
 
-export default function LoginContent(): JSX.Element {
+export default function RegisterContent(): JSX.Element {
    return (
       <>
-         <div id="login" className="h-full">
+         <div id="register" className="h-full">
             <div className="flex flex-1 h-full lg:flex-row">
-               <LoginMain />
+               <RegisterMain />
                <AuthPageAside />
             </div>
          </div>

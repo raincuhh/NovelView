@@ -9,14 +9,14 @@ export default function AuthFormHeader({
 }: AuthFormHeaderProps): JSX.Element {
    return (
       <>
-         <div className="flex flex-col mb-6">
-            <h1 className="mb-1 text-fs-md text-text-primary">
+         <header className="flex flex-col mb-10">
+            <h1 className="mb-1 text-fs-lg text-text-normal font-primary">
                {label}
             </h1>
-            <p className="text-fs-xs text-text-muted">
+            <p className="text-fs-xs text-text-muted font-secondary">
                {desc}
             </p>
-         </div>
+         </header>
       </>
    );
 }

@@ -9,6 +9,8 @@ export const is_tauri =
    typeof window !== "undefined" &&
    "__TAURI_INTERNALS__" in window;
 
+console.log(is_tauri);
+
 export function tauri_get_current_webview_window(): WebviewWindow | null {
    if (is_tauri) {
       return getCurrentWebviewWindow();

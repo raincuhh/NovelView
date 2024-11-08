@@ -1,12 +1,12 @@
 import { is_tauri } from "../../shared/lib/tauri_utils";
 
 import AuthFormHeader from "../../features/auth/components/ui/auth_form_header";
-import LoginForm from "../../features/auth/components/ui/login_form";
+import RegisterForm from "../../features/auth/components/ui/register_form";
 import AuthFormAgreementFooter from "../../features/auth/components/ui/auth_form_agreement_footer";
 import AuthDivider from "../../features/auth/components/ui/auth_divider";
 import AuthFormSwitcher from "../../features/auth/components/ui/auth_form_switcher";
 
-export default function LoginMain(): JSX.Element {
+export default function RegisterMain(): JSX.Element {
    return (
       <>
          <main
@@ -16,17 +16,17 @@ export default function LoginMain(): JSX.Element {
          >
             <div className="min-w-[320px] w-[320px] media-500:w-[380px] media-1150:w-[420px] h-full px-4 py-6 flex flex-col">
                <AuthFormHeader
-                  label="Welcome back"
-                  desc="login to your account"
+                  label="Welcome stranger"
+                  desc="create a new account"
                />
                <div className="flex flex-col gap-4">
                   <AuthDivider label="or" />
-                  <LoginForm />
+                  <RegisterForm />
                </div>
                <AuthFormSwitcher
-                  desc="Don't have an account?"
-                  link_path="/register"
-                  link_label="Register Here"
+                  desc="Already have an account?"
+                  link_path="/login"
+                  link_label="Login Here"
                />
                <AuthFormAgreementFooter />
             </div>
