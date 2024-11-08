@@ -3,11 +3,8 @@ import {
    TitleBarButtonState,
    TitleBarButtonTypes,
 } from "../../lib/types";
-import {
-   getCurrentWebviewWindow,
-   WebviewWindow,
-} from "@tauri-apps/api/webviewWindow";
-
+import { tauri_get_current_webview_window } from "../../lib/tauri_utils";
+import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import TitleBarButton from "./title_bar_button";
 
 type TitleBarButtonContainerProps = TitleBarButtonState;
@@ -17,9 +14,11 @@ export function TitleBarButtonContainer({
    maximize_button,
    minimize_button,
 }: TitleBarButtonContainerProps): JSX.Element {
-   const window: WebviewWindow = getCurrentWebviewWindow();
-
    const handle_btn_event = useCallback((event: string) => {
+      const window: WebviewWindow | null =
+         tauri_get_current_webview_window();
+      if (!window) return;
+
       switch (event) {
          case "minimize":
             window.minimize();

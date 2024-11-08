@@ -4,7 +4,6 @@ import {
    useState,
    useMemo,
 } from "react";
-import { listen } from "@tauri-apps/api/event";
 
 import { AuthContext } from "../../features/auth/lib/hooks";
 import { UserRoles } from "../../shared/lib/types";

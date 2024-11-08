@@ -15,8 +15,15 @@
       "isolatedModules": true,
       "noEmit": false,
       "jsx": "react-jsx",
-      "typeRoots": ["node_modules/@types", "src/shared/lib/global.d.ts"]
+      "typeRoots": [
+         "node_modules/@types",
+         "src/shared/lib/global.d.ts"
+      ]
    },
-   "include": ["src/**/*.ts", "src/**/*.tsx", "src/global.d.ts"],
+   "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "src/shared/lib/global.d.ts"
+   ],
    "exclude": ["node_modules", "dist"]
 }

@@ -12,6 +12,9 @@ export type EnvironmentContextProps = {
    is_desktop: boolean;
    is_tauri?: boolean;
    is_capacitor?: boolean;
+   update_titlebar_buttons: (
+      buttons: TitleBarButtonState
+   ) => void;
 };
 
 export enum TitleBarButtonTypes {
