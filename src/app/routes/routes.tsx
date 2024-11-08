@@ -48,6 +48,13 @@ const route_list: RouteListProps[] = [
       protected_route: true,
       protected_route_type: ProtectedRouteTypes.auth,
    },
+   {
+      path: "/dashboard",
+      element: <LoginPage />,
+      error_element: <NotFoundPage />,
+      protected_route: true,
+      protected_route_type: ProtectedRouteTypes.default,
+   },
 ];
 
 const routes = createRoutesFromElements(

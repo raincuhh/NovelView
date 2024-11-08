@@ -7,6 +7,8 @@ type RootLayoutProps = PropsWithChildren & {};
 export default function RootLayout({
    children,
 }: RootLayoutProps) {
+   // modals
+   // splashscreen
    return (
       <>
          <SplashScreen />

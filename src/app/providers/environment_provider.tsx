@@ -16,7 +16,6 @@ type EnvironmentProviderProps = PropsWithChildren;
 export default function EnvironmentProvider({
    children,
 }: EnvironmentProviderProps): JSX.Element {
-   // environment detection
    const mobile_detect: MobileDetect = new MobileDetect(
       window.navigator.userAgent
    );
@@ -34,7 +33,6 @@ export default function EnvironmentProvider({
    );
    const is_desktop = !is_mobile;
 
-   // title bar stuff TODO: make this less coupled? but dont do forwardref, that shits fucked
    const [
       titlebar_close_button,
       set_titlebar_close_button,
@@ -42,7 +40,7 @@ export default function EnvironmentProvider({
    const [
       titlebar_maximize_button,
       set_titlebar_maximize_button,
-   ] = useState(false);
+   ] = useState(true);
    const [
       titlebar_minimize_button,
       set_titlebar_minimize_button,

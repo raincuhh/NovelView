@@ -4,7 +4,6 @@ import AppProviders from "./providers/app_providers";
 
 import "../../public/css/global.css";
 import "../shared/lib/fontawesome";
-import "boxicons";
 import RootLayout from "../shared/components/layouts/root_layout";
 
 export default function App(): JSX.Element {

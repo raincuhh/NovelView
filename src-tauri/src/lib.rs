@@ -23,6 +23,8 @@ pub fn run() {
                 true,
                 false,
                 false,
+                800.0,
+                650.0,
             ) {
                 Ok(window) => window,
                 Err(e) => {
@@ -40,6 +42,8 @@ pub fn run() {
                 true,
                 false,
                 true,
+                800.0,
+                650.0,
             ) {
                 Ok(window) => window,
                 Err(e) => {
@@ -58,6 +62,33 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+}
+
+fn setup_window(
+    app_handle: &AppHandle,
+    label: &str,
+    url: &str,
+    title: &str,
+    visible: bool,
+    centered: bool,
+    decorations: bool,
+    resizable: bool,
+    width: f64,
+    height: f64,
+) -> Result<tauri::WebviewWindow, tauri::Error> {
+    let mut window_builder =
+        WebviewWindowBuilder::new(app_handle, label, tauri::WebviewUrl::App(url.into()))
+            .title(title)
+            .visible(visible)
+            .decorations(decorations)
+            .resizable(resizable)
+            .inner_size(width, height);
+
+    if centered {
+        window_builder = window_builder.center();
+    }
+
+    window_builder.build()
 }
 
 /*
@@ -99,27 +130,3 @@ fn close_window(window: Window) {
 }
 
 */
-
-fn setup_window(
-    app_handle: &AppHandle,
-    label: &str,
-    url: &str,
-    title: &str,
-    visible: bool,
-    centered: bool,
-    decorations: bool,
-    resizable: bool,
-) -> Result<tauri::WebviewWindow, tauri::Error> {
-    let mut window_builder =
-        WebviewWindowBuilder::new(app_handle, label, tauri::WebviewUrl::App(url.into()))
-            .title(title)
-            .visible(visible)
-            .decorations(decorations)
-            .resizable(resizable);
-
-    if centered {
-        window_builder = window_builder.center();
-    }
-
-    window_builder.build()
-}

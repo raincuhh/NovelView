@@ -6,7 +6,10 @@ module.exports = {
    safelist: [
       //titlebar
       "hover:bg-red-500",
-      "hover:bg-base-50",
+      "hover:bg-base-40",
+      "text-fs-sm",
+      "text-fs-md",
+      "text-fs-lg",
    ],
    theme: {
       extend: {
