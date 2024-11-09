@@ -2,7 +2,7 @@ import { is_tauri } from "../../shared/lib/tauri_utils";
 
 import AuthFormHeader from "../../features/auth/components/ui/auth_form_header";
 import AuthForm from "../../features/auth/components/ui/auth_form";
-import AuthFormAgreementFooter from "../../features/auth/components/ui/auth_form_agreement_footer";
+import AuthAgreementFooter from "../../features/auth/components/ui/auth_agreement_footer";
 import AuthDivider from "../../features/auth/components/ui/auth_divider";
 import AuthFormSwitcher from "../../features/auth/components/ui/auth_form_switcher";
 
@@ -14,7 +14,7 @@ export default function RegisterMain(): JSX.Element {
                is_tauri ? "pt-[30px]" : ""
             }`}
          >
-            <div className="min-w-[320px] w-[320px] media-500:w-[380px] media-1150:w-[420px] h-full px-4 py-6 flex flex-col">
+            <div className="min-w-[320px] w-[320px] min-w-500:w-[380px] min-w-1150:w-[420px] h-full px-4 py-6 flex flex-col min-h-667:justify-center">
                <AuthFormHeader
                   label="Hi"
                   desc="create a new account"
@@ -32,7 +32,7 @@ export default function RegisterMain(): JSX.Element {
                   link_path="/login"
                   link_label="Login Here"
                />
-               <AuthFormAgreementFooter />
+               <AuthAgreementFooter />
             </div>
          </main>
       </>

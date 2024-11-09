@@ -11,6 +11,7 @@ import ProtectedRoute, {
 
 //pages
 import NotFoundPage from "../../pages/error/not_found/page";
+import ErrorBoundary from "../../pages/error/error_boundary/page";
 import LoginPage from "../../pages/login/page";
 import RegisterPage from "../../pages/register/page";
 import PageLayout from "../../shared/components/layouts/page_layout";
@@ -27,31 +28,31 @@ const route_list: RouteListProps[] = [
    {
       path: "*",
       element: <NotFoundPage />,
-      error_element: <NotFoundPage />,
+      error_element: <ErrorBoundary />,
    },
    {
       path: "/",
       element: <Navigate to="/login" />,
-      error_element: <NotFoundPage />,
+      error_element: <ErrorBoundary />,
    },
    {
       path: "/login",
       element: <LoginPage />,
-      error_element: <NotFoundPage />,
+      error_element: <ErrorBoundary />,
       protected_route: true,
       protected_route_type: ProtectedRouteTypes.auth,
    },
    {
       path: "/register",
       element: <RegisterPage />,
-      error_element: <NotFoundPage />,
+      error_element: <ErrorBoundary />,
       protected_route: true,
       protected_route_type: ProtectedRouteTypes.auth,
    },
    {
       path: "/dashboard",
       element: <LoginPage />,
-      error_element: <NotFoundPage />,
+      error_element: <ErrorBoundary />,
       protected_route: true,
       protected_route_type: ProtectedRouteTypes.default,
    },
@@ -74,10 +75,16 @@ const routes = createRoutesFromElements(
                         </PageLayout>
                      </ProtectedRoute>
                   ) : (
-                     route.element
+                     <PageLayout>
+                        {route.element}
+                     </PageLayout>
                   )
                }
-               errorElement={route.error_element}
+               errorElement={
+                  <PageLayout>
+                     {route.error_element}
+                  </PageLayout>
+               }
             />
          )
       )}

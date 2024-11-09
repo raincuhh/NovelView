@@ -16,38 +16,66 @@ module.exports = {
       extend: {
          colors: {
             //base colors
-            "base-black": "rgb(0, 0, 0)",
-            "base-00": "rgb(25, 25, 25)",
-            "base-05": "rgb(28, 28, 28)",
-            "base-10": "rgb(31, 31, 31)",
-            "base-20": "rgb(33, 33, 33)",
-            "base-25": "rgb(37, 37, 37)",
-            "base-30": "rgb(51, 51, 51)",
-            "base-35": "rgb(61, 61, 61)",
-            "base-40": "rgb(82, 82, 82)",
-            "base-50": "rgb(99, 99, 99)",
-            "base-60": "rgb(153, 153, 153)",
-            "base-70": "rgb(179, 179, 179)",
-            "base-80": "rgb(191, 191, 191)",
-            "base-90": "rgb(204, 204, 204)",
-            "base-100": "rgb(218, 218, 218)",
+            "base-black": "var(--base-black)",
+            "base-00": "var(--base-00)",
+            "base-05": "var(--base-05)",
+            "base-10": "var(--base-10)",
+            "base-20": "var(--base-20)",
+            "base-25": "var(--base-25)",
+            "base-30": "var(--base-30)",
+            "base-35": "var(--base-35)",
+            "base-40": "var(--base-40)",
+            "base-50": "var(--base-50)",
+            "base-60": "var(--base-60)",
+            "base-70": "var(--base-70)",
+            "base-80": "var(--base-80)",
+            "base-90": "var(--base-90)",
+            "base-100": "var(--base-100)",
+
+            //brand colors
+            "brand-default": "var(--brand-default)",
+            "brand-600": "var(--brand-600)",
+            "brand-500": "var(--brand-500)",
+            "brand-400": "var(--brand-400)",
+            "brand-300": "var(--brand-300)",
+            "brand-200": "var(--brand-200)",
 
             //accent colors
-            "accent-primary": "hsl(258, 88%, 66%)",
-            "accent-secondary": "hsl(255, 89%, 76%)",
-            "accent-tertiary": "hsl(253, 92%, 85%)",
+            "accent-primary": "var(--accent-primary)",
+            "accent-secondary": "var(--accent-secondary)",
+            "accent-tertiary": "var(--accent-tertiary)",
 
             //background colors
-            "background-primary": "var(--base-00)",
-            "background-primary-alt": "var(--base-10)",
-            "background-secondary": "var(--base-20)",
-            "background-modifier-hover":
-               "rgba(var(--mono-rgb-100), 0.075)",
-            "background-modifier-active-hover":
-               "hsla(258, 88%, 66%, 0.15)",
-            "background-modifier-border": "var(--base-25)",
+            "background-primary":
+               "var(--background-primary)",
+            "background-primary-alt":
+               "var(--background-primary-alt)",
+            "background-secondary":
+               "var(--background-secondary)",
 
-            //interactive states
+            //border colors
+            "border-primary": "var(--border-primary)",
+            "border-secondary": "var(--border-secondary)",
+            "border-tertiary": "var(--border-tertiary)",
+
+            //warning colors
+            "warning-default": "var(--warning-default)",
+            "warning-600": "var(--warning-600)",
+            "warning-500": "var(--warning-500)",
+            "warning-400": "var(--warning-400)",
+            "warning-300": "var(--warning-300)",
+            "warning-200": "var(--warning-200)",
+
+            //destructive colors
+            "destructive-default":
+               "var(--destructive-default)",
+            "destructive-600": "var(--destructive-600)",
+            "destructive-500": "var(--destructive-500)",
+            "destructive-400": "var(--destructive-400)",
+            "destructive-300": "var(--destructive-300)",
+            "destructive-200": "var(--destructive-200)",
+
+            //interactive state colors
             "interactive-normal": "var(--base-30)",
             "interactive-hover": "var(--base-35)",
             "interactive-accent": "var(--accent-primary)",
@@ -64,8 +92,11 @@ module.exports = {
             "text-error": "var(--text-error)",
             "text-warning": "var(--text-warning)",
 
-            //custom stuff
+            /*              custom stuff               */
             "titlebar-bg": "var(--background-secondary)",
+
+            //input
+            "input-bg": "var(--base-15)",
          },
          boxShadow: {
             "input-shadow":
@@ -102,9 +133,9 @@ module.exports = {
             "fs-3xl": "clamp(3rem, 2vw + 3.5rem, 5rem)",
          },
          fontFamily: {
-            primary: ["Nuito Sans", "sans-serif"],
+            primary: ["Satoshi-Variable", "sans-serif"],
             secondary: ['"Roboto"', "sans-serif"],
-            tertiary: ["Satoshi-Variable", "sans-serif"],
+            tertiary: ["Nuito Sans", "sans-serif"],
          },
          height: {
             "titlebar-height": "30px",
@@ -139,10 +170,11 @@ module.exports = {
             ease: "ease",
          },
          screens: {
-            "media-500": "500px",
-            "media-850": "850px",
-            "media-1150": "1150px",
-            "media-1400": "1400px",
+            "min-h-667": { raw: "(min-height: 667px)" },
+            "min-w-500": "500px",
+            "min-w-850": "850px",
+            "min-w-1150": "1150px",
+            "min-w-1400": "1400px",
          },
       },
    },
@@ -167,15 +199,23 @@ module.exports = {
                "--base-90": "rgb(204, 204, 204)",
                "--base-100": "rgb(218, 218, 218)",
 
-               //accent
+               //brand colors
+               "--brand-default": "hsl(259, 51%, 55%)",
+               "--brand-600": "hsl(259, 51%, 65%)",
+               "--brand-500": "hsl(259, 51%, 45%)",
+               "--brand-400": "hsl(259, 51%, 35%)",
+               "--brand-300": "hsl(259, 51%, 75%)",
+               "--brand-200": "hsl(259, 51%, 85%)",
+
+               //accent colors
                "--accent-primary": "hsl(258, 88%, 66%)",
                "--accent-secondary": "hsl(255, 89%, 76%)",
                "--accent-tertiary": "hsl(253, 92%, 85%)",
 
-               //bgs
-               "--background-primary": "var(--base-00)",
-               "--background-primary-alt": "var(--base-10)",
-               "--background-secondary": "var(--base-20)",
+               //background colors
+               "--background-primary": "var(--base-05)",
+               "--background-primary-alt": "var(--base-20)",
+               "--background-secondary": "var(--base-25)",
                "--background-modifier-hover":
                   "rgba(var(--mono-rgb-100), 0.075)",
                "--background-modifier-active-hover":
@@ -183,6 +223,33 @@ module.exports = {
                "--background-modifier-border":
                   "var(--base-25)",
 
+               //border colors
+               "--border-primary": "var(--base-25)",
+               "--border-secondary": "var(--base-30)",
+               "--border-tertiary": "var(--base-35)",
+
+               //warning colors
+               "--warning-default":
+                  "hsl(38.9, 100%, 42.9%)",
+               "--warning-600": "hsl(38.9, 100%, 42.9%)",
+               "--warning-500": "hsl(34.8, 90.9%, 21.6%)",
+               "--warning-400": "hsl(33.2, 100%, 14.5%)",
+               "--warning-300": "hsl(32.3, 100%, 10.2%)",
+               "--warning-200": "hsl(36.6, 100%, 8%)",
+
+               //destructive colors
+               "--destructive-default":
+                  "hsl(10.2, 77.9%, 53.9%)",
+               "--destructive-600":
+                  "hsl(9.7, 85.2%, 62.9%)",
+               "--destructive-500": "hsl(7.9, 71.6%, 29%)",
+               "--destructive-400": "hsl(6.7, 60%, 20.6%)",
+               "--destructive-300":
+                  "hsl(7.5, 51.3%, 15.3%)",
+               "--destructive-200":
+                  "hsl(10.9, 23.4%, 9.2%)",
+
+               //interactive state colors
                "--interactive-normal": "var(--base-30)",
                "--interactive-hover": "var(--base-35)",
                "--interactive-accent":
@@ -190,25 +257,21 @@ module.exports = {
                "--interactive-accent-hover":
                   "var(--accent-secondary)",
 
-               //primarys
-               "--color-red": "rgb(255, 0, 0)",
-               "--color-orange": "rgb(255, 165, 0)",
-
                //text
-               "--text-normal": "var(--base-100)",
+               "--text-normal": "var(--base-90)",
                "--text-muted": "var(--base-60)",
                "--text-faint": "var(--base-50)",
                "--text-on-accent": "white",
                "--text-on-accent-inverted": "black",
-               "--text-error": "var(--color-red)",
-               "--text-warning": "var(--color-orange)",
+               "--text-error": "var(--destructive-default)",
+               "--text-warning": "var(--warning-default)",
 
                //fonts
                "--font-primary":
-                  '"Nunito Sans", sans-serif',
+                  '"Satoshi-Variable", sans-serif',
                "--font-secondary": '"Roboto", sans-serif',
                "--font-tertiary":
-                  '"Satoshi-Variable", sans-serif',
+                  '"Nunito Sans", sans-serif',
             },
          });
       }),

@@ -38,7 +38,9 @@ export default function TitleBarButton({
          }}
       >
          <div className="h-full flex justify-center items-center">
-            <i className={`${bx_icon_css} text-white`} />
+            <i
+               className={`${bx_icon_css} text-text-normal`}
+            />
          </div>
       </div>
    );

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-export default function AuthFormAgreementFooter() {
+export default function AuthAgreementFooter() {
    return (
-      <div className="pb-6 text-center text-text-faint font-secondary text-[12px]">
+      <div className="pb-8 text-center text-text-faint font-secondary text-[12px] mt-auto">
          By continuing, you acknowledge that you have read
          and agree to NovelView's{" "}
          <Link to="#">
