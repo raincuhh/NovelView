@@ -104,6 +104,7 @@ module.exports = {
          fontFamily: {
             primary: ["Nuito Sans", "sans-serif"],
             secondary: ['"Roboto"', "sans-serif"],
+            tertiary: ["Satoshi-Variable", "sans-serif"],
          },
          height: {
             "titlebar-height": "30px",
@@ -206,6 +207,8 @@ module.exports = {
                "--font-primary":
                   '"Nunito Sans", sans-serif',
                "--font-secondary": '"Roboto", sans-serif',
+               "--font-tertiary":
+                  '"Satoshi-Variable", sans-serif',
             },
          });
       }),

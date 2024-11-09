@@ -16,7 +16,7 @@ export default function RegisterMain(): JSX.Element {
          >
             <div className="min-w-[320px] w-[320px] media-500:w-[380px] media-1150:w-[420px] h-full px-4 py-6 flex flex-col">
                <AuthFormHeader
-                  label="Welcome stranger"
+                  label="Hi"
                   desc="create a new account"
                />
                <div className="flex flex-col gap-4">
