@@ -1,7 +1,7 @@
 import { is_tauri } from "../../shared/lib/tauri_utils";
 
 import AuthFormHeader from "../../features/auth/components/ui/auth_form_header";
-import RegisterForm from "../../features/auth/components/ui/register_form";
+import AuthForm from "../../features/auth/components/ui/auth_form";
 import AuthFormAgreementFooter from "../../features/auth/components/ui/auth_form_agreement_footer";
 import AuthDivider from "../../features/auth/components/ui/auth_divider";
 import AuthFormSwitcher from "../../features/auth/components/ui/auth_form_switcher";
@@ -21,7 +21,11 @@ export default function RegisterMain(): JSX.Element {
                />
                <div className="flex flex-col gap-4">
                   <AuthDivider label="or" />
-                  <RegisterForm />
+                  <AuthForm
+                     form_id="register-form"
+                     form_type="register"
+                     form_method="POST"
+                  />
                </div>
                <AuthFormSwitcher
                   desc="Already have an account?"
