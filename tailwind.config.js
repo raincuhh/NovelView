@@ -5,6 +5,7 @@ module.exports = {
    content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
    safelist: [
       //titlebar
+      "bg-destructive-default",
       "bg-accent-primary",
       "hover:bg-red-500",
       "hover:bg-base-40",
@@ -52,6 +53,8 @@ module.exports = {
                "var(--background-primary-alt)",
             "background-secondary":
                "var(--background-secondary)",
+            "background-tertiary":
+               "var(--background-tertiary)",
 
             //border colors
             "border-primary": "var(--border-primary)",
@@ -154,21 +157,6 @@ module.exports = {
             "layer-native": 90,
             "layer-window": 100,
          },
-         transitionProperty: {
-            "transition-all": "all",
-            "transition-color": "color",
-            "transition-bg": "background-color",
-            "transition-height": "height",
-            "transition-transform": "transform",
-            "transition-opacity": "opacity",
-         },
-         transitionTimingFunction: {
-            "ease-in": "cubic-bezier(0.4, 0, 1, 1)",
-            "ease-out": "cubic-bezier(0, 0, 0.2, 1)",
-            "ease-in-out": "cubic-bezier(0.4, 0, 0.2, 1)",
-            linear: "linear",
-            ease: "ease",
-         },
          screens: {
             "min-h-667": { raw: "(min-height: 667px)" },
             "min-w-500": "500px",
@@ -216,6 +204,7 @@ module.exports = {
                "--background-primary": "var(--base-05)",
                "--background-primary-alt": "var(--base-20)",
                "--background-secondary": "var(--base-25)",
+               "--background-tertiary": "var(--base-30)",
                "--background-modifier-hover":
                   "rgba(var(--mono-rgb-100), 0.075)",
                "--background-modifier-active-hover":

@@ -16,7 +16,10 @@ export default function AuthFormHeader({
             >
                {label}
             </h1>
-            <p className="text-fs-xs text-text-muted font-primary">
+            <p
+               className="text-fs-xs text-text-muted font-primary"
+               style={{ fontWeight: 500 }}
+            >
                {desc}
             </p>
          </header>

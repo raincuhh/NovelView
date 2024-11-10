@@ -32,7 +32,7 @@ export default function TitleBarButton({
 
    return (
       <div
-         className={`h-titlebar-height px-4 cursor-pointer flex items-center z-layer-menu bg-base-35 ${button_hover_css} transition-transition-bg duration-100 ease-in-out`}
+         className={`h-titlebar-height px-4 cursor-pointer flex items-center z-layer-menu bg-base-35 ${button_hover_css} transition-colors duration-100 ease-in-out`}
          onClick={() => {
             on_click?.(button_type);
          }}

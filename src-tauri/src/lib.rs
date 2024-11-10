@@ -20,6 +20,7 @@ pub fn run() {
                 "index.html#/login",
                 "login",
                 true,
+                false,
                 true,
                 false,
                 false,
@@ -38,6 +39,7 @@ pub fn run() {
                 "main",
                 "index.html#/dashboard",
                 "main",
+                false,
                 false,
                 true,
                 false,
@@ -70,6 +72,7 @@ fn setup_window(
     url: &str,
     title: &str,
     visible: bool,
+    transparent: bool,
     centered: bool,
     decorations: bool,
     resizable: bool,
@@ -80,6 +83,7 @@ fn setup_window(
         WebviewWindowBuilder::new(app_handle, label, tauri::WebviewUrl::App(url.into()))
             .title(title)
             .visible(visible)
+            .transparent(transparent)
             .decorations(decorations)
             .resizable(resizable)
             .inner_size(width, height);

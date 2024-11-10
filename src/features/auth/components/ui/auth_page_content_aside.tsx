@@ -16,9 +16,7 @@ export default function AuthPageAside({}: AuthPageAsideProps): JSX.Element {
                <div
                   className="font-primary text-fs-2xl overflow-hidden"
                   style={{ fontWeight: 500 }}
-               >
-                  test
-               </div>
+               ></div>
             </div>
          </aside>
       </>

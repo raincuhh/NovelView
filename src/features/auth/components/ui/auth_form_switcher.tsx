@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-type AuthFormSwitcherProps = {
+export type AuthFormSwitcherProps = {
    desc: string;
    link_path: string;
    link_label: string;
@@ -19,7 +19,7 @@ export default function AuthFormSwitcher({
          >
             {desc}{" "}
             <Link to={link_path}>
-               <span className="underline md:hover:text-text-normal transition-colors duration-100">
+               <span className="underline md:hover:text-text-normal transition-colors duration-100 ease-in-out">
                   {link_label}
                </span>
             </Link>
