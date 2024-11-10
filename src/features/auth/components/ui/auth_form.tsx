@@ -5,7 +5,7 @@ import RenderList from "../../../../shared/components/utils/render_list";
 import { AuthInputType } from "../../lib/types";
 import { uppercaseify } from "../../../../shared/lib/utils";
 import FormButton from "../../../../shared/components/forms/form_button";
-import FormCheckBox from "../../../../shared/components/forms/form_check_box";
+import LabeledCheckBox from "../../../../shared/components/ui/labeled_check_box";
 
 type AuthFormProps = {
    form_id: string;
@@ -90,15 +90,7 @@ export default function AuthForm({
             </div>
             <div>
                {form_type === "login" && (
-                  <div
-                     className="cursor-pointer flex flex-row gap-2 mt-2 font-primary text-text-muted text-fs-xs hover:text-text-faint items-center"
-                     style={{ fontWeight: 500 }}
-                  >
-                     <FormCheckBox />
-                     <p className="transition-colors duration-100 ease-in-out cursor-pointer">
-                        Remember me?
-                     </p>
-                  </div>
+                  <LabeledCheckBox text="Remember me?" />
                )}
             </div>
 
