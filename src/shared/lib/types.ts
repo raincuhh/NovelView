@@ -7,6 +7,13 @@ export enum UserRoles {
 
 export type User = {};
 
+export enum RouteTypes {
+   public,
+   protected,
+   auth,
+   admin,
+}
+
 export type EnvironmentContextProps = {
    is_mobile: boolean;
    is_desktop: boolean;

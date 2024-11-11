@@ -5,23 +5,27 @@ import {
    createRoutesFromElements,
    Navigate,
 } from "react-router-dom";
-import ProtectedRoute, {
-   ProtectedRouteTypes,
-} from "../../features/auth/components/utils/protected_route";
+
+import ProtectedRoute from "../../features/auth/components/utils/protected_route";
+import { RouteTypes } from "../../shared/lib/types";
+import PageLayout from "../../shared/components/layouts/page_layout";
 
 //pages
 import NotFoundPage from "../../pages/error/not_found/page";
 import ErrorBoundary from "../../pages/error/error_boundary/page";
+
+import LaunchPage from "../../pages/launch/page";
 import LoginPage from "../../pages/login/page";
 import RegisterPage from "../../pages/register/page";
-import PageLayout from "../../shared/components/layouts/page_layout";
+import AdminPage from "../../pages/admin/page";
+import AdminUsersPage from "../../pages/admin/users/page";
 
 type RouteListProps = {
    path: string;
    element: JSX.Element;
    error_element?: JSX.Element;
    protected_route?: boolean;
-   protected_route_type?: ProtectedRouteTypes;
+   route_type?: RouteTypes;
 };
 
 const route_list: RouteListProps[] = [
@@ -32,7 +36,7 @@ const route_list: RouteListProps[] = [
    },
    {
       path: "/",
-      element: <Navigate to="/login" />,
+      element: <LaunchPage />,
       error_element: <ErrorBoundary />,
    },
    {
@@ -40,21 +44,35 @@ const route_list: RouteListProps[] = [
       element: <LoginPage />,
       error_element: <ErrorBoundary />,
       protected_route: true,
-      protected_route_type: ProtectedRouteTypes.auth,
+      route_type: RouteTypes.auth,
    },
    {
       path: "/register",
       element: <RegisterPage />,
       error_element: <ErrorBoundary />,
       protected_route: true,
-      protected_route_type: ProtectedRouteTypes.auth,
+      route_type: RouteTypes.auth,
    },
    {
       path: "/dashboard",
       element: <LoginPage />,
       error_element: <ErrorBoundary />,
       protected_route: true,
-      protected_route_type: ProtectedRouteTypes.default,
+      route_type: RouteTypes.protected,
+   },
+   {
+      path: "/admin",
+      element: <AdminPage />,
+      error_element: <ErrorBoundary />,
+      protected_route: true,
+      route_type: RouteTypes.admin,
+   },
+   {
+      path: "/admin/users",
+      element: <AdminUsersPage />,
+      error_element: <ErrorBoundary />,
+      protected_route: true,
+      route_type: RouteTypes.admin,
    },
 ];
 
@@ -68,7 +86,7 @@ const routes = createRoutesFromElements(
                element={
                   route.protected_route ? (
                      <ProtectedRoute
-                        type={route.protected_route_type}
+                        type={route.route_type}
                      >
                         <PageLayout>
                            {route.element}
