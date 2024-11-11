@@ -1,4 +1,4 @@
-import NotFoundContent from "../../../widgets/error/not_found/not_found_content";
+import NotFoundContent from "../../widgets/not_found/not_found_content";
 
 export default function NotFoundPage() {
    return (

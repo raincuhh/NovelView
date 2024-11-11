@@ -17,13 +17,14 @@
       "jsx": "react-jsx",
       "typeRoots": [
          "node_modules/@types",
-         "src/shared/lib/global.d.ts"
+         "src/shared/types/global.d.ts",
+         "src/shared/types/env.d.ts"
       ]
    },
    "include": [
       "src/**/*.ts",
       "src/**/*.tsx",
-      "src/shared/lib/global.d.ts"
+      "src/shared/types/global.d.ts"
    ],
    "exclude": ["node_modules", "dist"]
 }

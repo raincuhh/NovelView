@@ -4,6 +4,7 @@ import {
    createHashRouter,
    createRoutesFromElements,
    Navigate,
+   replace,
 } from "react-router-dom";
 
 import ProtectedRoute from "../../features/auth/components/utils/protected_route";
@@ -11,8 +12,8 @@ import { RouteTypes } from "../../shared/lib/types";
 import PageLayout from "../../shared/components/layouts/page_layout";
 
 //pages
-import NotFoundPage from "../../pages/error/not_found/page";
-import ErrorBoundary from "../../pages/error/error_boundary/page";
+import NotFoundPage from "../../pages/not_found/page";
+import ErrorBoundary from "../../pages/error_boundary/page";
 
 import LaunchPage from "../../pages/launch/page";
 import LoginPage from "../../pages/login/page";
@@ -29,14 +30,15 @@ type RouteListProps = {
 };
 
 const route_list: RouteListProps[] = [
+   //public
    {
-      path: "/404-not-found",
+      path: "/not-found",
       element: <NotFoundPage />,
       error_element: <ErrorBoundary />,
    },
    {
       path: "*",
-      element: <Navigate to={"/404-not-found"} />,
+      element: <Navigate to={"/not-found"} />,
       error_element: <ErrorBoundary />,
    },
    {
@@ -44,6 +46,7 @@ const route_list: RouteListProps[] = [
       element: <LaunchPage />,
       error_element: <ErrorBoundary />,
    },
+   //auth
    {
       path: "/login",
       element: <LoginPage />,
@@ -51,6 +54,7 @@ const route_list: RouteListProps[] = [
       protected_route: true,
       route_type: RouteTypes.auth,
    },
+
    {
       path: "/register",
       element: <RegisterPage />,
@@ -58,6 +62,7 @@ const route_list: RouteListProps[] = [
       protected_route: true,
       route_type: RouteTypes.auth,
    },
+   //protected
    {
       path: "/dashboard",
       element: <LoginPage />,
@@ -65,6 +70,7 @@ const route_list: RouteListProps[] = [
       protected_route: true,
       route_type: RouteTypes.protected,
    },
+   //admin
    {
       path: "/admin",
       element: <AdminPage />,

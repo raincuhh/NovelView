@@ -9,20 +9,10 @@ export type User = {};
 
 export enum RouteTypes {
    public,
-   protected,
-   auth,
-   admin,
+   protected, // needs to be authenticated
+   auth, // redirects if authenticated
+   admin, // needs userrole to be admin
 }
-
-export type EnvironmentContextProps = {
-   is_mobile: boolean;
-   is_desktop: boolean;
-   is_tauri?: boolean;
-   is_capacitor?: boolean;
-   update_titlebar_buttons: (
-      buttons: TitleBarButtonState
-   ) => void;
-};
 
 export enum TitleBarButtonTypes {
    close = "close",

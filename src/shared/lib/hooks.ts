@@ -4,7 +4,7 @@ import {
    useState,
    useCallback,
 } from "react";
-import { EnvironmentContextProps } from "./types";
+import { EnvironmentContextProps } from "../types/providers";
 
 export const EnvironmentContext = createContext<
    EnvironmentContextProps | undefined
