@@ -30,8 +30,13 @@ type RouteListProps = {
 
 const route_list: RouteListProps[] = [
    {
-      path: "*",
+      path: "/404-not-found",
       element: <NotFoundPage />,
+      error_element: <ErrorBoundary />,
+   },
+   {
+      path: "*",
+      element: <Navigate to={"/404-not-found"} />,
       error_element: <ErrorBoundary />,
    },
    {
