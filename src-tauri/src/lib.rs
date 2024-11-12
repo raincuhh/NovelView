@@ -17,7 +17,7 @@ pub fn run() {
             let login_window: WebviewWindow = match setup_window(
                 app_handle,
                 "login",
-                "index.html#/",
+                "index.html#/login",
                 "login",
                 true,
                 false,
