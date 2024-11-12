@@ -2,9 +2,9 @@ import { tauri_get_current_webview_window } from "../../shared/lib/tauri_utils";
 import { useEffect, useState } from "react";
 import { use_environment } from "../../shared/lib/hooks";
 
-import LaunchContent from "../../widgets/launch/launch_content";
+import LandingContent from "../../widgets/landing/landing_content";
 
-export default function LaunchPage(): JSX.Element {
+export default function LandingPage(): JSX.Element {
    const { update_titlebar_buttons } = use_environment();
    const [is_tauri_app, set_is_tauri_app] = useState(false);
 
@@ -31,7 +31,7 @@ export default function LaunchPage(): JSX.Element {
 
    return (
       <>
-         <LaunchContent />
+         <LandingContent />
       </>
    );
 }

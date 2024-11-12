@@ -15,7 +15,7 @@ import PageLayout from "../../shared/components/layouts/page_layout";
 import NotFoundPage from "../../pages/not_found/page";
 import ErrorBoundary from "../../pages/error_boundary/page";
 
-import LaunchPage from "../../pages/launch/page";
+import LandingPage from "../../pages/landing/page";
 import LoginPage from "../../pages/login/page";
 import RegisterPage from "../../pages/register/page";
 import AdminPage from "../../pages/admin/page";
@@ -43,7 +43,7 @@ const route_list: RouteListProps[] = [
    },
    {
       path: "/",
-      element: <LaunchPage />,
+      element: <LandingPage />,
       error_element: <ErrorBoundary />,
    },
    //auth
