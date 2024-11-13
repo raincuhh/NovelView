@@ -161,7 +161,7 @@ module.exports = {
             "layer-window": 100,
          },
          screens: {
-            "min-h-667": { raw: "(min-height: 667px)" },
+            "min-h-668": { raw: "(min-height: 668px)" },
             "min-w-500": "500px",
             "min-w-850": "850px",
             "min-w-1150": "1150px",

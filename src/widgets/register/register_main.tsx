@@ -14,7 +14,7 @@ export default function RegisterMain(): JSX.Element {
                is_tauri ? "pt-[30px]" : ""
             }`}
          >
-            <div className="min-w-[320px] w-[320px] min-w-500:w-[380px] min-w-1150:w-[420px] h-full px-4 py-6 flex flex-col min-h-667:mt-[100px]">
+            <div className="min-w-[320px] w-[320px] min-w-500:w-[380px] min-w-1150:w-[420px] h-full px-4 py-6 flex flex-col min-h-668:mt-[100px]">
                <AuthFormHeader
                   label="Hi"
                   desc="Create a new account"
