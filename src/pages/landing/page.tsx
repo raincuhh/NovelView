@@ -6,7 +6,8 @@ import LandingContent from "../../widgets/landing/landing_content";
 
 export default function LandingPage(): JSX.Element {
    const { update_titlebar_buttons } = use_environment();
-   const [is_tauri_app, set_is_tauri_app] = useState(false);
+   const [is_tauri_app, set_is_tauri_app] =
+      useState<boolean>(false);
 
    useEffect(() => {
       try {

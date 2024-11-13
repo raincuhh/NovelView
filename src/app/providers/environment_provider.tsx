@@ -31,15 +31,15 @@ export default function EnvironmentProvider({
    const [
       titlebar_close_button,
       set_titlebar_close_button,
-   ] = useState(true);
+   ] = useState<boolean>(true);
    const [
       titlebar_maximize_button,
       set_titlebar_maximize_button,
-   ] = useState(true);
+   ] = useState<boolean>(true);
    const [
       titlebar_minimize_button,
       set_titlebar_minimize_button,
-   ] = useState(true);
+   ] = useState<boolean>(true);
 
    const update_titlebar_buttons = useCallback(
       (buttons: TitleBarButtonState) => {

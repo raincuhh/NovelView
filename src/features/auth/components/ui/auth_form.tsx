@@ -23,7 +23,8 @@ export default function AuthForm({
          ? ["username", "email", "password"]
          : ["username", "password"];
 
-   const [remember_me, set_remember_me] = useState(false);
+   const [remember_me, set_remember_me] =
+      useState<boolean>(false);
    const [form_data, set_form_data] = useState<{
       [key: string]: string;
    }>({});

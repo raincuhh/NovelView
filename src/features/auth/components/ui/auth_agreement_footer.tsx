@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function AuthAgreementFooter() {
    return (
       <div
-         className="pb-10 text-center text-text-faint font-primary text-[12px] mt-auto"
+         className="pb-16 text-center text-text-faint font-primary text-[12px] mt-auto"
          style={{ fontWeight: 500 }}
       >
          By continuing, you acknowledge that you have read

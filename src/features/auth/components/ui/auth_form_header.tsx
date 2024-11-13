@@ -9,7 +9,7 @@ export default function AuthFormHeader({
 }: AuthFormHeaderProps): JSX.Element {
    return (
       <>
-         <header className="flex flex-col mb-10">
+         <header className="flex flex-col mb-4">
             <h1
                className="mb-1 text-fs-lg text-text-normal font-primary"
                style={{ fontWeight: 700 }}

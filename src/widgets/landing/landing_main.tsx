@@ -1,9 +1,12 @@
 export default function LaunchMain(): JSX.Element {
    return (
       <>
-         <main className="w-full h-full flex justify-center">
-            <div className="min-w-[320px] w-[320px] px-2 py-4">
-               t
+         <main className="my-16 mx-auto w-[45rem] max-w-[90%] h-full">
+            <div className="flex flex-col select-none h-full">
+               <div
+                  id="bg"
+                  className="w-full h-2/4 bg-slate-200"
+               ></div>
             </div>
          </main>
       </>

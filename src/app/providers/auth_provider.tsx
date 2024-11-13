@@ -13,13 +13,15 @@ type AuthProviderProps = PropsWithChildren;
 export default function AuthProvider({
    children,
 }: AuthProviderProps) {
-   const [jwt_token, set_jwt_token] = useState(
-      localStorage.getItem("jwt_token")
-   );
+   const [jwt_token, set_jwt_token] = useState<
+      string | null
+   >(localStorage.getItem("jwt_token"));
    const [is_authenticated, set_is_authenticated] =
       useState(false);
-   const [role, set_role] = useState(UserRoles.guest);
-   const [loading, set_loading] = useState(false);
+   const [role, set_role] = useState<UserRoles>(
+      UserRoles.guest
+   );
+   const [loading, set_loading] = useState<boolean>(false);
 
    useEffect(() => {}, [jwt_token]);
 

@@ -34,6 +34,9 @@ module.exports = {
             "base-100": "var(--base-100)",
 
             //brand colors
+            "brand-button-bg": "var(--brand-button-bg)",
+            "brand-button-bg-hover":
+               "var(--brand-button-bg-hover)",
             "brand-default": "var(--brand-default)",
             "brand-600": "var(--brand-600)",
             "brand-500": "var(--brand-500)",
@@ -188,17 +191,20 @@ module.exports = {
                "--base-100": "rgb(218, 218, 218)",
 
                //brand colors
-               "--brand-default": "hsl(259, 51%, 55%)",
-               "--brand-600": "hsl(259, 51%, 65%)",
+               "--brand-button-bg": "var(--brand-500)",
+               "--brand-button-bg-hover":
+                  "var(--brand-600)",
+               "--brand-default": "hsl(259, 51%, 65%)",
+               "--brand-600": "hsl(259, 51%, 55%)",
                "--brand-500": "hsl(259, 51%, 45%)",
                "--brand-400": "hsl(259, 51%, 35%)",
                "--brand-300": "hsl(259, 51%, 75%)",
                "--brand-200": "hsl(259, 51%, 85%)",
 
                //accent colors
-               "--accent-primary": "hsl(258, 88%, 66%)",
-               "--accent-secondary": "hsl(255, 89%, 76%)",
-               "--accent-tertiary": "hsl(253, 92%, 85%)",
+               "--accent-primary": "var(--brand-default)",
+               "--accent-secondary": "var(--brand-600)",
+               "--accent-tertiary": "var(--brand-500)",
 
                //background colors
                "--background-primary": "var(--base-05)",

@@ -14,13 +14,13 @@ export default function RegisterMain(): JSX.Element {
                is_tauri ? "pt-[30px]" : ""
             }`}
          >
-            <div className="min-w-[320px] w-[320px] min-w-500:w-[380px] min-w-1150:w-[420px] h-full px-4 py-6 flex flex-col min-h-667:justify-center">
+            <div className="min-w-[320px] w-[320px] min-w-500:w-[380px] min-w-1150:w-[420px] h-full px-4 py-6 flex flex-col min-h-667:mt-[100px]">
                <AuthFormHeader
                   label="Hi"
-                  desc="create a new account"
+                  desc="Create a new account"
                />
                <div className="flex flex-col gap-4">
-                  <AuthDivider label="or" />
+                  <AuthDivider />
                   <AuthForm
                      form_id="register-form"
                      form_type="register"

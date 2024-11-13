@@ -19,7 +19,7 @@ export default function AuthFormSwitcher({
          >
             {desc}{" "}
             <Link to={link_path}>
-               <span className="underline md:hover:text-text-normal transition-colors duration-100 ease-in-out">
+               <span className="underline text-text-normal hover:text-brand-button-bg-hover transition-colors duration-100 ease-in-out">
                   {link_label}
                </span>
             </Link>

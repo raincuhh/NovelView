@@ -22,7 +22,7 @@ export default function AuthFormInput({
    on_input_change,
 }: AuthFormInputProps): JSX.Element {
    const [password_field_type, set_password_field_type] =
-      useState("password");
+      useState<string>("password");
 
    const toggle_password_field_type = () => {
       set_password_field_type((prev) =>
@@ -139,10 +139,13 @@ export default function AuthFormInput({
                            on_change_callback={
                               handle_change
                            }
-                           css={
-                              error_message &&
-                              "!bg-destructive-200 !border-destructive-300 !text-text-error"
-                           }
+                           css={`
+                              transition-transform
+                              ${
+                                 error_message &&
+                                 "!bg-destructive-200 !border-destructive-300 !text-text-error"
+                              }
+                           `}
                         />
                         <div className="flex">
                            <div
