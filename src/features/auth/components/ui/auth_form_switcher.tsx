@@ -13,13 +13,10 @@ export default function AuthFormSwitcher({
 }: AuthFormSwitcherProps): JSX.Element {
    return (
       <>
-         <div
-            className="my-8 text-center text-text-muted font-primary"
-            style={{ fontWeight: 500 }}
-         >
+         <div className="my-6 text-center dark:text-c-text-muted font-c-primary font-c-weight-md">
             {desc}{" "}
             <Link to={link_path}>
-               <span className="underline text-text-normal hover:text-brand-button-bg-hover transition-colors duration-100 ease-in-out">
+               <span className="underline text-c-text-normal dark:hover:text-c-brand-default transition-colors duration-100 ease-in-out">
                   {link_label}
                </span>
             </Link>

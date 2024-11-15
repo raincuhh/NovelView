@@ -25,7 +25,7 @@ pub fn run() {
                 false,
                 false,
                 800.0,
-                650.0,
+                668.0,
             ) {
                 Ok(window) => window,
                 Err(e) => {
@@ -45,7 +45,7 @@ pub fn run() {
                 false,
                 true,
                 800.0,
-                650.0,
+                668.0,
             ) {
                 Ok(window) => window,
                 Err(e) => {

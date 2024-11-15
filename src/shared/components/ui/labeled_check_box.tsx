@@ -7,11 +7,7 @@ type LabeledCheckBoxProps = {
    id?: string;
 };
 
-export default function LabeledCheckBox({
-   text,
-   name,
-   id,
-}: LabeledCheckBoxProps) {
+export default function LabeledCheckBox({ text, name, id }: LabeledCheckBoxProps) {
    const check_box_ref = useRef<{
       toggle_checked: () => void;
       set_checked: (value: boolean) => void;
@@ -23,20 +19,14 @@ export default function LabeledCheckBox({
 
    return (
       <>
-         <div
-            className="cursor-pointer flex flex-row mt-2 font-primary text-text-faint text-fs-xs hover:text-text-muted items-center select-none transition-colors duration-100 ease-in-out"
-            style={{ fontWeight: 500 }}
-         >
+         <div className="cursor-pointer flex flex-row mt-2 font-c-primary font-c-weight-md dark:text-c-text-faint text-c-md dark:hover:text-c-text-muted items-center select-none transition-colors duration-100 ease-in-out">
             <FormCheckBox
                ref={check_box_ref}
                name={name}
                id={id}
                css="group-hover:border-border-tertiary group-hover:bg-background-primary-alt"
             />
-            <p
-               onClick={handle_click}
-               className="cursor-pointer pl-2"
-            >
+            <p onClick={handle_click} className="cursor-pointer pl-2">
                {text}
             </p>
          </div>

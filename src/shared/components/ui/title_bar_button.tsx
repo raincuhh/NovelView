@@ -7,10 +7,7 @@ type TitlebarButtonProps = {
    on_click?: (event: string) => void;
 };
 
-export default function TitleBarButton({
-   button_type,
-   on_click,
-}: TitlebarButtonProps): JSX.Element {
+export default function TitleBarButton({ button_type, on_click }: TitlebarButtonProps): JSX.Element {
    const button_hover = {
       close: "bg-red-500",
       minimize: "bg-base-40",
@@ -18,37 +15,30 @@ export default function TitleBarButton({
    };
 
    const icon_css = {
-      maximize: "bx bx-square ",
+      maximize: "bx bx-square",
       minimize: "bx bx-minus text-fs-sm",
       close: "bx bx-x text-fs-md",
    };
 
-   const bx_icon_css: string =
-      icon_css[button_type_to_str(button_type)];
+   const bx_icon_css: string = icon_css[button_type_to_str(button_type)];
 
-   const button_hover_css: string = "hover:".concat(
-      button_hover[button_type]
-   );
+   const button_hover_css: string = "hover:".concat(button_hover[button_type]);
 
    return (
       <div
-         className={`h-titlebar-height px-3 cursor-pointer flex items-center z-layer-menu bg-base-35 ${button_hover_css} transition-colors duration-100 ease-in-out`}
+         className={`${button_hover_css} h-c-titlebar-height px-3 cursor-pointer flex items-center z-c-layer-window bg-c-base-35 transition-colors duration-100 ease-in-out`}
          onClick={() => {
             on_click?.(button_type);
          }}
       >
          <div className="h-full flex justify-center items-center">
-            <i
-               className={`${bx_icon_css} text-text-normal text-fs-sm`}
-            />
+            <i className={`${bx_icon_css} text-c-text-normal text-c-md`} />
          </div>
       </div>
    );
 }
 
-function button_type_to_str(
-   button_type: TitleBarButtonTypes
-): "maximize" | "minimize" | "close" {
+function button_type_to_str(button_type: TitleBarButtonTypes): "maximize" | "minimize" | "close" {
    switch (button_type) {
       case TitleBarButtonTypes.maximize:
          return "maximize";

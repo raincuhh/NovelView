@@ -1,8 +1,5 @@
 import { useCallback } from "react";
-import {
-   TitleBarButtonState,
-   TitleBarButtonTypes,
-} from "../../lib/types";
+import { TitleBarButtonState, TitleBarButtonTypes } from "../../lib/types";
 import { tauri_get_current_webview_window } from "../../lib/tauri_utils";
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import TitleBarButton from "./title_bar_button";
@@ -10,13 +7,12 @@ import TitleBarButton from "./title_bar_button";
 type TitleBarButtonContainerProps = TitleBarButtonState;
 
 export function TitleBarButtonContainer({
-   close_button,
-   maximize_button,
-   minimize_button,
+   closeButton,
+   maximizeButton,
+   minimizeButton,
 }: TitleBarButtonContainerProps): JSX.Element {
-   const handle_btn_event = useCallback((event: string) => {
-      const window: WebviewWindow | null =
-         tauri_get_current_webview_window();
+   const handleOnClick = useCallback((event: string) => {
+      const window: WebviewWindow | null = tauri_get_current_webview_window();
       if (!window) return;
 
       switch (event) {
@@ -37,27 +33,18 @@ export function TitleBarButtonContainer({
    return (
       <>
          <div className="flex flex-row-reverse absolute top-0 right-0 w-min">
-            {close_button === true ? (
-               <TitleBarButton
-                  button_type={TitleBarButtonTypes.close}
-                  on_click={handle_btn_event}
-               />
+            {closeButton === true ? (
+               <TitleBarButton button_type={TitleBarButtonTypes.close} on_click={handleOnClick} />
             ) : (
                <></>
             )}
-            {maximize_button === true ? (
-               <TitleBarButton
-                  button_type={TitleBarButtonTypes.maximize}
-                  on_click={handle_btn_event}
-               />
+            {maximizeButton === true ? (
+               <TitleBarButton button_type={TitleBarButtonTypes.maximize} on_click={handleOnClick} />
             ) : (
                <></>
             )}
-            {minimize_button === true ? (
-               <TitleBarButton
-                  button_type={TitleBarButtonTypes.minimize}
-                  on_click={handle_btn_event}
-               />
+            {minimizeButton === true ? (
+               <TitleBarButton button_type={TitleBarButtonTypes.minimize} on_click={handleOnClick} />
             ) : (
                <></>
             )}

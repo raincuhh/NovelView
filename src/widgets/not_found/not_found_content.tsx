@@ -5,17 +5,10 @@ export default function NotFoundContent(): JSX.Element {
       <>
          <div id="not-found" className="h-full">
             <div className="flex h-full w-full justify-center items-center flex-col bg-base-black">
-               <div
-                  className="text-fs-lg font-primary"
-                  style={{ fontWeight: 500 }}
-               >
-                  The page "/404" wasn't found... lets go
-                  back.
+               <div className="text-fs-lg font-primary font-c-weight-md">
+                  The page "/404" wasn't found... lets go back.
                </div>
-               <div
-                  className="text-fs-lg font-primary underline hover:text-text-muted transition-colors duration-100"
-                  style={{ fontWeight: 500 }}
-               >
+               <div className="text-fs-lg font-primary font-c-weight-md underline hover:text-text-muted transition-colors duration-100">
                   <Link to="/">back to home</Link>
                </div>
             </div>

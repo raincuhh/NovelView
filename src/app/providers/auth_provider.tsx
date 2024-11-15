@@ -1,78 +1,52 @@
-import {
-   PropsWithChildren,
-   useEffect,
-   useState,
-   useMemo,
-} from "react";
+import { PropsWithChildren, useEffect, useState, useMemo } from "react";
 
 import { AuthContext } from "../../features/auth/lib/hooks";
 import { UserRoles } from "../../shared/lib/types";
 
 type AuthProviderProps = PropsWithChildren;
 
-export default function AuthProvider({
-   children,
-}: AuthProviderProps) {
-   const [jwt_token, set_jwt_token] = useState<
-      string | null
-   >(localStorage.getItem("jwt_token"));
-   const [is_authenticated, set_is_authenticated] =
-      useState(false);
-   const [role, set_role] = useState<UserRoles>(
-      UserRoles.guest
-   );
-   const [loading, set_loading] = useState<boolean>(false);
+export default function AuthProvider({ children }: AuthProviderProps) {
+   const [jwtToken, setJwtToken] = useState<string | null>(localStorage.getItem("jwtToken"));
+   const [isAuthenticated, setIsAuthenticated] = useState(false);
+   const [role, setRole] = useState<UserRoles>(UserRoles.guest);
+   const [loading, setLoading] = useState<boolean>(false);
 
-   useEffect(() => {}, [jwt_token]);
+   useEffect(() => {}, [jwtToken]);
 
-   const login = async (
-      username: string,
-      password: string
-   ) => {
-      set_loading(true);
+   const login = async (username: string, password: string) => {
+      setLoading(true);
       try {
       } catch (err) {
       } finally {
-         set_loading(false);
+         setLoading(false);
       }
    };
 
    const logout = async () => {
-      set_is_authenticated(false);
+      setIsAuthenticated(false);
    };
 
-   const handle_jwt_token = async (jwt_token: string) => {
-      set_loading(true);
+   const handleJwtToken = async (jwtToken: string) => {
+      setLoading(true);
       try {
       } catch (err) {
       } finally {
-         set_loading(false);
+         setLoading(false);
       }
    };
 
    const context_value = useMemo(
       () => ({
-         jwt_token,
-         is_authenticated,
+         jwtToken,
+         isAuthenticated,
          role,
          loading,
          login,
          logout,
-         handle_jwt_token,
+         handleJwtToken,
       }),
-      [
-         jwt_token,
-         is_authenticated,
-         role,
-         loading,
-         login,
-         logout,
-      ]
+      [jwtToken, isAuthenticated, role, loading, login, logout]
    );
 
-   return (
-      <AuthContext.Provider value={context_value}>
-         {children}
-      </AuthContext.Provider>
-   );
+   return <AuthContext.Provider value={context_value}>{children}</AuthContext.Provider>;
 }

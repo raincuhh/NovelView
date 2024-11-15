@@ -1,19 +1,14 @@
 import { listen } from "@tauri-apps/api/event";
-import {
-   getCurrentWebviewWindow,
-   WebviewWindow,
-} from "@tauri-apps/api/webviewWindow";
+import { getCurrentWebviewWindow, WebviewWindow } from "@tauri-apps/api/webviewWindow";
 
-//const is_tauri = window.__TAURI__;
-export const is_tauri =
-   typeof window !== "undefined" &&
-   "__TAURI_INTERNALS__" in window;
+//const isTauri = window.__TAURI__;
+export const isTauri = typeof window !== "undefined" && "__TAURI_INTERNALS__" in window;
 
 export function tauri_get_current_webview_window(): WebviewWindow | null {
-   if (is_tauri) {
+   if (isTauri) {
       return getCurrentWebviewWindow();
    }
 
-   console.log(is_tauri);
+   console.log(isTauri);
    return null;
 }

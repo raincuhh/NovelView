@@ -1,78 +1,46 @@
-import {
-   PropsWithChildren,
-   useEffect,
-   useState,
-   useMemo,
-   useCallback,
-} from "react";
+import { PropsWithChildren, useEffect, useState, useMemo, useCallback } from "react";
 import { EnvironmentContext } from "../../shared/lib/hooks";
 import MobileDetect from "mobile-detect";
 
 import TitleBar from "../../shared/components/ui/title_bar";
 import { TitleBarButtonState } from "../../shared/lib/types";
-import { is_tauri } from "../../shared/lib/tauri_utils";
+import { isTauri } from "../../shared/lib/tauri_utils";
 
 type EnvironmentProviderProps = PropsWithChildren;
 
-export default function EnvironmentProvider({
-   children,
-}: EnvironmentProviderProps): JSX.Element {
-   const mobile_detect: MobileDetect = new MobileDetect(
-      window.navigator.userAgent
-   );
-   const is_mobile = useMemo(
-      () =>
-         mobile_detect.mobile() !== null ||
-         mobile_detect.tablet() !== null,
-      []
-   );
-   const is_desktop = !is_mobile;
+export default function EnvironmentProvider({ children }: EnvironmentProviderProps): JSX.Element {
+   const mobileDetect: MobileDetect = new MobileDetect(window.navigator.userAgent);
+   const isMobile = useMemo(() => mobileDetect.mobile() !== null || mobileDetect.tablet() !== null, []);
+   const isDesktop = !isMobile;
 
-   const [
-      titlebar_close_button,
-      set_titlebar_close_button,
-   ] = useState<boolean>(true);
-   const [
-      titlebar_maximize_button,
-      set_titlebar_maximize_button,
-   ] = useState<boolean>(true);
-   const [
-      titlebar_minimize_button,
-      set_titlebar_minimize_button,
-   ] = useState<boolean>(true);
+   const [titleBarCloseButton, setTitleBarCloseButton] = useState<boolean>(true);
 
-   const update_titlebar_buttons = useCallback(
-      (buttons: TitleBarButtonState) => {
-         if (buttons.close_button !== undefined)
-            set_titlebar_close_button(buttons.close_button);
-         if (buttons.maximize_button !== undefined)
-            set_titlebar_maximize_button(
-               buttons.maximize_button
-            );
-         if (buttons.minimize_button !== undefined)
-            set_titlebar_minimize_button(
-               buttons.minimize_button
-            );
-      },
-      []
-   );
+   const [titleBarMaximizeButton, setTitleBarMaximizeButton] = useState<boolean>(true);
 
-   const context_value = useMemo(
+   const [titleBarMinimizeButton, setTitleBarMinimizeButton] = useState<boolean>(true);
+
+   const updateTitleBarButtons = useCallback((buttons: TitleBarButtonState) => {
+      if (buttons.closeButton !== undefined) setTitleBarCloseButton(buttons.closeButton);
+      if (buttons.maximizeButton !== undefined) setTitleBarMaximizeButton(buttons.maximizeButton);
+      if (buttons.minimizeButton !== undefined) setTitleBarMinimizeButton(buttons.minimizeButton);
+   }, []);
+
+   const contextValue = useMemo(
       () => ({
-         is_desktop,
-         is_mobile,
-         update_titlebar_buttons,
+         isDesktop,
+         isMobile,
+         updateTitleBarButtons,
       }),
-      [is_desktop, is_mobile, update_titlebar_buttons]
+      [isDesktop, isMobile, updateTitleBarButtons]
    );
 
    return (
-      <EnvironmentContext.Provider value={context_value}>
-         {is_desktop && is_tauri && (
+      <EnvironmentContext.Provider value={contextValue}>
+         {isDesktop && isTauri && (
             <TitleBar
-               close_button={titlebar_close_button}
-               maximize_button={titlebar_maximize_button}
-               minimize_button={titlebar_minimize_button}
+               closeButton={titleBarCloseButton}
+               maximizeButton={titleBarMaximizeButton}
+               minimizeButton={titleBarMinimizeButton}
             />
          )}
          {children}

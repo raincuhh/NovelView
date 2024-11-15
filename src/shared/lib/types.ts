@@ -21,7 +21,7 @@ export enum TitleBarButtonTypes {
 }
 
 export type TitleBarButtonState = {
-   close_button?: boolean;
-   maximize_button?: boolean;
-   minimize_button?: boolean;
+   closeButton?: boolean;
+   maximizeButton?: boolean;
+   minimizeButton?: boolean;
 };
