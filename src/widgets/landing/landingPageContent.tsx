@@ -1,7 +1,7 @@
 import React from "react";
 import LandingMain from "./landingMain";
 
-export default function LandingContent(): React.JSX.Element {
+export default function LandingPageContent(): React.JSX.Element {
    return (
       <>
          <div id="landing" className="h-full">

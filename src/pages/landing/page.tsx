@@ -1,11 +1,11 @@
-import { LandingContent } from "../../widgets/landing";
+import { LandingPageContent } from "../../widgets/landing";
 
 type LandingPageProps = {};
 
 export default function LandingPage({}: LandingPageProps) {
    return (
       <>
-         <LandingContent />
+         <LandingPageContent />
       </>
    );
 }
