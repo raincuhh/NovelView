@@ -1,6 +1,5 @@
-export function create_uuid(): string {
-   let pattern: string =
-      "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
+export function getUuid(): string {
+   let pattern: string = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
    let result: string = "";
 
    for (let i = 0; i < pattern.length; i++) {
@@ -26,9 +25,7 @@ export function uppercaseify(str: string): string {
    return str;
 }
 
-export function uppercaseify_sentences(
-   str: string
-): string {
+export function uppercaseifySentences(str: string): string {
    let words: string[] = str.split(" ");
    words.forEach((word: string, i: number) => {
       words[i] = uppercaseify(word);

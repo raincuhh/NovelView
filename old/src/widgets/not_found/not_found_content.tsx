@@ -4,7 +4,7 @@ export default function NotFoundContent(): JSX.Element {
    return (
       <>
          <div id="not-found" className="h-full">
-            <div className="flex h-full w-full justify-center items-center flex-col bg-base-black">
+            <div className="flex h-full w-full justify-center items-center flex-col dark:bg-c-base-black">
                <div className="text-fs-lg font-primary font-c-weight-md">
                   The page "/404" wasn't found... lets go back.
                </div>

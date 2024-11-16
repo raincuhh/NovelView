@@ -15,16 +15,14 @@
       "isolatedModules": true,
       "noEmit": false,
       "jsx": "react-jsx",
-      "typeRoots": [
-         "node_modules/@types",
-         "src/shared/types/global.d.ts",
-         "src/shared/types/env.d.ts"
-      ]
+      "typeRoots": ["node_modules/@types", "src/shared/types/global.d.ts", "src/shared/types/env.d.ts"]
    },
    "include": [
       "src/**/*.ts",
       "src/**/*.tsx",
-      "src/shared/types/global.d.ts"
+      "src/shared/types/global.d.ts",
+      "old/src/app/providers/environmentProvider.tsx",
+      "old/src/app/providers/authProvider.tsx"
    ],
    "exclude": ["node_modules", "dist"]
 }

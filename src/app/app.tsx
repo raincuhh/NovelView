@@ -1,18 +1,19 @@
+import React from "react";
 import { RouterProvider } from "react-router-dom";
-import { router } from "./routes/routes";
-import AppProviders from "./providers/app_providers";
+import { appRouter } from "./routes/routes";
+import AppProviders from "./providers/appProviders";
 
 import "../../public/css/satoshi.css";
 import "../../public/css/global.css";
-import "../shared/lib/fontawesome";
-import RootLayout from "../shared/components/layouts/root_layout";
+// import "../shared/lib/fontawesome";
+import RootLayout from "../shared/components/layout/rootLayout";
 
-export default function App(): JSX.Element {
+export default function App(): React.JSX.Element {
    return (
       <>
          <AppProviders>
             <RootLayout>
-               <RouterProvider router={router} />
+               <RouterProvider router={appRouter} />
             </RootLayout>
          </AppProviders>
       </>

@@ -4,7 +4,7 @@ import MobileDetect from "mobile-detect";
 
 import TitleBar from "../../shared/components/ui/title_bar";
 import { TitleBarButtonState } from "../../shared/lib/types";
-import { isTauri } from "../../shared/lib/tauri_utils";
+import { isTauri } from "../../../../src/shared/lib/tauri";
 
 type EnvironmentProviderProps = PropsWithChildren;
 

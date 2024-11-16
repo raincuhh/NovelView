@@ -17,7 +17,6 @@ module.exports = {
       extend: {
          colors: {
             // Base colors
-            "c-base-black": "var(--base-black)",
             "c-base-00": "var(--base-00)",
             "c-base-05": "var(--base-05)",
             "c-base-10": "var(--base-10)",
@@ -42,11 +41,6 @@ module.exports = {
             "c-brand-400": "var(--brand-400)",
             "c-brand-300": "var(--brand-300)",
             "c-brand-200": "var(--brand-200)",
-
-            // Accent colors
-            "c-accent-primary": "var(--accent-primary)",
-            "c-accent-secondary": "var(--accent-secondary)",
-            "c-accent-tertiary": "var(--accent-tertiary)",
 
             // Background colors
             "c-background-primary": "var(--background-primary)",
@@ -75,12 +69,6 @@ module.exports = {
             "c-destructive-300": "var(--destructive-300)",
             "c-destructive-200": "var(--destructive-200)",
 
-            // Interactive state colors
-            "c-interactive-normal": "var(--base-30)",
-            "c-interactive-hover": "var(--base-35)",
-            "c-interactive-accent": "var(--accent-primary)",
-            "c-interactive-accent-hover": "var(--accent-secondary)",
-
             // Text colors
             "c-text-normal": "var(--text-normal)",
             "c-text-muted": "var(--text-muted)",
@@ -89,12 +77,6 @@ module.exports = {
             "c-text-on-accent-inverted": "var(--text-on-accent-inverted)",
             "c-text-error": "var(--text-error)",
             "c-text-warning": "var(--text-warning)",
-
-            // Custom
-            "c-titlebar-bg": "var(--background-secondary)",
-
-            // Input
-            "c-input-bg": "var(--base-15)",
          },
          boxShadow: {
             "c-input-shadow":
@@ -108,27 +90,25 @@ module.exports = {
          },
 
          fontSize: {
-            "c-default": "var(--c-default)",
-            "c-xs": "var(--c-xs)",
-            "c-sm": "var(--c-sm)",
-            "c-md": "var(--c-md)",
-            "c-lg": "var(--c-lg)",
-            "c-xl": "var(--c-xl)",
-            "c-2xl": "var(--c-2xl)",
-            "c-3xl": "var(--c-3xl)",
+            "c-fs-default": "var(--c-default)",
+            "c-fs-xs": "var(--c-xs)",
+            "c-fs-sm": "var(--c-sm)",
+            "c-fs-md": "var(--c-md)",
+            "c-fs-lg": "var(--c-lg)",
+            "c-fs-xl": "var(--c-xl)",
+            "c-fs-2xl": "var(--c-2xl)",
+            "c-fs-3xl": "var(--c-3xl)",
          },
          fontFamily: {
-            "c-primary": ["Satoshi-Variable", "sans-serif"],
-            "c-secondary": ['"Roboto"', "sans-serif"],
-            "c-tertiary": ["Nuito Sans", "sans-serif"],
+            "c-family-primary": ["Satoshi-Variable", "sans-serif"],
+            "c-family-secondary": ['"Roboto"', "sans-serif"],
+            "c-family-tertiary": ["Nuito Sans", "sans-serif"],
          },
          fontWeight: {
             "c-weight-xl": "700",
             "c-weight-lg": "600",
             "c-weight-md": "500",
-         },
-         height: {
-            "c-titlebar-height": "30px",
+            "c-weight-sm": "400",
          },
          zIndex: {
             "c-layer-background": 5,
@@ -142,7 +122,8 @@ module.exports = {
             "c-layer-tooltip": 70,
             "c-layer-dragging": 80,
             "c-layer-native": 90,
-            "c-layer-window": 100,
+            "c-layer-window-titlebar": 99,
+            "c-layer-window-titlebar-buttons": 100,
          },
          screens: {
             "c-min-h-650": { raw: "(min-height: 650px)" },
@@ -159,11 +140,10 @@ module.exports = {
          addBase({
             ":root": {
                //base
-               "--base-black": "rgb(0, 0, 0)",
-               "--base-00": "rgb(25, 25, 25)",
-               "--base-05": "rgb(28, 28, 28)",
-               "--base-10": "rgb(31, 31, 31)",
-               "--base-20": "rgb(33, 33, 33)",
+               "--base-00": "rgb(19, 19, 19)",
+               "--base-05": "rgb(22, 22, 22)",
+               "--base-10": "rgb(25, 25, 25)",
+               "--base-20": "rgb(31, 31, 31)",
                "--base-25": "rgb(37, 37, 37)",
                "--base-30": "rgb(51, 51, 51)",
                "--base-35": "rgb(61, 61, 61)",
@@ -178,23 +158,20 @@ module.exports = {
                //brand colors
                "--brand-button-bg": "var(--brand-500)",
                "--brand-button-bg-hover": "var(--brand-600)",
-               "--brand-default": "hsl(259, 51%, 65%)",
+               "--brand-700": "hsl(259, 51%, 65%)",
                "--brand-600": "hsl(259, 51%, 55%)",
                "--brand-500": "hsl(259, 51%, 45%)",
                "--brand-400": "hsl(259, 51%, 35%)",
                "--brand-300": "hsl(259, 51%, 75%)",
                "--brand-200": "hsl(259, 51%, 85%)",
 
-               //accent colors
-               "--accent-primary": "var(--brand-default)",
-               "--accent-secondary": "var(--brand-600)",
-               "--accent-tertiary": "var(--brand-500)",
-
                //background colors
-               "--background-primary": "var(--base-05)",
-               "--background-primary-alt": "var(--base-20)",
-               "--background-secondary": "var(--base-25)",
-               "--background-tertiary": "var(--base-30)",
+               "--background-primary": "var(--base-00)",
+               "--background-primary-alt": "var(--base-05)",
+               "--background-secondary": "var(--base-10)",
+               "--background-secondary-alt": "var(--base-20)",
+               "--background-tertiary": "var(--base-35)",
+               "--background-tertiary-alt": "var(--base-50)",
                "--background-modifier-hover": "rgba(var(--mono-rgb-100), 0.075)",
                "--background-modifier-active-hover": "hsla(258, 88%, 66%, 0.15)",
                "--background-modifier-border": "var(--base-25)",
@@ -205,7 +182,7 @@ module.exports = {
                "--border-tertiary": "var(--base-35)",
 
                //warning colors
-               "--warning-default": "hsl(38.9, 100%, 42.9%)",
+               "--warning-700": "hsl(38.9, 100%, 42.9%)",
                "--warning-600": "hsl(38.9, 100%, 42.9%)",
                "--warning-500": "hsl(34.8, 90.9%, 21.6%)",
                "--warning-400": "hsl(33.2, 100%, 14.5%)",
@@ -213,18 +190,12 @@ module.exports = {
                "--warning-200": "hsl(36.6, 100%, 8%)",
 
                //destructive colors
-               "--destructive-default": "hsl(10.2, 77.9%, 53.9%)",
+               "--destructive-700": "hsl(10.2, 77.9%, 53.9%)",
                "--destructive-600": "hsl(9.7, 85.2%, 62.9%)",
                "--destructive-500": "hsl(7.9, 71.6%, 29%)",
                "--destructive-400": "hsl(6.7, 60%, 20.6%)",
                "--destructive-300": "hsl(7.5, 51.3%, 15.3%)",
                "--destructive-200": "hsl(10.9, 23.4%, 9.2%)",
-
-               //interactive state colors
-               "--interactive-normal": "var(--base-30)",
-               "--interactive-hover": "var(--base-35)",
-               "--interactive-accent": "var(--accent-primary)",
-               "--interactive-accent-hover": "var(--accent-secondary)",
 
                //text
                "--text-normal": "var(--base-90)",
@@ -232,8 +203,8 @@ module.exports = {
                "--text-faint": "var(--base-50)",
                "--text-on-accent": "white",
                "--text-on-accent-inverted": "black",
-               "--text-error": "var(--destructive-default)",
-               "--text-warning": "var(--warning-default)",
+               "--text-error": "var(--destructive-700)",
+               "--text-warning": "var(--warning-700)",
 
                //fonts
                "--font-primary": '"Satoshi-Variable", sans-serif',
@@ -241,7 +212,6 @@ module.exports = {
                "--font-tertiary": '"Nunito Sans", sans-serif',
 
                //fontsize
-               "--c-default": "1rem",
                "--c-xs": "0.75rem",
                "--c-sm": "0.875rem",
                "--c-md": "1rem",
