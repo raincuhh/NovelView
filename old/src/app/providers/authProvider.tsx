@@ -37,7 +37,6 @@ export default function AuthProvider({ children }: AuthProviderProps) {
    const context_value = useMemo(
       () => ({
          jwtToken,
-
          role,
          loading,
          login,

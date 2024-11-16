@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { uppercaseify } from "../../shared/lib/utils";
 import Button from "../../shared/components/ui/button";
 import Divider from "../../shared/components/ui/divider";
+import { register } from "module";
 
 export default function LandingActions(): React.JSX.Element {
    return (
@@ -31,14 +32,20 @@ function LandingAction({ type, href }: LandingActionProps): React.JSX.Element {
       register: "default",
       login: "ghost",
    };
+   const buttonIcon: Record<LandingActionProps["type"], "bx-edit" | "bx-door-open"> = {
+      register: "bx-edit",
+      login: "bx-door-open",
+   };
 
    const variant: "default" | "ghost" = buttonVariants[type];
    const text: string = buttonTexts[type];
+   const icon: "bx-edit" | "bx-door-open" = buttonIcon[type];
 
    return (
       <>
          <div className="select-none cursor-pointer">
-            <Button variant={variant} href={href}>
+            <Button variant={variant} href={href} className="gap-2 items-center">
+               <i className={`bx ${icon} text-c-fs-lg`}></i>
                {uppercaseify(text)}
             </Button>
          </div>

@@ -1,16 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type MainLogoProps = {
    variant?: "white" | "black" | "purple";
    className?: string;
 };
 
-export default function MainLogo({ variant = "white", className = "" }: MainLogoProps): JSX.Element {
+export default function MainLogo({ variant = "white", className }: MainLogoProps): React.JSX.Element {
+   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
    const srcPaths = {
-      white: "../../../../public/assets/images/logo_base_90.png",
-      black: "../../../../public/assets/images/logo_black.png",
-      purple: "../../../../public/assets/images/logo_purple.png",
+      white: "/assets/images/logo_base_90.png",
+      black: "/assets/images/logo_black.png",
+      purple: "/assets/images/logo_purple.png",
    };
 
-   return <img src={srcPaths[variant]} alt="Main Logo" className={className} />;
+   useEffect(() => {
+      Object.values(srcPaths).forEach((src) => {
+         const img = new Image();
+         img.src = src;
+      });
+   }, []);
+
+   return (
+      <>
+         <div className="relative">
+            {!isLoaded && (
+               <div className={`absolute dark:bg-c-background-primary-alt rounded-[4px] ${className}`}></div>
+            )}
+            <img
+               src={srcPaths[variant]}
+               alt="Main Logo"
+               onLoad={() => setIsLoaded(true)}
+               className={className}
+            ></img>
+         </div>
+      </>
+   );
 }

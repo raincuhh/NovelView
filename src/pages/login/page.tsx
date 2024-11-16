@@ -1,12 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { tauriGetCurrentWebViewWindow } from "../../shared/lib/tauri";
+import LoginPageContent from "../../widgets/login/loginPageContent";
 
 export default function LoginPage(): React.JSX.Element {
    return (
       <>
-         <div>LoginPage</div>
-         <Link to="/">go back</Link>
-         {/* example */}
+         <LoginPageContent />
       </>
    );
 }

@@ -32,14 +32,14 @@ const buttonVariants = cva(
    }
 );
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
    VariantProps<typeof buttonVariants> & {
       href?: string;
       text?: string;
    };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-   ({ className, children, text, href, variant, size, rounded = "md", ...props }, ref) => {
+   ({ className, children, text, href, variant, size, rounded = "md", ...props }: ButtonProps, ref) => {
       const classes = buttonVariants({ variant, size, rounded, className });
 
       if (href) {

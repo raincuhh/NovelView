@@ -1,7 +1,4 @@
-import {
-   cva,
-   VariantProps,
-} from "class-variance-authority";
+import { cva, VariantProps } from "class-variance-authority";
 import { forwardRef, PropsWithChildren } from "react";
 
 const ButtonVariants = cva(
@@ -28,24 +25,13 @@ const ButtonVariants = cva(
    }
 );
 
-type ButtonProps =
-   React.ButtonHTMLAttributes<HTMLButtonElement> &
-      VariantProps<typeof ButtonVariants> & {
-         text?: string;
-      };
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+   VariantProps<typeof ButtonVariants> & {
+      text?: string;
+   };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-   (
-      {
-         text,
-         variant,
-         size,
-         className,
-         children,
-         ...props
-      },
-      ref
-   ) => (
+   ({ text, variant, size, className, children, ...props }, ref) => (
       <>
          <Button
             ref={ref}

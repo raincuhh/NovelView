@@ -1,5 +1,5 @@
 import { cva, VariantProps } from "class-variance-authority";
-import React, { forwardRef } from "react";
+import React from "react";
 
 const inputVariants = cva(
    "border-solid border-[1px] transition-colors duration-100 ease-in-out cursor-pointer",
@@ -25,7 +25,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> &
       // setChecked?: (checked: boolean) => void;
    };
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
    ({ className, variant, type = "text", checked, onChange, ...props }, ref) => {
       const classes = inputVariants({ variant, className });
 
