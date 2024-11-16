@@ -6,6 +6,7 @@ export default function LoginPage(): React.JSX.Element {
       <>
          <div>LoginPage</div>
          <Link to="/">go back</Link>
+         {/* example */}
       </>
    );
 }

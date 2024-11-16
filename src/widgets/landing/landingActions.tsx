@@ -9,9 +9,9 @@ export default function LandingActions(): React.JSX.Element {
       <>
          <div className="flex justify-end z-c-layer-content">
             <div className="flex flex-col w-full">
-               <div className="grid grid-cols-1 gap-2">
+               <div className="grid grid-cols-1 gap-2 sm:gap-0">
                   <LandingAction href="/register" type="register" />
-                  <Divider text="or" rootClassName="my-4" textClassName="text-c-text-faint text-c-fs-sm" />
+                  <Divider rootClassName="my-2 hidden sm:block" />
                   <LandingAction href="/login" type="login" />
                </div>
             </div>
@@ -39,7 +39,7 @@ function LandingAction({ type, href }: LandingActionProps): React.JSX.Element {
       <>
          <div className="select-none cursor-pointer">
             <Button variant={variant} href={href}>
-               {text}
+               {uppercaseify(text)}
             </Button>
          </div>
       </>
