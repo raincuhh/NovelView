@@ -1,6 +1,6 @@
 {
    "name": "novelview",
-   "version": "1.0.9",
+   "version": "1.0.10",
    "description": "A cross-platform application that lets you save, and read your .epub, .azw, etc.. formats.",
    "main": "index.js",
    "scripts": {
