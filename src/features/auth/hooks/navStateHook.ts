@@ -1,11 +1,11 @@
 import { createContext, useContext } from "react";
 
-type navStateContextProps = {
+type NavStateContextProps = {
    setTitle: (title: string) => void;
    setBackLocation: (location: string) => void;
 };
 
-export const NavStateContext = createContext<navStateContextProps | undefined>(undefined);
+export const NavStateContext = createContext<NavStateContextProps | undefined>(undefined);
 
 export const useNavState = () => {
    const context = useContext(NavStateContext);

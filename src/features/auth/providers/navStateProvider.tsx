@@ -2,10 +2,10 @@ import React, { useMemo, useState, forwardRef, PropsWithChildren } from "react";
 import { NavStateContext } from "../hooks/navStateHook";
 import { Link } from "react-router-dom";
 
-type navStateProviderProps = PropsWithChildren & { id?: string };
+type NavStateProviderProps = PropsWithChildren & { id?: string };
 
-const NavStateProvider = forwardRef<HTMLDivElement, navStateProviderProps>(
-   ({ children, id }: navStateProviderProps, ref) => {
+const NavStateProvider = forwardRef<HTMLDivElement, NavStateProviderProps>(
+   ({ children, id }: NavStateProviderProps, ref) => {
       const [title, setTitle] = useState<string>("placeholder");
       const [backLocation, setBackLocation] = useState<string>("/");
 

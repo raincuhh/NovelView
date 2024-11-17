@@ -1,7 +1,20 @@
+import React, { ReactNode } from "react";
 import { PropsWithChildren } from "react";
+import withProvider from "../../shared/components/utils/withProvider";
+import pipe from "../../shared/lib/pipe";
 
-type AppProvidersProps = PropsWithChildren;
+import AuthProvider from "../../features/auth/providers/authProvider";
 
-export default function AppProviders({ children }: AppProvidersProps) {
-   return <>{children}</>;
+type AppProvidersProps = PropsWithChildren<{}>;
+
+export default function AppProviders({ children }: AppProvidersProps): React.JSX.Element {
+   const AppWithProviders = pipe(withProvider(AuthProvider))((props: PropsWithChildren<{}>) => (
+      <>{props.children}</>
+   ));
+
+   return (
+      <>
+         <AppWithProviders>{children}</AppWithProviders>
+      </>
+   );
 }

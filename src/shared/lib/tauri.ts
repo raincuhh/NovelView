@@ -8,7 +8,5 @@ export function tauriGetCurrentWebViewWindow(): WebviewWindow | null {
    if (isTauri) {
       return getCurrentWebviewWindow();
    }
-
-   console.log(isTauri);
    return null;
 }
