@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { TitleBarButtonState, TitleBarButtonTypes } from "../../lib/types";
-import { tauri_get_current_webview_window } from "../../lib/tauri_utils";
+import { tauriGetCurrentWebViewWindow } from "../../../../../src/shared/lib/tauri";
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import TitleBarButton from "./title_bar_button";
 
@@ -12,7 +12,7 @@ export function TitleBarButtonContainer({
    minimizeButton,
 }: TitleBarButtonContainerProps): JSX.Element {
    const handleOnClick = useCallback((event: string) => {
-      const window: WebviewWindow | null = tauri_get_current_webview_window();
+      const window: WebviewWindow | null = tauriGetCurrentWebViewWindow();
       if (!window) return;
 
       switch (event) {
@@ -32,7 +32,7 @@ export function TitleBarButtonContainer({
 
    return (
       <>
-         <div className="flex flex-row-reverse absolute top-0 right-0 w-min">
+         <div className="absolute right-0 top-0 flex w-min flex-row-reverse">
             {closeButton === true ? (
                <TitleBarButton button_type={TitleBarButtonTypes.close} on_click={handleOnClick} />
             ) : (

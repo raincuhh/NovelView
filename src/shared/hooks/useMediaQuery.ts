@@ -10,7 +10,7 @@ export default function useMediaQuery({ mediaQuery }: UseMediaQueryProps) {
 
       setIsMatch(mediaQueryList.matches);
 
-      const listener = (e: MediaQueryListEvent) => {
+      const listener: (e: MediaQueryListEvent) => void = (e: MediaQueryListEvent) => {
          setIsMatch(e.matches);
       };
 

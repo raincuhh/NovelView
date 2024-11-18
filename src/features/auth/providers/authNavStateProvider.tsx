@@ -1,12 +1,13 @@
 import React, { useMemo, useState, forwardRef, PropsWithChildren } from "react";
-import { NavStateContext } from "../hooks/navStateHook";
+import { AuthNavStateContext } from "../hooks/useAuthNavState";
 import { Link } from "react-router-dom";
+import { uppercaseify } from "../../../shared/lib/utils";
 
-type NavStateProviderProps = PropsWithChildren & { id?: string };
+type AuthNavStateProviderProps = PropsWithChildren & { id?: string };
 
-const NavStateProvider = forwardRef<HTMLDivElement, NavStateProviderProps>(
-   ({ children, id }: NavStateProviderProps, ref) => {
-      const [title, setTitle] = useState<string>("placeholder");
+const AuthNavStateProvider = forwardRef<HTMLDivElement, AuthNavStateProviderProps>(
+   ({ children, id }: AuthNavStateProviderProps, ref) => {
+      const [title, setTitle] = useState<string>("back");
       const [backLocation, setBackLocation] = useState<string>("/");
 
       const ContextValue = useMemo(
@@ -19,17 +20,19 @@ const NavStateProvider = forwardRef<HTMLDivElement, NavStateProviderProps>(
 
       return (
          <>
-            <NavStateContext.Provider value={ContextValue}>
+            <AuthNavStateContext.Provider value={ContextValue}>
                <nav ref={ref} id={id} className="w-full">
                   <Link to={backLocation}>
-                     <div className="dark:border-border-secondary flex h-min flex-col border-b-[1px] border-solid px-4 py-2 sm:mx-auto sm:w-[50rem] sm:max-w-[90%] sm:border-none sm:px-2 sm:py-4">
+                     <div className="flex h-min flex-col border-b-[1px] border-solid px-4 py-2 sm:mx-auto sm:w-[50rem] sm:max-w-[90%] sm:border-none sm:px-2 sm:py-4 dark:border-border-secondary">
                         <div className="flex flex-row items-center gap-4">
                            <div className="flex h-full w-min">
                               <i className="bx bx-arrow-back text-fs-lg"></i>
                            </div>
                            {title && (
                               <>
-                                 <div className="font-family-primary text-fs-md font-weight-md">{title}</div>
+                                 <div className="font-family-primary text-fs-md font-weight-md">
+                                    {uppercaseify(title)}
+                                 </div>
                               </>
                            )}
                         </div>
@@ -37,10 +40,10 @@ const NavStateProvider = forwardRef<HTMLDivElement, NavStateProviderProps>(
                   </Link>
                </nav>
                {children}
-            </NavStateContext.Provider>
+            </AuthNavStateContext.Provider>
          </>
       );
    },
 );
 
-export default NavStateProvider;
+export default AuthNavStateProvider;

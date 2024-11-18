@@ -1,10 +1,12 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { isTauri } from "../../../../shared/lib/tauri";
 
-export default function AuthFormLayout() {
+type AuthFormLayoutProps = PropsWithChildren;
+
+export default function AuthFormLayout({ children }: AuthFormLayoutProps) {
    return (
       <>
-         <main></main>
+         <div className="">{children}</div>
       </>
    );
 }
