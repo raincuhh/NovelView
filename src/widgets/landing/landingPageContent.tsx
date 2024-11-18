@@ -1,14 +1,17 @@
 import React from "react";
-import LandingMain from "./landingMain";
+import CenteredLayout from "../../shared/components/layout/centeredLayout";
+import LandingBackgroundOverlay from "./landingBackgroundOverlay";
+import LandingHeader from "./landingHeader";
+import LandingActions from "./landingActions";
 
 export default function LandingPageContent(): React.JSX.Element {
    return (
       <>
-         <div id="landing" className="h-full">
-            <div className="flex flex-1 h-full lg:flex-row">
-               <LandingMain />
-            </div>
-         </div>
+         <CenteredLayout maxWidth="sm:max-w-sm md:max-w-md">
+            <LandingBackgroundOverlay />
+            <LandingHeader />
+            <LandingActions />
+         </CenteredLayout>
       </>
    );
 }

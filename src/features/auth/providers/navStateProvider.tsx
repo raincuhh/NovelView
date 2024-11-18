@@ -14,7 +14,7 @@ const NavStateProvider = forwardRef<HTMLDivElement, NavStateProviderProps>(
             setTitle,
             setBackLocation,
          }),
-         [setTitle, setBackLocation]
+         [setTitle, setBackLocation],
       );
 
       return (
@@ -22,16 +22,14 @@ const NavStateProvider = forwardRef<HTMLDivElement, NavStateProviderProps>(
             <NavStateContext.Provider value={ContextValue}>
                <nav ref={ref} id={id} className="w-full">
                   <Link to={backLocation}>
-                     <div className="flex flex-col px-4 py-2 sm:px-2 sm:py-4 h-min sm:mx-auto sm:w-[50rem] sm:max-w-[90%] border-solid dark:border-c-border-secondary border-b-[1px] sm:border-none">
-                        <div className="flex flex-row gap-4 items-center">
-                           <div className="h-full w-min flex">
-                              <i className="bx bx-arrow-back text-c-fs-lg"></i>
+                     <div className="dark:border-border-secondary flex h-min flex-col border-b-[1px] border-solid px-4 py-2 sm:mx-auto sm:w-[50rem] sm:max-w-[90%] sm:border-none sm:px-2 sm:py-4">
+                        <div className="flex flex-row items-center gap-4">
+                           <div className="flex h-full w-min">
+                              <i className="bx bx-arrow-back text-fs-lg"></i>
                            </div>
                            {title && (
                               <>
-                                 <div className="text-c-fs-md font-c-family-primary font-c-weight-md">
-                                    {title}
-                                 </div>
+                                 <div className="font-family-primary text-fs-md font-weight-md">{title}</div>
                               </>
                            )}
                         </div>
@@ -42,7 +40,7 @@ const NavStateProvider = forwardRef<HTMLDivElement, NavStateProviderProps>(
             </NavStateContext.Provider>
          </>
       );
-   }
+   },
 );
 
 export default NavStateProvider;

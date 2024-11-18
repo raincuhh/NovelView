@@ -1,19 +1,28 @@
+import React, { useEffect, useState } from "react";
 import MainLogo from "../../shared/components/ui/mainLogo";
 import packageJson from "../../../package.json";
+import useMediaQuery from "../../shared/hooks/useMediaQuery";
 
 export default function LandingHeader(): React.JSX.Element {
+   const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
+   const [variant, setVariant] = useState<"white" | "purple">(isSm ? "white" : "purple");
+
+   useEffect(() => {
+      setVariant(isSm ? "white" : "purple");
+   }, [isSm]);
+
    return (
       <>
-         <div className="flex flex-col h-min justify-center items-center mb-10 c-min-h-668:mb-14 gap-1 z-c-layer-content">
-            <div className="flex flex-col items-center gap-2">
-               <MainLogo variant="white" className="w-[150px] h-auto md:w-[167px]" />
-               <h1 className="text-c-fs-xl md:text-c-fs-2xl font-c-weight-lg font-c-family-primary">
+         <div className="mb-16 flex flex-col items-center justify-center sm:mb-20">
+            <div className="font-family-primary flex flex-col items-center">
+               <MainLogo variant={variant} className="w-40 sm:w-48" />
+               <header className="text-fs-xl font-weight-lg sm:font-weight-xl sm:text-fs-2xl mt-4 sm:mt-8">
                   NovelView
-               </h1>
+               </header>
+               <p className="text-fs-xs font-weight-lg sm:text-fs-sm dark:text-text-faint">
+                  v{packageJson.version}
+               </p>
             </div>
-            <h3 className="text-c-fs-sm font-c-weight-lg text-c-text-faint font-c-family-primary">
-               v{packageJson.version}
-            </h3>
          </div>
       </>
    );

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { PropsWithChildren } from "react";
 import withProvider from "../../shared/components/utils/withProvider";
 import pipe from "../../shared/lib/pipe";

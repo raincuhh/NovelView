@@ -9,129 +9,133 @@ module.exports = {
       "bg-accent-primary",
       "hover:bg-red-500",
       "hover:bg-base-40",
-      "text-c-sm",
-      "text-c-md",
-      "text-c-lg",
+      "text-sm",
+      "text-md",
+      "text-lg",
    ],
    theme: {
-      extend: {
-         colors: {
-            // Base colors
-            "c-base-00": "var(--base-00)",
-            "c-base-05": "var(--base-05)",
-            "c-base-10": "var(--base-10)",
-            "c-base-20": "var(--base-20)",
-            "c-base-25": "var(--base-25)",
-            "c-base-30": "var(--base-30)",
-            "c-base-35": "var(--base-35)",
-            "c-base-40": "var(--base-40)",
-            "c-base-50": "var(--base-50)",
-            "c-base-60": "var(--base-60)",
-            "c-base-70": "var(--base-70)",
-            "c-base-80": "var(--base-80)",
-            "c-base-90": "var(--base-90)",
-            "c-base-100": "var(--base-100)",
+      colors: {
+         // Base colors
+         "base-black": "var(--base-black)",
+         "base-00": "var(--base-00)",
+         "base-05": "var(--base-05)",
+         "base-10": "var(--base-10)",
+         "base-20": "var(--base-20)",
+         "base-25": "var(--base-25)",
+         "base-30": "var(--base-30)",
+         "base-35": "var(--base-35)",
+         "base-40": "var(--base-40)",
+         "base-50": "var(--base-50)",
+         "base-60": "var(--base-60)",
+         "base-70": "var(--base-70)",
+         "base-80": "var(--base-80)",
+         "base-90": "var(--base-90)",
+         "base-100": "var(--base-100)",
 
-            // Brand colors
-            "c-brand-button-bg": "var(--brand-button-bg)",
-            "c-brand-button-bg-hover": "var(--brand-button-bg-hover)",
-            "c-brand-default": "var(--brand-default)",
-            "c-brand-600": "var(--brand-600)",
-            "c-brand-500": "var(--brand-500)",
-            "c-brand-400": "var(--brand-400)",
-            "c-brand-300": "var(--brand-300)",
-            "c-brand-200": "var(--brand-200)",
+         // Brand colors
+         "brand-button-bg": "var(--brand-button-bg)",
+         "brand-button-bg-hover": "var(--brand-button-bg-hover)",
+         "brand-700": "var(--brand-700)",
+         "brand-600": "var(--brand-600)",
+         "brand-500": "var(--brand-500)",
+         "brand-400": "var(--brand-400)",
+         "brand-300": "var(--brand-300)",
+         "brand-200": "var(--brand-200)",
 
-            // Background colors
-            "c-background-primary": "var(--background-primary)",
-            "c-background-primary-alt": "var(--background-primary-alt)",
-            "c-background-secondary": "var(--background-secondary)",
-            "c-background-tertiary": "var(--background-tertiary)",
+         // Background colors
+         "background-primary": "var(--background-primary)",
+         "background-primary-alt": "var(--background-primary-alt)",
+         "background-primary-mobile": "var(--background-primary-mobile)",
+         "background-secondary": "var(--background-secondary)",
+         "background-secondary-alt": "var(--base-20)",
+         "background-tertiary": "var(--background-tertiary)",
+         "background-tertiary-alt": "var(--background-tertiary-alt)",
 
-            // Border colors
-            "c-border-primary": "var(--border-primary)",
-            "c-border-secondary": "var(--border-secondary)",
-            "c-border-tertiary": "var(--border-tertiary)",
+         // Border colors
+         "border-primary": "var(--border-primary)",
+         "border-secondary": "var(--border-secondary)",
+         "border-tertiary": "var(--border-tertiary)",
 
-            // Warning colors
-            "c-warning-default": "var(--warning-default)",
-            "c-warning-600": "var(--warning-600)",
-            "c-warning-500": "var(--warning-500)",
-            "c-warning-400": "var(--warning-400)",
-            "c-warning-300": "var(--warning-300)",
-            "c-warning-200": "var(--warning-200)",
+         // Warning colors
+         "warning-700": "var(--warning-700)",
+         "warning-600": "var(--warning-600)",
+         "warning-500": "var(--warning-500)",
+         "warning-400": "var(--warning-400)",
+         "warning-300": "var(--warning-300)",
+         "warning-200": "var(--warning-200)",
 
-            // Destructive colors
-            "c-destructive-default": "var(--destructive-default)",
-            "c-destructive-600": "var(--destructive-600)",
-            "c-destructive-500": "var(--destructive-500)",
-            "c-destructive-400": "var(--destructive-400)",
-            "c-destructive-300": "var(--destructive-300)",
-            "c-destructive-200": "var(--destructive-200)",
+         // Destructive colors
+         "destructive-700": "var(--destructive-700)",
+         "destructive-600": "var(--destructive-600)",
+         "destructive-500": "var(--destructive-500)",
+         "destructive-400": "var(--destructive-400)",
+         "destructive-300": "var(--destructive-300)",
+         "destructive-200": "var(--destructive-200)",
 
-            // Text colors
-            "c-text-normal": "var(--text-normal)",
-            "c-text-muted": "var(--text-muted)",
-            "c-text-faint": "var(--text-faint)",
-            "c-text-on-accent": "var(--text-on-accent)",
-            "c-text-on-accent-inverted": "var(--text-on-accent-inverted)",
-            "c-text-error": "var(--text-error)",
-            "c-text-warning": "var(--text-warning)",
-         },
-         boxShadow: {
-            "c-input-shadow":
-               "inset 0 0.5px 0.5px 0.5px rgba(255, 255, 255, 0.09), 0 2px 4px 0 rgba(0, 0, 0, .15), 0 1px 1.5px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .2), 0 0 0 0 transparent",
-            "c-input-shadow-hover":
-               "inset 0 0.5px 1px 0.5px rgba(255, 255, 255, 0.16), 0 2px 3px 0 rgba(0, 0, 0, .3), 0 1px 1.5px 0 rgba(0, 0, 0, .2), 0 1px 2px 0 rgba(0, 0, 0, .4), 0 0 0 0 transparent",
-            "c-shadow-s":
-               "0px 1px 2px rgba(0, 0, 0, 0.121), 0px 3.4px 6.7px rgba(0, 0, 0, 0.179), 0px 15px 30px rgba(0, 0, 0, 0.3)",
-            "c-shadow-l":
-               "0px 1.8px 7.3px rgba(0, 0, 0, 0.071), 0px 6.3px 24.7px rgba(0, 0, 0, 0.112), 0px 30px 90px rgba(0, 0, 0, 0.2)",
-         },
+         // Text colors
+         "text-normal": "var(--text-normal)",
+         "text-muted": "var(--text-muted)",
+         "text-faint": "var(--text-faint)",
+         "text-on-accent": "var(--text-on-accent)",
+         "text-on-accent-inverted": "var(--text-on-accent-inverted)",
+         "text-error": "var(--text-error)",
+         "text-warning": "var(--text-warning)",
+      },
+      // boxShadow: {
+      //    "input-shadow":
+      //       "inset 0 0.5px 0.5px 0.5px rgba(255, 255, 255, 0.09), 0 2px 4px 0 rgba(0, 0, 0, .15), 0 1px 1.5px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .2), 0 0 0 0 transparent",
+      //    "input-shadow-hover":
+      //       "inset 0 0.5px 1px 0.5px rgba(255, 255, 255, 0.16), 0 2px 3px 0 rgba(0, 0, 0, .3), 0 1px 1.5px 0 rgba(0, 0, 0, .2), 0 1px 2px 0 rgba(0, 0, 0, .4), 0 0 0 0 transparent",
+      //    "shadow-s":
+      //       "0px 1px 2px rgba(0, 0, 0, 0.121), 0px 3.4px 6.7px rgba(0, 0, 0, 0.179), 0px 15px 30px rgba(0, 0, 0, 0.3)",
+      //    "shadow-l":
+      //       "0px 1.8px 7.3px rgba(0, 0, 0, 0.071), 0px 6.3px 24.7px rgba(0, 0, 0, 0.112), 0px 30px 90px rgba(0, 0, 0, 0.2)",
+      // },
 
-         fontSize: {
-            "c-fs-default": "var(--c-default)",
-            "c-fs-xs": "var(--c-xs)",
-            "c-fs-sm": "var(--c-sm)",
-            "c-fs-md": "var(--c-md)",
-            "c-fs-lg": "var(--c-lg)",
-            "c-fs-xl": "var(--c-xl)",
-            "c-fs-2xl": "var(--c-2xl)",
-            "c-fs-3xl": "var(--c-3xl)",
-         },
-         fontFamily: {
-            "c-family-primary": ["Satoshi-Variable", "sans-serif"],
-            "c-family-secondary": ['"Roboto"', "sans-serif"],
-            "c-family-tertiary": ["Nuito Sans", "sans-serif"],
-         },
-         fontWeight: {
-            "c-weight-xl": "700",
-            "c-weight-lg": "600",
-            "c-weight-md": "500",
-            "c-weight-sm": "400",
-         },
-         zIndex: {
-            "c-layer-background": 5,
-            "c-layer-sidebar": 10,
-            "c-layer-header": 15,
-            "c-layer-popup": 30,
-            "c-layer-content": 45,
-            "c-layer-modal": 50,
-            "c-layer-notification": 60,
-            "c-layer-menu": 65,
-            "c-layer-tooltip": 70,
-            "c-layer-dragging": 80,
-            "c-layer-native": 90,
-            "c-layer-window-titlebar": 99,
-            "c-layer-window-titlebar-buttons": 100,
-         },
+      fontSize: {
+         "fs-default": "var(--default)",
+         "fs-xs": "var(--xs)",
+         "fs-sm": "var(--sm)",
+         "fs-md": "var(--md)",
+         "fs-lg": "var(--lg)",
+         "fs-xl": "var(--xl)",
+         "fs-2xl": "var(--2xl)",
+         "fs-3xl": "var(--3xl)",
+      },
+      fontFamily: {
+         "family-primary": ["Satoshi-Variable", "sans-serif"],
+         "family-secondary": ['"Roboto"', "sans-serif"],
+         "family-tertiary": ["Nuito Sans", "sans-serif"],
+      },
+      fontWeight: {
+         "weight-xl": "700",
+         "weight-lg": "600",
+         "weight-md": "500",
+         "weight-sm": "400",
+      },
+      zIndex: {
+         "layer-background": 5,
+         "layer-sidebar": 10,
+         "layer-header": 15,
+         "layer-popup": 30,
+         "layer-content": 45,
+         "layer-modal": 50,
+         "layer-notification": 60,
+         "layer-menu": 65,
+         "layer-tooltip": 70,
+         "layer-dragging": 80,
+         "layer-native": 90,
+         "layer-window-titlebar": 99,
+         "layer-window-titlebar-buttons": 100,
+      },
+      extends: {
          screens: {
-            "c-min-h-650": { raw: "(min-height: 650px)" },
-            "c-min-h-668": { raw: "(min-height: 668px)" },
-            "c-min-w-500": "500px",
-            "c-min-w-850": "850px",
-            "c-min-w-1150": "1150px",
-            "c-min-w-1400": "1400px",
+            // "media-min-h-650": { raw: "(min-height: 650px)" },
+            // "media-min-h-668": { raw: "(min-height: 668px)" },
+            "media-min-w-500": "500px",
+            "media-min-w-850": "850px",
+            "media-min-w-1150": "1150px",
+            "media-min-w-1400": "1400px",
          },
       },
    },
@@ -140,6 +144,7 @@ module.exports = {
          addBase({
             ":root": {
                //base
+               "--base-black": "rgb(0, 0, 0)",
                "--base-00": "rgb(19, 19, 19)",
                "--base-05": "rgb(22, 22, 22)",
                "--base-10": "rgb(25, 25, 25)",
@@ -168,13 +173,11 @@ module.exports = {
                //background colors
                "--background-primary": "var(--base-00)",
                "--background-primary-alt": "var(--base-05)",
+               "--background-primary-mobile": "var(--base-black)",
                "--background-secondary": "var(--base-10)",
                "--background-secondary-alt": "var(--base-20)",
                "--background-tertiary": "var(--base-35)",
                "--background-tertiary-alt": "var(--base-50)",
-               "--background-modifier-hover": "rgba(var(--mono-rgb-100), 0.075)",
-               "--background-modifier-active-hover": "hsla(258, 88%, 66%, 0.15)",
-               "--background-modifier-border": "var(--base-25)",
 
                //border colors
                "--border-primary": "var(--base-25)",
@@ -212,13 +215,13 @@ module.exports = {
                "--font-tertiary": '"Nunito Sans", sans-serif',
 
                //fontsize
-               "--c-xs": "0.75rem",
-               "--c-sm": "0.875rem",
-               "--c-md": "1rem",
-               "--c-lg": "1.25rem",
-               "--c-xl": "1.5rem",
-               "--c-2xl": "2rem",
-               "--c-3xl": "3rem",
+               "--xs": "0.75rem",
+               "--sm": "0.875rem",
+               "--md": "1rem",
+               "--lg": "1.25rem",
+               "--xl": "1.5rem",
+               "--2xl": "2rem",
+               "--3xl": "3rem",
             },
          });
       }),

@@ -8,14 +8,14 @@ const inputVariants = cva(
          variant: {
             textDefault: "",
             textBrand: "",
-            checkBoxDefault: "w-4 h-4 shrink-0 dark:border-c-border-secondary dark:sm:hover:border-c-border",
+            checkBoxDefault: "w-4 h-4 shrink-0 dark:border-border-secondary dark:sm:hover:border-border",
             checkBoxBrand: "",
          },
       },
       defaultVariants: {
          variant: "textDefault",
       },
-   }
+   },
 );
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> &
@@ -44,7 +44,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                      />
                      {checked && (
                         <>
-                           <i className="bx bx-check absolute translate-x-[-0%] translate-y-[-5%] select-none text-text-normal pointer-events-none"></i>
+                           <i className="bx bx-check text-text-normal pointer-events-none absolute translate-x-[-0%] translate-y-[-5%] select-none"></i>
                         </>
                      )}
                   </div>
@@ -56,7 +56,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             )}
          </>
       );
-   }
+   },
 );
 
 export default Input;

@@ -3,21 +3,21 @@ import { Link } from "react-router-dom";
 import { VariantProps, cva } from "class-variance-authority";
 
 const buttonVariants = cva(
-   "flex items-center justify-center font-c-weight-md font-c-family-primary transition-colors duration-100 ease-in-out focus:outline-none disabled:pointer-events-none",
+   "flex items-center justify-center font-weight-md font-family-primary transition-colors duration-100 ease-in-out focus:outline-none disabled:pointer-events-none",
    {
       variants: {
          variant: {
-            default: "bg-c-brand-button-bg sm:hover:bg-c-brand-button-bg-hover",
+            default: "bg-brand-button-bg sm:hover:bg-brand-button-bg-hover",
             destructive: "bg",
-            ghost: "bg-transparent sm:hover:bg-c-background-primary-alt",
+            ghost: "bg-transparent sm:hover:bg-background-primary-alt",
             outline:
-               "bg-transparent text-c-text-normal sm:hover:text-c-text-muted border-solid border-[1px] border-c-border-secondary",
-            link: "underline text-c-brand-default sm:hover:text-c-brand-600",
+               "bg-transparent text-text-normal sm:hover:text-text-muted border-solid border-[1px] border-border-secondary",
+            link: "underline text-brand-default sm:hover:text-brand-600",
          },
          size: {
-            sm: "py-1 px-2 text-c-fs-sm",
-            md: "py-2 px-4 text-c-fs-md",
-            lg: "py-3 px-6 text-c-fs-lg",
+            sm: "py-1 px-2 text-fs-sm",
+            md: "py-2 px-4 text-fs-md",
+            lg: "py-3 px-6 text-fs-lg",
          },
          rounded: {
             sm: "rounded-[2px]",
@@ -29,7 +29,7 @@ const buttonVariants = cva(
          variant: "default",
          size: "md",
       },
-   }
+   },
 );
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
@@ -59,7 +59,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             </button>
          </>
       );
-   }
+   },
 );
 
 export default Button;

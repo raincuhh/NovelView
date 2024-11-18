@@ -10,10 +10,10 @@ type AuthPageSwitcherProps = {
 export default function AuthPageSwitcher({ desc, href, label }: AuthPageSwitcherProps) {
    return (
       <>
-         <div className="my-6 text-center dark:text-c-text-muted font-c-family-primary font-c-weight-md">
+         <div className="dark:text-text-muted font-family-primary font-weight-md my-6 text-center">
             {desc}{" "}
             <Link to={href}>
-               <span className="underline text-c-text-normal dark:hover:text-c-brand-default transition-colors duration-100 ease-in-out">
+               <span className="dark:text-text-normal dark:hover:text-brand-700 underline transition-colors duration-100 ease-in-out">
                   {label}
                </span>
             </Link>

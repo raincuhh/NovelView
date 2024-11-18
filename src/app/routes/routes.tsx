@@ -1,3 +1,4 @@
+import React, { Suspense, lazy } from "react";
 import {
    HashRouter as Router,
    Route,
@@ -13,69 +14,73 @@ import PageLayout from "../../shared/components/layout/pageLayout";
 
 //pages
 import ErrorBoundary from "../../shared/components/utils/errorBoundary";
-import NotFoundPage from "../../pages/notFound/page";
-
-import LandingPage from "../../pages/landing/page";
-
-import LoginPage from "../../pages/login/page";
-import RegisterPage from "../../pages/register/page";
-
-import DashboardPage from "../../pages/dashboard/page";
-import AdminPage from "../../pages/admin/page";
+const NotFoundPage = lazy(() => import("../../pages/notFound/page"));
+const LandingPage = lazy(() => import("../../pages/landing/page"));
+const LoginPage = lazy(() => import("../../pages/login/page"));
+const RegisterPage = lazy(() => import("../../pages/register/page"));
+const DashboardPage = lazy(() => import("../../pages/dashboard/page"));
+const AdminPage = lazy(() => import("../../pages/admin/page"));
 
 type RouteListProps = {
+   id: string;
    path: string;
    element: JSX.Element;
-   errorElement: JSX.Element;
+   errorElement?: JSX.Element;
    routeType?: RouteTypes;
 };
 
 const fallbackMessage: string = "An error has occured, check DevTools for more details.";
 
+const SuspenseFallback = () => (
+   <div className="fixed flex h-screen items-center justify-center">
+      <span>Loading...</span>
+   </div>
+);
+
 const RouteList: RouteListProps[] = [
    // public
    {
+      id: "not-found",
       path: "/not-found",
       element: <NotFoundPage />,
-      errorElement: <ErrorBoundary fallback={fallbackMessage} />,
    },
    {
+      id: "not-found",
       path: "*",
       element: <Navigate to={"/not-found"} />,
-      errorElement: <ErrorBoundary fallback={fallbackMessage} />,
    },
    {
+      id: "landing",
       path: "/",
       element: <LandingPage />,
-      errorElement: <ErrorBoundary fallback={fallbackMessage} />,
       routeType: RouteTypes.public,
    },
    // auth
    {
+      id: "login",
       path: "/login",
       element: <LoginPage />,
-      errorElement: <ErrorBoundary fallback={fallbackMessage} />,
 
       routeType: RouteTypes.auth,
    },
    {
+      id: "register",
       path: "/register",
       element: <RegisterPage />,
-      errorElement: <ErrorBoundary fallback={fallbackMessage} />,
       routeType: RouteTypes.auth,
    },
    // protected
    {
+      id: "dashboard",
       path: "/dashboard",
       element: <DashboardPage />,
-      errorElement: <ErrorBoundary fallback={fallbackMessage} />,
       routeType: RouteTypes.protected,
    },
    // admin
    {
+      id: "admin",
       path: "/admin",
       element: <AdminPage />,
-      errorElement: <ErrorBoundary fallback={fallbackMessage} />,
       routeType: RouteTypes.admin,
    },
 ];
@@ -88,13 +93,15 @@ const routes = createRoutesFromElements(
             path={route.path}
             element={
                <RouteGuard type={route.routeType}>
-                  <PageLayout>{route.element}</PageLayout>
+                  <PageLayout id={route.id}>
+                     <Suspense fallback={<SuspenseFallback />}>{route.element}</Suspense>
+                  </PageLayout>
                </RouteGuard>
             }
-            errorElement={route.errorElement}
+            errorElement={route.errorElement || <ErrorBoundary fallback={fallbackMessage} />}
          />
       ))}
-   </>
+   </>,
 );
 
 export const appRouter = createHashRouter(routes);

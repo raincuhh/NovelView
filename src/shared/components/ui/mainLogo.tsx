@@ -9,7 +9,7 @@ export default function MainLogo({ variant = "white", className }: MainLogoProps
    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
    const srcPaths = {
-      white: "/assets/images/logo_base_90.png",
+      white: "/assets/images/logo_white.png",
       black: "/assets/images/logo_black.png",
       purple: "/assets/images/logo_purple.png",
    };
@@ -25,7 +25,7 @@ export default function MainLogo({ variant = "white", className }: MainLogoProps
       <>
          <div className="relative">
             {!isLoaded && (
-               <div className={`absolute dark:bg-c-background-primary-alt rounded-[4px] ${className}`}></div>
+               <div className={`dark:bg-background-primary-alt absolute rounded-[4px] ${className}`}></div>
             )}
             <img
                src={srcPaths[variant]}

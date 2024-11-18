@@ -8,11 +8,11 @@ import { register } from "module";
 export default function LandingActions(): React.JSX.Element {
    return (
       <>
-         <div className="flex justify-end z-c-layer-content">
-            <div className="flex flex-col w-full">
-               <div className="grid grid-cols-1 gap-2 sm:gap-0">
+         <div className="z-layer-content flex justify-end">
+            <div className="flex w-full flex-col">
+               <div className="grid grid-cols-1 gap-2 sm:gap-2">
                   <LandingAction href="/register" type="register" />
-                  <Divider rootClassName="my-2 hidden sm:block" />
+
                   <LandingAction href="/login" type="login" />
                </div>
             </div>
@@ -43,9 +43,9 @@ function LandingAction({ type, href }: LandingActionProps): React.JSX.Element {
 
    return (
       <>
-         <div className="select-none cursor-pointer">
-            <Button variant={variant} href={href} className="gap-2 items-center">
-               <i className={`bx ${icon} text-c-fs-lg`}></i>
+         <div className="cursor-pointer select-none">
+            <Button variant={variant} href={href} className="items-center gap-2">
+               <i className={`bx ${icon} text-fs-lg`}></i>
                {uppercaseify(text)}
             </Button>
          </div>
