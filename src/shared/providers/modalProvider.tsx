@@ -1,17 +1,19 @@
 import React, { PropsWithChildren, useMemo, useState } from "react";
 import { ModalContext } from "../hooks/useModal";
-import { Modals } from "../types/modal";
+import { Modal } from "../types/modal";
 
 type ModalProviderProps = PropsWithChildren;
 
 export default function ModalProvider({ children }: ModalProviderProps): React.JSX.Element {
-   const [modals, setModals] = useState<Modals[]>([]);
+   const [modals, setModals] = useState<Modal[]>([]);
 
-   const open = (modal: Modals) => setModals((old) => [...old, modal]);
+   const open = (modal: Modal) => setModals((old) => [...old, modal]);
 
    const remove = () => setModals((old) => old.slice(0, old.length - 1));
 
    const removeAll = () => setModals([]);
+
+   const removeById = (id: string) => setModals((old) => old.filter((modal) => modal.id !== id));
 
    const contextValue = useMemo(
       () => ({
@@ -19,8 +21,9 @@ export default function ModalProvider({ children }: ModalProviderProps): React.J
          open,
          remove,
          removeAll,
+         removeById,
       }),
-      [modals, open, remove, removeAll],
+      [modals, open, remove, removeAll, removeById],
    );
 
    return (

@@ -1,1 +1,6 @@
-export type Modals = { id: string };
+export type Modal = {
+   id: string;
+   content: React.ReactNode;
+   closable?: boolean;
+   size?: "small" | "medium" | "large";
+};

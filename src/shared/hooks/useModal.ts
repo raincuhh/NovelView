@@ -1,16 +1,17 @@
 import React, { createContext, useContext } from "react";
-import { Modals } from "../types/modal";
+import { Modal } from "../types/modal";
 
 type ModalContextProps = {
-   modals: Modals[];
-   open: (modal: Modals) => void;
+   modals: Modal[];
+   open: (modal: Modal) => void;
    remove: () => void;
    removeAll: () => void;
+   removeById: (id: string) => void;
 };
 
 export const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 
-export const useModal = () => {
+export function useModal(): ModalContextProps {
    const context = useContext(ModalContext);
 
    if (!context) {
@@ -18,4 +19,4 @@ export const useModal = () => {
    }
 
    return context;
-};
+}
