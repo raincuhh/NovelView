@@ -6,7 +6,9 @@ import { UserRoles } from "../../shared/lib/types";
 type AuthProviderProps = PropsWithChildren;
 
 export default function AuthProvider({ children }: AuthProviderProps) {
-   const [jwtToken, setJwtToken] = useState<string | null>(localStorage.getItem("JWT_TOKEN_KEY"));
+   const [jwtToken, setJwtToken] = useState<string | null>(
+      localStorage.getItem("JWT_TOKEN_KEY"),
+   );
    const [role, setRole] = useState<UserRoles>(UserRoles.guest);
    const [loading, setLoading] = useState<boolean>(false);
 
@@ -43,7 +45,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
          logout,
          handleJwtToken,
       }),
-      [jwtToken, role, loading, login, logout]
+      [jwtToken, role, loading, login, logout],
    );
 
    return <AuthContext.Provider value={context_value}>{children}</AuthContext.Provider>;

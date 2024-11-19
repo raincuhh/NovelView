@@ -13,7 +13,8 @@ export default function ModalProvider({ children }: ModalProviderProps): JSX.Ele
 
    const removeAll = () => setModals([]);
 
-   const removeById = (id: string) => setModals((old) => old.filter((modal) => modal.id !== id));
+   const removeById = (id: string) =>
+      setModals((old) => old.filter((modal) => modal.id !== id));
 
    const contextValue = useMemo(
       () => ({

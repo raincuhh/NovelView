@@ -2,7 +2,10 @@ import React, { PropsWithChildren } from "react";
 
 type AuthFormLayoutProps = PropsWithChildren & { id: string };
 
-export default function AuthFormLayout({ children, id }: AuthFormLayoutProps): JSX.Element {
+export default function AuthFormLayout({
+   children,
+   id,
+}: AuthFormLayoutProps): JSX.Element {
    return (
       <>
          <div id={id} className="mt-10">

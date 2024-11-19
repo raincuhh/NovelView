@@ -19,7 +19,7 @@ export default function LabeledCheckBox({ text, name, id }: LabeledCheckBoxProps
 
    return (
       <>
-         <div className="cursor-pointer flex flex-row mt-2 font-c-primary font-c-weight-md dark:text-c-text-faint text-c-md dark:hover:text-c-text-muted items-center select-none transition-colors duration-100 ease-in-out">
+         <div className="font-c-primary font-c-weight-md dark:text-c-text-faint text-c-md dark:hover:text-c-text-muted mt-2 flex cursor-pointer select-none flex-row items-center transition-colors duration-100 ease-in-out">
             <FormCheckBox
                ref={check_box_ref}
                name={name}

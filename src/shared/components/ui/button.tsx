@@ -7,9 +7,9 @@ const buttonVariants = cva(
    {
       variants: {
          variant: {
-            default: "bg-brand-button-bg sm:hover:bg-brand-button-bg-hover",
+            default: "bg-background-brand-secondary-alt hover:bg-background-brand-accent",
             destructive: "bg",
-            ghost: "bg-transparent sm:hover:bg-background-primary-alt",
+            ghost: "dark:bg-background-primary dark:sm:bg-background-primary-alt dark:hover:bg-background-primary-alt dark:sm:hover:bg-background-secondary",
             outline:
                "bg-transparent text-text-normal sm:hover:text-text-muted border-solid border-[1px] border-border-secondary",
             link: "underline text-brand-default sm:hover:text-brand-600",
@@ -39,7 +39,19 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
    };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-   ({ className, children, text, href, variant, size, rounded = "md", ...props }: ButtonProps, ref) => {
+   (
+      {
+         className,
+         children,
+         text,
+         href,
+         variant,
+         size,
+         rounded = "md",
+         ...props
+      }: ButtonProps,
+      ref,
+   ) => {
       const classes = buttonVariants({ variant, size, rounded, className });
 
       if (href) {

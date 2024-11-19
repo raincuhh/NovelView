@@ -1,10 +1,13 @@
 import React, { ComponentType } from "react";
 
 const pipe =
-   <P extends {}>(...functions: Array<(component: ComponentType<P>) => ComponentType<P>>) =>
+   <P extends {}>(
+      ...functions: Array<(component: ComponentType<P>) => ComponentType<P>>
+   ) =>
    (component: ComponentType<P>): ComponentType<P> =>
       functions.reduceRight(
-         (acc: ComponentType<P>, fn: (component: ComponentType<P>) => ComponentType<P>) => fn(acc),
+         (acc: ComponentType<P>, fn: (component: ComponentType<P>) => ComponentType<P>) =>
+            fn(acc),
          component,
       );
 

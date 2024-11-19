@@ -7,6 +7,7 @@ import {
    Navigate,
    replace,
 } from "react-router-dom";
+import SuspenseWithDelay from "../../shared/components/utils/suspenseWithDelay";
 
 import { RouteTypes } from "../../shared/types/routing";
 import RouteGuard from "../../features/auth/components/utils/routeGuard";
@@ -35,6 +36,7 @@ type RouteListProps = {
 
 const fallbackMessage: string = "An error has occured, check DevTools for more details.";
 
+//TODO: do a loading screen or something, idk.
 const SuspenseFallback = () => (
    <>
       <SplashScreen />
@@ -98,11 +100,15 @@ const routes = createRoutesFromElements(
             element={
                <RouteGuard type={route.routeType}>
                   <PageLayout id={route.id}>
-                     <Suspense fallback={<SuspenseFallback />}>{route.element}</Suspense>
+                     <SuspenseWithDelay fallback={<SuspenseFallback />} delay={600}>
+                        {route.element}
+                     </SuspenseWithDelay>
                   </PageLayout>
                </RouteGuard>
             }
-            errorElement={route.errorElement || <ErrorBoundary fallback={fallbackMessage} />}
+            errorElement={
+               route.errorElement || <ErrorBoundary fallback={fallbackMessage} />
+            }
          />
       ))}
    </>,

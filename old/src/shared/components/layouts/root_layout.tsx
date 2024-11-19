@@ -4,9 +4,7 @@ import SplashScreen from "../utils/splash_screen";
 
 type RootLayoutProps = PropsWithChildren & {};
 
-export default function RootLayout({
-   children,
-}: RootLayoutProps) {
+export default function RootLayout({ children }: RootLayoutProps) {
    // modals
    // splashscreen
    return (

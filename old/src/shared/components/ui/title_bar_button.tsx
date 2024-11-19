@@ -7,7 +7,10 @@ type TitlebarButtonProps = {
    on_click?: (event: string) => void;
 };
 
-export default function TitleBarButton({ button_type, on_click }: TitlebarButtonProps): JSX.Element {
+export default function TitleBarButton({
+   button_type,
+   on_click,
+}: TitlebarButtonProps): JSX.Element {
    const button_hover = {
       close: "bg-red-500",
       minimize: "bg-base-40",
@@ -26,19 +29,21 @@ export default function TitleBarButton({ button_type, on_click }: TitlebarButton
 
    return (
       <div
-         className={`${button_hover_css} h-c-titlebar-height px-3 cursor-pointer flex items-center z-c-layer-window bg-c-base-35 transition-colors duration-100 ease-in-out`}
+         className={`${button_hover_css} h-c-titlebar-height z-c-layer-window bg-c-base-35 flex cursor-pointer items-center px-3 transition-colors duration-100 ease-in-out`}
          onClick={() => {
             on_click?.(button_type);
          }}
       >
-         <div className="h-full flex justify-center items-center">
+         <div className="flex h-full items-center justify-center">
             <i className={`${bx_icon_css} text-c-text-normal text-c-md`} />
          </div>
       </div>
    );
 }
 
-function button_type_to_str(button_type: TitleBarButtonTypes): "maximize" | "minimize" | "close" {
+function button_type_to_str(
+   button_type: TitleBarButtonTypes,
+): "maximize" | "minimize" | "close" {
    switch (button_type) {
       case TitleBarButtonTypes.maximize:
          return "maximize";

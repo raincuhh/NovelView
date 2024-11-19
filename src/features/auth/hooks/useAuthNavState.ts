@@ -5,7 +5,9 @@ type AuthNavStateContextProps = {
    setBackLocation: (location: string) => void;
 };
 
-export const AuthNavStateContext = createContext<AuthNavStateContextProps | undefined>(undefined);
+export const AuthNavStateContext = createContext<AuthNavStateContextProps | undefined>(
+   undefined,
+);
 
 export function useAuthNavState(): AuthNavStateContextProps {
    const context = useContext(AuthNavStateContext);

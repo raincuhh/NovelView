@@ -1,0 +1,8 @@
+{
+   "htmlWhitespaceSensitivity": "ignore",
+   "printWidth": 90,
+   "tabWidth": 3,
+   "tailwindConfig": "./tailwind.config.js",
+   "plugins": ["prettier-plugin-classnames"],
+   "endingPosition": "relative"
+}

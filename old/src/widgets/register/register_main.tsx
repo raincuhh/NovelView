@@ -10,20 +10,28 @@ export default function RegisterMain(): JSX.Element {
    return (
       <>
          <main
-            className={`w-full lg:w-[65%] h-full justify-center items-center flex flex-col overflow-y-scroll rounded-r-md ${
+            className={`flex h-full w-full flex-col items-center justify-center overflow-y-scroll rounded-r-md lg:w-[65%] ${
                isTauri ? "pt-[30px]" : ""
             }`}
          >
-            <div className="min-w-[320px] w-[320px] c-min-w-500:w-[380px] c-min-w-1150:w-[420px] h-full px-4 py-6 flex flex-col c-min-h-668:mt-[100px]">
+            <div className="c-min-w-500:w-[380px] c-min-w-1150:w-[420px] c-min-h-668:mt-[100px] flex h-full w-[320px] min-w-[320px] flex-col px-4 py-6">
                {/* <AuthFormHeader
                   label="Hi"
                   desc="Create a new account"
                /> */}
-               <div className="flex flex-col mt-4">
+               <div className="mt-4 flex flex-col">
                   {/* <AuthDivider /> */}
-                  <AuthForm formId="register-form" formType="register" formMethod="POST" />
+                  <AuthForm
+                     formId="register-form"
+                     formType="register"
+                     formMethod="POST"
+                  />
                </div>
-               <AuthFormSwitcher desc="Already have an account?" link_path="/login" link_label="Login Here" />
+               <AuthFormSwitcher
+                  desc="Already have an account?"
+                  link_path="/login"
+                  link_label="Login Here"
+               />
                <AuthAgreementFooter />
             </div>
          </main>

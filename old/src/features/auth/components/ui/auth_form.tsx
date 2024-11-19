@@ -17,13 +17,13 @@
 //    const form_inputs: AuthInputType[] =
 //       formType === "register" ? ["username", "email", "password"] : ["username", "password"];
 
-//    const [remember_me, set_remember_me] = useState<boolean>(false);
-//    const [form_data, set_form_data] = useState<{
-//       [key: string]: string;
-//    }>({});
-//    const [form_errors, set_form_errors] = useState<{
-//       [key: string]: string;
-//    }>({});
+//  const [remember_me, set_remember_me] = useState<boolean>(false);
+//  const [form_data, set_form_data] = useState<{
+//     [key: string]: string;
+//  }>({});
+//  const [form_errors, set_form_errors] = useState<{
+//     [key: string]: string;
+//  }>({});
 
 //    useEffect(() => {
 //       console.log(form_errors);

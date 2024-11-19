@@ -12,7 +12,10 @@ type ErrorBoundaryState = {
    errorInfo?: React.ErrorInfo | null;
 };
 
-export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export default class ErrorBoundary extends React.Component<
+   ErrorBoundaryProps,
+   ErrorBoundaryState
+> {
    state: ErrorBoundaryState = { hasError: false, error: null, errorInfo: null };
 
    static getDerivedStateFromError(error: Error): ErrorBoundaryState {

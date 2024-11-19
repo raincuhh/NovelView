@@ -5,7 +5,10 @@ type MainLogoProps = {
    className?: string;
 };
 
-export default function MainLogo({ variant = "white", className }: MainLogoProps): JSX.Element {
+export default function MainLogo({
+   variant = "white",
+   className,
+}: MainLogoProps): JSX.Element {
    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
    const srcPaths = {
@@ -25,7 +28,9 @@ export default function MainLogo({ variant = "white", className }: MainLogoProps
       <>
          <div className="relative">
             {!isLoaded && (
-               <div className={`absolute rounded-[4px] dark:bg-background-primary-alt ${className}`}></div>
+               <div
+                  className={`dark:bg-background-primary-alt absolute rounded-[4px] ${className}`}
+               ></div>
             )}
             <img
                src={srcPaths[variant]}

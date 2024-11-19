@@ -6,7 +6,12 @@ const ModalOverlay = forwardRef<HTMLDivElement, ModalOverlayProps>(
    ({ modalId, children, className, ...props }: ModalOverlayProps, ref) => {
       return (
          <>
-            <div ref={ref} id={modalId} className={`h-full w-full ${className}`} {...props}>
+            <div
+               ref={ref}
+               id={modalId}
+               className={`h-full w-full ${className}`}
+               {...props}
+            >
                {children}
             </div>
          </>

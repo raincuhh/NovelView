@@ -34,17 +34,26 @@ export function TitleBarButtonContainer({
       <>
          <div className="absolute right-0 top-0 flex w-min flex-row-reverse">
             {closeButton === true ? (
-               <TitleBarButton button_type={TitleBarButtonTypes.close} on_click={handleOnClick} />
+               <TitleBarButton
+                  button_type={TitleBarButtonTypes.close}
+                  on_click={handleOnClick}
+               />
             ) : (
                <></>
             )}
             {maximizeButton === true ? (
-               <TitleBarButton button_type={TitleBarButtonTypes.maximize} on_click={handleOnClick} />
+               <TitleBarButton
+                  button_type={TitleBarButtonTypes.maximize}
+                  on_click={handleOnClick}
+               />
             ) : (
                <></>
             )}
             {minimizeButton === true ? (
-               <TitleBarButton button_type={TitleBarButtonTypes.minimize} on_click={handleOnClick} />
+               <TitleBarButton
+                  button_type={TitleBarButtonTypes.minimize}
+                  on_click={handleOnClick}
+               />
             ) : (
                <></>
             )}

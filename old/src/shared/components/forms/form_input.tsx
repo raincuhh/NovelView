@@ -30,7 +30,7 @@ export default function FormInput({
             autoComplete={auto_complete}
             aria-autocomplete="none"
             onChange={(e) => on_change_callback?.(e)}
-            className={`${css} w-full border-solid border-[1px] dark:border-c-border-secondary px-4 py-2 bg-c-base-20 rounded-[4px] placeholder:text-c-text-faint text-text-primary font-c-primary focus:outline-none focus:outline-offset-[0px] dark:focus:outline-base-25`}
+            className={`${css} dark:border-c-border-secondary bg-c-base-20 placeholder:text-c-text-faint text-text-primary font-c-primary dark:focus:outline-base-25 w-full rounded-[4px] border-[1px] border-solid px-4 py-2 focus:outline-none focus:outline-offset-[0px]`}
             style={{ fontWeight: 500 }}
          />
       </>

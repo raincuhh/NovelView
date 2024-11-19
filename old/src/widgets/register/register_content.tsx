@@ -5,7 +5,7 @@ export default function RegisterContent(): JSX.Element {
    return (
       <>
          <div id="register" className="h-full">
-            <div className="flex flex-1 h-full lg:flex-row">
+            <div className="flex h-full flex-1 lg:flex-row">
                <RegisterMain />
                <AuthPageAside />
             </div>

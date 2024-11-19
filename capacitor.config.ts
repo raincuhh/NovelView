@@ -1,9 +1,9 @@
-import type { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: 'com.novelview.app',
-  appName: 'novelview',
-  webDir: 'dist'
+   appId: "com.novelview.app",
+   appName: "novelview",
+   webDir: "dist",
 };
 
 export default config;

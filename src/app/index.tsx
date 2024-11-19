@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM, { createRoot } from "react-dom/client";
 import App from "./app";
 
-const root: ReactDOM.Root = createRoot(document.getElementById("novelview") as HTMLElement);
+const root: ReactDOM.Root = createRoot(
+   document.getElementById("novelview") as HTMLElement,
+);
 
 const html: HTMLElement | null = document.querySelector("html");
 
@@ -13,7 +15,7 @@ function render(strict: boolean = true) {
       root.render(
          <React.StrictMode>
             <App />
-         </React.StrictMode>
+         </React.StrictMode>,
       );
    } else {
       root.render(<App />);

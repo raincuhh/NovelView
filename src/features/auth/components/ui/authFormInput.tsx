@@ -49,7 +49,7 @@ export default function AuthFormInput({
                   <>
                      <div className="cursor-pointer">
                         <Link to="/forgot-password">
-                           <span className="transition-colors duration-100 ease-in-out dark:text-text-faint dark:hover:text-text-muted">
+                           <span className="dark:text-text-faint dark:hover:text-text-muted transition-colors duration-100 ease-in-out">
                               Forgot password?
                            </span>
                         </Link>

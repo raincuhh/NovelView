@@ -1,8 +1,16 @@
 import { useEffect, useRef } from "react";
 
-type UseEventListenerProps = { element: EventTarget | null; callback: Function; eventType: string };
+type UseEventListenerProps = {
+   element: EventTarget | null;
+   callback: Function;
+   eventType: string;
+};
 
-export default function useEventListener({ element, callback, eventType }: UseEventListenerProps) {
+export default function useEventListener({
+   element,
+   callback,
+   eventType,
+}: UseEventListenerProps) {
    const callbackRef = useRef(callback);
 
    useEffect(() => {

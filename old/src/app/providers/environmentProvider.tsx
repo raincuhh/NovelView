@@ -8,9 +8,14 @@ import { isTauri } from "../../../../src/shared/lib/tauri";
 
 type EnvironmentProviderProps = PropsWithChildren;
 
-export default function EnvironmentProvider({ children }: EnvironmentProviderProps): JSX.Element {
+export default function EnvironmentProvider({
+   children,
+}: EnvironmentProviderProps): JSX.Element {
    const mobileDetect: MobileDetect = new MobileDetect(window.navigator.userAgent);
-   const isMobile = useMemo(() => mobileDetect.mobile() !== null || mobileDetect.tablet() !== null, []);
+   const isMobile = useMemo(
+      () => mobileDetect.mobile() !== null || mobileDetect.tablet() !== null,
+      [],
+   );
    const isDesktop = !isMobile;
 
    const [titleBarCloseButton, setTitleBarCloseButton] = useState<boolean>(true);
@@ -19,8 +24,10 @@ export default function EnvironmentProvider({ children }: EnvironmentProviderPro
 
    const updateTitleBarButtons = useCallback((buttons: TitleBarButtonState) => {
       if (buttons.closeButton !== undefined) setTitleBarCloseButton(buttons.closeButton);
-      if (buttons.maximizeButton !== undefined) setTitleBarMaximizeButton(buttons.maximizeButton);
-      if (buttons.minimizeButton !== undefined) setTitleBarMinimizeButton(buttons.minimizeButton);
+      if (buttons.maximizeButton !== undefined)
+         setTitleBarMaximizeButton(buttons.maximizeButton);
+      if (buttons.minimizeButton !== undefined)
+         setTitleBarMinimizeButton(buttons.minimizeButton);
    }, []);
 
    const contextValue = useMemo(

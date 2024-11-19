@@ -4,6 +4,8 @@ import { AuthInputTypes, AuthModeTypes } from "../../lib/types";
 import RenderList from "../../../../shared/components/utils/renderList";
 import Checkbox from "../../../../shared/components/ui/checkbox";
 import AuthFormInput from "./authFormInput";
+import Button from "../../../../shared/components/ui/button";
+import { uppercaseify } from "../../../../shared/lib/utils";
 
 type AuthFormProps = { type: AuthModeTypes };
 
@@ -61,6 +63,15 @@ export default function AuthForm({ type }: AuthFormProps): JSX.Element {
                      <Checkbox text="Remember me?" />
                   </>
                )}
+            </div>
+            <div className="relative"></div>
+            <div className="mt-8 flex w-full items-center justify-center">
+               <Button
+                  size={"md"}
+                  variant={"default"}
+                  text={uppercaseify(type)}
+                  className="w-full"
+               />
             </div>
          </AuthFormLayout>
       </>

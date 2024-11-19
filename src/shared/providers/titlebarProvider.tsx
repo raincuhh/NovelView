@@ -4,7 +4,9 @@ import { isTauri } from "@tauri-apps/api/core";
 
 type TitlebarProviderProps = PropsWithChildren & {};
 
-export default function TitlebarProvider({ children }: TitlebarProviderProps): JSX.Element {
+export default function TitlebarProvider({
+   children,
+}: TitlebarProviderProps): JSX.Element {
    const isMinWidthForTitlebar = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
 
    const isTitlebarAvailable = isTauri() || (isTauri() && isMinWidthForTitlebar);

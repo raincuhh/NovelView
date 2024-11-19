@@ -13,7 +13,10 @@ export default function CenteredLayout({
          <div className="flex min-h-full w-full flex-col justify-center">
             <div className={clsx("flex min-h-full flex-col px-4 lg:px-8", justify)}>
                <div
-                  className={clsx("relative flex select-none flex-col py-8 sm:mx-auto sm:w-full", maxWidth)}
+                  className={clsx(
+                     "relative flex select-none flex-col py-8 sm:mx-auto sm:w-full",
+                     maxWidth,
+                  )}
                >
                   {children}
                </div>

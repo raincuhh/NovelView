@@ -6,7 +6,9 @@ import { UserRoles } from "../../../shared/types/user";
 type AuthProviderProps = PropsWithChildren;
 
 export default function AuthProvider({ children }: AuthProviderProps): React.JSX.Element {
-   const [accessToken, setAccessToken] = useState<string | null>(localStorage.getItem("ACCESS_TOKEN"));
+   const [accessToken, setAccessToken] = useState<string | null>(
+      localStorage.getItem("ACCESS_TOKEN"),
+   );
    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
    const [role, setRole] = useState<UserRoles>(UserRoles.user);
    const [loading, setLoading] = useState<boolean>(true);

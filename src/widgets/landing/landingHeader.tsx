@@ -23,7 +23,7 @@ export default function LandingHeader(): JSX.Element {
                <header className="mt-4 text-fs-xl font-weight-lg sm:mt-8 sm:text-fs-2xl sm:font-weight-xl">
                   NovelView
                </header>
-               <p className="text-fs-xs font-weight-lg sm:text-fs-sm dark:text-text-faint">
+               <p className="text-fs-xs font-weight-lg sm:text-fs-sm dark:text-text-faint-dark">
                   v{packageJson.version}
                </p>
             </div>
