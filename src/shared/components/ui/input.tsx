@@ -6,7 +6,7 @@ const inputVariants = cva(
    {
       variants: {
          variant: {
-            textDefault: "",
+            textDefault: "bg-background-primary-mobile rounded-[4px]",
             textBrand: "",
             checkBoxDefault: "w-4 h-4 shrink-0 dark:border-border-secondary dark:sm:hover:border-border",
             checkBoxBrand: "",
@@ -44,7 +44,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                      />
                      {checked && (
                         <>
-                           <i className="bx bx-check text-text-normal pointer-events-none absolute translate-x-[-0%] translate-y-[-5%] select-none"></i>
+                           <i className="bx bx-check pointer-events-none absolute translate-x-[-0%] translate-y-[-5%] select-none text-text-normal"></i>
                         </>
                      )}
                   </div>

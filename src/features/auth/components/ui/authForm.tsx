@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AuthFormLayout from "../layouts/authFormLayout";
-import { AuthModeTypes } from "../../lib/types";
+import { AuthInputTypes, AuthModeTypes } from "../../lib/types";
+import RenderList from "../../../../shared/components/utils/renderList";
+import Input from "../../../../shared/components/ui/input";
+import AuthFormInput from "./authFormInput";
 
 type AuthFormProps = { type: AuthModeTypes };
 
-export default function AuthForm({ type }: AuthFormProps) {
+export default function AuthForm({ type }: AuthFormProps): React.JSX.Element {
+   const formInputs: AuthInputTypes[] =
+      type === "register" ? ["username", "email", "password"] : ["username", "password"];
+
    const [formData, setFormData] = useState<{
       [key: string]: string;
    }>({});
@@ -12,22 +18,42 @@ export default function AuthForm({ type }: AuthFormProps) {
       [key: string]: string;
    }>({});
 
-   // const HandleInputChange = (field: string, value: string, error: string) => {
-   //    set_form_data((prev: any) => ({
-   //       ...prev,
-   //       [field]: value,
-   //    }));
-   //    set_form_errors((prev: any) => ({
-   //       ...prev,
-   //       [field]: error,
-   //    }));
-   // };
+   useEffect(() => {
+      console.log(formErrors);
+      console.log(formData);
+   }, [formErrors, formData]);
+
+   const HandleInputChange = (field: string, value: string, error: string) => {
+      setFormData((prev: any) => ({
+         ...prev,
+         [field]: value,
+      }));
+      setFormErrors((prev: any) => ({
+         ...prev,
+         [field]: error,
+      }));
+   };
 
    return (
       <>
-         <form id={"auth-form"}>
-            <div className="flex flex-col"></div>
-         </form>
+         <AuthFormLayout id="auth-form">
+            <RenderList
+               data={formInputs}
+               render={(inputType: AuthInputTypes, i: number) => (
+                  <AuthFormInput
+                     key={i}
+                     formModeType={type}
+                     inputType={inputType}
+                     label={inputType}
+                     value={formData[inputType] || ""}
+                     errorMessage={formErrors[inputType] || ""}
+                     onInputChange={(value: string, error: string) => {
+                        HandleInputChange(inputType, value, error);
+                     }}
+                  />
+               )}
+            />
+         </AuthFormLayout>
       </>
    );
 }

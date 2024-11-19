@@ -15,8 +15,10 @@ export default function AuthHeader({ type }: AuthHeaderProps): React.JSX.Element
    };
 
    const descs: Record<AuthModeTypes, string> = {
-      register: "Making your NovelView account makes you eligible to purchase add-on services like sync.",
-      login: "",
+      // register: "Making your NovelView account makes you eligible to purchase add-on services like sync.",
+      register:
+         "Create a NovelView account to access premium features like syncing your library and enhancing your reading experience.",
+      login: "Welcome back! Log in to continue exploring in your libraries and enjoy seamless reading across devices.",
    };
 
    const title = titles[type];
@@ -31,12 +33,12 @@ export default function AuthHeader({ type }: AuthHeaderProps): React.JSX.Element
                      <Link to="/">
                         {!isSm && (
                            <>
-                              <MainLogo variant="purple" className="w-36" />
+                              <MainLogo variant="purple" className="w-32" />
                            </>
                         )}
                         {isSm && (
                            <>
-                              <MainLogo variant="white" className="sm:w-48" />
+                              <MainLogo variant="white" className="sm:w-36" />
                            </>
                         )}
                      </Link>

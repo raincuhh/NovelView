@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function AuthFooter(): React.JSX.Element {
    return (
       <>
-         <div className="mt-8 text-center font-family-primary text-fs-xs font-weight-md dark:text-text-faint">
+         <div className="mt-4 text-center font-family-primary text-fs-xs font-weight-md dark:text-text-faint">
             By continuing, you acknowledge that you have read and agree to NovelView's{" "}
             <Link to={"#"}>
                <span className="underline transition-colors duration-100 ease-in-out dark:hover:text-text-muted">

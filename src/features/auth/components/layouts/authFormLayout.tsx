@@ -1,12 +1,13 @@
 import React, { PropsWithChildren } from "react";
-import { isTauri } from "../../../../shared/lib/tauri";
 
-type AuthFormLayoutProps = PropsWithChildren;
+type AuthFormLayoutProps = PropsWithChildren & { id: string };
 
-export default function AuthFormLayout({ children }: AuthFormLayoutProps) {
+export default function AuthFormLayout({ children, id }: AuthFormLayoutProps): React.JSX.Element {
    return (
       <>
-         <div className="">{children}</div>
+         <div id={id} className="mt-10">
+            <div className="flex flex-col">{children}</div>
+         </div>
       </>
    );
 }
