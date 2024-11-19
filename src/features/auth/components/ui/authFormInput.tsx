@@ -20,23 +20,30 @@ export default function AuthFormInput({
    label,
    value,
    errorMessage,
-}: AuthFormInputProps): React.JSX.Element {
-   //  const { validateInput, error } = useValidateInput({ inputType, onInputChange });
-
+   onInputChange,
+}: AuthFormInputProps): JSX.Element {
+   const { validateInput, error } = useValidateInput({ inputType, onInputChange });
    const isForgotPasswordIncluded = formModeType === "login" && inputType === "password";
+   const inputId = `${formModeType}-${inputType}`;
 
-   const inputUid = `${formModeType}-${inputType}`;
+   const placeholders = {
+      email: "user@example.com",
+      password: "password",
+      username: "username",
+   };
+
+   const placeholder = placeholders[inputType];
 
    useEffect(() => {
-      // if (value) validateInput(value);
+      if (value) validateInput(value);
    }, [value]);
 
    return (
-      <div className="flex flex-col">
+      <div className="mb-2 flex w-full flex-col">
          <div className="relative flex flex-col">
             <header className="mb-2 flex flex-row justify-between font-family-primary">
                <div>
-                  <label htmlFor={inputUid}>{uppercaseify(label)}</label>
+                  <label htmlFor={inputId}>{uppercaseify(label)}</label>
                </div>
                {isForgotPasswordIncluded && (
                   <>
@@ -51,10 +58,24 @@ export default function AuthFormInput({
                )}
             </header>
          </div>
-         <div className="flex flex-col">
+         <div className="flex min-w-full flex-col">
             <div>
                <div className="relative">
-                  <Input variant={"textDefault"} className="w-full" />
+                  <Input
+                     variant={"textDefault"}
+                     name={inputId}
+                     id={inputId}
+                     placeholder={placeholder}
+                     aria-placeholder={placeholder}
+                     autoComplete={inputType}
+                     onChange={(e) => {
+                        validateInput(e.target.value);
+                     }}
+                     className={"w-full"}
+                  />
+                  <div className="flex">
+                     <div className=""></div>
+                  </div>
                </div>
             </div>
          </div>

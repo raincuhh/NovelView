@@ -124,6 +124,7 @@ module.exports = {
          "layer-menu": 65,
          "layer-tooltip": 70,
          "layer-dragging": 80,
+         "layer-splash": 85,
          "layer-native": 90,
          "layer-window-titlebar": 99,
          "layer-window-titlebar-buttons": 100,

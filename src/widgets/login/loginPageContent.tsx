@@ -3,7 +3,7 @@ import AuthNavStateProvider from "../../features/auth/providers/authNavStateProv
 import CenteredLayout from "../../shared/components/layout/centeredLayout";
 import AuthContent from "../../features/auth/components/ui/authContent";
 
-export default function LoginPageContent(): React.JSX.Element {
+export default function LoginPageContent(): JSX.Element {
    return (
       <>
          <AuthNavStateProvider>

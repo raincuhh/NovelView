@@ -6,7 +6,7 @@ import RenderModalContent from "../utils/renderModalContent";
 
 type ModalContainerProps = { modal: Modal };
 
-export default function ModalContainer({ modal }: ModalContainerProps): React.JSX.Element {
+export default function ModalContainer({ modal }: ModalContainerProps): JSX.Element {
    const { remove } = useModal();
 
    return (

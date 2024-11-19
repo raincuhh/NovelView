@@ -6,7 +6,7 @@ type AuthPageSwitcherProps = {
    type: AuthModeTypes;
 };
 
-export default function AuthPageSwitcher({ type }: AuthPageSwitcherProps) {
+export default function AuthPageSwitcher({ type }: AuthPageSwitcherProps): JSX.Element {
    const descs: Record<AuthModeTypes, string> = {
       register: "Already have an account?",
       login: "Dont have an account?",

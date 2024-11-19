@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useMemo } from "react";
 import {
    HashRouter as Router,
    Route,
@@ -14,6 +14,10 @@ import PageLayout from "../../shared/components/layout/pageLayout";
 
 //pages
 import ErrorBoundary from "../../shared/components/utils/errorBoundary";
+import SplashScreen from "../../shared/components/overlay/splashScreen";
+
+import("../../pages/landing/page");
+
 const NotFoundPage = lazy(() => import("../../pages/notFound/page"));
 const LandingPage = lazy(() => import("../../pages/landing/page"));
 const LoginPage = lazy(() => import("../../pages/login/page"));
@@ -32,9 +36,9 @@ type RouteListProps = {
 const fallbackMessage: string = "An error has occured, check DevTools for more details.";
 
 const SuspenseFallback = () => (
-   <div className="fixed flex h-screen items-center justify-center">
-      <span>Loading...</span>
-   </div>
+   <>
+      <SplashScreen />
+   </>
 );
 
 const RouteList: RouteListProps[] = [

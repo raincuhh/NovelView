@@ -4,10 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 type RouteGuardProps = PropsWithChildren & { type?: RouteTypes };
 
-export default function RouteGuard({
-   children,
-   type = RouteTypes.protected,
-}: RouteGuardProps): React.JSX.Element {
+export default function RouteGuard({ children, type = RouteTypes.protected }: RouteGuardProps): JSX.Element {
    const navigate = useNavigate();
    const location = useLocation();
 

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Location, useLocation } from "react-router-dom";
 
-export default function StyleSheetLoader() {
+export default function StyleSheetLoader(): null {
    const location: Location<any> = useLocation();
    const url: string = location.pathname;
 

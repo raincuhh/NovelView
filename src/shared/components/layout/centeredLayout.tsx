@@ -7,7 +7,7 @@ export default function CenteredLayout({
    children,
    maxWidth = "sm:max-w-md",
    justify = "justify-end sm:justify-center",
-}: LandingMainProps): React.JSX.Element {
+}: LandingMainProps): JSX.Element {
    return (
       <>
          <div className="flex min-h-full w-full flex-col justify-center">

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import AuthFormLayout from "../layouts/authFormLayout";
 import { AuthInputTypes, AuthModeTypes } from "../../lib/types";
 import RenderList from "../../../../shared/components/utils/renderList";
-import Input from "../../../../shared/components/ui/input";
+import Checkbox from "../../../../shared/components/ui/checkbox";
 import AuthFormInput from "./authFormInput";
 
 type AuthFormProps = { type: AuthModeTypes };
 
-export default function AuthForm({ type }: AuthFormProps): React.JSX.Element {
+export default function AuthForm({ type }: AuthFormProps): JSX.Element {
    const formInputs: AuthInputTypes[] =
       type === "register" ? ["username", "email", "password"] : ["username", "password"];
 
@@ -37,22 +37,31 @@ export default function AuthForm({ type }: AuthFormProps): React.JSX.Element {
    return (
       <>
          <AuthFormLayout id="auth-form">
-            <RenderList
-               data={formInputs}
-               render={(inputType: AuthInputTypes, i: number) => (
-                  <AuthFormInput
-                     key={i}
-                     formModeType={type}
-                     inputType={inputType}
-                     label={inputType}
-                     value={formData[inputType] || ""}
-                     errorMessage={formErrors[inputType] || ""}
-                     onInputChange={(value: string, error: string) => {
-                        HandleInputChange(inputType, value, error);
-                     }}
-                  />
+            <div className="flex w-full flex-col gap-2">
+               <RenderList
+                  data={formInputs}
+                  render={(inputType: AuthInputTypes, i: number) => (
+                     <AuthFormInput
+                        key={i}
+                        formModeType={type}
+                        inputType={inputType}
+                        label={inputType}
+                        value={formData[inputType] || ""}
+                        errorMessage={formErrors[inputType] || ""}
+                        onInputChange={(value: string, error: string) => {
+                           HandleInputChange(inputType, value, error);
+                        }}
+                     />
+                  )}
+               />
+            </div>
+            <div className="w-full items-end">
+               {type === "login" && (
+                  <>
+                     <Checkbox text="Remember me?" />
+                  </>
                )}
-            />
+            </div>
          </AuthFormLayout>
       </>
    );

@@ -4,7 +4,7 @@ import { Modal } from "../../types/modal";
 import RenderList from "./renderList";
 import ModalContainer from "../ui/modalContainer";
 
-export default function ModalRoot(): React.JSX.Element {
+export default function ModalRoot(): JSX.Element {
    const { modals } = useModal();
 
    return (

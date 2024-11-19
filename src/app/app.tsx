@@ -9,7 +9,7 @@ import TooltipRoot from "../shared/components/utils/tooltipRoot";
 import "../../public/css/satoshi.css";
 import "../../public/css/global.css";
 
-export default function App(): React.JSX.Element {
+export default function App(): JSX.Element {
    return (
       <>
          <AppProviders>

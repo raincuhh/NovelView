@@ -4,7 +4,7 @@ import { Modal } from "../types/modal";
 
 type ModalProviderProps = PropsWithChildren;
 
-export default function ModalProvider({ children }: ModalProviderProps): React.JSX.Element {
+export default function ModalProvider({ children }: ModalProviderProps): JSX.Element {
    const [modals, setModals] = useState<Modal[]>([]);
 
    const open = (modal: Modal) => setModals((old) => [...old, modal]);

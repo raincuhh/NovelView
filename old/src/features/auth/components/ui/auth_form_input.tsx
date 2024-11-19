@@ -27,11 +27,11 @@
 //       setPasswordFieldType((prev) => (prev === "password" ? "text" : "password"));
 //    };
 
-//    const placeholders = {
-//       email: "user@example.com",
-//       password: "password",
-//       username: "cooldog123",
-//    };
+//  const placeholders = {
+//     email: "user@example.com",
+//     password: "password",
+//     username: "cooldog123",
+//  };
 
 //    const validateInput = (value: string) => {
 //       let error: string = "";

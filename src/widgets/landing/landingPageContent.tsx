@@ -4,7 +4,7 @@ import LandingBackgroundOverlay from "./landingBackgroundOverlay";
 import LandingHeader from "./landingHeader";
 import LandingActions from "./landingActions";
 
-export default function LandingPageContent(): React.JSX.Element {
+export default function LandingPageContent(): JSX.Element {
    return (
       <>
          <CenteredLayout maxWidth="sm:max-w-sm md:max-w-md">

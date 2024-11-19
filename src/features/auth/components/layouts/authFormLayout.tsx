@@ -2,11 +2,11 @@ import React, { PropsWithChildren } from "react";
 
 type AuthFormLayoutProps = PropsWithChildren & { id: string };
 
-export default function AuthFormLayout({ children, id }: AuthFormLayoutProps): React.JSX.Element {
+export default function AuthFormLayout({ children, id }: AuthFormLayoutProps): JSX.Element {
    return (
       <>
          <div id={id} className="mt-10">
-            <div className="flex flex-col">{children}</div>
+            <div className="flex w-full flex-col items-center">{children}</div>
          </div>
       </>
    );

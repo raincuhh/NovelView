@@ -3,7 +3,7 @@ import MainLogo from "../../shared/components/ui/mainLogo";
 import packageJson from "../../../package.json";
 import useMediaQuery from "../../shared/hooks/useMediaQuery";
 
-export default function LandingHeader(): React.JSX.Element {
+export default function LandingHeader(): JSX.Element {
    const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
 
    return (

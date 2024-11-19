@@ -14,9 +14,7 @@ export default function EnvironmentProvider({ children }: EnvironmentProviderPro
    const isDesktop = !isMobile;
 
    const [titleBarCloseButton, setTitleBarCloseButton] = useState<boolean>(true);
-
    const [titleBarMaximizeButton, setTitleBarMaximizeButton] = useState<boolean>(true);
-
    const [titleBarMinimizeButton, setTitleBarMinimizeButton] = useState<boolean>(true);
 
    const updateTitleBarButtons = useCallback((buttons: TitleBarButtonState) => {
@@ -31,7 +29,7 @@ export default function EnvironmentProvider({ children }: EnvironmentProviderPro
          isMobile,
          updateTitleBarButtons,
       }),
-      [isDesktop, isMobile, updateTitleBarButtons]
+      [isDesktop, isMobile, updateTitleBarButtons],
    );
 
    return (

@@ -6,7 +6,7 @@ import { AuthModeTypes } from "../../lib/types";
 
 type AuthHeaderProps = { type: AuthModeTypes };
 
-export default function AuthHeader({ type }: AuthHeaderProps): React.JSX.Element {
+export default function AuthHeader({ type }: AuthHeaderProps): JSX.Element {
    const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
 
    const titles: Record<AuthModeTypes, string> = {
@@ -33,12 +33,12 @@ export default function AuthHeader({ type }: AuthHeaderProps): React.JSX.Element
                      <Link to="/">
                         {!isSm && (
                            <>
-                              <MainLogo variant="purple" className="w-32" />
+                              <MainLogo variant="purple" className="w-28" />
                            </>
                         )}
                         {isSm && (
                            <>
-                              <MainLogo variant="white" className="sm:w-36" />
+                              <MainLogo variant="white" className="sm:w-32" />
                            </>
                         )}
                      </Link>

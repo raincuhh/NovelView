@@ -24,7 +24,7 @@ pub fn run() {
                 true,
                 false,
                 false,
-                800.0,
+                740.0,
                 668.0,
             ) {
                 Ok(window) => window,
@@ -44,7 +44,7 @@ pub fn run() {
                 true,
                 false,
                 true,
-                800.0,
+                740.0,
                 668.0,
             ) {
                 Ok(window) => window,

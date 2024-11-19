@@ -2,10 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { uppercaseify } from "../../shared/lib/utils";
 import Button from "../../shared/components/ui/button";
-import Divider from "../../shared/components/ui/divider";
-import { register } from "module";
 
-export default function LandingActions(): React.JSX.Element {
+export default function LandingActions(): JSX.Element {
    return (
       <>
          <div className="z-layer-content flex justify-end">
@@ -23,7 +21,7 @@ export default function LandingActions(): React.JSX.Element {
 
 type LandingActionProps = { type: "login" | "register"; href: string };
 
-function LandingAction({ type, href }: LandingActionProps): React.JSX.Element {
+function LandingAction({ type, href }: LandingActionProps): JSX.Element {
    const buttonTexts: Record<LandingActionProps["type"], string> = {
       register: "register for free",
       login: "login",

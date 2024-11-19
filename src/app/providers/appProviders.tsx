@@ -11,7 +11,7 @@ import TooltipProvider from "../../shared/providers/tooltipProvider";
 
 type AppProvidersProps = PropsWithChildren<{}>;
 
-export default function AppProviders({ children }: AppProvidersProps): React.JSX.Element {
+export default function AppProviders({ children }: AppProvidersProps): JSX.Element {
    const AppWithProviders = pipe(
       withProvider(TitlebarProvider),
       withProvider(TooltipProvider),
