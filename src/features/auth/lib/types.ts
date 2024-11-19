@@ -1,1 +1,1 @@
-export type AuthFormTypes = "register" | "login";
+export type AuthModeTypes = "register" | "login";

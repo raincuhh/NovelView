@@ -1,10 +1,16 @@
 import React from "react";
+import AuthNavStateProvider from "../../features/auth/providers/authNavStateProvider";
 import CenteredLayout from "../../shared/components/layout/centeredLayout";
+import AuthContent from "../../features/auth/components/ui/authContent";
 
 export default function LoginPageContent(): React.JSX.Element {
    return (
       <>
-         <CenteredLayout>test</CenteredLayout>
+         <AuthNavStateProvider>
+            <CenteredLayout>
+               <AuthContent type="login" />
+            </CenteredLayout>
+         </AuthNavStateProvider>
       </>
    );
 }

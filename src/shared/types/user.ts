@@ -1,5 +1,6 @@
 export enum UserRoles {
    admin = "admin",
    user = "user",
-   guest = "guest",
 }
+// implement more robust user system where users can
+//have multiple roles that give different perms, like discord.
