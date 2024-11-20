@@ -197,6 +197,16 @@ module.exports = {
          border: {
             "border-width": "var(--border-width)",
          },
+         width: {
+            "icon-size-sm": "var(--icon-size-sm)",
+            "icon-size-md": "var(--icon-size-md)",
+            "icon-size-lg": "var(--icon-size-lg)",
+         },
+         height: {
+            "icon-size-sm": "var(--icon-size-sm)",
+            "icon-size-md": "var(--icon-size-md)",
+            "icon-size-lg": "var(--icon-size-lg)",
+         },
       },
    },
    plugins: [
@@ -295,12 +305,12 @@ module.exports = {
                "--background-modifier-success-hsl": "var(--success-500)",
                "--background-modifier-success": "var(--background-modifier-success-hsl)",
 
-               "--text-normal": "var(--base-100)",
+               "--text-normal": "var(--base-90)",
                "--text-muted": "var(--base-60)",
                "--text-faint": "var(--base-40)",
                "--text-on-accent": "var(--rgb-full)",
                "--text-on-accent-inverted": "var(--rgb-none)",
-               "--text-error": "var(--destructive-600)",
+               "--text-error": "var(--destructive-500)",
                "--text-warning": "var(--warning-600)",
                "--text-success": "var(--success-600)",
                "--text-accent": "var(--color-accent-1)",
@@ -349,16 +359,16 @@ module.exports = {
                "--font-weight-xl": "700",
 
                // fontsize
-               "--font-xs": "0.8rem",
-               "--font-sm": "0.875rem",
-               "--font-md": "1rem",
-               "--font-lg": "1.25rem",
-               "--font-xl": "1.5rem",
-               "--font-2xl": "2rem",
-               "--font-3xl": "3rem",
-               "--font-4xl": "4rem",
-               "--font-5xl": "6rem",
-               "--font-6xl": "8rem",
+               "--font-xs": "12px",
+               "--font-sm": "13px",
+               "--font-md": "15px",
+               "--font-lg": "20px",
+               "--font-xl": "24px",
+               "--font-2xl": "28px",
+               "--font-3xl": "36px",
+               "--font-4xl": "46px",
+               "--font-5xl": "54px",
+               "--font-6xl": "62px",
 
                //radius
                "--radius-sm": "3px",
@@ -391,6 +401,11 @@ module.exports = {
                   "0 0.5px 1px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.15), 0 6px 12px rgba(0, 0, 0, 0.2)",
                "--shadow-deep":
                   "0 2px 6px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.2), 0 12px 24px rgba(0, 0, 0, 0.3)",
+
+               // icon
+               "--icon-size-sm": "16px",
+               "--icon-size-md": "24px",
+               "--icon-size-lg": "32px",
             },
          });
       }),

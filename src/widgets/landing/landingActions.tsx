@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { uppercaseify } from "../../shared/lib/utils";
 import Button from "../../shared/components/ui/button";
 import LandingAction from "./landingAction";
+import Divider from "../../shared/components/ui/divider";
 
 export default function LandingActions(): JSX.Element {
    return (

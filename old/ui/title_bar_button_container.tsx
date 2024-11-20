@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { TitleBarButtonState, TitleBarButtonTypes } from "../../lib/types";
-import { tauriGetCurrentWebViewWindow } from "../../../../../src/shared/lib/tauri";
+import { tauriGetCurrentWebViewWindow } from "../../../../../../src/shared/lib/tauri";
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import TitleBarButton from "./title_bar_button";
 
@@ -32,7 +32,7 @@ export function TitleBarButtonContainer({
 
    return (
       <>
-         <div className="absolute right-0 top-0 flex w-min flex-row-reverse">
+         <div className="absolute top-0 right-0 flex flex-row-reverse w-min">
             {closeButton === true ? (
                <TitleBarButton
                   button_type={TitleBarButtonTypes.close}

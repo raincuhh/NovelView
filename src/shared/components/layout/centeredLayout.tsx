@@ -1,16 +1,29 @@
 import React, { PropsWithChildren } from "react";
 import clsx from "clsx";
 
-type LandingMainProps = PropsWithChildren & { maxWidth?: string; justify?: string };
+type LandingMainProps = PropsWithChildren & {
+   maxWidth?: string;
+   justify?: string;
+   justifyChildren?: string;
+   className?: string;
+};
 
 export default function CenteredLayout({
    children,
    maxWidth = "sm:max-w-md",
    justify = "justify-end sm:justify-center",
+   justifyChildren = "justify-center",
+   className,
 }: LandingMainProps): JSX.Element {
    return (
       <>
-         <div className="flex min-h-full w-full flex-col justify-center">
+         <div
+            className={clsx(
+               "flex flex-col w-full min-h-full",
+               justifyChildren,
+               className,
+            )}
+         >
             <div className={clsx("flex min-h-full flex-col px-4 lg:px-8", justify)}>
                <div
                   className={clsx(

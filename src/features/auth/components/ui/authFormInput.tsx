@@ -4,6 +4,7 @@ import { uppercaseify } from "../../../../shared/lib/utils";
 import Input from "../../../../shared/components/ui/input";
 import { AuthInputTypes, AuthModeTypes } from "../../lib/types";
 import useValidateInput from "../../hooks/useValidateInput";
+import EyeOpenIcon from "../../../../shared/components/ui/icons/eyeOpenIcon";
 
 type AuthFormInputProps = {
    formModeType: AuthModeTypes;
@@ -71,9 +72,29 @@ export default function AuthFormInput({
                      onChange={(e) => validateInput(e.target.value)}
                      className={`w-full ${error ? "" : ""}`}
                   />
-                  <div className="flex">
-                     <div className="">{error}</div>
+                  <div
+                     className="absolute top-0 right-0 flex items-center h-full cursor-pointer mr-[2px]
+                        pointer-events-none"
+                  >
+                     <div
+                        className="p-2 dark:bg-background-modifier-primary-form-field
+                           dark:sm:bg-background-modifier-secondary-form-field"
+                        onClick={(e) => {
+                           e.stopPropagation();
+                        }}
+                     >
+                        <div>
+                           {inputType === "password" && (
+                              <>
+                                 <EyeOpenIcon className="!fill-text-muted" />
+                              </>
+                           )}
+                        </div>
+                     </div>
                   </div>
+               </div>
+               <div className="flex mt-2">
+                  <div className="text-text-error">{error}</div>
                </div>
             </div>
          </div>

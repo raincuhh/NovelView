@@ -14,7 +14,7 @@ pub fn run() {
             }
             let app_handle: &AppHandle = app.app_handle();
 
-            let login_window: WebviewWindow = match setup_window(
+            let landing_window: WebviewWindow = match setup_window(
                 app_handle,
                 "login",
                 "index.html#/",
@@ -24,8 +24,8 @@ pub fn run() {
                 true,
                 false,
                 false,
-                740.0,
-                668.0,
+                690.0,
+                580.0,
             ) {
                 Ok(window) => window,
                 Err(e) => {
@@ -44,8 +44,8 @@ pub fn run() {
                 true,
                 false,
                 true,
-                740.0,
-                668.0,
+                690.0,
+                580.0,
             ) {
                 Ok(window) => window,
                 Err(e) => {
@@ -55,7 +55,7 @@ pub fn run() {
             };
 
             app.listen_any("login_success", move |_| {
-                login_window.hide().unwrap();
+                landing_window.hide().unwrap();
                 main_window.show().unwrap();
             });
 
