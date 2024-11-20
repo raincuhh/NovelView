@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { tauriGetCurrentWebViewWindow } from "../../shared/lib/tauri";
+import React from "react";
 import LoginPageContent from "../../widgets/login/loginPageContent";
 
 export default function LoginPage(): JSX.Element {

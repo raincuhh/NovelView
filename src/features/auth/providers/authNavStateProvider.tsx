@@ -52,8 +52,10 @@ const AuthNavStateProvider = forwardRef<HTMLDivElement, AuthNavStateProviderProp
                      </div>
                   </Link>
                </nav>
-               {/* <div className={`pb-8 ${isTauri() ? "pb-[87.98px]" : ""}`}></div> */}
-               {children}
+               <div className="h-full">
+                  <div className={`pb-10 ${isTauri() ? "!pb-[87.98px]" : ""}`}></div>
+                  {children}
+               </div>
             </AuthNavStateContext.Provider>
          </>
       );

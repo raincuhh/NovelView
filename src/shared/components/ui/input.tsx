@@ -19,12 +19,10 @@ const inputVariants = cva(
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> &
    VariantProps<typeof inputVariants> & {
       type?: "text" | "password";
-      onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-      // setChecked?: (checked: boolean) => void;
    };
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-   ({ className, variant, type = "text", checked, onChange, ...props }, ref) => {
+   ({ className, variant, type = "text", checked, ...props }, ref) => {
       const classes = inputVariants({ variant, className });
 
       return (

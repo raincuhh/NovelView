@@ -47,13 +47,13 @@ const RouteList: RouteListProps[] = [
    // public
    {
       id: "not-found",
-      path: "/not-found",
+      path: "/404",
       element: <NotFoundPage />,
    },
    {
-      id: "not-found",
+      id: "all",
       path: "*",
-      element: <Navigate to={"/not-found"} />,
+      element: <Navigate to={"/404"} replace={true} />,
    },
    {
       id: "landing",

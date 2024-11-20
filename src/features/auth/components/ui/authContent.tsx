@@ -15,7 +15,7 @@ export default function AuthContent({ type }: AuthContentProps): JSX.Element {
                <AuthHeader type={type} />
                <AuthForm type={type} />
                <AuthPageSwitcher type={type} />
-               {/* <AuthFooter /> */}
+               <AuthFooter />
             </div>
          </div>
       </>

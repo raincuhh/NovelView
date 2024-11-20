@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RouterProvider } from "react-router-dom";
 import { appRouter } from "./routes/routes";
 import AppProviders from "./providers/appProviders";
@@ -10,6 +10,10 @@ import "../../public/css/satoshi.css";
 import "../../public/css/global.css";
 
 export default function App(): JSX.Element {
+   useEffect(() => {
+      //setting localstorage stuff.
+   }, []);
+
    return (
       <>
          <AppProviders>

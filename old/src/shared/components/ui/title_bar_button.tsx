@@ -35,7 +35,7 @@ export default function TitleBarButton({
             on_click?.(button_type);
          }}
       >
-         <div className="flex h-full items-center justify-center">
+         <div className="flex items-center justify-center h-full">
             <i className={`${bx_icon_css} text-c-text-normal text-c-md`} />
          </div>
       </div>

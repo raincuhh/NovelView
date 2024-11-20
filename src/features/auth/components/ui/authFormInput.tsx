@@ -68,13 +68,11 @@ export default function AuthFormInput({
                      placeholder={placeholder}
                      aria-placeholder={placeholder}
                      autoComplete={inputType}
-                     onChange={(e) => {
-                        validateInput(e.target.value);
-                     }}
-                     className={"w-full"}
+                     onChange={(e) => validateInput(e.target.value)}
+                     className={`w-full ${error ? "" : ""}`}
                   />
                   <div className="flex">
-                     <div className=""></div>
+                     <div className="">{error}</div>
                   </div>
                </div>
             </div>

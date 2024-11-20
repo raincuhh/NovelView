@@ -266,9 +266,9 @@ module.exports = {
                "--color-accent-hsl": "var(--accent-h), var(--accent-s), var(--accent-l)",
                "--color-accent": "hsl(var(--color-accent-hsl))",
                "--color-accent-1":
-                  "hsl(calc(var(--accent-h) - 3), calc(var(--accent-s) * 1.05), calc(var(--accent-l) * 1.14))",
+                  "hsl(calc(var(--accent-h) - 3), calc(var(--accent-s) * 1.07), calc(var(--accent-l) * 1.14))",
                "--color-accent-2":
-                  "hsl(calc(var(--accent-h) - 5), calc(var(--accent-s) * 1.1), calc(var(--accent-l) * 1.25))",
+                  "hsl(calc(var(--accent-h) - 5), calc(var(--accent-s) * 1.15), calc(var(--accent-l) * 1.25))",
 
                "--interactive-base": "var(--base-25)",
                "--interactive-base-hover": "var(--base-30)",
