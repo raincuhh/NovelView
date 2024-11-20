@@ -7,12 +7,13 @@ const buttonVariants = cva(
    {
       variants: {
          variant: {
-            default: "bg-background-brand-secondary-alt hover:bg-background-brand-accent",
+            base: "dark:bg-interactive-base dark:hover:bg-interactive-base-hover",
+            accent: "bg-interactive-accent hover:bg-interactive-accent-hover",
             destructive: "bg",
             ghost: "dark:bg-background-primary dark:sm:bg-background-primary-alt dark:hover:bg-background-primary-alt dark:sm:hover:bg-background-secondary",
             outline:
                "bg-transparent text-text-normal sm:hover:text-text-muted border-solid border-[1px] border-border-secondary",
-            link: "underline text-brand-default sm:hover:text-brand-600",
+            link: "underline text-text-accent sm:hover:text-text-accent-hover",
          },
          size: {
             sm: "py-1 px-2 text-fs-sm",
@@ -20,14 +21,15 @@ const buttonVariants = cva(
             lg: "py-3 px-6 text-fs-lg",
          },
          rounded: {
-            sm: "rounded-[2px]",
-            md: "rounded-[5px]",
-            full: "rounded-[6.66rem]",
+            sm: "rounded-radius-sm",
+            md: "rounded-radius-md",
+            full: "rounded-radius-full",
          },
       },
       defaultVariants: {
-         variant: "default",
+         variant: "base",
          size: "md",
+         rounded: "sm",
       },
    },
 );
@@ -40,16 +42,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
    (
-      {
-         className,
-         children,
-         text,
-         href,
-         variant,
-         size,
-         rounded = "md",
-         ...props
-      }: ButtonProps,
+      { className, children, text, href, variant, size, rounded, ...props }: ButtonProps,
       ref,
    ) => {
       const classes = buttonVariants({ variant, size, rounded, className });

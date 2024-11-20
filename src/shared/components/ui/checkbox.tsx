@@ -9,18 +9,24 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       return (
          <>
             <div className="flex">
-               <label className="relative flex h-full flex-row items-center gap-2">
+               <label className="relative flex flex-row items-center h-full gap-2">
                   <input
                      ref={ref}
                      type="checkbox"
                      checked={checked}
                      onChange={() => setChecked((prev) => !prev)}
-                     className={`dark:border-border-secondary h-4 w-4 shrink-0 appearance-none rounded-[4px] border-[1px] border-solid ${checked ? "dark:border-brand-button-bg dark:bg-brand-button-bg dark:sm:bg-brand-button-bg" : ""} dark:bg-background-primary-mobile dark:sm:bg-background-primary-alt`}
+                     className={` h-4 w-4 shrink-0 appearance-none rounded-radius-sm border-[1px] border-solid
+                        dark:bg-background-primary dark:sm:bg-background-primary-alt
+                        dark:border-background-modifier-border-color ${
+                        checked
+                              ? "dark:border-interactive-accent dark:bg-interactive-accent dark:sm:bg-interactive-accent"
+                              : ""
+                        } `}
                      {...props}
                   ></input>
                   {checked && (
                      <>
-                        <i className="bx bx-check text-text-normal absolute"></i>
+                        <i className="absolute bx bx-check text-text-normal"></i>
                      </>
                   )}
                   <span className="font-family-primary text-fs-md font-weight-md">

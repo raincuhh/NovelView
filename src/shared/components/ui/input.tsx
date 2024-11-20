@@ -2,17 +2,16 @@ import { cva, VariantProps } from "class-variance-authority";
 import React, { forwardRef } from "react";
 
 const inputVariants = cva(
-   "border-solid border-[1px] transition-colors duration-100 ease-in-out cursor-pointer ",
+   "border-solid border-[1px] transition-colors duration-100 ease-in-out cursor-pointer",
    {
       variants: {
          variant: {
-            textDefault:
-               "dark:bg-background-primary-mobile dark:sm:bg-background-primary-alt dark:border-border-secondary rounded-[4px] px-4 py-2 dark:placeholder:text-text-faint focus:outline-none dark:focus:outline-background-secondary-alt focus:outline-offset-[0px]",
+            base: "dark:bg-background-modifier-primary-form-field dark:sm:bg-background-modifier-secondary-form-field dark:border-background-modifier-border-color dark:hover:border-background-modifier-border-hover dark:hover:focus:border-background-modifier-border-color rounded-radius-sm px-4 py-2 dark:placeholder:text-text-form-placeholder focus:outline-none dark:focus:outline-background-modifier-border-color focus:outline-offset-[0px]",
             textBrand: "",
          },
       },
       defaultVariants: {
-         variant: "textDefault",
+         variant: "base",
       },
    },
 );
@@ -31,29 +30,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       return (
          <>
             <input ref={ref} type={type} className={classes} {...props} />
-            {/* {type === "checkbox" ? (
-               <>
-                  <div className="relative h-min w-min items-center justify-center">
-                     <input
-                        ref={ref}
-                        type="checkbox"
-                        checked={checked}
-                        onChange={onChange}
-                        className={classes}
-                        {...props}
-                     />
-                     {checked && (
-                        <>
-                           <i className="bx bx-check pointer-events-none absolute translate-x-[-0%] translate-y-[-5%] select-none text-text-normal"></i>
-                        </>
-                     )}
-                  </div>
-               </>
-            ) : (
-               <>
-                  <input ref={ref} type={type} className={classes} {...props} />
-               </>
-            )} */}
          </>
       );
    },

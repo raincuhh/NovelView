@@ -26,10 +26,12 @@ export default function AuthPageSwitcher({ type }: AuthPageSwitcherProps): JSX.E
 
    return (
       <>
-         <div className="dark:text-text-muted my-6 text-center font-family-primary font-weight-md">
+         <div className="my-6 text-center dark:text-text-muted font-family-primary font-weight-md">
             {desc}{" "}
             <Link to={`/${href}`}>
-               <span className="dark:text-text-normal dark:hover:text-brand-700 underline transition-colors duration-100 ease-in-out">
+               <span
+                  className="underline transition-colors duration-100 ease-in-out dark:text-text-normal dark:hover:text-text-accent-hover"
+               >
                   {label}
                </span>
             </Link>

@@ -8,11 +8,7 @@ export default function PageLayout({ children, id }: PageLayoutProps): JSX.Eleme
          <div className="flex flex-col min-h-full">
             <div className="flex-none"></div>
             <div className="w-full min-h-full overflow-hidden h-dvh">
-               <div
-                  className="h-full bg-background-primary-light text-text-normal-light
-                     sm:bg-background-primary-alt-light dark:bg-background-primary-dark
-                     dark:text-text-normal-dark dark:sm:bg-background-primary-alt-dark"
-               >
+               <div className="h-full dark:bg-background-primary dark:text-text-normal dark:sm:bg-background-primary-alt">
                   <main id={id} className="h-full overflow-y-scroll">
                      {children}
                   </main>

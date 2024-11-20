@@ -39,7 +39,7 @@ export default function AuthForm({ type }: AuthFormProps): JSX.Element {
    return (
       <>
          <AuthFormLayout id="auth-form">
-            <div className="flex w-full flex-col gap-2">
+            <div className="flex flex-col w-full gap-2">
                <RenderList
                   data={formInputs}
                   render={(inputType: AuthInputTypes, i: number) => (
@@ -57,7 +57,7 @@ export default function AuthForm({ type }: AuthFormProps): JSX.Element {
                   )}
                />
             </div>
-            <div className="w-full items-end">
+            <div className="items-end w-full">
                {type === "login" && (
                   <>
                      <Checkbox text="Remember me?" />
@@ -65,10 +65,10 @@ export default function AuthForm({ type }: AuthFormProps): JSX.Element {
                )}
             </div>
             <div className="relative"></div>
-            <div className="mt-8 flex w-full items-center justify-center">
+            <div className="flex items-center justify-center w-full mt-8">
                <Button
                   size={"md"}
-                  variant={"default"}
+                  variant={"accent"}
                   text={uppercaseify(type)}
                   className="w-full"
                />

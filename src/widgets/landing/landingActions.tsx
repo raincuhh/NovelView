@@ -6,11 +6,10 @@ import Button from "../../shared/components/ui/button";
 export default function LandingActions(): JSX.Element {
    return (
       <>
-         <div className="z-layer-content flex justify-end">
-            <div className="flex w-full flex-col">
+         <div className="flex justify-end z-layer-content">
+            <div className="flex flex-col w-full">
                <div className="grid grid-cols-1 gap-2 sm:gap-2">
                   <LandingAction href="/register" type="register" />
-
                   <LandingAction href="/login" type="login" />
                </div>
             </div>
@@ -26,8 +25,8 @@ function LandingAction({ type, href }: LandingActionProps): JSX.Element {
       register: "register for free",
       login: "login",
    };
-   const buttonVariants: Record<LandingActionProps["type"], "default" | "ghost"> = {
-      register: "default",
+   const buttonVariants: Record<LandingActionProps["type"], "ghost" | "accent"> = {
+      register: "accent",
       login: "ghost",
    };
    const buttonIcon: Record<LandingActionProps["type"], "bx-edit" | "bx-door-open"> = {
@@ -35,7 +34,7 @@ function LandingAction({ type, href }: LandingActionProps): JSX.Element {
       login: "bx-door-open",
    };
 
-   const variant: "default" | "ghost" = buttonVariants[type];
+   const variant: "accent" | "ghost" = buttonVariants[type];
    const text: string = buttonTexts[type];
    const icon: "bx-edit" | "bx-door-open" = buttonIcon[type];
 

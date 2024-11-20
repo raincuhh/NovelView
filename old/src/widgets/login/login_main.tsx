@@ -10,11 +10,13 @@ export default function LoginMain(): JSX.Element {
    return (
       <>
          <main
-            className={`flex h-full w-full flex-col items-center justify-center overflow-y-scroll rounded-r-md lg:w-[65%] ${
-               isTauri ? "pt-[30px]" : ""
-            }`}
+            className={`flex h-full w-full flex-col items-center justify-center overflow-y-scroll rounded-r-md
+               lg:w-[65%] ${isTauri ? "pt-[30px]" : ""}`}
          >
-            <div className="min-w-500:w-[380px] min-w-1150:w-[420px] c-min-h-668:mt-[100px] flex h-full w-[320px] min-w-[320px] flex-col px-4 py-6">
+            <div
+               className="min-w-500:w-[380px] min-w-1150:w-[420px] c-min-h-668:mt-[100px] flex h-full w-[320px]
+                  min-w-[320px] flex-col px-4 py-6"
+            >
                <AuthFormHeader label="Welcome back" desc="Login to your account" />
                <div className="mt-4 flex flex-col">
                   {/* <AuthDivider /> */}

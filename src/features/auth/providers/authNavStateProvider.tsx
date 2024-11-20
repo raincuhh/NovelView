@@ -28,10 +28,15 @@ const AuthNavStateProvider = forwardRef<HTMLDivElement, AuthNavStateProviderProp
                <nav
                   ref={ref}
                   id={id}
-                  className={`fixed ${isTauri() && "pt-8"} dark:bg-background-primary-mobile dark:sm:bg-background-primary z-layer-menu w-full`}
+                  className={`fixed ${isTauri() && "pt-8"} dark:bg-background-primary dark:sm:bg-background-primary-alt
+                     z-layer-menu w-full`}
                >
                   <Link to={backLocation}>
-                     <div className="dark:border-border-secondary flex h-min flex-col border-b-[1px] border-solid px-4 py-2 sm:mx-auto sm:w-[50rem] sm:max-w-[90%] sm:border-none sm:px-2 sm:py-4">
+                     <div
+                        className="dark:border-background-modifier-border-color flex h-min flex-col border-b-[1px]
+                           border-solid px-4 py-2 sm:mx-auto sm:w-[50rem] sm:max-w-[90%] sm:border-none sm:px-2
+                           sm:py-4"
+                     >
                         <div className="flex flex-row items-center gap-4">
                            <div className="flex h-full w-min">
                               <i className="bx bx-arrow-back text-fs-lg"></i>

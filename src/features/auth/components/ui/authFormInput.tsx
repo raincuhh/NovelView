@@ -39,9 +39,9 @@ export default function AuthFormInput({
    }, [value]);
 
    return (
-      <div className="mb-2 flex w-full flex-col">
+      <div className="flex flex-col w-full mb-2">
          <div className="relative flex flex-col">
-            <header className="mb-2 flex flex-row justify-between font-family-primary">
+            <header className="flex flex-row justify-between mb-2 font-family-primary">
                <div>
                   <label htmlFor={inputId}>{uppercaseify(label)}</label>
                </div>
@@ -49,7 +49,7 @@ export default function AuthFormInput({
                   <>
                      <div className="cursor-pointer">
                         <Link to="/forgot-password">
-                           <span className="dark:text-text-faint dark:hover:text-text-muted transition-colors duration-100 ease-in-out">
+                           <span className="transition-colors duration-100 ease-in-out dark:text-text-faint dark:hover:text-text-muted">
                               Forgot password?
                            </span>
                         </Link>
@@ -58,11 +58,11 @@ export default function AuthFormInput({
                )}
             </header>
          </div>
-         <div className="flex min-w-full flex-col">
+         <div className="flex flex-col min-w-full">
             <div>
                <div className="relative">
                   <Input
-                     variant={"textDefault"}
+                     variant={"base"}
                      name={inputId}
                      id={inputId}
                      placeholder={placeholder}

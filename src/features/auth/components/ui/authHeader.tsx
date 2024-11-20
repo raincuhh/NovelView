@@ -24,7 +24,7 @@ export default function AuthHeader({ type }: AuthHeaderProps): JSX.Element {
 
    return (
       <>
-         <header className="flex h-min max-h-min items-center justify-center font-family-primary">
+         <header className="flex items-center justify-center h-min max-h-min font-family-primary">
             <div className="flex flex-col gap-4">
                <header className="flex flex-col items-center">
                   {!isTauri() && (
