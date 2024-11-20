@@ -30,7 +30,8 @@ export default function AuthPageSwitcher({ type }: AuthPageSwitcherProps): JSX.E
             {desc}{" "}
             <Link to={`/${href}`}>
                <span
-                  className="underline transition-colors duration-100 ease-in-out dark:text-text-normal dark:hover:text-text-accent-hover"
+                  className="underline transition-colors duration-100 ease-in-out dark:text-text-normal
+                     dark:hover:text-text-accent-hover"
                >
                   {label}
                </span>

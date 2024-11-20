@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { RouterProvider } from "react-router-dom";
 import { appRouter } from "./routes/routes";
+import MobileDetect from "mobile-detect";
 import AppProviders from "./providers/appProviders";
 import RootLayout from "../shared/components/layout/rootLayout";
 import ModalRoot from "../shared/components/utils/modalRoot";
@@ -10,6 +11,13 @@ import "../../public/css/satoshi.css";
 import "../../public/css/global.css";
 
 export default function App(): JSX.Element {
+   const mobileDetect: MobileDetect = new MobileDetect(window.navigator.userAgent);
+   const isMobile = useMemo(
+      () => mobileDetect.mobile() !== null || mobileDetect.tablet() !== null,
+      [],
+   );
+   const isDesktop = !isMobile;
+
    useEffect(() => {
       //setting localstorage stuff.
    }, []);

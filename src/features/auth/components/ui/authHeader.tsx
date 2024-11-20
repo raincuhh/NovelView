@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import MainLogo from "../../../../shared/components/ui/mainLogo";
+import BrandLogoIcon from "../../../../shared/components/ui/icons/brandLogoIcon";
 import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
 import { AuthModeTypes } from "../../lib/types";
 import { isTauri } from "@tauri-apps/api/core";
@@ -31,16 +31,10 @@ export default function AuthHeader({ type }: AuthHeaderProps): JSX.Element {
                      <>
                         <div className="cursor-pointer">
                            <Link to="/">
-                              {!isSm && (
-                                 <>
-                                    <MainLogo variant="purple" className="w-28" />
-                                 </>
-                              )}
-                              {isSm && (
-                                 <>
-                                    <MainLogo variant="white" className="sm:w-32" />
-                                 </>
-                              )}
+                              <BrandLogoIcon
+                                 className="w-40 transition-colors duration-100 ease-in-out fill-interactive-accent
+                                    hover:fill-interactive-accent-hover"
+                              />
                            </Link>
                         </div>
                      </>

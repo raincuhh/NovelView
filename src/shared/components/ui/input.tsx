@@ -2,7 +2,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import React, { forwardRef } from "react";
 
 const inputVariants = cva(
-   "border-solid border-[1px] transition-colors duration-100 ease-in-out cursor-pointer",
+   "select-all border-solid border-[1px] transition-colors duration-100 ease-in-out cursor-pointer",
    {
       variants: {
          variant: {

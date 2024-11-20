@@ -9,7 +9,9 @@
       "tauri": "tauri",
       "tauri:dev": "tauri dev",
       "tauri:build": "tauri build",
-      "test": "echo \"Error: no test specified\" && exit 1"
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "postversion": "git push && git push --tags",
+      "push": "npm run version:bump && git add package.json package-lock.json && git commit -m \"chore(release): bump version to $(node -p 'require(\"./package.json\").version')\" && git tag v$(node -p 'require(\"./package.json\").version') && git push && git push --tags"
    },
    "repository": {
       "type": "git",

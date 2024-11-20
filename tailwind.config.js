@@ -297,7 +297,7 @@ module.exports = {
 
                "--text-normal": "var(--base-100)",
                "--text-muted": "var(--base-60)",
-               "--text-faint": "var(--base-50)",
+               "--text-faint": "var(--base-40)",
                "--text-on-accent": "var(--rgb-full)",
                "--text-on-accent-inverted": "var(--rgb-none)",
                "--text-error": "var(--destructive-600)",
