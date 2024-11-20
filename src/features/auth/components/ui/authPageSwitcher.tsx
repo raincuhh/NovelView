@@ -20,6 +20,7 @@ export default function AuthPageSwitcher({ type }: AuthPageSwitcherProps): JSX.E
       login: "Register",
    };
 
+   // test thing
    const desc = descs[type];
    const href = hrefs[type];
    const label = labels[type];
