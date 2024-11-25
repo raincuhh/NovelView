@@ -70,7 +70,6 @@ module.exports = {
             500: "var(--success-500)",
             400: "var(--success-400)",
          },
-
          background: {
             primary: "var(--background-primary)",
             "primary-alt": "var(--background-primary-alt)",
@@ -236,13 +235,13 @@ module.exports = {
                "--base-110": "rgb(204, 204, 204)",
                "--base-120": "rgb(218, 218, 218)",
 
-               "--brand-1000": "hsl(259, 51%, 10%)",
-               "--brand-900": "hsl(259, 51%, 15%)",
-               "--brand-800": "hsl(259, 51%, 25%)",
-               "--brand-700": "hsl(259, 51%, 35%)",
-               "--brand-600": "hsl(259, 51%, 45%)",
-               "--brand-500": "hsl(259, 51%, 55%)",
-               "--brand-400": "hsl(259, 51%, 65%)",
+               // "--brand-1000": "hsl(259, 51%, 10%)",
+               // "--brand-900": "hsl(259, 51%, 15%)",
+               // "--brand-800": "hsl(259, 51%, 25%)",
+               // "--brand-700": "hsl(259, 51%, 35%)",
+               // "--brand-600": "hsl(259, 51%, 45%)",
+               // "--brand-500": "hsl(259, 51%, 55%)",
+               // "--brand-400": "hsl(259, 51%, 65%)",
 
                "--warning-1000": "hsl(33, 100%, 10%)",
                "--warning-900": "hsl(35, 100%, 15%)",
