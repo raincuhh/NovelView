@@ -2,10 +2,14 @@ import React from "react";
 import Button from "../../shared/components/ui/button";
 import EditIcon from "../../shared/components/ui/icons/editIcon";
 import { uppercaseify } from "../../shared/lib/utils";
+import { LandingPageViews } from "./landingPageContent";
+import { useViewSwitcher } from "../../shared/hooks/useViewSwitcher";
 
-type LandingActionProps = { type: "login" | "register"; href: string };
+type LandingActionProps = { type: "login" | "register"; view: LandingPageViews };
 
-export default function LandingAction({ type, href }: LandingActionProps): JSX.Element {
+export default function LandingAction({ type, view }: LandingActionProps): JSX.Element {
+   const { navigate } = useViewSwitcher();
+
    const buttonTexts: Record<LandingActionProps["type"], string> = {
       register: "create an account",
       login: "login",
@@ -20,15 +24,15 @@ export default function LandingAction({ type, href }: LandingActionProps): JSX.E
 
    return (
       <>
-         <div className="cursor-pointer select-none">
+         <div className="w-full cursor-pointer select-none">
             <Button
                variant={variant}
-               href={href}
-               className="items-center gap-2 text-text-normal"
+               onClick={() => navigate(view)}
+               className="items-center w-full gap-2 text-text-normal"
             >
                {type === "register" && (
                   <>
-                     <EditIcon className="h-6 fill-text-normal" />
+                     <EditIcon className="h-6 fill-normal" />
                   </>
                )}
                {type === "login" && (

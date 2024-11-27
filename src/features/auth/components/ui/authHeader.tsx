@@ -14,7 +14,6 @@ export default function AuthHeader({ type }: AuthHeaderProps): JSX.Element {
       login: "Login to your account",
    };
    const descs: Record<AuthModeTypes, string> = {
-      // register: "Making your NovelView account makes you eligible to purchase add-on services like sync.",
       register:
          "Create a NovelView account to access premium features like syncing your library and enhancing your reading experience.",
       login: "Welcome back! Log in to continue exploring in your libraries and enjoy seamless reading across devices.",
@@ -27,23 +26,21 @@ export default function AuthHeader({ type }: AuthHeaderProps): JSX.Element {
          <header className="flex items-center justify-center h-min max-h-min font-family-primary">
             <div className="flex flex-col gap-4">
                <header className="flex flex-col items-center">
-                  {!isTauri() && (
-                     <>
-                        <div className="cursor-pointer">
-                           <Link to="/">
-                              <BrandLogoIcon
-                                 className="w-40 transition-colors duration-100 ease-in-out fill-interactive-accent
-                                    hover:fill-interactive-accent-hover"
-                              />
-                           </Link>
-                        </div>
-                     </>
-                  )}
+                  {!isTauri() ||
+                     (!isSm && (
+                        <>
+                           <div className="cursor-pointer">
+                              <Link to="/">
+                                 <BrandLogoIcon className="w-40 transition-colors duration-100 ease-in-out fill-interactive-accent hover:fill-" />
+                              </Link>
+                           </div>
+                        </>
+                     ))}
                   <h1 className="mt-2 text-fs-xl font-weight-xl sm:text-fs-2xl sm:font-weight-xl">
                      {title}
                   </h1>
                </header>
-               <p className="text-text-muted text-fs-md font-weight-md">{desc}</p>
+               <p className="text-muted text-fs-md font-weight-md">{desc}</p>
             </div>
          </header>
       </>

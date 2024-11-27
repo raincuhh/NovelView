@@ -9,8 +9,6 @@ type AuthNavStateProviderProps = PropsWithChildren & { id?: string };
 
 const AuthNavStateProvider = forwardRef<HTMLDivElement, AuthNavStateProviderProps>(
    ({ children, id }: AuthNavStateProviderProps, ref) => {
-      const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
-
       const [title, setTitle] = useState<string>("back");
       const [backLocation, setBackLocation] = useState<string>("/");
 

@@ -7,8 +7,7 @@ import LandingRegisterView from "./landingRegisterView";
 import LandingLoginView from "./landingLoginView";
 
 export default function LandingViewsContainer(): JSX.Element {
-   const { currentView, changeView, isAnimating, direction, getDirection, navigate } =
-      useViewSwitcher<LandingPageViews>();
+   const { currentView, direction } = useViewSwitcher<LandingPageViews>();
 
    const variants = {
       enter: (direction: number) => ({
@@ -25,31 +24,15 @@ export default function LandingViewsContainer(): JSX.Element {
       }),
    };
 
-   // const getDirection = (current: LandingPageViews, target: LandingPageViews): number => {
-   //    let views = [
-   //       LandingPageViews.home,
-   //       LandingPageViews.login,
-   //       LandingPageViews.register,
-   //    ];
-   //    return views.indexOf(target) > views.indexOf(current) ? 1 : -1;
-   // };
-
    return (
       <>
          <div className="relative w-full h-full overflow-hidden">
-            <div className="navigation">
-               <button onClick={() => navigate(LandingPageViews.home)}>Home</button>
-               <button onClick={() => navigate(LandingPageViews.login)}>Login</button>
-               <button onClick={() => navigate(LandingPageViews.register)}>
-                  Register
-               </button>
-            </div>
-            <AnimatePresence mode="wait" custom={direction}>
+            <AnimatePresence mode="popLayout" custom={direction}>
                {currentView === LandingPageViews.home && (
                   <motion.div
                      key={LandingPageViews.home}
                      custom={direction}
-                     initial="enter"
+                     initial="center"
                      animate="center"
                      exit="exit"
                      variants={variants}

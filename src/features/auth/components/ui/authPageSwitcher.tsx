@@ -11,32 +11,24 @@ export default function AuthPageSwitcher({ type }: AuthPageSwitcherProps): JSX.E
       register: "Already have an account?",
       login: "Dont have an account?",
    };
-   const hrefs: Record<AuthModeTypes, string> = {
-      register: "login",
-      login: "register",
-   };
    const labels: Record<AuthModeTypes, string> = {
       register: "Login",
       login: "Register",
    };
 
-   // test thing
    const desc = descs[type];
-   const href = hrefs[type];
    const label = labels[type];
 
    return (
       <>
          <div className="my-6 text-center dark:text-text-muted font-family-primary font-weight-md">
             {desc}{" "}
-            <Link to={`/${href}`}>
-               <span
-                  className="underline transition-colors duration-100 ease-in-out dark:text-text-normal
-                     dark:hover:text-text-accent-hover"
-               >
-                  {label}
-               </span>
-            </Link>
+            <span
+               className="underline transition-colors duration-100 ease-in-out dark:text-text-normal
+                  dark:hover:text-text-accent-hover"
+            >
+               {label}
+            </span>
          </div>
       </>
    );

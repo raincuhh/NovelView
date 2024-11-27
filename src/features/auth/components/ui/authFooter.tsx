@@ -6,16 +6,16 @@ import { Link } from "react-router-dom";
 export default function AuthFooter(): JSX.Element {
    return (
       <>
-         <div className="dark:text-text-faint mt-4 text-center font-family-primary text-fs-xs font-weight-md">
+         <div className="mt-4 text-center dark:text-faint font-family-primary text-fs-xs font-weight-md">
             By continuing, you acknowledge that you have read and agree to NovelView's{" "}
             <Link to={"#"}>
-               <span className="dark:hover:text-text-muted underline transition-colors duration-100 ease-in-out">
+               <span className="underline transition-colors duration-100 ease-in-out dark:hover:text-muted">
                   Terms of Service
                </span>
             </Link>{" "}
             and{" "}
             <Link to={"#"}>
-               <span className="dark:hover:text-text-muted underline transition-colors duration-100 ease-in-out">
+               <span className="underline transition-colors duration-100 ease-in-out dark:hover:text-muted">
                   Privacy Policy
                </span>
             </Link>

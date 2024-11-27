@@ -6,7 +6,7 @@ const inputVariants = cva(
    {
       variants: {
          variant: {
-            base: "dark:bg-background-modifier-primary-form-field dark:sm:bg-background-modifier-secondary-form-field dark:border-background-modifier-border-color dark:hover:border-background-modifier-border-hover dark:hover:focus:border-background-modifier-border-color rounded-radius-sm px-4 py-2 dark:placeholder:text-text-form-placeholder focus:outline-none dark:focus:outline-background-modifier-border-color focus:outline-offset-[0px]",
+            base: "dark:bg-modifier-primary-form-field dark:sm:bg-modifier-secondary-form-field dark:border-modifier-border-color dark:hover:border-modifier-border-hover dark:hover:focus:border-modifier-border-color rounded-radius-sm px-4 py-2 dark:placeholder:text-form-placeholder focus:outline-none dark:focus:outline-modifier-border-color focus:outline-offset-[0px]",
             textBrand: "",
          },
       },
