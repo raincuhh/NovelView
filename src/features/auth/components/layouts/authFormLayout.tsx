@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from "react";
+import { isTauri } from "@tauri-apps/api/core";
 
 type AuthFormLayoutProps = PropsWithChildren & { id: string };
 
@@ -8,8 +9,8 @@ export default function AuthFormLayout({
 }: AuthFormLayoutProps): JSX.Element {
    return (
       <>
-         <div id={id} className="mt-10">
-            <div className="flex w-full flex-col items-center">{children}</div>
+         <div id={id} className={`${isTauri() ? "mt-10" : ""}`}>
+            <div className="flex flex-col items-center w-full">{children}</div>
          </div>
       </>
    );

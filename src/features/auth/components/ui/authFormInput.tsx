@@ -86,16 +86,20 @@ export default function AuthFormInput({
                         <div>
                            {inputType === "password" && (
                               <>
-                                 <EyeOpenIcon className="!fill-text-muted" />
+                                 <EyeOpenIcon className="!fill-muted" />
                               </>
                            )}
                         </div>
                      </div>
                   </div>
                </div>
-               <div className="flex mt-2">
-                  <div className="text-text-error">{error}</div>
-               </div>
+               {error && (
+                  <>
+                     <div className="flex mt-2">
+                        <div className="text-text-error">{error}</div>
+                     </div>
+                  </>
+               )}
             </div>
          </div>
       </div>
