@@ -1,24 +1,26 @@
 import React from "react";
 import CenteredLayout from "../../shared/components/layout/centeredLayout";
-// import LandingBackgroundOverlay from "./landingBackgroundOverlay";
-import LandingHeader from "./landingHeader";
-import LandingActions from "./landingActions";
 import { ViewSwitcherProvider } from "../../shared/providers/viewSwitcherProvider";
 import LandingViewsContainer from "./landingViewsContainer";
 
-enum LandingPageViews {
-   home,
-   login,
-   register,
+export enum LandingPageViews {
+   home = "home",
+   login = "login",
+   register = "register",
 }
+
+type LandingPageType = {
+   [K in keyof typeof LandingPageViews]: (typeof LandingPageViews)[K];
+};
 
 export default function LandingPageContent(): JSX.Element {
    return (
       <>
          <CenteredLayout maxWidth="sm:max-w-sm md:max-w-md">
-            <ViewSwitcherProvider<LandingPageViews>
+            <ViewSwitcherProvider<LandingPageType>
                initialView={LandingPageViews.home}
-               duration={300}
+               duration={100}
+               type={LandingPageViews}
             >
                <LandingViewsContainer />
             </ViewSwitcherProvider>

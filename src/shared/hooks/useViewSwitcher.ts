@@ -2,8 +2,11 @@ import { useState, createContext, useContext } from "react";
 
 type ViewSwitcherContextType<T> = {
    currentView: T;
-   changeView: (page: T) => void;
+   changeView: (page: T, newDirection: number) => void;
    isAnimating: boolean;
+   direction: number;
+   getDirection: (currentView: T, targetView: T) => number;
+   navigate: (targetView: T) => void;
 };
 
 export const ViewSwitcherContext = createContext<ViewSwitcherContextType<any> | null>(

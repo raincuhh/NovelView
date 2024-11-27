@@ -70,24 +70,6 @@ module.exports = {
             500: "var(--success-500)",
             400: "var(--success-400)",
          },
-         background: {
-            primary: "var(--background-primary)",
-            "primary-alt": "var(--background-primary-alt)",
-            secondary: "var(--background-secondary)",
-            "secondary-alt": "var(--background-secondary-alt)",
-            "modifier-primary-form-field":
-               "var(--background-modifier-primary-form-field)",
-            "modifier-secondary-form-field":
-               "var(--background-modifier-secondary-form-field)",
-            "modifier-border-width": "var(--background-modifier-border-width)",
-            "modifier-border-color": "var(--background-modifier-border-color)",
-            "modifier-border-hover": "var(--background-modifier-border-hover)",
-            "modifier-border-focus": "var(--background-modifier-border-focus)",
-            "modifier-box-shadow": "var(--background-modifier-box-shadow)",
-            "modifier-error": "var(--background-modifier-error)",
-            "modifier-error-hover": "var(--background-modifier-error-hover)",
-            "modifier-success": "var(--background-modifier-success)",
-         },
          interactive: {
             base: "var(--interactive-base)",
             "base-hover": "var(--interactive-base-hover)",
@@ -103,19 +85,7 @@ module.exports = {
             "icon-color-focused": "var(--titlebar-icon-color-focused)",
             "icon-weight": "var(--titlebar-icon-weight)",
          },
-         text: {
-            normal: "var(--text-normal)",
-            muted: "var(--text-muted)",
-            faint: "var(--text-faint)",
-            "on-accent": "var(--text-on-accent)",
-            "on-accent-inverted": "var(--text-on-accent-inverted)",
-            error: "var(--text-error)",
-            warning: "var(--text-warning)",
-            success: "var(--text-success)",
-            accent: "var(--text-accent)",
-            "accent-hover": "var(--text-accent-hover)",
-            "form-placeholder": "var(--text-form-placeholder)",
-         },
+         text: {},
          link: {
             color: "var(--link-color)",
             "color-hover": "var(--link-color-hover)",
@@ -132,6 +102,7 @@ module.exports = {
             "border-hover": "var(--tag-border-hover)",
          },
       },
+
       borderRadius: {
          "radius-sm": "var(--radius-sm)",
          "radius-md": "var(--radius-md)",
@@ -184,7 +155,25 @@ module.exports = {
          "layer-titlebar": "var(--layer-titlebar)",
          "layer-titlebar-buttons": "var(--layer-titlebar-buttons)",
       },
-      extends: {
+      extend: {
+         colors: {
+            primary: "var(--background-primary)",
+            "primary-alt": "var(--background-primary-alt)",
+            secondary: "var(--background-secondary)",
+            "secondary-alt": "var(--background-secondary-alt)",
+            "modifier-primary-form-field":
+               "var(--background-modifier-primary-form-field)",
+            "modifier-secondary-form-field":
+               "var(--background-modifier-secondary-form-field)",
+            "modifier-border-width": "var(--background-modifier-border-width)",
+            "modifier-border-color": "var(--background-modifier-border-color)",
+            "modifier-border-hover": "var(--background-modifier-border-hover)",
+            "modifier-border-focus": "var(--background-modifier-border-focus)",
+            "modifier-box-shadow": "var(--background-modifier-box-shadow)",
+            "modifier-error": "var(--background-modifier-error)",
+            "modifier-error-hover": "var(--background-modifier-error-hover)",
+            "modifier-success": "var(--background-modifier-success)",
+         },
          screens: {
             // "media-min-h-650": { raw: "(min-height: 650px)" },
             // "media-min-h-668": { raw: "(min-height: 668px)" },
@@ -192,6 +181,19 @@ module.exports = {
             "media-min-w-850": "850px",
             "media-min-w-1150": "1150px",
             "media-min-w-1400": "1400px",
+         },
+         textColor: {
+            normal: "var(--text-normal)",
+            muted: "var(--text-muted)",
+            faint: "var(--text-faint)",
+            "on-accent": "var(--text-on-accent)",
+            "on-accent-inverted": "var(--text-on-accent-inverted)",
+            error: "var(--text-error)",
+            warning: "var(--text-warning)",
+            success: "var(--text-success)",
+            accent: "var(--text-accent)",
+            "accent-hover": "var(--text-accent-hover)",
+            "form-placeholder": "var(--text-form-placeholder)",
          },
          border: {
             "border-width": "var(--border-width)",
@@ -232,8 +234,6 @@ module.exports = {
                "--base-80": "rgb(191, 191, 191)",
                "--base-90": "rgb(204, 204, 204)",
                "--base-100": "rgb(218, 218, 218)",
-               "--base-110": "rgb(204, 204, 204)",
-               "--base-120": "rgb(218, 218, 218)",
 
                // "--brand-1000": "hsl(259, 51%, 10%)",
                // "--brand-900": "hsl(259, 51%, 15%)",
