@@ -62,19 +62,19 @@ const RouteList: RouteListProps[] = [
       routeType: RouteTypes.public,
    },
    // auth
-   {
-      id: "login",
-      path: "/login",
-      element: <LoginPage />,
+   // {
+   //    id: "login",
+   //    path: "/login",
+   //    element: <LoginPage />,
 
-      routeType: RouteTypes.auth,
-   },
-   {
-      id: "register",
-      path: "/register",
-      element: <RegisterPage />,
-      routeType: RouteTypes.auth,
-   },
+   //    routeType: RouteTypes.auth,
+   // },
+   // {
+   //    id: "register",
+   //    path: "/register",
+   //    element: <RegisterPage />,
+   //    routeType: RouteTypes.auth,
+   // },
    // protected
    {
       id: "dashboard",

@@ -26,7 +26,7 @@ export default function LandingViewsContainer(): JSX.Element {
 
    return (
       <>
-         <div className="relative w-full h-full overflow-hidden">
+         <div className="relative flex-row w-full h-full overflow-hidden">
             <AnimatePresence mode="popLayout" custom={direction}>
                {currentView === LandingPageViews.home && (
                   <motion.div
@@ -36,7 +36,7 @@ export default function LandingViewsContainer(): JSX.Element {
                      animate="center"
                      exit="exit"
                      variants={variants}
-                     transition={{ duration: 0.1 }}
+                     transition={{ duration: 0.3 }}
                      className="inset-0"
                   >
                      <LandingHomeView />
@@ -50,7 +50,7 @@ export default function LandingViewsContainer(): JSX.Element {
                      animate="center"
                      exit="exit"
                      variants={variants}
-                     transition={{ duration: 0.1 }}
+                     transition={{ duration: 0.3 }}
                      className="inset-0"
                   >
                      <LandingRegisterView />
@@ -64,7 +64,7 @@ export default function LandingViewsContainer(): JSX.Element {
                      animate="center"
                      exit="exit"
                      variants={variants}
-                     transition={{ duration: 0.1 }}
+                     transition={{ duration: 0.3 }}
                      className="inset-0"
                   >
                      <LandingLoginView />

@@ -6,7 +6,7 @@ import { useViewSwitcher } from "../../shared/hooks/useViewSwitcher";
 export default function LandingHomeView() {
    return (
       <>
-         <div className="flex flex-col gap-16 sm:gap-20">
+         <div className="flex flex-col w-full gap-16 sm:gap-20">
             <LandingHeader />
             <LandingActions />
          </div>

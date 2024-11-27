@@ -15,9 +15,10 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
                      type="checkbox"
                      checked={checked}
                      onChange={() => setChecked((prev) => !prev)}
-                     className={` h-4 w-4 shrink-0 appearance-none rounded-radius-sm border-[1px] border-solid
-                        dark:bg-background-primary dark:sm:bg-background-primary-alt
-                        dark:border-background-modifier-border-color ${
+                     className={`h-4 w-4 shrink-0 appearance-none rounded-radius-sm border-[1px] border-solid
+                        checked:border-0 dark:bg-primary checked:dark:bg-interactive-accent
+                        hover:checked:dark:bg-interactive-accent-hover dark:sm:bg-primary-alt
+                        dark:border-modifier-border-color ${
                         checked
                               ? "dark:border-interactive-accent dark:bg-interactive-accent dark:sm:bg-interactive-accent"
                               : ""

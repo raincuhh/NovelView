@@ -10,7 +10,9 @@ export default function AuthFormLayout({
    return (
       <>
          <div id={id} className={`${isTauri() ? "mt-10" : ""}`}>
-            <div className="flex flex-col items-center w-full">{children}</div>
+            <div className="flex flex-col items-center justify-center w-full">
+               {children}
+            </div>
          </div>
       </>
    );

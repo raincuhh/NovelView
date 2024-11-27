@@ -39,7 +39,7 @@ export default function AuthForm({ type }: AuthFormProps): JSX.Element {
    return (
       <>
          <AuthFormLayout id="auth-form">
-            <div className="flex flex-col w-full gap-1">
+            <div className="flex flex-col items-center justify-center w-full gap-1">
                <RenderList
                   data={formInputs}
                   render={(inputType: AuthInputTypes, i: number) => (

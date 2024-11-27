@@ -59,9 +59,9 @@ export default function AuthFormInput({
                )}
             </header>
          </div>
-         <div className="flex flex-col min-w-full">
-            <div>
-               <div className="relative">
+         <div className="flex flex-col items-center w-full min-w-full">
+            <div className="flex flex-col items-center justify-center w-full">
+               <div className="relative items-center justify-center w-[99.5%]">
                   <Input
                      variant={"base"}
                      name={inputId}
