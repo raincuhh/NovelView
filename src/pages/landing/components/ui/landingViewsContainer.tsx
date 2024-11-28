@@ -1,10 +1,11 @@
 import React from "react";
-import { useViewSwitcher } from "../../shared/hooks/useViewSwitcher";
-import { LandingPageViews } from "./landingPageContent";
+import { useViewSwitcher } from "../../../../shared/hooks/useViewSwitcher";
+import { LandingPageViews } from "../../lib/types";
 import { motion, AnimatePresence } from "framer-motion";
 import LandingHomeView from "./landingHomeView";
 import LandingRegisterView from "./landingRegisterView";
 import LandingLoginView from "./landingLoginView";
+import LandingHeader from "./landingHeader";
 
 export default function LandingViewsContainer(): JSX.Element {
    const { currentView, direction } = useViewSwitcher<LandingPageViews>();
@@ -27,6 +28,7 @@ export default function LandingViewsContainer(): JSX.Element {
    return (
       <>
          <div className="relative flex-row w-full h-full overflow-hidden">
+            {/* <LandingHeader /> */}
             <AnimatePresence mode="popLayout" custom={direction}>
                {currentView === LandingPageViews.home && (
                   <motion.div

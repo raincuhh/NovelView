@@ -41,7 +41,7 @@ export default function AuthFormInput({
 
    return (
       <div className="flex flex-col w-full mb-2">
-         <div className="relative flex flex-col">
+         {/* <div className="relative flex flex-col">
             <header className="flex flex-row justify-between mb-2 font-family-primary">
                <div>
                   <label htmlFor={inputId}>{uppercaseify(label)}</label>
@@ -58,7 +58,7 @@ export default function AuthFormInput({
                   </>
                )}
             </header>
-         </div>
+         </div> */}
          <div className="flex flex-col items-center w-full min-w-full">
             <div className="flex flex-col items-center justify-center w-full">
                <div className="relative items-center justify-center w-[99.5%]">

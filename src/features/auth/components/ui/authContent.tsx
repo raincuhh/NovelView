@@ -13,13 +13,8 @@ export default function AuthContent({ type }: AuthContentProps): JSX.Element {
       <>
          <div className="flex flex-col items-center justify-center w-full h-full font-family-primary font-weight-md">
             <div className="flex flex-col w-full">
-               {isTauri() && (
-                  <>
-                     <AuthHeader type={type} />
-                  </>
-               )}
                <AuthForm type={type} />
-               <AuthPageSwitcher type={type} />
+               {/* <AuthPageSwitcher type={type} /> */}
                {/* <AuthFooter /> */}
             </div>
          </div>
