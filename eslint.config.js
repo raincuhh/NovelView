@@ -75,41 +75,38 @@ export default defineConfig([
          "boundaries/element-types": [
             "error",
             {
-               // components: ["@components/*"],
-               // pages: ["@pages/*"],
-               // shared: ["@shared/*"],
-               // features: ["@features/*"],
-               // widgets: ["@widgets/*"],
-               // app: ["@app/*"],
                default: "disallow",
                rules: [
                   {
                      from: "@features/*",
-                     disallow: ["@features/*"],
+                     disallow: ["@features/*", "@pages/*", "@app/*"],
                      message:
-                        "Do not import other features. Use shared or widgets instead.",
+                        "Features should not import from other features, pages, app, or processes.",
                   },
                   {
                      from: "@pages/*",
-                     disallow: ["@features/*", "@pages/*", "@widgets/*"],
+                     disallow: ["@pages/*", "@features/*", "@app/*"],
+                     allow: ["@widgets/*", "@shared/*"],
                      message:
-                        "Pages should not depend on features, widgets, or other pages.",
-                  },
-                  {
-                     from: "@shared/*",
-                     disallow: ["@features/*", "@pages/*"],
-                     message: "Shared should remain decoupled from features and pages.",
+                        "Pages should only import from widgets, shared, entities, and app.",
                   },
                   {
                      from: "@widgets/*",
-                     disallow: ["@features/*", "@pages/*"],
+                     disallow: ["@features/*", "@pages/*", "@app/*"],
                      message:
-                        "Widgets should be reusable and should not depend on features or pages.",
+                        "Widgets should remain independent of features, pages, and app-level logic.",
+                  },
+                  {
+                     from: "@shared/*",
+                     disallow: ["@features/*", "@pages/*", "@app/*"],
+                     message:
+                        "Shared should remain decoupled from business logic, pages, and app.",
                   },
                   {
                      from: "@app/*",
-                     disallow: ["@features/*", "@pages/*"],
-                     message: "App-level logic should not depend on features or pages.",
+                     allow: ["@pages/*", "@features/*", "@shared/*", "@widgets/*"],
+                     message:
+                        "App can import from pages, features, shared, and widgets to tie everything together.",
                   },
                ],
             },
