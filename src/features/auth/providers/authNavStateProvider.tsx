@@ -1,9 +1,9 @@
 import React, { useMemo, useState, forwardRef, PropsWithChildren } from "react";
-import { AuthNavStateContext } from "../hooks/useAuthNavState";
-import { Link } from "react-router-dom";
-import { uppercaseify } from "../../../shared/lib/utils";
-import useMediaQuery from "../../../shared/hooks/useMediaQuery";
-import { isTauri } from "@tauri-apps/api/core";
+// import { AuthNavStateContext } from "../hooks/useAuthNavState";
+// import { Link } from "react-router-dom";
+// import { uppercaseify } from "../../../shared/lib/utils";
+// import useMediaQuery from "../../../shared/hooks/useMediaQuery";
+// import { isTauri } from "@tauri-apps/api/core";
 
 type AuthNavStateProviderProps = PropsWithChildren & { id?: string };
 

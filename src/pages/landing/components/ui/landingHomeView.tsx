@@ -1,7 +1,7 @@
-import React from "react";
-import LandingHeader from "./landingHeader";
-import LandingActions from "./landingActions";
-import { useViewSwitcher } from "../../../../shared/hooks/useViewSwitcher";
+// import React from "react";
+// import LandingHeader from "./landingHeader";
+// import LandingActions from "./landingActions";
+// import { useViewSwitcher } from "../../../../shared/hooks/useViewSwitcher";
 
 export default function LandingHomeView() {
    return (

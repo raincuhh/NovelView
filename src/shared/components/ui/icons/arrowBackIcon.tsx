@@ -1,4 +1,4 @@
-import { SvgIconProps } from "../../../types/general";
+// import { SvgIconProps } from "../../../types/general";
 
 type ArrowBackIconProps = SvgIconProps;
 

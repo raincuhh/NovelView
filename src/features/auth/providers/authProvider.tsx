@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useCallback, useMemo, useState } from "react";
-import { AuthContext } from "../hooks/useAuth";
-import { UserRoles } from "../../../shared/types/user";
+// import { AuthContext } from "../hooks/useAuth";
+// import { UserRoles } from "../../../shared/types/user";
 // https://v2.tauri.app/plugin/store/
 
 type AuthProviderProps = PropsWithChildren;

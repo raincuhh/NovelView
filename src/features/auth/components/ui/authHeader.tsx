@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import BrandLogoIcon from "../../../../shared/components/ui/icons/brandLogoIcon";
-import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
-import { AuthModeTypes } from "../../lib/types";
-import { isTauri } from "@tauri-apps/api/core";
+// import { Link } from "react-router-dom";
+// import BrandLogoIcon from "../../../../shared/components/ui/icons/brandLogoIcon";
+// import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
+// import { AuthModeTypes } from "../../lib/types";
+// import { isTauri } from "@tauri-apps/api/core";
 
 type AuthHeaderProps = { type: AuthModeTypes };
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { uppercaseify } from "../../../../shared/lib/utils";
-import Input from "../../../../shared/components/ui/input";
-import { AuthInputTypes, AuthModeTypes } from "../../lib/types";
-import useValidateInput from "../../hooks/useValidateInput";
-import EyeOpenIcon from "../../../../shared/components/ui/icons/eyeOpenIcon";
+// import { Link } from "react-router-dom";
+// import { uppercaseify } from "../../../../shared/lib/utils";
+// import Input from "../../../../shared/components/ui/input";
+// import { AuthInputTypes, AuthModeTypes } from "../../lib/types";
+// import useValidateInput from "../../hooks/useValidateInput";
+// import EyeOpenIcon from "../../../../shared/components/ui/icons/eyeOpenIcon";
 
 type AuthFormInputProps = {
    formModeType: AuthModeTypes;

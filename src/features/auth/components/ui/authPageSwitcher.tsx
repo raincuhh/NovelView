@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AuthModeTypes } from "../../lib/types";
+// import { AuthModeTypes } from "../../lib/types";
 
 type AuthPageSwitcherProps = {
    type: AuthModeTypes;

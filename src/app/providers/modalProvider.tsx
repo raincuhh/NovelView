@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useMemo, useState } from "react";
-import { ModalContext } from "../hooks/useModal";
-import { Modal } from "../types/modal";
+// import { ModalContext } from "../hooks/useModal";
+// import { Modal } from "../types/modal";
 
 type ModalProviderProps = PropsWithChildren;
 

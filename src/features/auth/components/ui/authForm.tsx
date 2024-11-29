@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import AuthFormLayout from "../layouts/authFormLayout";
-import { AuthInputTypes, AuthModeTypes } from "../../lib/types";
-import RenderList from "../../../../shared/components/utils/renderList";
-import Checkbox from "../../../../shared/components/ui/checkbox";
-import AuthFormInput from "./authFormInput";
-import Button from "../../../../shared/components/ui/button";
-import { uppercaseify } from "../../../../shared/lib/utils";
+// import AuthFormLayout from "../layouts/authFormLayout";
+// import { AuthInputTypes, AuthModeTypes } from "../../lib/types";
+// import RenderList from "../../../../shared/components/utils/renderList";
+// import Checkbox from "../../../../shared/components/ui/checkbox";
+// import AuthFormInput from "./authFormInput";
+// import Button from "../../../../shared/components/ui/button";
+// import { uppercaseify } from "../../../../shared/lib/utils";
 
 type AuthFormProps = { type: AuthModeTypes };
 

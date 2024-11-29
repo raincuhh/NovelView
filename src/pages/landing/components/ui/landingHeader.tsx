@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import packageJson from "../../../../../package.json";
-import BrandLogoIcon from "../../../../shared/components/ui/icons/brandLogoIcon";
-import { isTauri } from "@tauri-apps/api/core";
-import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
+// import packageJson from "../../../../../package.json";
+// import BrandLogoIcon from "../../../../shared/components/ui/icons/brandLogoIcon";
+// import { isTauri } from "@tauri-apps/api/core";
+// import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
 
 export default function LandingHeader(): JSX.Element {
    const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });

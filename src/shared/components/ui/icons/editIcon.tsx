@@ -1,5 +1,6 @@
-import { SvgIconProps } from "../../../types/general";
 import clsx from "clsx";
+
+import { SvgIconProps } from "../../../types/general";
 
 type EditIconProps = SvgIconProps;
 

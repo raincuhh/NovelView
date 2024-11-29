@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import FormCheckBox from "../forms/form_check_box";
 
 type LabeledCheckBoxProps = {
    text: string;
@@ -20,9 +19,9 @@ export default function LabeledCheckBox({ text, name, id }: LabeledCheckBoxProps
    return (
       <>
          <div
-            className="font-c-primary font-c-weight-md dark:text-c-text-faint text-c-md
-               dark:hover:text-c-text-muted mt-2 flex cursor-pointer select-none flex-row items-center
-               transition-colors duration-100 ease-in-out"
+            className="flex flex-row items-center mt-2 transition-colors duration-100 ease-in-out cursor-pointer
+               select-none font-c-primary font-c-weight-md dark:text-c-text-faint text-c-md
+               dark:hover:text-c-text-muted"
          >
             <FormCheckBox
                ref={check_box_ref}
@@ -30,7 +29,7 @@ export default function LabeledCheckBox({ text, name, id }: LabeledCheckBoxProps
                id={id}
                css="group-hover:border-border-tertiary group-hover:bg-background-primary-alt"
             />
-            <p onClick={handle_click} className="cursor-pointer pl-2">
+            <p onClick={handle_click} className="pl-2 cursor-pointer">
                {text}
             </p>
          </div>

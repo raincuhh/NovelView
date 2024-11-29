@@ -1,9 +1,9 @@
 import React from "react";
-import Button from "../../shared/components/ui/button";
-import EditIcon from "../../shared/components/ui/icons/editIcon";
-import { uppercaseify } from "../../shared/lib/utils";
-import { LandingPageViews } from "./landingPageContent";
-import { useViewSwitcher } from "../../shared/hooks/useViewSwitcher";
+// import Button from "../../shared/components/ui/button";
+// import EditIcon from "../../shared/components/ui/icons/editIcon";
+// import { uppercaseify } from "../../shared/lib/utils";
+// import { LandingPageViews } from "./landingPageContent";
+// import { useViewSwitcher } from "../../shared/hooks/useViewSwitcher";
 
 type LandingActionProps = { type: "login" | "register"; view: LandingPageViews };
 

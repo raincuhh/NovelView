@@ -1,10 +1,10 @@
 import React from "react";
-import { AuthModeTypes } from "../../lib/types";
-import AuthHeader from "./authHeader";
-import AuthForm from "./authForm";
-import AuthPageSwitcher from "./authPageSwitcher";
-import AuthFooter from "./authFooter";
-import { isTauri } from "@tauri-apps/api/core";
+// import { AuthModeTypes } from "../../lib/types";
+// import AuthHeader from "./authHeader";
+// import AuthForm from "./authForm";
+// import AuthPageSwitcher from "./authPageSwitcher";
+// import AuthFooter from "./authFooter";
+// import { isTauri } from "@tauri-apps/api/core";
 
 type AuthContentProps = { type: AuthModeTypes };
 

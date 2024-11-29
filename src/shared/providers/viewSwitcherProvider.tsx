@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-
-import { ViewSwitcherContext } from "../hooks/useViewSwitcher";
+// import React, { useState } from "react";
+// import { ViewSwitcherContext } from "../hooks/useViewSwitcher";
 
 type ViewSwitcherProviderProps<TEnum extends { [key: string]: string }> = {
    initialView: TEnum[keyof TEnum];

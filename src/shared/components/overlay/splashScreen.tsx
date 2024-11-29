@@ -1,5 +1,6 @@
-import React from "react";
-import BrandLogoIcon from "../ui/icons/brandLogoIcon";
+// import React from "react";
+
+// import BrandLogoIcon from "../ui/icons/brandLogoIcon";
 
 export default function SplashScreen(): JSX.Element {
    return (

@@ -7,24 +7,24 @@ import {
    Navigate,
    replace,
 } from "react-router-dom";
-import SuspenseWithDelay from "../../shared/components/utils/suspenseWithDelay";
+// import SuspenseWithDelay from "../../shared/components/utils/suspenseWithDelay";
 
-import { RouteTypes } from "../../shared/types/routing";
-import RouteGuard from "../../features/auth/components/utils/routeGuard";
-import PageLayout from "../../shared/components/layout/pageLayout";
+// import { RouteTypes } from "../../shared/types/routing";
+// import RouteGuard from "../../features/auth/components/utils/routeGuard";
+// import PageLayout from "../../shared/components/layout/pageLayout";
 
 //pages
-import ErrorBoundary from "../../shared/components/utils/errorBoundary";
-import SplashScreen from "../../shared/components/overlay/splashScreen";
+// import ErrorBoundary from "../../shared/components/utils/errorBoundary";
+// import SplashScreen from "../../shared/components/overlay/splashScreen";
 
-import("../../pages/landing/page");
+// import("../../pages/landing/page");
 
-const NotFoundPage = lazy(() => import("../../pages/notFound/page"));
-const LandingPage = lazy(() => import("../../pages/landing/page"));
-const LoginPage = lazy(() => import("../../pages/login/page"));
-const RegisterPage = lazy(() => import("../../pages/register/page"));
-const DashboardPage = lazy(() => import("../../pages/dashboard/page"));
-const AdminPage = lazy(() => import("../../pages/admin/page"));
+const NotFoundPage = lazy(() => import("@/pages/notFound/page"));
+const LandingPage = lazy(() => import("@/pages/landing/page"));
+const LoginPage = lazy(() => import("@/pages/login/page"));
+const RegisterPage = lazy(() => import("@/pages/register/page"));
+const DashboardPage = lazy(() => import("@/pages/dashboard/page"));
+const AdminPage = lazy(() => import("@/pages/admin/page"));
 
 type RouteListProps = {
    id: string;

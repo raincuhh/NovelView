@@ -1,6 +1,6 @@
 import React from "react";
-import LandingAction from "./landingAction";
-import { LandingPageViews } from "./landingPageContent";
+// import LandingAction from "./landingAction";
+// import { LandingPageViews } from "./landingPageContent";
 
 export default function LandingActions(): JSX.Element {
    return (

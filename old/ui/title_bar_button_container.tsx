@@ -1,8 +1,6 @@
 import { useCallback } from "react";
-import { TitleBarButtonState, TitleBarButtonTypes } from "../../lib/types";
-import { tauriGetCurrentWebViewWindow } from "../../../../../../src/shared/lib/tauri";
 import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
-import TitleBarButton from "./title_bar_button";
+// import TitleBarButton from "./title_bar_button";
 
 type TitleBarButtonContainerProps = TitleBarButtonState;
 

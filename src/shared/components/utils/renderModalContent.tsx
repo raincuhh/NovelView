@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+
 import { Modal } from "../../types/modal";
 
 type RenderModalContentProps = React.HTMLAttributes<HTMLElement> & { modal: Modal };

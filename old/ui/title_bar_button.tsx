@@ -1,7 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { TitleBarButtonTypes } from "../../lib/types";
-
 type TitlebarButtonProps = {
    button_type: TitleBarButtonTypes;
    on_click?: (event: string) => void;

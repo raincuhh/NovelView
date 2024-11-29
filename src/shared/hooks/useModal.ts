@@ -1,5 +1,6 @@
-import React, { createContext, useContext } from "react";
-import { Modal } from "../types/modal";
+// import React, { createContext, useContext } from "react";
+
+// import { Modal } from "../types/modal";
 
 type ModalContextProps = {
    modals: Modal[];

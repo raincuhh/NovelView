@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useEffect } from "react";
-import useMediaQuery from "../hooks/useMediaQuery";
+// import useMediaQuery from "../hooks/useMediaQuery";
 import { isTauri } from "@tauri-apps/api/core";
 
 type TitlebarProviderProps = PropsWithChildren & {};

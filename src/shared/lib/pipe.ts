@@ -1,4 +1,4 @@
-import React, { ComponentType } from "react";
+// import React, { ComponentType } from "react";
 
 const pipe =
    <P extends {}>(

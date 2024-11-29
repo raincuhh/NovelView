@@ -1,6 +1,6 @@
 import React from "react";
-import CenteredLayout from "../../shared/components/layout/centeredLayout";
-import NotFoundHeader from "./notFoundHeader";
+// import CenteredLayout from "../../../shared/components/layout/centeredLayout";
+// import NotFoundHeader from "./notFoundHeader";
 import { Link } from "react-router-dom";
 
 export default function NotFoundPageContent() {

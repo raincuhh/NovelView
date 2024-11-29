@@ -1,8 +1,9 @@
-import React from "react";
-import { Modal } from "../../types/modal";
-import { useModal } from "../../hooks/useModal";
-import ModalOverlay from "../overlay/modalOverlay";
-import RenderModalContent from "../utils/renderModalContent";
+// import React from "react";
+
+// import { Modal } from "../../types/modal";
+// import { useModal } from "../../hooks/useModal";
+// import ModalOverlay from "../overlay/modalOverlay";
+// import RenderModalContent from "../utils/renderModalContent";
 
 type ModalContainerProps = { modal: Modal };
 

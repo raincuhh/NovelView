@@ -1,11 +1,11 @@
-import React from "react";
-import CenteredLayout from "../../shared/components/layout/centeredLayout";
-import { ViewSwitcherProvider } from "../../shared/providers/viewSwitcherProvider";
-import LandingViewsContainer from "./components/ui/landingViewsContainer";
-import { isTauri } from "@tauri-apps/api/core";
-import useMediaQuery from "../../shared/hooks/useMediaQuery";
-import { LandingPageViews } from "./lib/types";
-import { LandingPageType } from "./lib/types";
+// import React from "react";
+// import CenteredLayout from "../../shared/components/layout/centeredLayout";
+// import { ViewSwitcherProvider } from "../../shared/providers/viewSwitcherProvider";
+// import LandingViewsContainer from "./components/ui/landingViewsContainer";
+// import { isTauri } from "@tauri-apps/api/core";
+// import useMediaQuery from "../../shared/hooks/useMediaQuery";
+// import { LandingPageViews } from "./lib/types";
+// import { LandingPageType } from "./lib/types";
 
 export default function LandingPage(): JSX.Element {
    const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
