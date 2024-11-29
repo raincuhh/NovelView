@@ -7,24 +7,23 @@ import {
    Navigate,
    replace,
 } from "react-router-dom";
-// import SuspenseWithDelay from "../../shared/components/utils/suspenseWithDelay";
+import SuspenseWithDelay from "@/shared/components/utils/suspenseWithDelay";
 
-// import { RouteTypes } from "../../shared/types/routing";
+import { RouteTypes } from "@/shared/types";
 // import RouteGuard from "../../features/auth/components/utils/routeGuard";
-// import PageLayout from "../../shared/components/layout/pageLayout";
+import { PageLayout } from "@/shared/components/layout";
 
 //pages
-// import ErrorBoundary from "../../shared/components/utils/errorBoundary";
-// import SplashScreen from "../../shared/components/overlay/splashScreen";
+import { ErrorBoundary } from "@/shared/components/utils";
+import { SplashScreen } from "@/shared/components/overlay";
 
 // import("../../pages/landing/page");
+import("@/pages/landing/components/ui/page");
 
-const NotFoundPage = lazy(() => import("@/pages/notFound/page"));
-const LandingPage = lazy(() => import("@/pages/landing/page"));
-const LoginPage = lazy(() => import("@/pages/login/page"));
-const RegisterPage = lazy(() => import("@/pages/register/page"));
-const DashboardPage = lazy(() => import("@/pages/dashboard/page"));
-const AdminPage = lazy(() => import("@/pages/admin/page"));
+const NotFoundPage = lazy(() => import("@/pages/notFound/components/ui/page"));
+const LandingPage = lazy(() => import("@/pages/landing/components/ui/page"));
+// const DashboardPage = lazy(() => import("@/pages/dashboard/page"));
+// const AdminPage = lazy(() => import("@/pages/admin/page"));
 
 type RouteListProps = {
    id: string;
@@ -76,19 +75,19 @@ const RouteList: RouteListProps[] = [
    //    routeType: RouteTypes.auth,
    // },
    // protected
-   {
-      id: "dashboard",
-      path: "/dashboard",
-      element: <DashboardPage />,
-      routeType: RouteTypes.protected,
-   },
-   // admin
-   {
-      id: "admin",
-      path: "/admin",
-      element: <AdminPage />,
-      routeType: RouteTypes.admin,
-   },
+   // {
+   //    id: "dashboard",
+   //    path: "/dashboard",
+   //    element: <DashboardPage />,
+   //    routeType: RouteTypes.protected,
+   // },
+   // // admin
+   // {
+   //    id: "admin",
+   //    path: "/admin",
+   //    element: <AdminPage />,
+   //    routeType: RouteTypes.admin,
+   // },
 ];
 
 const routes = createRoutesFromElements(

@@ -1,8 +1,7 @@
-// import React from "react";
+import React from "react";
+import { BrandLogoIcon } from "../ui";
 
-// import BrandLogoIcon from "../ui/icons/brandLogoIcon";
-
-export default function SplashScreen(): JSX.Element {
+const SplashScreen = (): React.JSX.Element => {
    return (
       <>
          <div
@@ -18,4 +17,6 @@ export default function SplashScreen(): JSX.Element {
          </div>
       </>
    );
-}
+};
+
+export default SplashScreen;

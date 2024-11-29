@@ -1,4 +1,4 @@
-// import React, { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 type ErrorBoundaryProps = {
    fallback: ReactNode;

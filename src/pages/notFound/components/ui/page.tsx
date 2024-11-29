@@ -1,9 +1,9 @@
 import React from "react";
-// import CenteredLayout from "../../../shared/components/layout/centeredLayout";
-// import NotFoundHeader from "./notFoundHeader";
 import { Link } from "react-router-dom";
+import { CenteredLayout } from "@/shared/components/layout";
+import NotFoundHeader from "./notFoundHeader";
 
-export default function NotFoundPageContent() {
+const NotFoundPage = (): React.JSX.Element => {
    return (
       <CenteredLayout maxWidth="sm:max-w-sm">
          <div className="flex items-center justify-center">
@@ -19,4 +19,6 @@ export default function NotFoundPageContent() {
          </div>
       </CenteredLayout>
    );
-}
+};
+
+export default NotFoundPage;

@@ -12,6 +12,7 @@
       "target": "ESNext",
       "lib": ["dom", "dom.iterable", "esnext"],
       "allowJs": true,
+      "checkJs": false,
       "skipLibCheck": true,
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
@@ -19,16 +20,13 @@
       "forceConsistentCasingInFileNames": true,
       "noFallthroughCasesInSwitch": true,
       "module": "esnext",
-      "moduleResolution": "node",
+      "moduleResolution": "bundler",
+      "moduleDetection": "force",
       "resolveJsonModule": true,
       "isolatedModules": true,
       "noEmit": true,
       "jsx": "react-jsx",
-      "typeRoots": [
-         "node_modules/@types",
-         "src/shared/types"
-         // "src/shared/types/env.d.ts"
-      ]
+      "typeRoots": ["node_modules/@types", "src/shared/types"]
    },
    "include": [
       "src/**/*.ts",

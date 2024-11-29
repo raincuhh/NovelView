@@ -20,3 +20,5 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
       );
    },
 );
+
+export default Header;

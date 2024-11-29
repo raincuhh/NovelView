@@ -1,11 +1,11 @@
 import React from "react";
 
-import { useModal } from "../../hooks/useModal";
-import { Modal } from "../../types/modal";
+import { useModal } from "@/shared/hooks";
+import { Modal } from "@/shared/types";
 import RenderList from "./renderList";
 import ModalContainer from "../ui/modalContainer";
 
-export default function ModalRoot(): JSX.Element {
+const ModalRoot = (): React.JSX.Element => {
    const { modals } = useModal();
 
    return (
@@ -22,4 +22,6 @@ export default function ModalRoot(): JSX.Element {
          </div>
       </>
    );
-}
+};
+
+export default ModalRoot;

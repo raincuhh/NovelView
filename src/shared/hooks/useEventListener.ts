@@ -6,11 +6,7 @@ type UseEventListenerProps = {
    eventType: string;
 };
 
-export default function useEventListener({
-   element,
-   callback,
-   eventType,
-}: UseEventListenerProps) {
+const useEventListener = ({ element, callback, eventType }: UseEventListenerProps) => {
    const callbackRef = useRef(callback);
 
    useEffect(() => {
@@ -24,4 +20,6 @@ export default function useEventListener({
 
       return () => element.removeEventListener(eventType, handler);
    }, [eventType, element]);
-}
+};
+
+export default useEventListener;

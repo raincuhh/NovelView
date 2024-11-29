@@ -11,7 +11,7 @@ type ModalContextProps = {
 
 export const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 
-export function useModal(): ModalContextProps {
+const useModal = (): ModalContextProps => {
    const context = useContext(ModalContext);
 
    if (!context) {
@@ -19,4 +19,6 @@ export function useModal(): ModalContextProps {
    }
 
    return context;
-}
+};
+
+export default useModal;

@@ -1,7 +1,9 @@
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 
 type RootLayoutProps = PropsWithChildren & {};
 
-export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
+const RootLayout = ({ children }: RootLayoutProps): React.JSX.Element => {
    return <>{children}</>;
-}
+};
+
+export default RootLayout;

@@ -1,7 +1,7 @@
 export * from "./icons";
-export * from "./header";
-export * from "./button";
-export * from "./checkbox";
-export * from "./divider";
-export * from "./input";
-export * from "./modalContainer";
+export { default as Header } from "./header";
+export { default as Button } from "./button";
+export { default as Checkbox } from "./checkbox";
+export { default as Divider } from "./divider";
+export { default as Input } from "./input";
+export { default as ModalContainer } from "./modalContainer";

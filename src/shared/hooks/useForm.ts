@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function useForm<T>(initialState: T) {
+const useForm = <T>(initialState: T) => {
    const [formData, setFormData] = useState(initialState);
 
    const handleChange = (key: keyof T, value: any) => {
@@ -10,4 +10,6 @@ export function useForm<T>(initialState: T) {
    const resetForm = () => setFormData(initialState);
 
    return { formData, handleChange, resetForm };
-}
+};
+
+export default useForm;

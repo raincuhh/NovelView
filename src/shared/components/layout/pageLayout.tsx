@@ -1,8 +1,8 @@
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 
 type PageLayoutProps = PropsWithChildren & { id: string };
 
-export default function PageLayout({ children, id }: PageLayoutProps): JSX.Element {
+const PageLayout = ({ children, id }: PageLayoutProps): React.JSX.Element => {
    return (
       <>
          <div className="flex flex-col min-h-full font-family-primary text-normal font-weight-md">
@@ -17,4 +17,6 @@ export default function PageLayout({ children, id }: PageLayoutProps): JSX.Eleme
          </div>
       </>
    );
-}
+};
+
+export default PageLayout;

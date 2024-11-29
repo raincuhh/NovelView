@@ -1,5 +1,3 @@
-export * from "./fontawesome";
-export * from "./pipe";
-export * from "./supabase";
-export * from "./tauri";
+export { default as pipe } from "./pipe";
+export { default as supabase } from "./supabase";
 export * from "./utils";

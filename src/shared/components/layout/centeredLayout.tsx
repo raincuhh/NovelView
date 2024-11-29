@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import clsx from "clsx";
 
 type LandingMainProps = PropsWithChildren & {
@@ -8,13 +8,13 @@ type LandingMainProps = PropsWithChildren & {
    className?: string;
 };
 
-export default function CenteredLayout({
+const CenteredLayout = ({
    children,
    maxWidth = "sm:max-w-md",
    justify = "justify-end sm:justify-center",
    justifyChildren = "justify-center",
    className,
-}: LandingMainProps): JSX.Element {
+}: LandingMainProps): React.JSX.Element => {
    return (
       <>
          <div
@@ -37,4 +37,6 @@ export default function CenteredLayout({
          </div>
       </>
    );
-}
+};
+
+export default CenteredLayout;

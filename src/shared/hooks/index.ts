@@ -1,7 +1,7 @@
-export * from "./useEventListener";
-export * from "./useForm";
-export * from "./useMediaQuery";
-export * from "./useModal";
-export * from "./useTheme";
-export * from "./useToggleState";
-export * from "./useViewSwitcher";
+export { default as useEventListener } from "./useEventListener";
+export { default as useForm } from "./useForm";
+export { default as useMediaQuery } from "./useMediaQuery";
+export { default as useModal } from "./useModal";
+export { default as useTheme } from "./useTheme";
+export { default as useToggleState } from "./useToggleState";
+export { default as useViewSwitcher } from "./useViewSwitcher";
