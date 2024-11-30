@@ -1,4 +1,5 @@
 import React from "react";
+
 import { BrandLogoIcon } from "../ui";
 
 const SplashScreen = (): React.JSX.Element => {

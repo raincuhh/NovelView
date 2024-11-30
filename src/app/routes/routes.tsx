@@ -1,115 +1,47 @@
-import React, { Suspense, lazy, useMemo } from "react";
 import {
    HashRouter as Router,
    Route,
    createHashRouter,
    createRoutesFromElements,
-   Navigate,
-   replace,
+   RouteObject,
 } from "react-router-dom";
 import SuspenseWithDelay from "@/shared/components/utils/suspenseWithDelay";
-
-import { RouteTypes } from "@/shared/types";
-// import RouteGuard from "../../features/auth/components/utils/routeGuard";
+import RouteList from "./routeList";
 import { PageLayout } from "@/shared/components/layout";
-
-//pages
-import { ErrorBoundary } from "@/shared/components/utils";
+import { ErrorBoundary, RenderList } from "@/shared/components/utils";
 import { SplashScreen } from "@/shared/components/overlay";
+import RouteGuard from "@/features/auth/components/utils/routeGuard";
+import { RouteListProps } from "@/shared/types";
 
-// import("../../pages/landing/page");
-import("@/pages/landing/components/ui/page");
-
-const NotFoundPage = lazy(() => import("@/pages/notFound/components/ui/page"));
-const LandingPage = lazy(() => import("@/pages/landing/components/ui/page"));
-// const DashboardPage = lazy(() => import("@/pages/dashboard/page"));
-// const AdminPage = lazy(() => import("@/pages/admin/page"));
-
-type RouteListProps = {
-   id: string;
-   path: string;
-   element: JSX.Element;
-   errorElement?: JSX.Element;
-   routeType?: RouteTypes;
-};
-
-const fallbackMessage: string = "An error has occured, check DevTools for more details.";
-
-//TODO: do a loading screen or something, idk.
-const SuspenseFallback = () => (
+const routes: RouteObject[] = createRoutesFromElements(
    <>
-      <SplashScreen />
-   </>
-);
-
-const RouteList: RouteListProps[] = [
-   // public
-   {
-      id: "not-found",
-      path: "/404",
-      element: <NotFoundPage />,
-   },
-   {
-      id: "all",
-      path: "*",
-      element: <Navigate to={"/404"} replace={true} />,
-   },
-   {
-      id: "landing",
-      path: "/",
-      element: <LandingPage />,
-      routeType: RouteTypes.public,
-   },
-   // auth
-   // {
-   //    id: "login",
-   //    path: "/login",
-   //    element: <LoginPage />,
-
-   //    routeType: RouteTypes.auth,
-   // },
-   // {
-   //    id: "register",
-   //    path: "/register",
-   //    element: <RegisterPage />,
-   //    routeType: RouteTypes.auth,
-   // },
-   // protected
-   // {
-   //    id: "dashboard",
-   //    path: "/dashboard",
-   //    element: <DashboardPage />,
-   //    routeType: RouteTypes.protected,
-   // },
-   // // admin
-   // {
-   //    id: "admin",
-   //    path: "/admin",
-   //    element: <AdminPage />,
-   //    routeType: RouteTypes.admin,
-   // },
-];
-
-const routes = createRoutesFromElements(
-   <>
-      {RouteList.map((route: RouteListProps, i: number) => (
-         <Route
-            key={i}
-            path={route.path}
-            element={
-               <RouteGuard type={route.routeType}>
-                  <PageLayout id={route.id}>
-                     <SuspenseWithDelay fallback={<SuspenseFallback />} delay={600}>
-                        {route.element}
-                     </SuspenseWithDelay>
-                  </PageLayout>
-               </RouteGuard>
-            }
-            errorElement={
-               route.errorElement || <ErrorBoundary fallback={fallbackMessage} />
-            }
-         />
-      ))}
+      <RenderList
+         data={RouteList}
+         render={(route: RouteListProps, i: number) => (
+            <Route
+               key={i}
+               path={route.path}
+               element={
+                  <RouteGuard type={route.routeType}>
+                     <PageLayout id={route.id}>
+                        <SuspenseWithDelay fallback={<SplashScreen />} delay={600}>
+                           {route.element}
+                        </SuspenseWithDelay>
+                     </PageLayout>
+                  </RouteGuard>
+               }
+               errorElement={
+                  route.errorElement || (
+                     <ErrorBoundary
+                        fallback={
+                           "An error has occured, check DevTools for more details."
+                        }
+                     />
+                  )
+               }
+            />
+         )}
+      />
    </>,
 );
 

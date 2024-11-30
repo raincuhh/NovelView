@@ -31,6 +31,8 @@ const useValidateInput = ({ inputType, onInputChange }: UseValidateInputProps) =
                validationError = "Password must contain at least one special character";
             }
             break;
+         case "confirmPassword":
+         case "verificationCode":
          default:
             break;
       }

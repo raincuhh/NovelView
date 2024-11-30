@@ -1,7 +1,7 @@
-// import React from "react";
-// import { Link } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
-export default function NotFoundHeader(): JSX.Element {
+const NotFoundHeader = (): React.JSX.Element => {
    return (
       <header className="flex flex-col gap-4 text-center font-family-primary">
          <h1 className="dark:text-text-normal text-fs-xl font-weight-xl sm:text-fs-2xl">
@@ -17,4 +17,6 @@ export default function NotFoundHeader(): JSX.Element {
          </p>
       </header>
    );
-}
+};
+
+export default NotFoundHeader;

@@ -1,1 +1,1 @@
-export { default as LandingPage } from "./components/ui/page";
+export { default as LandingPage } from "./components/ui/landingPage";

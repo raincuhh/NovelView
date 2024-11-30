@@ -1,6 +1,14 @@
 export enum RouteTypes {
-   public, // public route.
-   auth, // redirects if authenticated
-   protected, // needs to be authenticated
-   admin, // needs userrole to be admin
+   public,
+   auth,
+   protected,
+   admin,
 }
+
+export type RouteListProps = {
+   id: string;
+   path: string;
+   element: JSX.Element;
+   errorElement?: JSX.Element;
+   routeType?: RouteTypes;
+};

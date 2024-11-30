@@ -1,13 +1,13 @@
 import React from "react";
-// import Button from "../../shared/components/ui/button";
-// import EditIcon from "../../shared/components/ui/icons/editIcon";
-// import { uppercaseify } from "../../shared/lib/utils";
-// import { LandingPageViews } from "./landingPageContent";
-// import { useViewSwitcher } from "../../shared/hooks/useViewSwitcher";
+import { Button } from "@/shared/components/ui";
+import { EditIcon } from "@/shared/components/icons";
+import { uppercaseify } from "@/shared/lib";
+import { LandingPageViews } from "../../lib/types";
+import { useViewSwitcher } from "@/shared/hooks";
 
 type LandingActionProps = { type: "login" | "register"; view: LandingPageViews };
 
-export default function LandingAction({ type, view }: LandingActionProps): JSX.Element {
+const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element => {
    const { navigate } = useViewSwitcher();
 
    const buttonTexts: Record<LandingActionProps["type"], string> = {
@@ -45,4 +45,6 @@ export default function LandingAction({ type, view }: LandingActionProps): JSX.E
          </div>
       </>
    );
-}
+};
+
+export default LandingAction;

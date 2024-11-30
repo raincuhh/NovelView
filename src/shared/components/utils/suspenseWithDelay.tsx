@@ -1,4 +1,4 @@
-// import React, { useState, useEffect, PropsWithChildren, Suspense } from "react";
+import React, { useState, useEffect, PropsWithChildren, Suspense } from "react";
 
 type SuspenseWithDelayProps = PropsWithChildren & {
    fallback: JSX.Element;
@@ -14,7 +14,6 @@ export default function SuspenseWithDelay({
 
    useEffect(() => {
       const timer = setTimeout(() => setShowFallback(true), delay);
-
       return () => clearTimeout(timer);
    }, [delay]);
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import { CenteredLayout } from "@/shared/components/layout";
 import NotFoundHeader from "./notFoundHeader";
 

@@ -1,13 +1,13 @@
 import { PropsWithChildren, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-// import { RouteTypes } from "../../../../shared/types/routing";
+import { RouteTypes } from "@/shared/types";
 
 type RouteGuardProps = PropsWithChildren & { type?: RouteTypes };
 
-export default function RouteGuard({
+const RouteGuard = ({
    children,
    type = RouteTypes.protected,
-}: RouteGuardProps): JSX.Element {
+}: RouteGuardProps): React.JSX.Element => {
    const navigate = useNavigate();
    const location = useLocation();
 
@@ -34,4 +34,6 @@ export default function RouteGuard({
    }, []);
 
    return <>{children}</>;
-}
+};
+
+export default RouteGuard;

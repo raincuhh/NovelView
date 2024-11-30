@@ -1,1 +1,1 @@
-export * from "./viewSwitcherProvider";
+export { default as ViewSwitcherProvider } from "./viewSwitcherProvider";

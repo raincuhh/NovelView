@@ -1,30 +1,28 @@
-// import React, { useState } from "react";
-// import { ViewSwitcherContext } from "../hooks/useViewSwitcher";
+import React, { useState } from "react";
+import { ViewSwitcherContext } from "../hooks/useViewSwitcher";
 
-type ViewSwitcherProviderProps<TEnum extends { [key: string]: string }> = {
-   initialView: TEnum[keyof TEnum];
+type ViewSwitcherProviderProps<T extends { [key: string]: string }> = {
+   initialView: T[keyof T];
    children: React.ReactNode;
    duration: number;
-   type: TEnum;
+   type: T;
 };
 
-function getEnumValues<TEnum extends { [key: string]: string }>(
-   enumType: TEnum,
-): string[] {
+const getEnumValues = <T extends { [key: string]: string }>(enumType: T): string[] => {
    return Object.values(enumType);
-}
+};
 
-export function ViewSwitcherProvider<TEnum extends { [key: string]: string }>({
+const ViewSwitcherProvider = <T extends { [key: string]: string }>({
    initialView,
    children,
    duration,
    type,
-}: ViewSwitcherProviderProps<TEnum>) {
-   const [currentView, setCurrentView] = useState<TEnum[keyof TEnum]>(initialView);
+}: ViewSwitcherProviderProps<T>) => {
+   const [currentView, setCurrentView] = useState<T[keyof T]>(initialView);
    const [isAnimating, setIsAnimating] = useState<boolean>(false);
    const [direction, setDirection] = useState<number>(0);
 
-   const changeView = (newPage: TEnum[keyof TEnum], newDirection: number) => {
+   const changeView = (newPage: T[keyof T], newDirection: number) => {
       if (isAnimating) return;
 
       setIsAnimating(true);
@@ -35,15 +33,12 @@ export function ViewSwitcherProvider<TEnum extends { [key: string]: string }>({
       }, duration);
    };
 
-   const getDirection = (
-      currentView: TEnum[keyof TEnum],
-      targetView: TEnum[keyof TEnum],
-   ): number => {
+   const getDirection = (currentView: T[keyof T], targetView: T[keyof T]): number => {
       const views = getEnumValues(type);
       return views.indexOf(targetView) > views.indexOf(currentView) ? 1 : -1;
    };
 
-   const navigate = (targetView: TEnum[keyof TEnum]) => {
+   const navigate = (targetView: T[keyof T]) => {
       const direction = getDirection(currentView, targetView);
       if (!isAnimating) changeView(targetView, direction);
    };
@@ -62,4 +57,6 @@ export function ViewSwitcherProvider<TEnum extends { [key: string]: string }>({
          {children}
       </ViewSwitcherContext.Provider>
    );
-}
+};
+
+export default ViewSwitcherProvider;

@@ -27,25 +27,26 @@ export default defineConfig([
                "newlines-between": "always",
             },
          ],
-         "import/no-restricted-paths": [
-            "error",
-            {
-               zones: [
-                  {
-                     target: "./src/features",
-                     from: "./src/features",
-                     message:
-                        "Direct imports from within features are not allowed. Use the public API (`index.ts`) instead.",
-                  },
-                  {
-                     target: "./src/pages",
-                     from: "./src/pages",
-                     message:
-                        "Direct imports from within pages are not allowed. Use the public API (`index.ts`) instead.",
-                  },
-               ],
-            },
-         ],
+         // "import/no-restricted-paths": [
+         //    "error",
+         //    {
+         //       zones: [
+         //          {
+         //             target: "./src/features",
+         //             from: "./src/features",
+         //             message:
+         //                "Direct imports from within features are not allowed. Use the public API (`index.ts`) instead.",
+         //          },
+         //          {
+         //             target: "./src/pages",
+         //             from: "./src/pages",
+         //             except: ["./**"],
+         //             message:
+         //                "Direct imports from within pages are not allowed. Use the public API (`index.ts`) instead.",
+         //          },
+         //       ],
+         //    },
+         // ],
          "boundaries/element-types": [
             "error",
             {
@@ -60,19 +61,21 @@ export default defineConfig([
                   {
                      from: "@pages/*",
                      disallow: ["@pages/*", "@features/*", "@app/*"],
-                     allow: ["@widgets/*", "@shared/*"],
+                     allow: ["@widgets/*", "@shared/*", "./**"],
                      message:
                         "Pages should only import from widgets, shared, entities, and app.",
                   },
                   {
                      from: "@widgets/*",
                      disallow: ["@features/*", "@pages/*", "@app/*"],
+                     allow: ["./**", "@shared/*"],
                      message:
                         "Widgets should remain independent of features, pages, and app.",
                   },
                   {
                      from: "@shared/*",
                      disallow: ["@features/*", "@pages/*", "@app/*"],
+                     allow: ["./**"],
                      message:
                         "Shared should remain decoupled from business logic, pages, and app.",
                   },

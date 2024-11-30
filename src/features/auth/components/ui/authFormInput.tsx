@@ -1,39 +1,42 @@
 import React, { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
-// import { uppercaseify } from "../../../../shared/lib/utils";
-// import Input from "../../../../shared/components/ui/input";
-// import { AuthInputTypes, AuthModeTypes } from "../../lib/types";
-// import useValidateInput from "../../hooks/useValidateInput";
-// import EyeOpenIcon from "../../../../shared/components/ui/icons/eyeOpenIcon";
+import { Link } from "react-router-dom";
+import { uppercaseify } from "@/shared/lib";
+import { Input } from "@/shared/components/ui";
+import { AuthField, AuthActions } from "../../types";
+import { useValidateInput } from "../../hooks";
+import { EyeOpenIcon, EyeSlashIcon } from "@/shared/components/icons";
 
 type AuthFormInputProps = {
-   formModeType: AuthModeTypes;
-   inputType: AuthInputTypes;
+   authActionType: AuthActions;
+   authFieldType: AuthField;
    label: string;
    value: string;
    errorMessage: string;
    onInputChange: (value: string, error: string) => void;
 };
 
-export default function AuthFormInput({
-   formModeType,
-   inputType,
+const AuthFormInput = ({
+   authActionType,
+   authFieldType,
    label,
    value,
    errorMessage,
    onInputChange,
-}: AuthFormInputProps): JSX.Element {
-   const { validateInput, error } = useValidateInput({ inputType, onInputChange });
-   const isForgotPasswordIncluded = formModeType === "login" && inputType === "password";
-   const inputId = `${formModeType}-${inputType}`;
+}: AuthFormInputProps): React.JSX.Element => {
+   const { validateInput, error } = useValidateInput({ authFieldType, onInputChange });
+   const isForgotPasswordIncluded =
+      authActionType === "login" && authFieldType === "password";
+   const inputId = `${authActionType}-${authFieldType}`;
 
-   const placeholders = {
-      email: "user@example.com",
-      password: "password",
-      username: "username",
+   const placeholders: Record<AuthField, string> = {
+      email: "enter email...",
+      password: "enter password...",
+      username: "enter username...",
+      confirmPassword: "confirm password...",
+      verificationCode: "enter verification code...",
    };
 
-   const placeholder = placeholders[inputType];
+   const placeholder = placeholders[authFieldType];
 
    useEffect(() => {
       if (value) validateInput(value);
@@ -68,7 +71,7 @@ export default function AuthFormInput({
                      id={inputId}
                      placeholder={placeholder}
                      aria-placeholder={placeholder}
-                     autoComplete={inputType}
+                     autoComplete={authFieldType}
                      onChange={(e) => validateInput(e.target.value)}
                      className={`w-full ${error ? "" : ""}`}
                   />
@@ -84,7 +87,7 @@ export default function AuthFormInput({
                         }}
                      >
                         <div>
-                           {inputType === "password" && (
+                           {authFieldType === "password" && (
                               <>
                                  <EyeOpenIcon className="!fill-muted" />
                               </>
@@ -104,4 +107,6 @@ export default function AuthFormInput({
          </div>
       </div>
    );
-}
+};
+
+export default AuthFormInput;

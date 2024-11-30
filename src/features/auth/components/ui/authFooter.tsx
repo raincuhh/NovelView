@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 //TODO: make the actual website, which holds just general info, andstuff like privacy policy, etc.
 
-export default function AuthFooter(): JSX.Element {
+const AuthFooter = (): React.JSX.Element => {
    return (
       <>
          <div className="mt-4 text-center dark:text-faint font-family-primary text-fs-xs font-weight-md">
@@ -23,4 +23,6 @@ export default function AuthFooter(): JSX.Element {
          </div>
       </>
    );
-}
+};
+
+export default AuthFooter;

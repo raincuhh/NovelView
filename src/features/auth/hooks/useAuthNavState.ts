@@ -9,11 +9,13 @@ export const AuthNavStateContext = createContext<AuthNavStateContextProps | unde
    undefined,
 );
 
-export function useAuthNavState(): AuthNavStateContextProps {
+const useAuthNavState = (): AuthNavStateContextProps => {
    const context = useContext(AuthNavStateContext);
 
    if (!context) {
       throw new Error("useAuthNavState must be used within a NavStateProvider");
    }
    return context;
-}
+};
+
+export default useAuthNavState;

@@ -1,13 +1,13 @@
-// import React from "react";
-// import { useViewSwitcher } from "../../../../shared/hooks/useViewSwitcher";
-// import { LandingPageViews } from "../../lib/types";
-// import { motion, AnimatePresence } from "framer-motion";
-// import LandingHomeView from "./landingHomeView";
-// import LandingRegisterView from "./landingRegisterView";
-// import LandingLoginView from "./landingLoginView";
-// import LandingHeader from "./landingHeader";
+import React from "react";
+import { useViewSwitcher } from "@/shared/hooks";
+import { LandingPageViews } from "../../lib/types";
+import { motion, AnimatePresence } from "framer-motion";
+import LandingHomeView from "./landingHomeView";
+import LandingRegisterView from "./landingRegisterView";
+import LandingLoginView from "./landingLoginView";
+import LandingHeader from "./landingHeader";
 
-export default function LandingViewsContainer(): JSX.Element {
+const LandingViewsContainer = (): React.JSX.Element => {
    const { currentView, direction } = useViewSwitcher<LandingPageViews>();
 
    const variants = {
@@ -76,4 +76,6 @@ export default function LandingViewsContainer(): JSX.Element {
          </div>
       </>
    );
-}
+};
+
+export default LandingViewsContainer;

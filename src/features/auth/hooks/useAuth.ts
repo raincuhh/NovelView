@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
-// import { UserRoles } from "../../../shared/types/user";
+import { UserRoles } from "@/shared/types";
 
 type AuthContextProps = {
    accessToken: string | null;
-   isAuthenticated: boolean;
+   isAuth: boolean;
    role: UserRoles;
    loading: boolean;
    login: (username: string, password: string) => Promise<void>;
@@ -12,7 +12,7 @@ type AuthContextProps = {
 
 export const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
-export const useAuth = (): AuthContextProps => {
+const useAuth = (): AuthContextProps => {
    const context: AuthContextProps | undefined = useContext(AuthContext);
 
    if (context === undefined) {
@@ -21,3 +21,5 @@ export const useAuth = (): AuthContextProps => {
 
    return context;
 };
+
+export default useAuth;
