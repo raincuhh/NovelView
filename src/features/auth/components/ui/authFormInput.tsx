@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import { uppercaseify } from "@/shared/lib";
 import { Input } from "@/shared/components/ui";
 import { AuthField, AuthActions } from "../../types";
@@ -8,7 +9,7 @@ import { EyeOpenIcon, EyeSlashIcon } from "@/shared/components/icons";
 
 type AuthFormInputProps = {
    authActionType: AuthActions;
-   authFieldType: AuthField;
+   inputType: AuthField;
    label: string;
    value: string;
    errorMessage: string;
@@ -17,16 +18,16 @@ type AuthFormInputProps = {
 
 const AuthFormInput = ({
    authActionType,
-   authFieldType,
+   inputType,
    label,
    value,
    errorMessage,
    onInputChange,
 }: AuthFormInputProps): React.JSX.Element => {
-   const { validateInput, error } = useValidateInput({ authFieldType, onInputChange });
+   const { validateInput, error } = useValidateInput({ inputType, onInputChange });
    const isForgotPasswordIncluded =
-      authActionType === "login" && authFieldType === "password";
-   const inputId = `${authActionType}-${authFieldType}`;
+      authActionType === "login" && inputType === "password";
+   const inputId = `${authActionType}-${inputType}`;
 
    const placeholders: Record<AuthField, string> = {
       email: "enter email...",
@@ -36,7 +37,7 @@ const AuthFormInput = ({
       verificationCode: "enter verification code...",
    };
 
-   const placeholder = placeholders[authFieldType];
+   const placeholder = placeholders[inputType];
 
    useEffect(() => {
       if (value) validateInput(value);
@@ -71,8 +72,8 @@ const AuthFormInput = ({
                      id={inputId}
                      placeholder={placeholder}
                      aria-placeholder={placeholder}
-                     autoComplete={authFieldType}
-                     onChange={(e) => validateInput(e.target.value)}
+                     autoComplete={inputType}
+                     onChange={(e: any) => validateInput(e.target.value)}
                      className={`w-full ${error ? "" : ""}`}
                   />
                   <div
@@ -87,7 +88,7 @@ const AuthFormInput = ({
                         }}
                      >
                         <div>
-                           {authFieldType === "password" && (
+                           {inputType === "password" && (
                               <>
                                  <EyeOpenIcon className="!fill-muted" />
                               </>

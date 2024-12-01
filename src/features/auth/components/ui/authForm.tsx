@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { isTauri } from "@tauri-apps/api/core";
+
 import { RenderList } from "@/shared/components/utils";
 import { uppercaseify } from "@/shared/lib";
 import { Button, Checkbox } from "@/shared/components/ui";
@@ -45,7 +46,7 @@ const AuthForm = ({ type }: AuthFormProps): React.JSX.Element => {
                      render={(inputType: AuthField, i: number) => (
                         <AuthFormInput
                            key={i}
-                           formModeType={type}
+                           authActionType={type}
                            inputType={inputType}
                            label={inputType}
                            value={formData[inputType] || ""}

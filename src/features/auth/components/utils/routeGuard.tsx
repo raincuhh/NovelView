@@ -1,5 +1,6 @@
 import { PropsWithChildren, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
 import { RouteTypes } from "@/shared/types";
 
 type RouteGuardProps = PropsWithChildren & { type?: RouteTypes };

@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
+
 import { RouteTypes, RouteListProps } from "@/shared/types";
 import("@/pages/landing");
 

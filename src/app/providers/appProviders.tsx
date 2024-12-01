@@ -3,10 +3,10 @@ import React, { PropsWithChildren } from "react";
 import pipe from "@/shared/lib/pipe";
 import withProvider from "@/shared/components/utils/withProvider";
 import TitlebarProvider from "./titlebarProvider";
-import TooltipProvider from "./tooltipProvider";
 import NotificationProvider from "./notificationProvider";
 import ModalProvider from "./modalProvider";
 import { AuthProvider } from "@/features/auth/providers";
+import TooltipProvider from "./tooltipProvider";
 
 type AppProvidersProps = PropsWithChildren<{}>;
 

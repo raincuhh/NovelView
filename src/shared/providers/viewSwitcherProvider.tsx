@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { ViewSwitcherContext } from "../hooks/useViewSwitcher";
 
 type ViewSwitcherProviderProps<T extends { [key: string]: string }> = {

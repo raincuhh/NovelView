@@ -2,6 +2,8 @@ import React, { PropsWithChildren } from "react";
 
 type TooltipProviderProps = PropsWithChildren & {};
 
-export default function TooltipProvider({ children }: TooltipProviderProps): JSX.Element {
+const TooltipProvider = ({ children }: TooltipProviderProps): React.JSX.Element => {
    return <>{children}</>;
-}
+};
+
+export default TooltipProvider;

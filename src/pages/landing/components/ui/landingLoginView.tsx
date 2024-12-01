@@ -1,10 +1,11 @@
-// import React from "react";
-// import AuthContent from "../../features/auth/components/ui/authContent";
+import React from "react";
 
-export default function LandingLoginView(): JSX.Element {
+const LandingLoginView = (): React.JSX.Element => {
    return (
       <>
-         <AuthContent type="login" />
+         <div>login</div>
       </>
    );
-}
+};
+
+export default LandingLoginView;

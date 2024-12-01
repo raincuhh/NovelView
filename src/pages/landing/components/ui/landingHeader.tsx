@@ -1,21 +1,27 @@
-import React, { useEffect, useState } from "react";
-// import packageJson from "../../../../../package.json";
-// import BrandLogoIcon from "../../../../shared/components/ui/icons/brandLogoIcon";
-// import { isTauri } from "@tauri-apps/api/core";
-// import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
+import React from "react";
 
-export default function LandingHeader(): JSX.Element {
+import packageJson from "../../../../../package.json";
+import { BrandLogoIcon } from "@/shared/components/icons";
+import { useMediaQuery } from "@/shared/hooks";
+
+type LandingHeaderProps = { includeLogo?: boolean };
+
+const LandingHeader = ({
+   includeLogo = false,
+}: LandingHeaderProps): React.JSX.Element => {
    const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
 
    return (
       <>
          <div className="flex flex-col items-center justify-center">
             <div className="flex flex-col items-center font-family-primary">
-               <BrandLogoIcon
-                  className="transition-colors duration-100 ease-in-out w-36 fill-interactive-accent
-                     hover:fill-interactive-accent-hover"
-               />
-               <header className="mt-0 sm:mt-2 text-fs-l font-weight-lg md:mt-4 sm:text-fs-xl sm:font-weight-xl">
+               {includeLogo && (
+                  <BrandLogoIcon
+                     className="transition-colors duration-100 ease-in-out w-36 fill-interactive-accent
+                        hover:fill-interactive-accent-hover"
+                  />
+               )}
+               <header className="mt-2 sm:mt-2 text-fs-2xl font-weight-lg md:mt-4 sm:text-fs-3xl sm:font-weight-xl">
                   NovelView
                </header>
                <p className="text-fs-xs font-weight-md sm:text-fs-sm dark:text-faint">
@@ -25,4 +31,6 @@ export default function LandingHeader(): JSX.Element {
          </div>
       </>
    );
-}
+};
+
+export default LandingHeader;

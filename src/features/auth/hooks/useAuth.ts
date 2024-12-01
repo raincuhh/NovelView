@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+
 import { UserRoles } from "@/shared/types";
 
 type AuthContextProps = {

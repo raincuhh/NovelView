@@ -1,6 +1,8 @@
 import React, { PropsWithChildren, useCallback, useMemo, useState } from "react";
-// import { AuthContext } from "../hooks/useAuth";
-// import { UserRoles } from "../../../shared/types/user";
+
+import { AuthContext } from "../hooks/useAuth";
+import { UserRoles } from "@/shared/types";
+
 // https://v2.tauri.app/plugin/store/
 
 type AuthProviderProps = PropsWithChildren;
@@ -9,7 +11,7 @@ export default function AuthProvider({ children }: AuthProviderProps): React.JSX
    const [accessToken, setAccessToken] = useState<string | null>(
       localStorage.getItem("ACCESS_TOKEN"),
    );
-   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+   const [isAuth, setIsAuth] = useState<boolean>(false);
    const [role, setRole] = useState<UserRoles>(UserRoles.user);
    const [loading, setLoading] = useState<boolean>(true);
 
@@ -31,7 +33,7 @@ export default function AuthProvider({ children }: AuthProviderProps): React.JSX
    };
 
    const logout = () => {
-      setIsAuthenticated(false);
+      setIsAuth(false);
       setAccessToken(null);
       setRole(UserRoles.user);
       localStorage.removeItem("ACCESS_TOKEN");
@@ -41,13 +43,13 @@ export default function AuthProvider({ children }: AuthProviderProps): React.JSX
    const contextValue = useMemo(
       () => ({
          accessToken,
-         isAuthenticated,
+         isAuth,
          role,
          loading,
          login,
          logout,
       }),
-      [accessToken, isAuthenticated, role, loading, login, logout],
+      [accessToken, isAuth, role, loading, login, logout],
    );
 
    return (

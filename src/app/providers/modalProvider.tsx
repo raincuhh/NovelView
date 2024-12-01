@@ -1,10 +1,11 @@
 import React, { PropsWithChildren, useMemo, useState } from "react";
-// import { ModalContext } from "../hooks/useModal";
-// import { Modal } from "../types/modal";
+
+import { ModalContext } from "@/shared/hooks/useModal";
+import { Modal } from "@/shared/types";
 
 type ModalProviderProps = PropsWithChildren;
 
-export default function ModalProvider({ children }: ModalProviderProps): JSX.Element {
+const ModalProvider = ({ children }: ModalProviderProps): React.JSX.Element => {
    const [modals, setModals] = useState<Modal[]>([]);
 
    const open = (modal: Modal) => setModals((old) => [...old, modal]);
@@ -32,4 +33,6 @@ export default function ModalProvider({ children }: ModalProviderProps): JSX.Ele
          <ModalContext.Provider value={contextValue}>{children}</ModalContext.Provider>
       </>
    );
-}
+};
+
+export default ModalProvider;

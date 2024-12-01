@@ -1,0 +1,1 @@
+import { supabaseInstance } from "./connections";

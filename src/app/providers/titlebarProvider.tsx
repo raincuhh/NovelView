@@ -1,12 +1,11 @@
 import React, { PropsWithChildren, useEffect } from "react";
-// import useMediaQuery from "../hooks/useMediaQuery";
 import { isTauri } from "@tauri-apps/api/core";
+
+import { useMediaQuery } from "@/shared/hooks";
 
 type TitlebarProviderProps = PropsWithChildren & {};
 
-export default function TitlebarProvider({
-   children,
-}: TitlebarProviderProps): JSX.Element {
+const TitlebarProvider = ({ children }: TitlebarProviderProps): React.JSX.Element => {
    const isMinWidthForTitlebar = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
    const isTitlebarAvailable = isTauri() || (isTauri() && isMinWidthForTitlebar);
 
@@ -34,4 +33,6 @@ export default function TitlebarProvider({
          {children}
       </>
    );
-}
+};
+
+export default TitlebarProvider;

@@ -1,6 +1,6 @@
-// import React, { ButtonHTMLAttributes, forwardRef } from "react";
-// import { Link } from "react-router-dom";
-// import { VariantProps, cva } from "class-variance-authority";
+import React, { ButtonHTMLAttributes, forwardRef } from "react";
+import { Link } from "react-router-dom";
+import { VariantProps, cva } from "class-variance-authority";
 
 const buttonVariants = cva(
    "flex items-center justify-center font-weight-md font-family-primary transition-colors duration-100 ease-in-out focus:outline-none disabled:pointer-events-none",
@@ -10,7 +10,7 @@ const buttonVariants = cva(
             base: "dark:bg-interactive-base dark:hover:bg-interactive-base-hover",
             accent: "bg-interactive-accent hover:bg-interactive-accent-hover",
             destructive: "bg",
-            ghost: "dark:bg-background-primary dark:sm:bg-background-primary-alt dark:hover:bg-background-primary-alt dark:sm:hover:bg-background-secondary",
+            ghost: "dark:bg-primary dark:sm:bg-primary-alt dark:hover:bg-primary-alt dark:sm:hover:bg-secondary",
             outline:
                "bg-transparent text-text-normal sm:hover:text-text-muted border-solid border-[1px] border-border-secondary",
             link: "underline text-text-accent sm:hover:text-text-accent-hover",

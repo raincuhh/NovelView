@@ -4,6 +4,7 @@ import path from "path";
 
 export default defineConfig({
    clearScreen: false,
+   publicDir: "public",
    resolve: {
       alias: {
          "@": path.resolve(__dirname, "./src"),

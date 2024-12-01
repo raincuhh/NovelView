@@ -4,7 +4,7 @@ import React from "react";
 export default function LandingRegisterView(): JSX.Element {
    return (
       <>
-         <AuthContent type="register" />
+         <div>register view</div>
       </>
    );
 }
