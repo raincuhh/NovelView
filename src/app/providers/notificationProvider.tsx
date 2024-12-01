@@ -2,8 +2,10 @@ import React, { PropsWithChildren } from "react";
 
 type NotificationProviderProps = PropsWithChildren;
 
-export default function NotificationProvider({
+const NotificationProvider = ({
    children,
-}: NotificationProviderProps): JSX.Element {
+}: NotificationProviderProps): React.JSX.Element => {
    return <>{children}</>;
-}
+};
+
+export default NotificationProvider;

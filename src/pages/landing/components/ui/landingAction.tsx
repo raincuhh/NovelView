@@ -15,24 +15,23 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
 
    const actionConfig: Record<
       LandingActionProps["type"],
-      { text: string; variant: "base" | "accent"; title: string; subTitle: string }
+      { text: string; variant: "base" | "accent"; title: string; desc: string }
    > = {
       register: {
          text: "register",
          variant: "accent",
          title: "Create Your Account",
-         subTitle:
-            "Sign up to unlock premium features, and sync your library across devices.",
+         desc: "Sign up to unlock premium features and sync your library.",
       },
       login: {
          text: "login",
          variant: "base",
          title: "Welcome Back",
-         subTitle: "Log in to access your saved libraries and preferences.",
+         desc: "Log in to access your saved libraries.",
       },
    };
 
-   const { text, variant, title, subTitle } = actionConfig[type];
+   const { text, variant, title, desc } = actionConfig[type];
 
    return (
       <>
@@ -44,7 +43,7 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
                <>
                   <div className="flex flex-col">
                      <header className="text-fs-lg font-weight-lg">{title}</header>
-                     <p className="text-muted text-fs-md font-weight-md">{subTitle}</p>
+                     <p className="text-muted text-fs-md font-weight-md">{desc}</p>
                   </div>
                </>
             )}
@@ -52,8 +51,7 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
                size={isSm ? "md" : "lg"}
                variant={isSm ? variant : "ghost"}
                onClick={() => navigate(view)}
-               className="sm:!justify-center flex items-center w-full justify-between sm:w-28 sm:h-8
-                  sm:bg-modifier-gradient-1"
+               className="sm:!justify-center flex items-center w-full justify-between sm:w-28 sm:h-8"
             >
                <div className="flex flex-row gap-2 items-center">
                   {!isSm && (
@@ -73,7 +71,6 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
 
                   {uppercaseify(text)}
                </div>
-
                {!isSm && <>{">"}</>}
             </Button>
          </div>
