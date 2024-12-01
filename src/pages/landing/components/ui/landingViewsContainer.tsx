@@ -47,36 +47,35 @@ const LandingViewsContainer = (): React.JSX.Element => {
                      <LandingHomeView />
                   </motion.div>
                )}
-               <>
-                  {currentView === LandingPageViews.register && (
-                     <motion.div
-                        key={LandingPageViews.register}
-                        custom={direction}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
-                        variants={variants}
-                        transition={{ duration: 0.3 }}
-                        className="inset-0 relative w-full h-full"
-                     >
-                        <LandingRegisterView />
-                     </motion.div>
-                  )}
-                  {currentView === LandingPageViews.login && (
-                     <motion.div
-                        key={LandingPageViews.login}
-                        custom={direction}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
-                        variants={variants}
-                        transition={{ duration: 0.3 }}
-                        className="inset-0 relative w-full h-full"
-                     >
-                        <LandingLoginView />
-                     </motion.div>
-                  )}
-               </>
+
+               {currentView === LandingPageViews.register && (
+                  <motion.div
+                     key={LandingPageViews.register}
+                     custom={direction}
+                     initial="enter"
+                     animate="center"
+                     exit="exit"
+                     variants={variants}
+                     transition={{ duration: 0.3 }}
+                     className={`inset-0 relative w-full h-full ${isSm ? "pt-12" : ""}`}
+                  >
+                     <LandingRegisterView />
+                  </motion.div>
+               )}
+               {currentView === LandingPageViews.login && (
+                  <motion.div
+                     key={LandingPageViews.login}
+                     custom={direction}
+                     initial="enter"
+                     animate="center"
+                     exit="exit"
+                     variants={variants}
+                     transition={{ duration: 0.3 }}
+                     className={`inset-0 relative w-full h-full ${isSm ? "pt-12" : ""}`}
+                  >
+                     <LandingLoginView />
+                  </motion.div>
+               )}
             </AnimatePresence>
          </div>
       </>

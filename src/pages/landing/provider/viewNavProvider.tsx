@@ -1,14 +1,65 @@
-// import React, { useMemo, useState, forwardRef, PropsWithChildren } from "react";
-// // import { AuthNavStateContext } from "../hooks/useAuthNavState";
-// // import { Link } from "react-router-dom";
-// // import { uppercaseify } from "../../../shared/lib/utils";
-// // import useMediaQuery from "../../../shared/hooks/useMediaQuery";
-// // import { isTauri } from "@tauri-apps/api/core";
+import React, { useMemo, useState, forwardRef, PropsWithChildren } from "react";
+import { ViewNavContext } from "../hooks/useViewNav";
+import { Link } from "react-router-dom";
+import { uppercaseify } from "@/shared/lib";
+import { useMediaQuery } from "@/shared/hooks";
+import { isTauri } from "@tauri-apps/api/core";
+import { useViewSwitcher } from "@/shared/hooks";
+import { LandingPageViews } from "../types";
 
-// type AuthNavStateProviderProps = PropsWithChildren & { id?: string };
+type ViewNavProviderProps = PropsWithChildren & { id?: string };
 
-// const AuthNavStateProvider = forwardRef<HTMLDivElement, AuthNavStateProviderProps>(
-//    ({ children, id }: AuthNavStateProviderProps, ref) => {
+const ViewNavProvider = forwardRef<HTMLDivElement, ViewNavProviderProps>(
+   ({ children, id }: ViewNavProviderProps, ref) => {
+      const { currentView, navigate } = useViewSwitcher<LandingPageViews>();
+
+      const renderNav = () => {
+         return (
+            <nav
+               ref={ref}
+               id={id}
+               className="dark:bg-primary dark:sm:bg-primary-alt z-layer-menu"
+            >
+               <div onClick={() => navigate(LandingPageViews.home)}>
+                  <div className="py-4">back</div>
+               </div>
+               {/* {currentView === LandingPageViews.register && (
+                  <>
+                     <div>
+                        <div className="dark:bg-primary dark:sm:bg-primary-alt">test</div>
+                     </div>
+                  </>
+               )} */}
+               {/* {currentView === LandingPageViews.login && (
+                  <>
+                     <div></div>
+                  </>
+               )} */}
+            </nav>
+         );
+      };
+
+      const contextValue = useMemo(
+         () => ({
+            nav: renderNav(),
+         }),
+         [currentView],
+      );
+
+      return (
+         <>
+            <ViewNavContext.Provider value={contextValue}>
+               {children}
+            </ViewNavContext.Provider>
+         </>
+      );
+   },
+);
+
+export default ViewNavProvider;
+
+// const AuthNavStateProvider = forwardRef<HTMLDivElement, ViewNavProps>(
+//    ({ children, id }: ViewNavProps, ref) => {
 //       const [title, setTitle] = useState<string>("back");
 //       const [backLocation, setBackLocation] = useState<string>("/");
 

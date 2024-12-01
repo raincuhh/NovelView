@@ -7,7 +7,7 @@ import { LandingPageViews } from "../../types";
 import { useViewSwitcher } from "@/shared/hooks";
 import { useMediaQuery } from "@/shared/hooks";
 
-type LandingActionProps = { type: "login" | "register"; view: LandingPageViews };
+type LandingActionProps = { type: "login" | "register"; view?: LandingPageViews };
 
 const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element => {
    const { navigate } = useViewSwitcher();
@@ -15,7 +15,7 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
 
    const actionConfig: Record<
       LandingActionProps["type"],
-      { text: string; variant: "ghost" | "accent"; title: string; subTitle: string }
+      { text: string; variant: "base" | "accent"; title: string; subTitle: string }
    > = {
       register: {
          text: "register",
@@ -25,7 +25,7 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
       },
       login: {
          text: "login",
-         variant: "ghost",
+         variant: "base",
          title: "test 2",
          subTitle: "lorem ipsum 2",
       },
@@ -43,7 +43,9 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
                <>
                   <div className="flex flex-col">
                      <div className="text-fs-lg font-weight-lg">{title}</div>
-                     <div className="text-muted">{subTitle}</div>
+                     <div className="text-muted text-fs-md font-weight-md">
+                        {subTitle}
+                     </div>
                   </div>
                </>
             )}
@@ -51,7 +53,8 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
                size={isSm ? "md" : "lg"}
                variant={isSm ? variant : "ghost"}
                onClick={() => navigate(view)}
-               className="sm:!justify-center flex items-center w-full justify-between text-text-normal sm:w-48"
+               className="sm:!justify-center flex items-center w-full justify-between text-text-normal sm:w-36
+                  sm:h-10"
             >
                <div className="flex flex-row gap-2 items-center">
                   {!isSm && (

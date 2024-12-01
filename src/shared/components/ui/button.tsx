@@ -7,9 +7,10 @@ const buttonVariants = cva(
    {
       variants: {
          variant: {
-            base: "dark:bg-interactive-base dark:hover:bg-interactive-base-hover",
-            accent: "bg-interactive-accent hover:bg-interactive-accent-hover",
-            destructive: "bg",
+            base: "dark:bg-interactive-base dark:hover:bg-interactive-base-hover sm:shadow-input-shadow-2",
+            accent:
+               "bg-interactive-accent hover:bg-interactive-accent-hover sm:shadow-input-shadow-2",
+            destructive: " sm:shadow-input-shadow-2",
             ghost: "dark:bg-primary dark:sm:bg-primary-alt dark:hover:bg-primary-alt dark:sm:hover:bg-secondary",
             outline:
                "bg-transparent text-text-normal sm:hover:text-text-muted border-solid border-[1px] border-border-secondary",
