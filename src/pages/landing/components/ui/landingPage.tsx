@@ -1,5 +1,6 @@
 import React from "react";
 import { isTauri } from "@tauri-apps/api/core";
+
 import ViewNavProvider from "../../provider/viewNavProvider";
 import { CenteredLayout } from "@/shared/components/layout";
 import { useMediaQuery } from "@/shared/hooks";
@@ -20,7 +21,7 @@ const LandingPage = (): React.JSX.Element => {
                   type={LandingPageViews}
                >
                   <ViewNavProvider>
-                     <div className="relative flex flex-col py-16 sm:mx-auto sm:w-full max-w-2xl">
+                     <div className="relative flex flex-col sm:py-16 pb-16 sm:mx-auto sm:w-full max-w-2xl">
                         <LandingViewsContainer />
                      </div>
                   </ViewNavProvider>

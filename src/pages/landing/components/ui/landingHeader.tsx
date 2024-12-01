@@ -21,10 +21,10 @@ const LandingHeader = ({
                         hover:fill-interactive-accent-hover"
                   />
                )}
-               <header className="mt-2 sm:mt-2 text-fs-2xl font-weight-lg md:mt-4 sm:text-fs-3xl sm:font-weight-xl">
+               <header className="mt-2 sm:mt-2 text-fs-3xl font-weight-lg md:mt-4 sm:text-fs-3xl sm:font-weight-xl">
                   NovelView
                </header>
-               <p className="text-fs-xs font-weight-md sm:text-fs-sm dark:text-faint">
+               <p className="text-fs-sm sm:text-fs-md font-weight-md dark:text-faint">
                   v{packageJson.version}
                </p>
             </div>

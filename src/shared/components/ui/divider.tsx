@@ -15,7 +15,7 @@ const Divider = forwardRef<HTMLDivElement, DividerProps>(
                {text && (
                   <div
                      className={`${textClassName || ""} bg-primary text-text-normal absolute left-[50%] top-0
-                     translate-x-[-50%] translate-y-[-50%] px-2 font-family-primary font-weight-md`}
+                     translate-x-[-50%] translate-y-[-50%] px-2 font-weight-md`}
                   >
                      {text}
                   </div>

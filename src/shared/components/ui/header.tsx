@@ -13,7 +13,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
    ) => {
       return (
          <>
-            <div ref={ref} className={`flex flex-col font-family-primary ${className}`}>
+            <div ref={ref} className={`flex flex-col ${className}`}>
                <header className={` ${headerClassName}`}></header>
             </div>
          </>

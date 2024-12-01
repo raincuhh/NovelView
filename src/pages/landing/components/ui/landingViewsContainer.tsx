@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { useViewSwitcher } from "@/shared/hooks";
@@ -12,6 +12,16 @@ import { useMediaQuery } from "@/shared/hooks";
 const LandingViewsContainer = (): React.JSX.Element => {
    const { currentView, direction } = useViewSwitcher<LandingPageViews>();
    const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
+   const [seenLanding, setSeenLanding] = useState<boolean>(false);
+
+   useEffect(() => {
+      const hasSeenLanding = localStorage.getItem("SEEN_LANDING");
+      if (hasSeenLanding) {
+         setSeenLanding(true);
+      } else {
+         localStorage.setItem("SEEN_LANDING", "true");
+      }
+   }, []);
 
    const variants = {
       enter: (direction: number) => ({
@@ -37,12 +47,12 @@ const LandingViewsContainer = (): React.JSX.Element => {
                   <motion.div
                      key={LandingPageViews.home}
                      custom={direction}
-                     initial="center"
+                     initial="enter"
                      animate="center"
                      exit="exit"
                      variants={variants}
                      transition={{ duration: 0.3 }}
-                     className={`inset-0 relative w-full h-full ${isSm ? "pt-12" : ""}`}
+                     className={`inset-0 relative w-full h-full ${isSm ? "pt-8" : ""}`}
                   >
                      <LandingHomeView />
                   </motion.div>
@@ -57,7 +67,7 @@ const LandingViewsContainer = (): React.JSX.Element => {
                      exit="exit"
                      variants={variants}
                      transition={{ duration: 0.3 }}
-                     className={`inset-0 relative w-full h-full ${isSm ? "pt-12" : ""}`}
+                     className={`inset-0 relative w-full h-full ${isSm ? "pt-8" : ""}`}
                   >
                      <LandingRegisterView />
                   </motion.div>
@@ -71,7 +81,7 @@ const LandingViewsContainer = (): React.JSX.Element => {
                      exit="exit"
                      variants={variants}
                      transition={{ duration: 0.3 }}
-                     className={`inset-0 relative w-full h-full ${isSm ? "pt-12" : ""}`}
+                     className={`inset-0 relative w-full h-full ${isSm ? "pt-8" : ""}`}
                   >
                      <LandingLoginView />
                   </motion.div>

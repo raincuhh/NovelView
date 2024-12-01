@@ -119,6 +119,9 @@ module.exports = {
             "modifier-error-hover": "var(--background-modifier-error-hover)",
             "modifier-success": "var(--background-modifier-success)",
          },
+         backgroundImage: {
+            "modifier-gradient-1": "var(--background-modifier-gradient-1)",
+         },
          screens: {
             // "media-min-h-650": { raw: "(min-height: 650px)" },
             // "media-min-h-668": { raw: "(min-height: 668px)" },
@@ -227,7 +230,7 @@ module.exports = {
                "--color-accent-1":
                   "hsl(calc(var(--accent-h) - 3), calc(var(--accent-s) * 1.07), calc(var(--accent-l) * 1.14))",
                "--color-accent-2":
-                  "hsl(calc(var(--accent-h) - 5), calc(var(--accent-s) * 1.15), calc(var(--accent-l) * 1.25))",
+                  "hsl(calc(var(--accent-h) - 5), calc(var(--accent-s) * 1.20), calc(var(--accent-l) * 1.25))",
 
                "--interactive-base": "var(--base-25)",
                "--interactive-base-hover": "var(--base-30)",
@@ -241,6 +244,8 @@ module.exports = {
                "--background-primary-alt": "var(--base-10)",
                "--background-secondary": "var(--base-15)",
                "--background-secondary-alt": "var(--base-20)",
+               "--background-modifier-gradient-1":
+                  "linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0))",
                "--background-modifier-primary-form-field": "var(--base-10)",
                "--background-modifier-secondary-form-field": "var(--base-25)",
                "--background-modifier-border-width": "var(--border-width)",
@@ -321,7 +326,7 @@ module.exports = {
 
                //radius
                "--radius-sm": "3px",
-               "--radius-md": "6px",
+               "--radius-md": "7px",
                "--radius-lg": "11px",
                "--radius-xl": "15px",
                "--radius-full": "6.66rem",

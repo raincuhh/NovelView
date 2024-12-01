@@ -20,14 +20,15 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
       register: {
          text: "register",
          variant: "accent",
-         title: "test",
-         subTitle: "lorem ipsum",
+         title: "Create Your Account",
+         subTitle:
+            "Sign up to unlock premium features, and sync your library across devices.",
       },
       login: {
          text: "login",
          variant: "base",
-         title: "test 2",
-         subTitle: "lorem ipsum 2",
+         title: "Welcome Back",
+         subTitle: "Log in to access your saved libraries and preferences.",
       },
    };
 
@@ -42,10 +43,8 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
             {isSm && (
                <>
                   <div className="flex flex-col">
-                     <div className="text-fs-lg font-weight-lg">{title}</div>
-                     <div className="text-muted text-fs-md font-weight-md">
-                        {subTitle}
-                     </div>
+                     <header className="text-fs-lg font-weight-lg">{title}</header>
+                     <p className="text-muted text-fs-md font-weight-md">{subTitle}</p>
                   </div>
                </>
             )}
@@ -53,8 +52,8 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
                size={isSm ? "md" : "lg"}
                variant={isSm ? variant : "ghost"}
                onClick={() => navigate(view)}
-               className="sm:!justify-center flex items-center w-full justify-between text-text-normal sm:w-36
-                  sm:h-10"
+               className="sm:!justify-center flex items-center w-full justify-between sm:w-28 sm:h-8
+                  sm:bg-modifier-gradient-1"
             >
                <div className="flex flex-row gap-2 items-center">
                   {!isSm && (

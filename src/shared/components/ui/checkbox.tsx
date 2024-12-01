@@ -30,9 +30,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
                         <i className="absolute bx bx-check text-text-normal"></i>
                      </>
                   )}
-                  <span className="font-family-primary text-fs-md font-weight-md">
-                     {text}
-                  </span>
+                  <span className="text-fs-md font-weight-md">{text}</span>
                </label>
             </div>
          </>

@@ -1,48 +1,50 @@
 import React from "react";
-// import { Link } from "react-router-dom";
-// import BrandLogoIcon from "../../../../shared/components/ui/icons/brandLogoIcon";
-// import useMediaQuery from "../../../../shared/hooks/useMediaQuery";
-// import { AuthModeTypes } from "../../lib/types";
-// import { isTauri } from "@tauri-apps/api/core";
+import { Link } from "react-router-dom";
+import { BrandLogoIcon } from "@/shared/components/icons";
+import { useMediaQuery } from "@/shared/hooks";
+import { AuthActions } from "../../types";
+import { isTauri } from "@tauri-apps/api/core";
 
-type AuthHeaderProps = { type: AuthModeTypes };
+type AuthHeaderProps = { type: AuthActions };
 
-export default function AuthHeader({ type }: AuthHeaderProps): JSX.Element {
-   const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
-   const titles: Record<AuthModeTypes, string> = {
-      register: "Create an account",
-      login: "Login to your account",
+const AuthHeader = ({ type }: AuthHeaderProps): React.JSX.Element => {
+   const actionConfig: Record<AuthActions, { title: string; desc: string }> = {
+      register: {
+         title: "Create an Account",
+         desc: "Sign up for NovelView to unlock premium features and sync your library.",
+      },
+      login: {
+         title: "Login to Your Account",
+         desc: "Access your saved libraries and enjoy seamless reading across devices.",
+      },
+      forgotPassword: {
+         title: "Forgot Your Password?",
+         desc: "Enter your email to receive instructions for resetting your password.",
+      },
+      forgotEmail: {
+         title: "Trouble Finding Your Email?",
+         desc: "We'll help you locate the email associated with your NovelView account.",
+      },
+      resetPassword: {
+         title: "Reset Your Password",
+         desc: "Create a new password to regain access to your NovelView account.",
+      },
+      verifyEmail: {
+         title: "Verify Your Email Address",
+         desc: "Check your inbox for a verification link to activate your account.",
+      },
    };
-   const descs: Record<AuthModeTypes, string> = {
-      register:
-         "Create a NovelView account to access premium features like syncing your library and enhancing your reading experience.",
-      login: "Welcome back! Log in to continue exploring in your libraries and enjoy seamless reading across devices.",
-   };
-   const title = titles[type];
-   const desc = descs[type];
+
+   const { title, desc } = actionConfig[type];
 
    return (
       <>
-         <header className="flex items-center justify-center h-min max-h-min font-family-primary">
-            <div className="flex flex-col gap-4">
-               <header className="flex flex-col items-center">
-                  {!isTauri() ||
-                     (!isSm && (
-                        <>
-                           <div className="cursor-pointer">
-                              <Link to="/">
-                                 <BrandLogoIcon className="w-40 transition-colors duration-100 ease-in-out fill-interactive-accent hover:fill-" />
-                              </Link>
-                           </div>
-                        </>
-                     ))}
-                  <h1 className="mt-2 text-fs-xl font-weight-xl sm:text-fs-2xl sm:font-weight-xl">
-                     {title}
-                  </h1>
-               </header>
-               <p className="text-muted text-fs-md font-weight-md">{desc}</p>
-            </div>
-         </header>
+         <div className="flex flex-col">
+            <header className="text-fs-2xl sm:text-fs-lg font-weight-lg">{title}</header>
+            <p className="text-muted text-fs-md font-weight-md">{desc}</p>
+         </div>
       </>
    );
-}
+};
+
+export default AuthHeader;

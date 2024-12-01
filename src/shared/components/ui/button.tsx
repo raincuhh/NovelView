@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { VariantProps, cva } from "class-variance-authority";
 
 const buttonVariants = cva(
-   "flex items-center justify-center font-weight-md font-family-primary transition-colors duration-100 ease-in-out focus:outline-none disabled:pointer-events-none",
+   "flex items-center justify-center font-weight-md transition-colors duration-100 ease-in-out focus:outline-none disabled:pointer-events-none",
    {
       variants: {
          variant: {

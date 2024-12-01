@@ -76,10 +76,7 @@ const AuthFormInput = ({
                      onChange={(e: any) => validateInput(e.target.value)}
                      className={`w-full ${error ? "" : ""}`}
                   />
-                  <div
-                     className="absolute top-0 right-0 flex items-center h-full cursor-pointer mr-[2px]
-                        pointer-events-none"
-                  >
+                  <div className="absolute top-0 right-0 flex items-center h-full cursor-text mr-[2px] pointer-events-none">
                      <div
                         className="p-2 dark:bg-background-modifier-primary-form-field
                            dark:sm:bg-background-modifier-secondary-form-field"

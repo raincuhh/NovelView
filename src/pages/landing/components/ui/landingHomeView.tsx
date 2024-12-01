@@ -10,7 +10,7 @@ const LandingHomeView = (): React.JSX.Element => {
 
    return (
       <>
-         <div className="flex flex-col w-full gap-16 sm:gap-20 items-center absolute">
+         <div className="flex flex-col w-full gap-16 sm:gap-20 items-center absolute py-16 sm:py-0">
             {isSm ? null : <LandingHeader includeLogo={true} />}
             <LandingActions />
          </div>
