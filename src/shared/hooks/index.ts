@@ -5,3 +5,4 @@ export { default as useModal } from "./useModal";
 export { default as useTheme } from "./useTheme";
 export { default as useToggleState } from "./useToggleState";
 export { default as useViewSwitcher } from "./useViewSwitcher";
+export { default as useEnvironment } from "./useEnvironment";

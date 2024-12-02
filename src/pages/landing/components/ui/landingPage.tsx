@@ -1,5 +1,4 @@
 import React from "react";
-
 import ViewNavProvider from "../../provider/viewNavProvider";
 import { ViewSwitcherProvider } from "@/shared/providers";
 import LandingViewsContainer from "./landingViewsContainer";

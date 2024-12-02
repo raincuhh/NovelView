@@ -1,27 +1,67 @@
-import React from "react";
+import React, { forwardRef } from "react";
+import { TitlebarButtonTypes } from "@/shared/types";
 
 type TitlebarButtonProps = {
-   buttonType: string;
+   type: TitlebarButtonTypes;
 };
+
+type TitlebarButtonStyles = Record<
+   TitlebarButtonTypes,
+   { hover: string; element: React.JSX.Element }
+>;
+
+const titlebarButtonTypes: TitlebarButtonStyles = {
+   minimize: {
+      hover: "",
+      element: <div>O</div>,
+   },
+   maximize: {
+      hover: "",
+      element: <div>W</div>,
+   },
+   close: {
+      hover: "",
+      element: <div>X</div>,
+   },
+};
+
+const TitlebarButton = forwardRef<HTMLDivElement, TitlebarButtonProps>(
+   ({ type }: TitlebarButtonProps, ref) => {
+      const { hover, element } = titlebarButtonTypes[type];
+
+      return (
+         <div
+            ref={ref}
+            className={`h-8 w-8 flex items-center justify-center ${hover}`}
+            role="button"
+            aria-label={type}
+         >
+            {element}
+         </div>
+      );
+   },
+);
+
+export default TitlebarButton;
 
 // const TitleBarButton = React.forwardRef<HTMLDivElement, TitlebarButtonProps>(
 //    ({ buttonType }, ref) => {
-//       const buttonStyles = {
-//          maximize: {
-//             hover: "bg-base-40",
-//             icon: "bx bx-square",
-//          },
-//          minimize: {
-//             hover: "bg-base-40",
-//             icon: "bx bx-minus text-fs-sm",
-//          },
-//          close: {
-//             hover: "bg-red-500",
-//             icon: "bx bx-x text-fs-md",
-//          },
-//       };
+// const buttonStyles = {
+//    maximize: {
+//       hover: "bg-base-40",
+//       icon: "bx bx-square",
+//    },
+//    minimize: {
+//       hover: "bg-base-40",
+//       icon: "bx bx-minus text-fs-sm",
+//    },
+//    close: {
+//       hover: "bg-red-500",
+//       icon: "bx bx-x text-fs-md",
+//    },
+// };
 
-//       // const { hover, icon } = buttonStyles[buttonType];
+// const { hover, icon } = buttonStyles[buttonType];
 
 //       return (
 //          <div

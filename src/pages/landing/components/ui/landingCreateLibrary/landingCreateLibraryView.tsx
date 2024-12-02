@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import LandingViewsHeader from "../landingViewsHeader";
 import ViewNavProviderRoot from "../../utils/viewNavProviderRoot";
 import useViewNav from "@/pages/landing/hooks/useViewNav";
@@ -8,7 +7,6 @@ const LandingCreateLibraryView = (): React.JSX.Element => {
    const { setNavTitle } = useViewNav();
 
    useEffect(() => {
-      console.log("setNavTitle: Create Library");
       setNavTitle("Create Library");
    }, [setNavTitle]);
 

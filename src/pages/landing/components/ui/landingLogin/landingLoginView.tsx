@@ -8,7 +8,6 @@ const LandingLoginView = (): React.JSX.Element => {
    const { setNavTitle } = useViewNav();
 
    useEffect(() => {
-      console.log("setNavTitle: Login");
       setNavTitle("Login");
    }, [setNavTitle]);
 
