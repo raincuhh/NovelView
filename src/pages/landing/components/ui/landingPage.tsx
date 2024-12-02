@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+
 import ViewNavProvider from "../../provider/viewNavProvider";
 import { ViewSwitcherProvider } from "@/shared/providers";
 import LandingViewsContainer from "./landingViewsContainer";
 import { LandingPageViews, LandingPageType } from "../../types";
+import { useEnvironment } from "@/shared/hooks";
 
 const LandingPage = (): React.JSX.Element => {
+   const { setTitlebarButtons } = useEnvironment();
+
+   useEffect(() => {
+      setTitlebarButtons(["close", "minimize"]);
+   }, []);
+
    return (
       <>
          <div className="w-full min-h-full justify-start flex flex-col">

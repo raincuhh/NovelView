@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useAuth } from "@/features/auth";
 import LandingHomeAction from "./landingHomeAction";
 import { LandingPageViews } from "@/pages/landing/types";
 import LandingHomeHeader from "./landingHomeHeader";
@@ -7,6 +7,7 @@ import { useMediaQuery } from "@/shared/hooks";
 
 const LandingHomeView = (): React.JSX.Element => {
    const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
+   const { isAuth } = useAuth();
 
    return (
       <>
@@ -17,8 +18,15 @@ const LandingHomeView = (): React.JSX.Element => {
                   className="flex flex-col w-full border-solid border-t-[1px] sm:border-t-0
                      border-modifier-border-color"
                >
-                  <LandingHomeAction view={LandingPageViews.register} type="register" />
-                  <LandingHomeAction view={LandingPageViews.login} type="login" />
+                  {!isAuth && (
+                     <>
+                        <LandingHomeAction
+                           view={LandingPageViews.register}
+                           type="register"
+                        />
+                        <LandingHomeAction view={LandingPageViews.login} type="login" />
+                     </>
+                  )}
                   <LandingHomeAction
                      view={LandingPageViews.createLibrary}
                      type="createLibrary"

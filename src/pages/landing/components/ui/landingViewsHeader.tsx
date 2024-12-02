@@ -1,8 +1,11 @@
+import { useEnvironment } from "@/shared/hooks";
 import React from "react";
 
 type LandingViewsHeaderProps = { type: "login" | "register" | "createLibrary" };
 
 const LandingViewsHeader = ({ type }: LandingViewsHeaderProps): React.JSX.Element => {
+   const { isMobile } = useEnvironment();
+
    const actionConfig: Record<
       LandingViewsHeaderProps["type"],
       { title: string; desc: string }
@@ -25,9 +28,9 @@ const LandingViewsHeader = ({ type }: LandingViewsHeaderProps): React.JSX.Elemen
 
    return (
       <>
-         <div className="flex flex-col">
-            <header className="text-fs-2xl sm:text-fs-lg font-weight-lg">{title}</header>
-            <p className="text-muted text-fs-md font-weight-md">{desc}</p>
+         <div className="flex flex-col pt-8 sm:pt-0 pb-2">
+            <header className="text-fs-2xl sm:text-fs-xl font-weight-xl">{title}</header>
+            {isMobile && <p className="text-muted text-fs-md font-weight-md">{desc}</p>}
          </div>
       </>
    );

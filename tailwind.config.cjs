@@ -5,13 +5,13 @@ module.exports = {
    content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
    safelist: [
       //titlebar
-      "bg-destructive-default",
-      "bg-accent-primary",
-      "hover:bg-red-500",
-      "hover:bg-base-40",
-      "text-sm",
-      "text-md",
-      "text-lg",
+      // "bg-destructive-default",
+      // "bg-accent-primary",
+      // "hover:bg-red-500",
+      // "hover:bg-base-40",
+      // "text-sm",
+      // "text-md",
+      // "text-lg",
    ],
    theme: {
       colors: {
@@ -293,13 +293,11 @@ module.exports = {
                "--tag-border-color": "var(--text-accent)",
                "--tag-border-hover": "var(--text-accent-hover)",
 
-               "--titlebar-background": "var(--background-primary)",
-               "--titlebar-background-focused": "var(--background-primary-alt)",
-               "--titlebar-quit-background": "var(--titlebar-background)",
+               "--titlebar-background": "var(--base-35)",
+               "--titlebar-background-focused": "var(--base-60)",
+               "--titlebar-quit-background": "var(--destructive-600)",
                "--titlebar-quit-background-focused": "var(--destructive-600)",
-               "--titlebar-icon-color": "var(--text-muted)",
-               "--titlebar-icon-color-focused": "var(--text-normal)",
-               "--titlebar-icon-weight": "var(--font-weight-lg)",
+               "--titlebar-icon-color": "var(--text-normal)",
 
                // fontfamilies
                "--font-primary": '"Satoshi-Variable", sans-serif',

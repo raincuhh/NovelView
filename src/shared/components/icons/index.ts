@@ -7,3 +7,6 @@ export { default as PlusIcon } from "./plusIcon";
 export { default as ChevronRightIcon } from "./chevronRight";
 export { default as UserIcon } from "./userIcon";
 export { default as UserPlusIcon } from "./userPlusIcon";
+export { default as XIcon } from "./xIcon";
+export { default as MinusIcon } from "./minusIcon";
+export { default as RectangleIcon } from "./rectangleIcon";

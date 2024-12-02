@@ -17,6 +17,7 @@ const buttonVariants = cva(
             link: "underline text-text-accent sm:hover:text-text-accent-hover cursor-pointer",
          },
          size: {
+            desktop: "sm:min-w-28 sm:max-w-36 sm:h-8",
             sm: "py-1 px-2 text-fs-sm",
             md: "py-2 px-4 text-fs-md",
             lg: "py-3 px-6 text-fs-lg",

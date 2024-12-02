@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import { TitlebarButtonTypes } from "../types";
 
 type EnvironmentContextProps = {
    isTauri: boolean;
@@ -8,6 +9,7 @@ type EnvironmentContextProps = {
    isProd: boolean;
    isDev: boolean;
    osInfo: string;
+   setTitlebarButtons: React.Dispatch<React.SetStateAction<TitlebarButtonTypes[]>>;
 };
 
 export const EnvironmentContext = createContext<EnvironmentContextProps | undefined>(

@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from "react";
+
 import pipe from "@/shared/lib/pipe";
 import withProvider from "@/shared/components/utils/withProvider";
 import NotificationProvider from "./notificationProvider";

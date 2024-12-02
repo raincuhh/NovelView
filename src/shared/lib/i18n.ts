@@ -1,5 +1,6 @@
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
+
 import enJSON from "../assets/locales/en.json";
 import noJSON from "../assets/locales/no.json";
 

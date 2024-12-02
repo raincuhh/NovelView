@@ -1,8 +1,9 @@
 import React, { PropsWithChildren, useEffect, useMemo, useState } from "react";
-import { EnvironmentContext } from "@/shared/hooks/useEnvironment";
 import { isTauri as packageIsTauri } from "@tauri-apps/api/core";
 import { Capacitor } from "@capacitor/core";
 import MobileDetect from "mobile-detect";
+
+import { EnvironmentContext } from "@/shared/hooks/useEnvironment";
 import { useMediaQuery } from "@/shared/hooks";
 import { TitlebarButtonTypes } from "@/shared/types";
 import { TitlebarButton } from "@/shared/components/ui";
@@ -53,14 +54,14 @@ const EnvironmentProvider = ({
    }, [isSm]);
 
    useEffect(() => {
-      console.log("<======= EnvInfo =========>");
-      console.log("tauri: ", isTauri);
-      console.log("titlebar: ", showTitlebar);
-      console.log("capacitor: ", isCapacitor);
-      console.log("mobile: ", isMobile);
-      console.log("prod: ", isProd);
-      console.log("dev: ", isDev);
-      console.log("osinfo: ", osInfo);
+      // console.log("<======= EnvInfo =========>");
+      // console.log("tauri: ", isTauri);
+      // console.log("titlebar: ", showTitlebar);
+      // console.log("capacitor: ", isCapacitor);
+      // console.log("mobile: ", isMobile);
+      // console.log("prod: ", isProd);
+      // console.log("dev: ", isDev);
+      // console.log("osinfo: ", osInfo);
    }, [isTauri, showTitlebar, isCapacitor, isMobile, isProd, isDev, osInfo]);
 
    const contextValue = useMemo(
@@ -72,7 +73,6 @@ const EnvironmentProvider = ({
          isProd,
          isDev,
          osInfo,
-         titlebarButtons,
          setTitlebarButtons,
       }),
       [
@@ -83,7 +83,6 @@ const EnvironmentProvider = ({
          isProd,
          isDev,
          osInfo,
-         titlebarButtons,
          setTitlebarButtons,
       ],
    );
@@ -98,7 +97,7 @@ const EnvironmentProvider = ({
                      data-tauri-drag-region
                   >
                      <div className="text-normal">
-                        <div className="absolute top-0 right-0 flex flex-row-reverse w-min">
+                        <div className="absolute top-0 right-0 flex flex-row w-min">
                            {titlebarButtons.includes("minimize") && (
                               <TitlebarButton type="minimize" />
                            )}

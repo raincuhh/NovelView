@@ -29,13 +29,13 @@ const LandingHomeAction = ({ type, view }: LandingHomeActionProps): React.JSX.El
          text: "register",
          variant: "accent",
          title: "Create Your Account",
-         desc: "Sign up to unlock premium features and sync your library.",
+         desc: "Sign up to unlock premium features and syncing.",
       },
       login: {
          text: "login",
          variant: "base",
          title: "Welcome Back",
-         desc: "Log in to access your saved libraries.",
+         desc: "Log in to access your synced libraries.",
       },
       createLibrary: {
          text: "create library",
@@ -63,10 +63,10 @@ const LandingHomeAction = ({ type, view }: LandingHomeActionProps): React.JSX.El
                </>
             )}
             <Button
-               size={isSm ? "md" : "lg"}
+               size={isSm ? "desktop" : "lg"}
                variant={isSm ? variant : "ghost"}
                onClick={() => navigate(view)}
-               className="sm:!justify-center flex items-center w-full justify-between sm:min-w-28 sm:max-w-36 sm:h-8"
+               className="sm:!justify-center flex items-center w-full justify-between"
             >
                <div className="flex flex-row gap-2 items-center">
                   {!isSm && (

@@ -32,7 +32,7 @@ const ViewNavProvider = forwardRef<HTMLDivElement, ViewNavProviderProps>(
                      className="py-4 sm:pb-2 sm:py-0 border-solid sm:border-b-0 border-b-[1px]
                         border-modifier-border-color text-fs-lg"
                   >
-                     <div className="flex flex-row items-center gap-2 sm:items-end justify-end">
+                     <div className="flex flex-row items-center gap-2">
                         <LeftArrowAltIcon className="!h-6 !w-6 fill-normal" />
                         <div className="font-weight-lg">
                            {uppercaseifySentences(title)}
