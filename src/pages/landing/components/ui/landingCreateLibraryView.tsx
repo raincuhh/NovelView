@@ -4,12 +4,12 @@ import ViewNavProviderRoot from "../utils/viewNavProviderRoot";
 import LandingViewsHeader from "./landingViewsHeader";
 import useViewNav from "../../hooks/useViewNav";
 
-const LandingLoginView = (): React.JSX.Element => {
+const LandingCreateLibraryView = (): React.JSX.Element => {
    const { setNavTitle } = useViewNav();
 
    useEffect(() => {
-      console.log("setNavTitle: Login");
-      setNavTitle("Login");
+      console.log("setNavTitle: Create Library");
+      setNavTitle("Create Library");
    }, [setNavTitle]);
 
    return (
@@ -17,14 +17,14 @@ const LandingLoginView = (): React.JSX.Element => {
          <div className="flex flex-col">
             <ViewNavProviderRoot />
             <div className="mt-4 sm:mt-2 pb-2">
-               <LandingViewsHeader type="login" />
+               <LandingViewsHeader type="createLibrary" />
             </div>
             <div className="border-solid sm:border-t-[1px] border-modifier-border-color">
-               test
+               yadawdawdawdaw
             </div>
          </div>
       </>
    );
 };
 
-export default LandingLoginView;
+export default LandingCreateLibraryView;

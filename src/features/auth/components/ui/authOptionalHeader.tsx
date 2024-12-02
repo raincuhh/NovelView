@@ -1,13 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { BrandLogoIcon } from "@/shared/components/icons";
-import { useMediaQuery } from "@/shared/hooks";
-import { AuthActions } from "../../types";
-import { isTauri } from "@tauri-apps/api/core";
+import { AuthActions } from "@/features/auth";
 
-type AuthHeaderProps = { type: AuthActions };
+type AuthOptionalHeaderProps = { type: AuthActions };
 
-const AuthHeader = ({ type }: AuthHeaderProps): React.JSX.Element => {
+const AuthOptionalHeader = ({ type }: AuthOptionalHeaderProps): React.JSX.Element => {
    const actionConfig: Record<AuthActions, { title: string; desc: string }> = {
       register: {
          title: "Create an Account",
@@ -47,4 +43,4 @@ const AuthHeader = ({ type }: AuthHeaderProps): React.JSX.Element => {
    );
 };
 
-export default AuthHeader;
+export default AuthOptionalHeader;

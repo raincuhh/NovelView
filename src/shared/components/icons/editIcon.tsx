@@ -1,10 +1,10 @@
 import clsx from "clsx";
-
-import { SvgIconProps } from "../../../types/general";
+import { SvgIconProps } from "@/shared/types";
+import React from "react";
 
 type EditIconProps = SvgIconProps;
 
-const EditIcon = ({ className }: EditIconProps) => {
+const EditIcon = ({ className }: EditIconProps): React.JSX.Element => {
    return (
       <>
          <svg

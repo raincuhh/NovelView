@@ -11,7 +11,7 @@ const SplashScreen = (): React.JSX.Element => {
          >
             <div className="flex h-[100dvh] w-[100dvw] items-center justify-center">
                <BrandLogoIcon
-                  className="w-48 transition-colors duration-100 ease-in-out fill-interactive-accent
+                  className="!w-48 !h-48 transition-colors duration-100 ease-in-out fill-interactive-accent
                      hover:fill-interactive-accent-hover"
                />
             </div>

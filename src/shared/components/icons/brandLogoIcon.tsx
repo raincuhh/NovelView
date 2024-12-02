@@ -1,15 +1,16 @@
-// import React from "react";
+import React from "react";
+import clsx from "clsx";
 
 type BrandLogoIconProps = {
    className?: string;
 };
 
-const BrandLogoIcon = ({ className }: BrandLogoIconProps) => {
+const BrandLogoIcon = ({ className }: BrandLogoIconProps): React.JSX.Element => {
    return (
       <>
          <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={className}
+            className={clsx("h-5 w-5", className)}
             viewBox="0 0 400 360.81632653"
          >
             <g>

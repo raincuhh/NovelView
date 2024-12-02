@@ -6,8 +6,9 @@ import { LandingPageViews } from "../../types";
 import LandingHomeView from "./landingHomeView";
 import LandingRegisterView from "./landingRegisterView";
 import LandingLoginView from "./landingLoginView";
-import LandingHeader from "./landingHeader";
+import LandingHeader from "./landingHomeHeader";
 import { useMediaQuery } from "@/shared/hooks";
+import LandingCreateLibraryView from "./landingCreateLibraryView";
 
 const LandingViewsContainer = (): React.JSX.Element => {
    const { currentView, direction } = useViewSwitcher<LandingPageViews>();
@@ -57,7 +58,6 @@ const LandingViewsContainer = (): React.JSX.Element => {
                      <LandingHomeView />
                   </motion.div>
                )}
-
                {currentView === LandingPageViews.register && (
                   <motion.div
                      key={LandingPageViews.register}
@@ -84,6 +84,20 @@ const LandingViewsContainer = (): React.JSX.Element => {
                      className={`inset-0 relative w-full h-full ${isSm ? "pt-8" : ""}`}
                   >
                      <LandingLoginView />
+                  </motion.div>
+               )}
+               {currentView === LandingPageViews.createLibrary && (
+                  <motion.div
+                     key={LandingPageViews.createLibrary}
+                     custom={direction}
+                     initial="enter"
+                     animate="center"
+                     exit="exit"
+                     variants={variants}
+                     transition={{ duration: 0.3 }}
+                     className={`inset-0 relative w-full h-full ${isSm ? "pt-8" : ""}`}
+                  >
+                     <LandingCreateLibraryView />
                   </motion.div>
                )}
             </AnimatePresence>

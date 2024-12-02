@@ -1,18 +1,25 @@
-import React, { useMemo, useState, forwardRef, PropsWithChildren } from "react";
-import { Link } from "react-router-dom";
-import { isTauri } from "@tauri-apps/api/core";
-import { ArrowBackIcon } from "@/shared/components/icons";
+import { useMemo, forwardRef, PropsWithChildren, useState, useCallback } from "react";
+import { LeftArrowAltIcon } from "@/shared/components/icons";
 import { ViewNavContext } from "../hooks/useViewNav";
 import { useViewSwitcher } from "@/shared/hooks";
 import { LandingPageViews } from "../types";
+import { uppercaseify, uppercaseifySentences } from "@/shared/lib";
+import { useMediaQuery } from "@/shared/hooks";
 
 type ViewNavProviderProps = PropsWithChildren & { id?: string };
 
 const ViewNavProvider = forwardRef<HTMLDivElement, ViewNavProviderProps>(
    ({ children, id }: ViewNavProviderProps, ref) => {
       const { currentView, navigate } = useViewSwitcher<LandingPageViews>();
+      const [navTitle, setNavTitle] = useState<string>("back");
+      const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
 
-      const renderNav = () => {
+      const stableSetNavTitle = useCallback((title: string) => {
+         setNavTitle(title);
+      }, []);
+
+      const nav = useMemo(() => {
+         const title = isSm ? "Back" : navTitle;
          return (
             <nav
                ref={ref}
@@ -25,20 +32,23 @@ const ViewNavProvider = forwardRef<HTMLDivElement, ViewNavProviderProps>(
                         border-modifier-border-color text-fs-lg"
                   >
                      <div className="flex flex-row items-center gap-2">
-                        <ArrowBackIcon className="!h-6 !w-6 fill-normal" />
-                        <div className="font-weight-lg">Back</div>
+                        <LeftArrowAltIcon className="!h-6 !w-6 fill-normal" />
+                        <div className="font-weight-lg">
+                           {uppercaseifySentences(title)}
+                        </div>
                      </div>
                   </div>
                </div>
             </nav>
          );
-      };
+      }, [navTitle, isSm, navigate]);
 
       const contextValue = useMemo(
          () => ({
-            nav: renderNav(),
+            nav,
+            setNavTitle: stableSetNavTitle,
          }),
-         [currentView],
+         [nav, navigate],
       );
 
       return (

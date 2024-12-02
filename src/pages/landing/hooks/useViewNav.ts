@@ -1,10 +1,8 @@
 import React, { createContext, useContext } from "react";
 
 type ViewNavContextProps = {
-   // setTitle?: (title: string) => void;
-   // setBackLocation?: (location: string) => void;
    nav: React.JSX.Element;
-   // setNav: React.Dispatch<React.SetStateAction<React.JSX.Element>>;
+   setNavTitle: (title: string) => void;
 };
 
 export const ViewNavContext = createContext<ViewNavContextProps | undefined>(undefined);

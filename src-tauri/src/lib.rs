@@ -25,8 +25,8 @@ pub fn run() {
                 true,
                 false,
                 false,
-                690.0,
-                580.0,
+                700.0, //700.0
+                600.0,
             ) {
                 Ok(window) => window,
                 Err(e) => {
@@ -45,8 +45,8 @@ pub fn run() {
                 true,
                 false,
                 true,
-                690.0,
-                580.0,
+                700.0,
+                600.0,
             ) {
                 Ok(window) => window,
                 Err(e) => {
@@ -95,43 +95,3 @@ fn setup_window(
 
     window_builder.build()
 }
-
-/*
-#[command]
-fn minimize_window(window: Window) {
-    window.minimize().unwrap();
-}
-
-struct WindowState {
-    width: Option<u32>,
-    height: Option<u32>,
-}
-
-#[command]
-fn maximize_window(window: Window, state: tauri::State<'_, std::sync::Mutex<WindowState>>) {
-    let mut state = state.lock().unwrap();
-
-    if let Some(width) = state.width {
-        window
-            .set_size(tauri::Size::Physical(tauri::PhysicalSize {
-                width,
-                height: state.height.unwrap_or(600),
-            }))
-            .unwrap();
-    } else {
-        let size: tauri::PhysicalSize<u32> = window.inner_size().unwrap();
-
-        state.width = Some(size.width);
-        state.height = Some(size.height);
-        drop(state);
-
-        window.maximize().unwrap();
-    }
-}
-
-#[command]
-fn close_window(window: Window) {
-    window.close().unwrap();
-}
-
-*/

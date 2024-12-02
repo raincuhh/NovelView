@@ -1,8 +1,8 @@
 import { SvgIconProps } from "@/shared/types";
 
-type ArrowBackIconProps = SvgIconProps;
+type leftArrowAltIconProps = SvgIconProps;
 
-const ArrowBackIcon = ({ className }: ArrowBackIconProps) => {
+const leftArrowAltIcon = ({ className }: leftArrowAltIconProps) => {
    return (
       <>
          <svg
@@ -16,4 +16,4 @@ const ArrowBackIcon = ({ className }: ArrowBackIconProps) => {
    );
 };
 
-export default ArrowBackIcon;
+export default leftArrowAltIcon;

@@ -1,16 +1,10 @@
 import React from "react";
-import { isTauri } from "@tauri-apps/api/core";
-
 import ViewNavProvider from "../../provider/viewNavProvider";
-import { CenteredLayout } from "@/shared/components/layout";
-import { useMediaQuery } from "@/shared/hooks";
 import { ViewSwitcherProvider } from "@/shared/providers";
 import LandingViewsContainer from "./landingViewsContainer";
 import { LandingPageViews, LandingPageType } from "../../types";
 
 const LandingPage = (): React.JSX.Element => {
-   const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
-
    return (
       <>
          <div className="w-full min-h-full justify-start flex flex-col">
@@ -33,4 +27,3 @@ const LandingPage = (): React.JSX.Element => {
 };
 
 export default LandingPage;
-// weirdo fucking render bug thing with ts. idk if it has a problem mounting or something but idk.

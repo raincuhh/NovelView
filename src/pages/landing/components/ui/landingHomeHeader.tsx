@@ -2,22 +2,19 @@ import React from "react";
 
 import packageJson from "../../../../../package.json";
 import { BrandLogoIcon } from "@/shared/components/icons";
-import { useMediaQuery } from "@/shared/hooks";
 
-type LandingHeaderProps = { includeLogo?: boolean };
+type LandingHomeHeaderProps = { includeLogo?: boolean };
 
-const LandingHeader = ({
+const LandingHomeHeader = ({
    includeLogo = false,
-}: LandingHeaderProps): React.JSX.Element => {
-   const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
-
+}: LandingHomeHeaderProps): React.JSX.Element => {
    return (
       <>
          <div className="flex flex-col items-center justify-center">
             <div className="flex flex-col items-center font-family-primary">
                {includeLogo && (
                   <BrandLogoIcon
-                     className="transition-colors duration-100 ease-in-out w-36 fill-interactive-accent
+                     className="transition-colors duration-100 ease-in-out !w-32 !h-32 fill-interactive-accent
                         hover:fill-interactive-accent-hover"
                   />
                )}
@@ -33,4 +30,4 @@ const LandingHeader = ({
    );
 };
 
-export default LandingHeader;
+export default LandingHomeHeader;

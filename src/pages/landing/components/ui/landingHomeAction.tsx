@@ -1,20 +1,27 @@
 import React from "react";
-
 import { Button } from "@/shared/components/ui";
-import { EditIcon } from "@/shared/components/icons";
-import { uppercaseify } from "@/shared/lib";
+import {
+   ChevronRightIcon,
+   PlusIcon,
+   UserIcon,
+   UserPlusIcon,
+} from "@/shared/components/icons";
+import { uppercaseifySentences } from "@/shared/lib";
 import { LandingPageViews } from "../../types";
 import { useViewSwitcher } from "@/shared/hooks";
 import { useMediaQuery } from "@/shared/hooks";
 
-type LandingActionProps = { type: "login" | "register"; view?: LandingPageViews };
+type LandingHomeActionProps = {
+   type: "login" | "register" | "createLibrary";
+   view?: LandingPageViews;
+};
 
-const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element => {
+const LandingHomeAction = ({ type, view }: LandingHomeActionProps): React.JSX.Element => {
    const { navigate } = useViewSwitcher();
    const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
 
    const actionConfig: Record<
-      LandingActionProps["type"],
+      LandingHomeActionProps["type"],
       { text: string; variant: "base" | "accent"; title: string; desc: string }
    > = {
       register: {
@@ -28,6 +35,12 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
          variant: "base",
          title: "Welcome Back",
          desc: "Log in to access your saved libraries.",
+      },
+      createLibrary: {
+         text: "create library",
+         variant: "base",
+         title: "Create Library",
+         desc: "Create a library to contain your books.",
       },
    };
 
@@ -51,31 +64,39 @@ const LandingAction = ({ type, view }: LandingActionProps): React.JSX.Element =>
                size={isSm ? "md" : "lg"}
                variant={isSm ? variant : "ghost"}
                onClick={() => navigate(view)}
-               className="sm:!justify-center flex items-center w-full justify-between sm:w-28 sm:h-8"
+               className="sm:!justify-center flex items-center w-full justify-between sm:min-w-28 sm:max-w-36 sm:h-8"
             >
                <div className="flex flex-row gap-2 items-center">
                   {!isSm && (
                      <>
                         {type === "register" && (
                            <>
-                              <EditIcon className="!h-6 !w-6 fill-normal" />
+                              <UserPlusIcon className="!h-6 !w-6 fill-normal" />
                            </>
                         )}
                         {type === "login" && (
                            <>
-                              <EditIcon className="!h-6 !w-6 fill-normal" />
+                              <UserIcon className="!h-6 !w-6 fill-normal" />
+                           </>
+                        )}
+                        {type === "createLibrary" && (
+                           <>
+                              <PlusIcon className="!h-6 !w-6 fill-normal" />
                            </>
                         )}
                      </>
                   )}
-
-                  {uppercaseify(text)}
+                  {uppercaseifySentences(text)}
                </div>
-               {!isSm && <>{">"}</>}
+               {!isSm && (
+                  <>
+                     <ChevronRightIcon className="!h-6 !w-6 fill-normal" />
+                  </>
+               )}
             </Button>
          </div>
       </>
    );
 };
 
-export default LandingAction;
+export default LandingHomeAction;

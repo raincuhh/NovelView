@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+
 import { Theme } from "../types/theme";
 
 type ThemeContextProps = {

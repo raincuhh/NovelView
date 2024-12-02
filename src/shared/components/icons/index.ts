@@ -1,5 +1,9 @@
-export { default as ArrowBackIcon } from "./arrowBackIcon";
+export { default as LeftArrowAltIcon } from "./leftArrowAlt";
 export { default as BrandLogoIcon } from "./brandLogoIcon";
 export { default as EditIcon } from "./editIcon";
 export { default as EyeOpenIcon } from "./eyeOpenIcon";
 export { default as EyeSlashIcon } from "./eyeSlashIcon";
+export { default as PlusIcon } from "./plusIcon";
+export { default as ChevronRightIcon } from "./chevronRight";
+export { default as UserIcon } from "./userIcon";
+export { default as UserPlusIcon } from "./userPlusIcon";

@@ -43,7 +43,7 @@ a {
    text-decoration: none;
 }
 
-::selection {
+/* ::selection {
    color: var(--text-normal);
    background: var(--accent-primary);
 }
@@ -51,4 +51,4 @@ a {
 ::-moz-selection {
    color: var(--text-normal);
    background: var(--accent-primary);
-}
+} */
