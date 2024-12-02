@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import LandingViewsHeader from "./landingViewsHeader";
 import ViewNavProviderRoot from "../utils/viewNavProviderRoot";
 import useViewNav from "../../hooks/useViewNav";

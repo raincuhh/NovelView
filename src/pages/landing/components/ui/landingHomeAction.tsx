@@ -49,8 +49,9 @@ const LandingHomeAction = ({ type, view }: LandingHomeActionProps): React.JSX.El
    return (
       <>
          <div
-            className="w-full select-none flex flex-row sm:flex-row py-2 justify-between
-               !border-modifier-border-color border-solid border-b-[1px]"
+            className={`w-full select-none flex flex-row sm:flex-row py-2 justify-between
+               !border-modifier-border-color border-solid
+               ${type === "register" ? "sm:border-b-[1px]" : "border-b-[1px]"}`}
          >
             {isSm && (
                <>
