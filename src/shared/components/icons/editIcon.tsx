@@ -1,6 +1,7 @@
 import clsx from "clsx";
-import { SvgIconProps } from "@/shared/types";
 import React from "react";
+
+import { SvgIconProps } from "@/shared/types";
 
 type EditIconProps = SvgIconProps;
 

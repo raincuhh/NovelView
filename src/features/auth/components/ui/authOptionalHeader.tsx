@@ -1,4 +1,5 @@
 import React from "react";
+
 import { AuthActions } from "@/features/auth";
 
 type AuthOptionalHeaderProps = { type: AuthActions };

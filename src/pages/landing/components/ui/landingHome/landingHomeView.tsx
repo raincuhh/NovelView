@@ -1,6 +1,7 @@
 import React from "react";
+
 import LandingHomeAction from "./landingHomeAction";
-import { LandingPageViews } from "../../types";
+import { LandingPageViews } from "@/pages/landing/types";
 import LandingHomeHeader from "./landingHomeHeader";
 import { useMediaQuery } from "@/shared/hooks";
 

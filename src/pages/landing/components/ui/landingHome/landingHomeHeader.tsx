@@ -1,6 +1,6 @@
 import React from "react";
 
-import packageJson from "../../../../../package.json";
+import packageJson from "../../../../../../package.json";
 import { BrandLogoIcon } from "@/shared/components/icons";
 
 type LandingHomeHeaderProps = { includeLogo?: boolean };
@@ -18,7 +18,7 @@ const LandingHomeHeader = ({
                         hover:fill-interactive-accent-hover"
                   />
                )}
-               <header className="mt-2 sm:mt-2 text-fs-3xl font-weight-lg md:mt-4 sm:text-fs-3xl sm:font-weight-xl">
+               <header className="mt-2 sm:mt-2 text-fs-3xl font-weight-lg sm:text-fs-3xl sm:font-weight-xl">
                   NovelView
                </header>
                <p className="text-fs-sm sm:text-fs-md font-weight-md dark:text-faint">

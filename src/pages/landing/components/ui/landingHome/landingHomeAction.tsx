@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Button } from "@/shared/components/ui";
 import {
    ChevronRightIcon,
@@ -7,7 +8,7 @@ import {
    UserPlusIcon,
 } from "@/shared/components/icons";
 import { uppercaseifySentences } from "@/shared/lib";
-import { LandingPageViews } from "../../types";
+import { LandingPageViews } from "@/pages/landing/types";
 import { useViewSwitcher } from "@/shared/hooks";
 import { useMediaQuery } from "@/shared/hooks";
 

@@ -3,12 +3,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { useViewSwitcher } from "@/shared/hooks";
 import { LandingPageViews } from "../../types";
-import LandingHomeView from "./landingHomeView";
-import LandingRegisterView from "./landingRegisterView";
-import LandingLoginView from "./landingLoginView";
-import LandingHeader from "./landingHomeHeader";
+import LandingHomeView from "./landingHome/landingHomeView";
+import LandingRegisterView from "./landingRegister/landingRegisterView";
+import LandingLoginView from "./landingLogin/landingLoginView";
+import LandingHomeHeader from "./landingHome/landingHomeHeader";
 import { useMediaQuery } from "@/shared/hooks";
-import LandingCreateLibraryView from "./landingCreateLibraryView";
+import LandingCreateLibraryView from "./landingCreateLibrary/landingCreateLibraryView";
 
 const LandingViewsContainer = (): React.JSX.Element => {
    const { currentView, direction } = useViewSwitcher<LandingPageViews>();
@@ -42,7 +42,7 @@ const LandingViewsContainer = (): React.JSX.Element => {
    return (
       <>
          <div className="relative flex-row w-full h-full">
-            {isSm ? <LandingHeader includeLogo={true} /> : null}
+            {isSm ? <LandingHomeHeader includeLogo={true} /> : null}
             <AnimatePresence mode="popLayout" custom={direction}>
                {currentView === LandingPageViews.home && (
                   <motion.div

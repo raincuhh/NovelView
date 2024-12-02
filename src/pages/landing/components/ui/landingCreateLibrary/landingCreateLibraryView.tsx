@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 
-import ViewNavProviderRoot from "../utils/viewNavProviderRoot";
-import LandingViewsHeader from "./landingViewsHeader";
-import useViewNav from "../../hooks/useViewNav";
+import LandingViewsHeader from "../landingViewsHeader";
+import ViewNavProviderRoot from "../../utils/viewNavProviderRoot";
+import useViewNav from "@/pages/landing/hooks/useViewNav";
 
 const LandingCreateLibraryView = (): React.JSX.Element => {
    const { setNavTitle } = useViewNav();

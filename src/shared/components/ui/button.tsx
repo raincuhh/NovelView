@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { VariantProps, cva } from "class-variance-authority";
 
 const buttonVariants = cva(
-   "flex items-center justify-center font-weight-md transition-colors duration-100 ease-in-out focus:outline-none disabled:pointer-events-none",
+   "flex items-center justify-center font-weight-md transition-colors duration-100 ease-in-out cursor-default focus:outline-none disabled:pointer-events-none",
    {
       variants: {
          variant: {
@@ -14,7 +14,7 @@ const buttonVariants = cva(
             ghost: "dark:bg-primary dark:sm:bg-primary-alt dark:hover:bg-primary-alt dark:sm:hover:bg-secondary",
             outline:
                "bg-transparent text-text-normal sm:hover:text-text-muted border-solid border-[1px] border-border-secondary",
-            link: "underline text-text-accent sm:hover:text-text-accent-hover",
+            link: "underline text-text-accent sm:hover:text-text-accent-hover cursor-pointer",
          },
          size: {
             sm: "py-1 px-2 text-fs-sm",
