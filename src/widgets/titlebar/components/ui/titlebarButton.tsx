@@ -1,9 +1,9 @@
-import React, { forwardRef, useCallback } from "react";
+import { forwardRef, useCallback } from "react";
 import { getCurrentWebviewWindow, WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { VariantProps, cva } from "class-variance-authority";
 import clsx from "clsx";
 
-import { XIcon, RectangleIcon, MinusIcon } from "../icons";
+import { XIcon, RectangleIcon, MinusIcon } from "@/shared/components/icons";
 
 type TitlebarButtonType = "minimize" | "maximize" | "close";
 

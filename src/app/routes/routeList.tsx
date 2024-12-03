@@ -7,6 +7,11 @@ import("@/pages/landing");
 const NotFoundPage = lazy(() => import("@/pages/notFound/components/ui/notFoundPage"));
 const LandingPage = lazy(() => import("@/pages/landing/components/ui/landingPage"));
 const HomePage = lazy(() => import("@/pages/home/components/ui/homePage"));
+const LibrariesPage = lazy(() => import("@/pages/libraries/components/ui/librariesPage"));
+const LibraryDetailPage = lazy(
+   () => import("@/pages/libraryDetail/components/ui/libraryDetailPage"),
+);
+const ReaderPage = lazy(() => import("@/pages/reader/components/ui/readerPage"));
 
 const RouteList: RouteListProps[] = [
    {
@@ -30,11 +35,25 @@ const RouteList: RouteListProps[] = [
       id: "home",
       path: "/home",
       element: <HomePage />,
+      routeType: RouteTypes.public,
    },
    {
       id: "libraries",
       path: "/libraries",
-      element: <HomePage />,
+      element: <LibrariesPage />,
+      routeType: RouteTypes.public,
+   },
+   {
+      id: "library-detail",
+      path: "/libraries/:libraryId",
+      element: <LibraryDetailPage />,
+      routeType: RouteTypes.public,
+   },
+   {
+      id: "reader",
+      path: "/libraries/:libraryId/:bookId",
+      element: <ReaderPage />,
+      routeType: RouteTypes.public,
    },
 ];
 

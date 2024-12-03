@@ -3,16 +3,13 @@ import { RouterProvider } from "react-router-dom";
 
 import { appRouter } from "./routes/routes";
 import AppProviders from "./providers/appProviders";
-import { RootLayout } from "@/shared/components/layout";
 import { ModalRoot, TooltipRoot } from "@/shared/components/utils";
 
 const App = (): React.JSX.Element => {
    return (
       <>
          <AppProviders>
-            <RootLayout>
-               <RouterProvider router={appRouter} />
-            </RootLayout>
+            <RouterProvider router={appRouter} />
             <ModalRoot />
             <TooltipRoot />
          </AppProviders>

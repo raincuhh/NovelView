@@ -5,4 +5,3 @@ export { default as Divider } from "./divider";
 export { default as Input } from "./input";
 export { default as ModalContainer } from "./modalContainer";
 export { default as BrandTextLogo } from "./BrandTextLogo";
-export { default as TitlebarButton } from "./titlebarButton";

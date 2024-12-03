@@ -15,6 +15,7 @@ export default defineConfig({
       port: 8000,
       strictPort: true,
       open: true,
+      host: "0.0.0.0",
    },
    build: {
       target: process.env.TAURI_PLATFORM == "windows" ? "chrome105" : "safari13",

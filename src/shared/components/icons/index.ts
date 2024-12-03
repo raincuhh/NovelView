@@ -11,3 +11,7 @@ export { default as XIcon } from "./xIcon";
 export { default as MinusIcon } from "./minusIcon";
 export { default as RectangleIcon } from "./rectangleIcon";
 export { default as FastForwardCircleIcon } from "./fastForwardCircleIcon";
+export { default as LibraryIcon } from "./libraryIcon";
+export { default as HomeIcon } from "./homeIcon";
+export { default as HollowSearchIcon } from "./hollowSearchIcon";
+export { default as FilledSearchIcon } from "./filledSearchIcon";

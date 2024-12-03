@@ -5,8 +5,7 @@ import MobileDetect from "mobile-detect";
 
 import { EnvironmentContext } from "@/shared/hooks/useEnvironment";
 import { useMediaQuery } from "@/shared/hooks";
-import { TitlebarButtonTypes } from "@/shared/types";
-import { TitlebarButton } from "@/shared/components/ui";
+import { TitlebarButtonTypes, Titlebar } from "@/widgets/titlebar";
 
 type EnvironmentProviderProps = PropsWithChildren;
 
@@ -92,24 +91,7 @@ const EnvironmentProvider = ({
          <EnvironmentContext.Provider value={contextValue}>
             {showTitlebar && (
                <>
-                  <div
-                     className="fixed top-0 right-0 w-full h-8 border-none z-layer-titlebar"
-                     data-tauri-drag-region
-                  >
-                     <div className="text-normal">
-                        <div className="absolute top-0 right-0 flex flex-row w-min">
-                           {titlebarButtons.includes("minimize") && (
-                              <TitlebarButton type="minimize" />
-                           )}
-                           {titlebarButtons.includes("maximize") && (
-                              <TitlebarButton type="maximize" />
-                           )}
-                           {titlebarButtons.includes("close") && (
-                              <TitlebarButton type="close" />
-                           )}
-                        </div>
-                     </div>
-                  </div>
+                  <Titlebar titlebarButtons={titlebarButtons}></Titlebar>
                </>
             )}
             {children}
