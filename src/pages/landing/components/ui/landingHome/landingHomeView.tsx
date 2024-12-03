@@ -1,4 +1,5 @@
 import React from "react";
+
 import { useAuth } from "@/features/auth";
 import LandingHomeAction from "./landingHomeAction";
 import { LandingPageViews } from "@/pages/landing/types";
@@ -27,10 +28,7 @@ const LandingHomeView = (): React.JSX.Element => {
                         <LandingHomeAction view={LandingPageViews.login} type="login" />
                      </>
                   )}
-                  <LandingHomeAction
-                     view={LandingPageViews.createLibrary}
-                     type="createLibrary"
-                  />
+                  <LandingHomeAction type="QuickStart" />
                </div>
             </div>
          </div>

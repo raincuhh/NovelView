@@ -13,16 +13,6 @@ import LandingCreateLibraryView from "./landingCreateLibrary/landingCreateLibrar
 const LandingViewsContainer = (): React.JSX.Element => {
    const { currentView, direction } = useViewSwitcher<LandingPageViews>();
    const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
-   const [seenLanding, setSeenLanding] = useState<boolean>(false);
-
-   useEffect(() => {
-      const hasSeenLanding = localStorage.getItem("SEEN_LANDING");
-      if (hasSeenLanding) {
-         setSeenLanding(true);
-      } else {
-         localStorage.setItem("SEEN_LANDING", "true");
-      }
-   }, []);
 
    const variants = {
       enter: (direction: number) => ({

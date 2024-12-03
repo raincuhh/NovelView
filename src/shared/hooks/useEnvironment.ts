@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+
 import { TitlebarButtonTypes } from "../types";
 
 type EnvironmentContextProps = {

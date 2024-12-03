@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "@/shared/components/ui";
 import {
    ChevronRightIcon,
-   PlusIcon,
+   FastForwardCircleIcon,
    UserIcon,
    UserPlusIcon,
 } from "@/shared/components/icons";
@@ -13,7 +13,7 @@ import { useViewSwitcher } from "@/shared/hooks";
 import { useMediaQuery } from "@/shared/hooks";
 
 type LandingHomeActionProps = {
-   type: "login" | "register" | "createLibrary";
+   type: "login" | "register" | "QuickStart";
    view?: LandingPageViews;
 };
 
@@ -37,11 +37,11 @@ const LandingHomeAction = ({ type, view }: LandingHomeActionProps): React.JSX.El
          title: "Welcome Back",
          desc: "Log in to access your synced libraries.",
       },
-      createLibrary: {
-         text: "create library",
+      QuickStart: {
+         text: "quick start",
          variant: "base",
-         title: "Create Library",
-         desc: "Create a library to contain your books.",
+         title: "Get Started Instantly",
+         desc: "Set up local libraries and start reading.",
       },
    };
 
@@ -62,6 +62,7 @@ const LandingHomeAction = ({ type, view }: LandingHomeActionProps): React.JSX.El
                   </div>
                </>
             )}
+
             <Button
                size={isSm ? "desktop" : "lg"}
                variant={isSm ? variant : "ghost"}
@@ -81,9 +82,9 @@ const LandingHomeAction = ({ type, view }: LandingHomeActionProps): React.JSX.El
                               <UserIcon className="!h-6 !w-6 fill-normal" />
                            </>
                         )}
-                        {type === "createLibrary" && (
+                        {type === "QuickStart" && (
                            <>
-                              <PlusIcon className="!h-6 !w-6 fill-normal" />
+                              <FastForwardCircleIcon className="!h-6 !w-6 fill-normal" />
                            </>
                         )}
                      </>

@@ -1,5 +1,6 @@
-import { useEnvironment } from "@/shared/hooks";
 import React from "react";
+
+import { useEnvironment } from "@/shared/hooks";
 
 type LandingViewsHeaderProps = { type: "login" | "register" | "createLibrary" };
 
