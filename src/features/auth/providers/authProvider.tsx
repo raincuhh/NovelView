@@ -36,8 +36,6 @@ export default function AuthProvider({ children }: AuthProviderProps): React.JSX
       setIsAuth(false);
       setAccessToken(null);
       setRole(UserRoles.user);
-      localStorage.removeItem("ACCESS_TOKEN");
-      // remove the refresh token aswell here.
    };
 
    const contextValue = useMemo(

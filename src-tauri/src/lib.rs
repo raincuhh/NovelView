@@ -1,6 +1,10 @@
+use std::sync::Mutex;
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 use tauri::{AppHandle, Listener, WebviewWindowBuilder};
 use tauri::{Manager, WebviewWindow};
+
+static IS_MAIN_VISIBLE: std::sync::Mutex<bool> = Mutex::new(false);
 
 pub fn run() {
     tauri::Builder::default()
@@ -17,16 +21,18 @@ pub fn run() {
 
             let landing_window: WebviewWindow = match setup_window(
                 app_handle,
-                "login",
+                "landing",
                 "index.html#/",
-                "login",
+                "landing",
                 true,
                 false,
                 true,
                 false,
                 false,
-                700.0, //700.0
+                700.0,
                 600.0,
+                None,
+                None,
             ) {
                 Ok(window) => window,
                 Err(e) => {
@@ -38,7 +44,7 @@ pub fn run() {
             let main_window: WebviewWindow = match setup_window(
                 app_handle,
                 "main",
-                "index.html#/dashboard",
+                "index.html#/home",
                 "main",
                 false,
                 false,
@@ -47,6 +53,8 @@ pub fn run() {
                 true,
                 700.0,
                 600.0,
+                Some(660.0),
+                Some(400.0),
             ) {
                 Ok(window) => window,
                 Err(e) => {
@@ -55,9 +63,18 @@ pub fn run() {
                 }
             };
 
-            app.listen_any("login_success", move |_| {
-                landing_window.hide().unwrap();
-                main_window.show().unwrap();
+
+            app.listen_any("toggle_window", move |_| {
+                let mut is_visible = IS_MAIN_VISIBLE.lock().unwrap();
+                if *is_visible {
+                    landing_window.show().unwrap();
+                    main_window.hide().unwrap();
+                    *is_visible = false;
+                } else {
+                    landing_window.hide().unwrap();
+                    main_window.show().unwrap();
+                    *is_visible = true;
+                }
             });
 
             Ok(())
@@ -79,6 +96,8 @@ fn setup_window(
     resizable: bool,
     width: f64,
     height: f64,
+    min_width: Option<f64>,
+    min_height: Option<f64>,
 ) -> Result<tauri::WebviewWindow, tauri::Error> {
     let mut window_builder =
         WebviewWindowBuilder::new(app_handle, label, tauri::WebviewUrl::App(url.into()))
@@ -88,6 +107,10 @@ fn setup_window(
             .decorations(decorations)
             .resizable(resizable)
             .inner_size(width, height);
+
+    if let (Some(min_w), Some(min_h)) = (min_width, min_height) {
+        window_builder = window_builder.min_inner_size(min_w, min_h);
+    }
 
     if centered {
         window_builder = window_builder.center();

@@ -28,7 +28,7 @@ const LandingHomeView = (): React.JSX.Element => {
                         <LandingHomeAction view={LandingPageViews.login} type="login" />
                      </>
                   )}
-                  <LandingHomeAction type="QuickStart" />
+                  <LandingHomeAction type="quickStart" />
                </div>
             </div>
          </div>

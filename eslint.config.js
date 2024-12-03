@@ -22,6 +22,7 @@ export default defineConfig([
                   { pattern: "@pages/**", group: "internal" },
                   { pattern: "@shared/**", group: "internal" },
                   { pattern: "@widgets/**", group: "internal" },
+                  { pattern: "@entities/**", group: "internal" },
                ],
                pathGroupsExcludedImportTypes: ["builtin"],
                "newlines-between": "always",
@@ -48,6 +49,12 @@ export default defineConfig([
          //    },
          // ],
          "boundaries/element-types": [
+            // { type: "features", pattern: "src/pages/*" },
+            // { type: "pages", pattern: "src/pages/*" },
+            // { type: "widgets", pattern: "src/widgets/*" },
+            // { type: "shared", pattern: "src/shared/*" },
+            // { type: "entities", pattern: "src/entities/*" },
+            // { type: "app", pattern: "src/app/*" },
             "error",
             {
                default: "disallow",
@@ -61,16 +68,16 @@ export default defineConfig([
                   {
                      from: "@pages/*",
                      disallow: ["@pages/*", "@features/*", "@app/*"],
-                     allow: ["@widgets/*", "@shared/*", "./**"],
+                     allow: ["@widgets/*", "@shared/*", "@entities/*", "./**"],
                      message:
                         "Pages should only import from widgets, shared, entities, and app.",
                   },
                   {
                      from: "@widgets/*",
                      disallow: ["@features/*", "@pages/*", "@app/*"],
-                     allow: ["./**", "@shared/*"],
+                     allow: ["./**", "@shared/*", "@entities/*"],
                      message:
-                        "Widgets should remain independent of features, pages, and app.",
+                        "Widgets should remain independent of features, pages, and app, but can import from entities.",
                   },
                   {
                      from: "@shared/*",
@@ -80,10 +87,22 @@ export default defineConfig([
                         "Shared should remain decoupled from business logic, pages, and app.",
                   },
                   {
-                     from: "@app/*",
-                     allow: ["@pages/*", "@features/*", "@shared/*", "@widgets/*"],
+                     from: "@entities/*",
+                     allow: ["@entities/*"],
                      message:
-                        "App can import from pages, features, shared, and widgets to tie everything together.",
+                        "Entities should only import from other entities to maintain the domain layer.",
+                  },
+                  {
+                     from: "@app/*",
+                     allow: [
+                        "@pages/*",
+                        "@features/*",
+                        "@shared/*",
+                        "@widgets/*",
+                        "@entities/*",
+                     ],
+                     message:
+                        "App can import from pages, features, shared, widgets, and entities to tie everything together.",
                   },
                ],
             },

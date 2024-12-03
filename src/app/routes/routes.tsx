@@ -22,11 +22,9 @@ const routes: RouteObject[] = createRoutesFromElements(
             path={route.path}
             element={
                <RouteGuard type={route.routeType}>
-                  <PageLayout id={route.id}>
-                     <SuspenseWithDelay fallback={<SplashScreen />} delay={600}>
-                        {route.element}
-                     </SuspenseWithDelay>
-                  </PageLayout>
+                  <SuspenseWithDelay fallback={<SplashScreen />} delay={600}>
+                     <PageLayout id={route.id}>{route.element}</PageLayout>
+                  </SuspenseWithDelay>
                </RouteGuard>
             }
             errorElement={

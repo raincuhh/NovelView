@@ -39,7 +39,7 @@ const ViewSwitcherProvider = <T extends { [key: string]: string }>({
       return views.indexOf(targetView) > views.indexOf(currentView) ? 1 : -1;
    };
 
-   const navigate = (targetView: T[keyof T]) => {
+   const viewSwitcherNavigate = (targetView: T[keyof T]) => {
       const direction = getDirection(currentView, targetView);
       if (!isAnimating) changeView(targetView, direction);
    };
@@ -52,7 +52,7 @@ const ViewSwitcherProvider = <T extends { [key: string]: string }>({
             isAnimating,
             direction,
             getDirection,
-            navigate,
+            viewSwitcherNavigate,
          }}
       >
          {children}

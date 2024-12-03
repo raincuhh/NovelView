@@ -14,7 +14,7 @@ const NotFoundPage = (): React.JSX.Element => {
                </div>
                <NotFoundHeader />
                <div className="mt-2 font-family-primary text-accent hover:text-accent-hover text-fs-md font-weight-md">
-                  <Link to={"/"}>Go back to home.</Link>
+                  <Link to={"/home"}>Go back to home.</Link>
                </div>
             </div>
          </div>

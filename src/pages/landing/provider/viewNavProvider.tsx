@@ -11,7 +11,7 @@ type ViewNavProviderProps = PropsWithChildren & { id?: string };
 
 const ViewNavProvider = forwardRef<HTMLDivElement, ViewNavProviderProps>(
    ({ children, id }: ViewNavProviderProps, ref) => {
-      const { currentView, navigate } = useViewSwitcher<LandingPageViews>();
+      const { currentView, viewSwitcherNavigate } = useViewSwitcher<LandingPageViews>();
       const [navTitle, setNavTitle] = useState<string>("back");
       const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
 
@@ -27,7 +27,7 @@ const ViewNavProvider = forwardRef<HTMLDivElement, ViewNavProviderProps>(
                id={id}
                className="dark:bg-primary dark:sm:bg-primary-alt z-layer-menu cursor-pointer"
             >
-               <div onClick={() => navigate(LandingPageViews.home)}>
+               <div onClick={() => viewSwitcherNavigate(LandingPageViews.home)}>
                   <div
                      className="py-4 sm:pb-2 sm:py-0 border-solid sm:border-b-0 border-b-[1px]
                         border-modifier-border-color text-fs-lg"
@@ -42,14 +42,14 @@ const ViewNavProvider = forwardRef<HTMLDivElement, ViewNavProviderProps>(
                </div>
             </nav>
          );
-      }, [navTitle, isSm, navigate]);
+      }, [navTitle, isSm, viewSwitcherNavigate]);
 
       const contextValue = useMemo(
          () => ({
             nav,
             setNavTitle: stableSetNavTitle,
          }),
-         [nav, navigate],
+         [nav, viewSwitcherNavigate],
       );
 
       return (

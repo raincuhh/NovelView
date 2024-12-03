@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { emit } from "@tauri-apps/api/event";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/shared/components/ui";
 import {
@@ -9,17 +11,19 @@ import {
 } from "@/shared/components/icons";
 import { uppercaseifySentences } from "@/shared/lib";
 import { LandingPageViews } from "@/pages/landing/types";
-import { useViewSwitcher } from "@/shared/hooks";
+import { useEnvironment, useViewSwitcher } from "@/shared/hooks";
 import { useMediaQuery } from "@/shared/hooks";
 
 type LandingHomeActionProps = {
-   type: "login" | "register" | "QuickStart";
+   type: "login" | "register" | "quickStart";
    view?: LandingPageViews;
 };
 
 const LandingHomeAction = ({ type, view }: LandingHomeActionProps): React.JSX.Element => {
-   const { navigate } = useViewSwitcher();
+   const { viewSwitcherNavigate } = useViewSwitcher();
    const isSm = useMediaQuery({ mediaQuery: "(min-width: 640px)" });
+   const { isTauri } = useEnvironment();
+   const navigate = useNavigate();
 
    const actionConfig: Record<
       LandingHomeActionProps["type"],
@@ -37,7 +41,7 @@ const LandingHomeAction = ({ type, view }: LandingHomeActionProps): React.JSX.El
          title: "Welcome Back",
          desc: "Log in to access your synced libraries.",
       },
-      QuickStart: {
+      quickStart: {
          text: "quick start",
          variant: "base",
          title: "Get Started Instantly",
@@ -46,6 +50,25 @@ const LandingHomeAction = ({ type, view }: LandingHomeActionProps): React.JSX.El
    };
 
    const { text, variant, title, desc } = actionConfig[type];
+
+   const handleOnClick = useCallback((type: "login" | "register" | "quickStart") => {
+      switch (type) {
+         case "login":
+         case "register":
+            viewSwitcherNavigate(view);
+            break;
+         case "quickStart":
+            if (isTauri) {
+               console.log("quick start");
+               emit("toggle_window");
+            } else {
+               navigate("/home");
+            }
+            break;
+         default:
+            break;
+      }
+   }, []);
 
    return (
       <>
@@ -66,7 +89,7 @@ const LandingHomeAction = ({ type, view }: LandingHomeActionProps): React.JSX.El
             <Button
                size={isSm ? "desktop" : "lg"}
                variant={isSm ? variant : "ghost"}
-               onClick={() => navigate(view)}
+               onClick={() => handleOnClick(type)}
                className="sm:!justify-center flex items-center w-full justify-between"
             >
                <div className="flex flex-row gap-2 items-center">
@@ -82,7 +105,7 @@ const LandingHomeAction = ({ type, view }: LandingHomeActionProps): React.JSX.El
                               <UserIcon className="!h-6 !w-6 fill-normal" />
                            </>
                         )}
-                        {type === "QuickStart" && (
+                        {type === "quickStart" && (
                            <>
                               <FastForwardCircleIcon className="!h-6 !w-6 fill-normal" />
                            </>

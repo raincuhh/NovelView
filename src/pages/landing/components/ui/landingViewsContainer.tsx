@@ -8,7 +8,6 @@ import LandingRegisterView from "./landingRegister/landingRegisterView";
 import LandingLoginView from "./landingLogin/landingLoginView";
 import LandingHomeHeader from "./landingHome/landingHomeHeader";
 import { useMediaQuery } from "@/shared/hooks";
-import LandingCreateLibraryView from "./landingCreateLibrary/landingCreateLibraryView";
 
 const LandingViewsContainer = (): React.JSX.Element => {
    const { currentView, direction } = useViewSwitcher<LandingPageViews>();
@@ -31,7 +30,7 @@ const LandingViewsContainer = (): React.JSX.Element => {
 
    return (
       <>
-         <div className="relative flex-row w-full h-full">
+         <div className="flex-row w-full h-full">
             {isSm ? <LandingHomeHeader includeLogo={true} /> : null}
             <AnimatePresence mode="popLayout" custom={direction}>
                {currentView === LandingPageViews.home && (
@@ -74,20 +73,6 @@ const LandingViewsContainer = (): React.JSX.Element => {
                      className={`inset-0 relative w-full h-full ${isSm ? "pt-8" : ""}`}
                   >
                      <LandingLoginView />
-                  </motion.div>
-               )}
-               {currentView === LandingPageViews.createLibrary && (
-                  <motion.div
-                     key={LandingPageViews.createLibrary}
-                     custom={direction}
-                     initial="enter"
-                     animate="center"
-                     exit="exit"
-                     variants={variants}
-                     transition={{ duration: 0.3 }}
-                     className={`inset-0 relative w-full h-full ${isSm ? "pt-8" : ""}`}
-                  >
-                     <LandingCreateLibraryView />
                   </motion.div>
                )}
             </AnimatePresence>

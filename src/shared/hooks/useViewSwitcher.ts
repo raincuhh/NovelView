@@ -6,7 +6,7 @@ type ViewSwitcherContextType<T> = {
    isAnimating: boolean;
    direction: number;
    getDirection: (currentView: T, targetView: T) => number;
-   navigate: (targetView: T) => void;
+   viewSwitcherNavigate: (targetView: T) => void;
 };
 
 export const ViewSwitcherContext = createContext<ViewSwitcherContextType<any> | null>(

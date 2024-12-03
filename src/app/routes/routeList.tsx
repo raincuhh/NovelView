@@ -6,6 +6,7 @@ import("@/pages/landing");
 
 const NotFoundPage = lazy(() => import("@/pages/notFound/components/ui/notFoundPage"));
 const LandingPage = lazy(() => import("@/pages/landing/components/ui/landingPage"));
+const HomePage = lazy(() => import("@/pages/home/components/ui/homePage"));
 
 const RouteList: RouteListProps[] = [
    {
@@ -24,6 +25,16 @@ const RouteList: RouteListProps[] = [
       path: "/",
       element: <LandingPage />,
       routeType: RouteTypes.public,
+   },
+   {
+      id: "home",
+      path: "/home",
+      element: <HomePage />,
+   },
+   {
+      id: "libraries",
+      path: "/libraries",
+      element: <HomePage />,
    },
 ];
 

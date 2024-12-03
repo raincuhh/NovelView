@@ -1,22 +1,3 @@
-export const getUuid = (): string => {
-   let pattern: string = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx";
-   let result: string = "";
-
-   for (let i = 0; i < pattern.length; i++) {
-      let c: string = pattern[i];
-
-      if (c === "x" || c === "y") {
-         let r: number = Math.floor(Math.random() * 16);
-         let v: number = c === "x" ? r : (r & 0x3) | 0x8;
-
-         result += v.toString(16);
-      } else {
-         result += c;
-      }
-   }
-   return result;
-};
-
 export const uppercaseify = (str: string): string => {
    let first: string = str.charAt(0);
    if (first !== first.toUpperCase()) {

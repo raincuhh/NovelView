@@ -16,7 +16,7 @@
          "capabilities": [
             {
                "identifier": "window-titlebar",
-               "windows": ["login", "main"],
+               "windows": ["landing", "main"],
                "permissions": [
                   "core:window:allow-start-dragging",
                   "core:window:allow-internal-toggle-maximize",
@@ -25,7 +25,9 @@
                   "core:window:allow-toggle-maximize",
                   "core:window:allow-close",
                   "core:window:allow-unmaximize",
-                  "core:window:allow-unminimize"
+                  "core:window:allow-unminimize",
+                  "core:event:allow-emit",
+                  "core:event:default"
                ]
             }
          ]
