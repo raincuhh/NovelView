@@ -8,6 +8,7 @@ static IS_MAIN_VISIBLE: std::sync::Mutex<bool> = Mutex::new(false);
 
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_sql::Builder::new().build())
         .plugin(tauri_plugin_store::Builder::new().build())
         .setup(|app| {
             if cfg!(debug_assertions) {
@@ -62,7 +63,6 @@ pub fn run() {
                     return Err(Box::new(e));
                 }
             };
-
 
             app.listen_any("toggle_window", move |_| {
                 let mut is_visible = IS_MAIN_VISIBLE.lock().unwrap();

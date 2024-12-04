@@ -28,33 +28,7 @@ export default defineConfig([
                "newlines-between": "always",
             },
          ],
-         // "import/no-restricted-paths": [
-         //    "error",
-         //    {
-         //       zones: [
-         //          {
-         //             target: "./src/features",
-         //             from: "./src/features",
-         //             message:
-         //                "Direct imports from within features are not allowed. Use the public API (`index.ts`) instead.",
-         //          },
-         //          {
-         //             target: "./src/pages",
-         //             from: "./src/pages",
-         //             except: ["./**"],
-         //             message:
-         //                "Direct imports from within pages are not allowed. Use the public API (`index.ts`) instead.",
-         //          },
-         //       ],
-         //    },
-         // ],
          "boundaries/element-types": [
-            // { type: "features", pattern: "src/pages/*" },
-            // { type: "pages", pattern: "src/pages/*" },
-            // { type: "widgets", pattern: "src/widgets/*" },
-            // { type: "shared", pattern: "src/shared/*" },
-            // { type: "entities", pattern: "src/entities/*" },
-            // { type: "app", pattern: "src/app/*" },
             "error",
             {
                default: "disallow",
@@ -131,6 +105,9 @@ export default defineConfig([
          "src-tauri/target/",
          "tailwind.config.cjs",
          ".prettierrc.json",
+         "android",
+         "dist/",
+         "dist",
       ],
    },
    {

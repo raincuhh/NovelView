@@ -38,5 +38,12 @@
       "capacitor.config.ts",
       "postcss.config.cjs"
    ],
-   "exclude": ["node_modules", "dist", "src-tauri/**", "src-tauri/target"]
+   "exclude": [
+      "node_modules",
+      "dist",
+      "src-tauri/**",
+      "src-tauri/target",
+      "android",
+      "ios"
+   ]
 }
