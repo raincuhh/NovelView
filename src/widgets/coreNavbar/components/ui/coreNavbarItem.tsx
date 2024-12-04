@@ -1,3 +1,4 @@
+import { uppercaseify } from "@/shared/lib";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -25,7 +26,7 @@ const CoreNavbarItem = ({
                <div className="flex flex-col justify-center items-center gap-1">
                   <div>{iconElement}</div>
                   <div className="text-fs-sm media-min-w-400:text-fs-md font-weight-lg text-muted">
-                     {text}
+                     {uppercaseify(text)}
                   </div>
                </div>
             </>

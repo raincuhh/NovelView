@@ -106,6 +106,7 @@ export default defineConfig([
          "tailwind.config.cjs",
          ".prettierrc.json",
          "android",
+         "ios",
          "dist/",
          "dist",
       ],

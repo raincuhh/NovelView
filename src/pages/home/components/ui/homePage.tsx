@@ -1,9 +1,26 @@
+import { useEnvironment } from "@/shared/hooks";
 import React from "react";
+import HomeNavbar from "./homeNavbar";
+import HomePageLayout from "../layouts/homePageLayout";
+import LibraryQuickAccess from "./libraryQuickAccess";
+import RecentlyRead from "./recentlyRead";
+import RecentFeed from "./recentFeed";
 
 const HomePage = (): React.JSX.Element => {
+   const { isMobile } = useEnvironment();
+   // make the layout desktop like aswell. as in the side main side layout thing.
    return (
       <>
-         <div className="w-full h-full">test</div>
+         <HomePageLayout>
+            {isMobile && <HomeNavbar />}
+            <div className="h-full mt-2 px-4 sm:mt-0 sm:px-0">
+               <div className="flex flex-col">
+                  <RecentFeed />
+                  <RecentlyRead />
+                  <LibraryQuickAccess />
+               </div>
+            </div>
+         </HomePageLayout>
       </>
    );
 };
