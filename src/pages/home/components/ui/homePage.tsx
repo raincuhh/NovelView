@@ -6,6 +6,7 @@ import HomePageLayout from "../layouts/homePageLayout";
 import LibraryQuickAccess from "./libraryQuickAccess";
 import RecentlyRead from "./recentlyRead";
 import RecentFeed from "./recentFeed";
+import HomeCategoryLayout from "../layouts/homeCategoryLayout";
 
 const HomePage = (): React.JSX.Element => {
    const { isMobile } = useEnvironment();
@@ -14,11 +15,17 @@ const HomePage = (): React.JSX.Element => {
       <>
          <HomePageLayout>
             {isMobile && <HomeNavbar />}
-            <div className="h-full mt-2 px-4 sm:mt-0 sm:px-0">
-               <div className="flex flex-col">
-                  <RecentFeed />
-                  <RecentlyRead />
-                  <LibraryQuickAccess />
+            <div className="h-full mt-2 sm:mt-0 sm:px-0">
+               <div className="flex flex-col gap-8">
+                  <HomeCategoryLayout>
+                     <RecentFeed />
+                  </HomeCategoryLayout>
+                  <HomeCategoryLayout>
+                     <RecentlyRead />
+                  </HomeCategoryLayout>
+                  <HomeCategoryLayout>
+                     <LibraryQuickAccess />
+                  </HomeCategoryLayout>
                </div>
             </div>
          </HomePageLayout>

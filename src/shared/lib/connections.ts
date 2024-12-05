@@ -1,5 +1,6 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import { invoke, InvokeArgs, InvokeOptions } from "@tauri-apps/api/core";
+
 import { SUPABASE_URL, SUPABASE_PUBLIC_ANON_KEY } from "./env";
 
 export const supabaseInstance = (): SupabaseClient<any, "public", any> => {

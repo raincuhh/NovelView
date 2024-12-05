@@ -1,9 +1,17 @@
-import React from "react";
+import { RenderList } from "@/shared/components/utils";
+import React, { useState } from "react";
 
-const RecentFeed = () => {
+const RecentFeed = (): React.JSX.Element => {
+   const [recentList, setRecentList] = useState<[]>([]);
+
    return (
       <>
-         <div>Recent Feed</div>
+         <div className="flex flex-wrap flex-1">
+            <RenderList
+               data={recentList}
+               render={(item: any, i: number) => <div key={i}>test</div>}
+            />
+         </div>
       </>
    );
 };

@@ -26,15 +26,7 @@ const CoreNavbar = (): React.JSX.Element => {
                      text="Libraries"
                      to="/libraries"
                   />
-                  <CoreNavbarItem
-                     iconElement={
-                        <UserIcon className="fill-interactive-accent w-9 h-9" />
-                     }
-                     text="Me"
-                     onClick={() => {
-                        console.log("clicked me");
-                     }}
-                  />
+
                   <CoreNavbarItem
                      iconElement={
                         <PlusIcon className="fill-interactive-accent w-9 h-9" />
