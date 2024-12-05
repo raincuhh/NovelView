@@ -1,5 +1,7 @@
 import React from "react";
 
+import { UserAvatar } from "@/shared/components/ui";
+
 const HomeNavbar = (): React.JSX.Element => {
    return (
       <>
@@ -8,7 +10,9 @@ const HomeNavbar = (): React.JSX.Element => {
                bg-primary border-b-[1px]"
          >
             <div className="h-full w-full flex items-center px-4">
-               <div className="text-fs-xl font-weight-lg">Home</div>
+               <div className="flex flex-row overflow-x-scroll py-4 gap-4 h-full items-center">
+                  <UserAvatar className="w-8 h-8" />
+               </div>
             </div>
          </div>
       </>

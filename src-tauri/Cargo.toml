@@ -26,3 +26,4 @@ tauri-plugin-log = "2.0.0-rc"
 dotenv = "0.15"
 tauri-plugin-store = "2"
 tauri-plugin-sql = { version = "2", features = ["sqlite"] }
+rusqlite = "0.32.1"

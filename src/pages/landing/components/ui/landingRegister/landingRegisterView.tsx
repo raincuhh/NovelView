@@ -4,6 +4,7 @@ import LandingViewsHeader from "../landingViewsHeader";
 import ViewNavProviderRoot from "../../utils/viewNavProviderRoot";
 import useViewNav from "@/pages/landing/hooks/useViewNav";
 import { AuthForm } from "@/features/auth";
+import LandingCategoryLayout from "../../layouts/landingCategoryLayout";
 
 const LandingRegisterView = (): React.JSX.Element => {
    const { setNavTitle } = useViewNav();
@@ -16,8 +17,12 @@ const LandingRegisterView = (): React.JSX.Element => {
       <>
          <div className="flex flex-col">
             <ViewNavProviderRoot />
-            <LandingViewsHeader type="register" />
-            <AuthForm type="register" />
+            <LandingCategoryLayout>
+               <LandingViewsHeader type="register" />
+            </LandingCategoryLayout>
+            <LandingCategoryLayout>
+               <AuthForm type="register" />
+            </LandingCategoryLayout>
          </div>
       </>
    );

@@ -16,7 +16,7 @@ const LandingPage = (): React.JSX.Element => {
    return (
       <>
          <div className="w-full min-h-full justify-start flex flex-col h-full">
-            <div className="flex flex-col min-h-full px-4 sm:px-8">
+            <div className="flex flex-col min-h-full">
                <ViewSwitcherProvider<LandingPageType>
                   initialView={LandingPageViews.home}
                   duration={50}

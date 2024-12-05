@@ -5,25 +5,24 @@ import HomeNavbar from "./homeNavbar";
 import HomePageLayout from "../layouts/homePageLayout";
 import LibraryQuickAccess from "./libraryQuickAccess";
 import RecentlyRead from "./recentlyRead";
-import RecentFeed from "./recentFeed";
+import RecentFeed from "./recentFeed/recentFeed";
 import HomeCategoryLayout from "../layouts/homeCategoryLayout";
 
 const HomePage = (): React.JSX.Element => {
    const { isMobile } = useEnvironment();
-   // make the layout desktop like aswell. as in the side main side layout thing.
    return (
       <>
          <HomePageLayout>
             {isMobile && <HomeNavbar />}
             <div className="h-full mt-2 sm:mt-0 sm:px-0">
-               <div className="flex flex-col gap-8">
-                  <HomeCategoryLayout>
+               <div className="flex flex-col gap-6">
+                  <HomeCategoryLayout id="recent-feed">
                      <RecentFeed />
                   </HomeCategoryLayout>
-                  <HomeCategoryLayout>
+                  <HomeCategoryLayout id="recently-read">
                      <RecentlyRead />
                   </HomeCategoryLayout>
-                  <HomeCategoryLayout>
+                  <HomeCategoryLayout id="library-quick-access">
                      <LibraryQuickAccess />
                   </HomeCategoryLayout>
                </div>

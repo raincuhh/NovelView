@@ -5,6 +5,7 @@ import ViewNavProviderRoot from "../../utils/viewNavProviderRoot";
 import useViewNav from "@/pages/landing/hooks/useViewNav";
 import { AuthForm } from "@/features/auth";
 import { useEnvironment } from "@/shared/hooks";
+import LandingCategoryLayout from "../../layouts/landingCategoryLayout";
 
 const LandingLoginView = (): React.JSX.Element => {
    const { setNavTitle } = useViewNav();
@@ -17,8 +18,12 @@ const LandingLoginView = (): React.JSX.Element => {
       <>
          <div className="flex flex-col">
             <ViewNavProviderRoot />
-            <LandingViewsHeader type="login" />
-            <AuthForm type="login" />
+            <LandingCategoryLayout>
+               <LandingViewsHeader type="login" />
+            </LandingCategoryLayout>
+            <LandingCategoryLayout>
+               <AuthForm type="login" />
+            </LandingCategoryLayout>
          </div>
       </>
    );

@@ -8,6 +8,7 @@ import LandingRegisterView from "./landingRegister/landingRegisterView";
 import LandingLoginView from "./landingLogin/landingLoginView";
 import LandingHomeHeader from "./landingHome/landingHomeHeader";
 import { useMediaQuery } from "@/shared/hooks";
+import LandingCategoryLayout from "../layouts/landingCategoryLayout";
 
 const LandingViewsContainer = (): React.JSX.Element => {
    const { currentView, direction } = useViewSwitcher<LandingPageViews>();
@@ -31,7 +32,11 @@ const LandingViewsContainer = (): React.JSX.Element => {
    return (
       <>
          <div className="flex-row w-full h-full">
-            {isSm ? <LandingHomeHeader includeLogo={true} /> : null}
+            {isSm ? (
+               <LandingCategoryLayout>
+                  <LandingHomeHeader includeLogo={true} />
+               </LandingCategoryLayout>
+            ) : null}
             <AnimatePresence mode="popLayout" custom={direction}>
                {currentView === LandingPageViews.home && (
                   <motion.div

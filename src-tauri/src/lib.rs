@@ -4,14 +4,50 @@ use std::sync::Mutex;
 use tauri::{AppHandle, Listener, WebviewWindowBuilder};
 use tauri::{Manager, WebviewWindow};
 use tauri_plugin_sql::{Migration, MigrationKind};
+use std::fs::create_dir_all;
+// use std::path::Path;
+use rusqlite::Connection;
 
-static IS_MAIN_VISIBLE: std::sync::Mutex<bool> = Mutex::new(false);
+static IS_MAIN_VISIBLE: Mutex<bool> = Mutex::new(false);
+
+// .plugin(tauri_plugin_sql::Builder::new().add_migrations("sqlite:db.db", setup_database()).build())
+//         .plugin(tauri_plugin_store::Builder::new().build())
 
 pub fn run() {
     tauri::Builder::default()
-        .plugin(tauri_plugin_sql::Builder::new().build())
         .plugin(tauri_plugin_store::Builder::new().build())
-        .setup(|app| {
+        .setup(|app: &mut tauri::App| {
+
+            let app_handle: &AppHandle = app.app_handle();
+            let app_dir: std::path::PathBuf = app.path().app_data_dir().unwrap();
+
+            let db_path: std::path::PathBuf = app_dir.join("db.sqlite");
+
+            if !db_path.exists() {
+                let conn = Connection::open(&db_path).expect("Failed to create database");
+                let schema_content = include_str!("schema.sql");
+
+                conn.execute_batch(schema_content)
+                    .expect("Failed to create initial tables");
+
+                println!("Created a new db.sqlite file at: {}", db_path.to_string_lossy());
+            } else {
+                println!("Database file already exists at: {}", db_path.to_string_lossy());
+            }
+
+            let db_url: String = db_path.to_string_lossy().to_string();
+
+
+            println!("db path resolved to: {}", db_url);
+
+            create_dir_all(&app_dir).expect("Failed to create AppData directory");
+
+            app.handle().plugin(
+                tauri_plugin_sql::Builder::new()
+                    .add_migrations(&db_url, setup_database())
+                    .build(),
+            )?;
+
             if cfg!(debug_assertions) {
                 app.handle().plugin(
                     tauri_plugin_log::Builder::default()
@@ -19,7 +55,7 @@ pub fn run() {
                         .build(),
                 )?;
             }
-            let app_handle: &AppHandle = app.app_handle();
+
 
             let landing_window: WebviewWindow = match setup_window(
                 app_handle,
@@ -138,22 +174,25 @@ pub fn setup_database() -> Vec<Migration> {
 
             CREATE TABLE IF NOT EXISTS libraries (
                 library_id UUID PRIMARY KEY,
-                user_id UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+                user_id UUID NULL REFERENCES users(user_id) ON DELETE CASCADE,
                 name VARCHAR NOT NULL,
                 desc VARCHAR,
                 tags TEXT,
+                sync_status TEXT DEFAULT 'local',
                 created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
             );
 
             CREATE TABLE IF NOT EXISTS books (
                 book_id UUID PRIMARY KEY,
-                user_id UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+                user_id UUID NULL REFERENCES users(user_id) ON DELETE CASCADE,
                 title VARCHAR NOT NULL,
                 author VARCHAR,
                 added_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
                 metadata TEXT,
                 desc TEXT,
                 file_url VARCHAR NOT NULL
+                sync_status TEXT DEFAULT 'local',
+                created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
             );
 
             CREATE TABLE IF NOT EXISTS library_books (
@@ -163,10 +202,10 @@ pub fn setup_database() -> Vec<Migration> {
                 PRIMARY KEY (library_id, book_id)
             );
 
-            CREATE TABLE IF NOT EXISTS libraryInteractions (
+            CREATE TABLE IF NOT EXISTS library_interactions (
                 interaction_id UUID PRIMARY KEY,
                 library_id UUID NOT NULL REFERENCES libraries(library_id) ON DELETE CASCADE,
-                user_id UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+                user_id UUID NULL REFERENCES users(user_id) ON DELETE CASCADE,
                 click_count INT DEFAULT 0,
                 last_accessed TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
                 created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
