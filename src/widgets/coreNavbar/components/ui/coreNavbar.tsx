@@ -1,7 +1,7 @@
 import React from "react";
 
 import CoreNavbarItem from "./coreNavbarItem";
-import { HomeIcon, LibraryIcon, UserIcon } from "@/shared/components/icons";
+import { HomeIcon, LibraryIcon, UserIcon, PlusIcon } from "@/shared/components/icons";
 import { useAuth } from "@/features/auth";
 
 const CoreNavbar = (): React.JSX.Element => {
@@ -31,7 +31,15 @@ const CoreNavbar = (): React.JSX.Element => {
                         <UserIcon className="fill-interactive-accent w-9 h-9" />
                      }
                      text="Me"
-                     to="/"
+                     onClick={() => {
+                        console.log("clicked me");
+                     }}
+                  />
+                  <CoreNavbarItem
+                     iconElement={
+                        <PlusIcon className="fill-interactive-accent w-9 h-9" />
+                     }
+                     text="Create"
                   />
                </ul>
             </div>

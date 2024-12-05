@@ -42,7 +42,7 @@ const LandingViewsContainer = (): React.JSX.Element => {
                      exit="exit"
                      variants={variants}
                      transition={{ duration: 0.3 }}
-                     className={`inset-0 relative w-full h-full ${isSm ? "pt-8" : ""}`}
+                     className={`inset-0 relative w-full h-min ${isSm ? "pt-8" : ""}`}
                   >
                      <LandingHomeView />
                   </motion.div>
@@ -56,7 +56,7 @@ const LandingViewsContainer = (): React.JSX.Element => {
                      exit="exit"
                      variants={variants}
                      transition={{ duration: 0.3 }}
-                     className={`inset-0 relative w-full h-full ${isSm ? "pt-8" : ""}`}
+                     className={`inset-0 relative w-full h-min ${isSm ? "pt-8" : ""}`}
                   >
                      <LandingRegisterView />
                   </motion.div>
@@ -70,7 +70,7 @@ const LandingViewsContainer = (): React.JSX.Element => {
                      exit="exit"
                      variants={variants}
                      transition={{ duration: 0.3 }}
-                     className={`inset-0 relative w-full h-full ${isSm ? "pt-8" : ""}`}
+                     className={`inset-0 relative w-full h-min ${isSm ? "pt-8" : ""}`}
                   >
                      <LandingLoginView />
                   </motion.div>
