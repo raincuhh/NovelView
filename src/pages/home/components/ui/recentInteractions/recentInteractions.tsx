@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { RenderList } from "@/shared/components/utils";
 
-const RecentFeed = (): React.JSX.Element => {
+const RecentInteractions = (): React.JSX.Element => {
    const [recentList, setRecentList] = useState<string[]>([]);
    const [loading, setLoading] = useState<boolean>(true);
 
@@ -13,7 +13,7 @@ const RecentFeed = (): React.JSX.Element => {
    const fetchRecentList = async () => {
       setLoading(true);
       setTimeout(() => {
-         setRecentList(["hello world", "yurr listen man"]);
+         setRecentList(["hello world", "yurr awdawdaw man"]);
          setLoading(false);
       }, 1000);
    };
@@ -42,4 +42,4 @@ const RecentFeed = (): React.JSX.Element => {
    );
 };
 
-export default RecentFeed;
+export default RecentInteractions;

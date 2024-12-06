@@ -10,8 +10,8 @@ const CoreNavbar = (): React.JSX.Element => {
    return (
       <>
          <nav className="w-full fixed bottom-0 z-layer-menu">
-            <div className="px-4 pt-4 flex justify-center w-full bg-gradient-to-t from-primary to-transparent">
-               <ul className="flex gap-12 justify-around w-full pb-2">
+            <div className="pt-4 flex justify-center w-full bg-gradient-to-t from-primary to-transparent">
+               <ul className="flex gap-12 justify-around w-full pb-2 px-4">
                   <CoreNavbarItem
                      iconElement={
                         <HomeIcon className="fill-interactive-accent w-9 h-9" />

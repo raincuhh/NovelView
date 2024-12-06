@@ -15,3 +15,4 @@ export { default as LibraryIcon } from "./libraryIcon";
 export { default as HomeIcon } from "./homeIcon";
 export { default as HollowSearchIcon } from "./hollowSearchIcon";
 export { default as FilledSearchIcon } from "./filledSearchIcon";
+export { default as BookIcon } from "./bookIcon";
