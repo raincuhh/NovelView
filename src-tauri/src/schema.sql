@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS books (
     author VARCHAR,
     added_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     metadata TEXT,
+    tags TEXT,
     desc TEXT,
     file_url VARCHAR NOT NULL,
     sync_status TEXT DEFAULT "local",

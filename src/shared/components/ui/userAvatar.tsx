@@ -5,12 +5,8 @@ type UserAvatarProps = HTMLAttributes<HTMLDivElement> & {};
 const UserAvatar = ({ ...props }: UserAvatarProps): React.JSX.Element => {
    const [loading, setLoading] = useState<boolean>(true);
    const [userAvatarUrl, setUserAvatarUrl] = useState<string>(
-      "../../../../../../public/assets/placeholders/avatars/profileAvatarPlaceholder.png",
+      "/assets/placeholders/avatars/placeholder.jpg",
    );
-
-   useEffect(() => {
-      fetchUserAvatarUrl();
-   }, []);
 
    const fetchUserAvatarUrl = async () => {
       setLoading(true);
@@ -19,18 +15,21 @@ const UserAvatar = ({ ...props }: UserAvatarProps): React.JSX.Element => {
       }, 1000);
    };
 
-   // replace loading with a skeleton thing.
+   useEffect(() => {
+      fetchUserAvatarUrl();
+   }, []);
+
    return (
       <>
          <div {...props}>
             <div className="w-full h-full">
-               {loading ? (
-                  <div className="w-full h-full bg-interactive-base rounded-radius-full"></div>
-               ) : (
-                  <div className="w-full h-full bg-interactive-base rounded-radius-full">
+               <div className="w-full h-full bg-interactive-base rounded-radius-full">
+                  {loading ? (
+                     <div></div>
+                  ) : (
                      <img src={userAvatarUrl} alt="pfp" className="rounded-radius-full" />
-                  </div>
-               )}
+                  )}
+               </div>
             </div>
          </div>
       </>

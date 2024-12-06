@@ -51,8 +51,14 @@ const RouteList: RouteListProps[] = [
    },
    {
       id: "reader",
-      path: "/libraries/:libraryId/:bookId",
+      path: "/book/:bookId",
       element: <ReaderPage />,
+      routeType: RouteTypes.public,
+   },
+   {
+      id: "recents",
+      path: "/recents",
+      element: <div></div>,
       routeType: RouteTypes.public,
    },
 ];

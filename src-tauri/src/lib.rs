@@ -5,13 +5,9 @@ use tauri::{AppHandle, Listener, WebviewWindowBuilder};
 use tauri::{Manager, WebviewWindow};
 use tauri_plugin_sql::{Migration, MigrationKind};
 use std::fs::create_dir_all;
-// use std::path::Path;
 use rusqlite::Connection;
 
 static IS_MAIN_VISIBLE: Mutex<bool> = Mutex::new(false);
-
-// .plugin(tauri_plugin_sql::Builder::new().add_migrations("sqlite:db.db", setup_database()).build())
-//         .plugin(tauri_plugin_store::Builder::new().build())
 
 pub fn run() {
     tauri::Builder::default()
@@ -20,6 +16,8 @@ pub fn run() {
 
             let app_handle: &AppHandle = app.app_handle();
             let app_dir: std::path::PathBuf = app.path().app_data_dir().unwrap();
+
+            create_dir_all(&app_dir).expect("Failed to create AppData directory");
 
             let db_path: std::path::PathBuf = app_dir.join("db.sqlite");
 
@@ -39,8 +37,6 @@ pub fn run() {
 
 
             println!("db path resolved to: {}", db_url);
-
-            create_dir_all(&app_dir).expect("Failed to create AppData directory");
 
             app.handle().plugin(
                 tauri_plugin_sql::Builder::new()
