@@ -13,5 +13,6 @@ export type RouteListProps = {
    element: JSX.Element;
    errorElement?: JSX.Element;
    routeType?: RouteTypes;
-   layout: keyof typeof LayoutRegistry;
+   layout?: keyof typeof LayoutRegistry;
+   layoutProps?: Record<string, any>;
 };

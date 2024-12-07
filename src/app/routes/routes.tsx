@@ -20,7 +20,10 @@ const appRouter = createHashRouter(
    createRoutesFromElements(
       <>
          {RouteList.map((route: RouteListProps, i: number) => {
-            const PageLayout = AppLayoutRegistry[route.layout] || AppLayoutRegistry.base;
+            const PageLayout =
+               AppLayoutRegistry[route.layout as keyof typeof AppLayoutRegistry] ||
+               AppLayoutRegistry.base;
+            const layoutProps = route.layoutProps || {};
 
             return (
                <Route
@@ -30,7 +33,7 @@ const appRouter = createHashRouter(
                      <RouteGuard type={route.routeType}>
                         <SuspenseWithDelay fallback={<SplashScreen />} delay={300}>
                            <AppLayout>
-                              <PageLayout>{route.element}</PageLayout>
+                              <PageLayout {...layoutProps}>{route.element}</PageLayout>
                            </AppLayout>
                         </SuspenseWithDelay>
                      </RouteGuard>

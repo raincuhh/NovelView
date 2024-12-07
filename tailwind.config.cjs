@@ -387,11 +387,11 @@ module.exports = {
                "--radius-full": "6.66rem",
 
                //zindex
-               "--layer-background": "5",
+               "--layer-background": "1",
                "--layer-sidebar": "10",
-               "--layer-header": "15",
+               "--layer-header": "20",
                "--layer-popup": "30",
-               "--layer-content": "45",
+               "--layer-content": "40",
                "--layer-modal": "50",
                "--layer-notification": "60",
                "--layer-menu": "65",
