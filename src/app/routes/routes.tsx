@@ -6,37 +6,49 @@ import {
    RouteObject,
 } from "react-router-dom";
 
+import AppLayoutRegistry from "@/shared/components/utils/appLayoutRegistry";
+import { PageLayout, AppLayout } from "@/shared/components/layout";
+
 import SuspenseWithDelay from "@/shared/components/utils/suspenseWithDelay";
 import RouteList from "./routeList";
-import { PageLayout } from "@/shared/components/layout";
+import { RouteListProps } from "@/shared/types";
 import { ErrorBoundary } from "@/shared/components/utils";
 import { SplashScreen } from "@/shared/components/overlay";
 import RouteGuard from "@/features/auth/components/utils/routeGuard";
-import { RouteListProps } from "@/shared/types";
 
-const routes: RouteObject[] = createRoutesFromElements(
-   <>
-      {RouteList.map((route: RouteListProps, i: number) => (
-         <Route
-            key={i}
-            path={route.path}
-            element={
-               <RouteGuard type={route.routeType}>
-                  <SuspenseWithDelay fallback={<SplashScreen />} delay={300}>
-                     <PageLayout id={route.id}>{route.element}</PageLayout>
-                  </SuspenseWithDelay>
-               </RouteGuard>
-            }
-            errorElement={
-               route.errorElement || (
-                  <ErrorBoundary
-                     fallback={"An error has occurred, check DevTools for more details."}
-                  />
-               )
-            }
-         />
-      ))}
-   </>,
+const appRouter = createHashRouter(
+   createRoutesFromElements(
+      <>
+         {RouteList.map((route: RouteListProps, i: number) => {
+            const PageLayout = AppLayoutRegistry[route.layout] || AppLayoutRegistry.base;
+
+            return (
+               <Route
+                  key={i}
+                  path={route.path}
+                  element={
+                     <RouteGuard type={route.routeType}>
+                        <SuspenseWithDelay fallback={<SplashScreen />} delay={300}>
+                           <AppLayout>
+                              <PageLayout>{route.element}</PageLayout>
+                           </AppLayout>
+                        </SuspenseWithDelay>
+                     </RouteGuard>
+                  }
+                  errorElement={
+                     route.errorElement || (
+                        <ErrorBoundary
+                           fallback={
+                              "An error has occurred, check DevTools for more details."
+                           }
+                        />
+                     )
+                  }
+               />
+            );
+         })}
+      </>,
+   ),
 );
 
-export const appRouter = createHashRouter(routes);
+export default appRouter;

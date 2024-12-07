@@ -13,7 +13,7 @@ const RecentInteractions = (): React.JSX.Element => {
    const fetchRecentList = async () => {
       setLoading(true);
       setTimeout(() => {
-         setRecentList(["hello world", "yurr awdawdaw man"]);
+         setRecentList(["hello world", "yurr awdawdaw man", "megurger speciadwla"]);
          setLoading(false);
       }, 1000);
    };

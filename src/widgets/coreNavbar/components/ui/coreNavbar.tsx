@@ -11,17 +11,17 @@ const CoreNavbar = (): React.JSX.Element => {
       <>
          <nav className="w-full fixed bottom-0 z-layer-menu">
             <div className="pt-4 flex justify-center w-full bg-gradient-to-t from-primary to-transparent">
-               <ul className="flex gap-12 justify-around w-full pb-2 px-4">
+               <ul className="flex gap-12 justify-around w-full px-4">
                   <CoreNavbarItem
                      iconElement={
-                        <HomeIcon className="fill-interactive-accent w-9 h-9" />
+                        <HomeIcon className="fill-interactive-accent w-8 h-8" />
                      }
                      text="Home"
                      to="/home"
                   />
                   <CoreNavbarItem
                      iconElement={
-                        <LibraryIcon className="fill-interactive-accent w-9 h-9" />
+                        <LibraryIcon className="fill-interactive-accent w-8 h-8" />
                      }
                      text="Libraries"
                      to="/libraries"
@@ -29,7 +29,7 @@ const CoreNavbar = (): React.JSX.Element => {
 
                   <CoreNavbarItem
                      iconElement={
-                        <PlusIcon className="fill-interactive-accent w-9 h-9" />
+                        <PlusIcon className="fill-interactive-accent w-8 h-8" />
                      }
                      text="Create"
                   />

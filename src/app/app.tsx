@@ -1,10 +1,12 @@
 import React from "react";
 import { RouterProvider } from "react-router-dom";
-import { appRouter } from "./routes/routes";
+import { SkeletonTheme } from "react-loading-skeleton";
+
+import appRouter from "./routes/routes";
 import AppProviders from "./providers/appProviders";
 import { ModalRoot, TooltipRoot } from "@/shared/components/utils";
+
 import "react-loading-skeleton/dist/skeleton.css";
-import { SkeletonTheme } from "react-loading-skeleton";
 
 const App = (): React.JSX.Element => {
    const skeletonBaseColor = getComputedStyle(document.documentElement)

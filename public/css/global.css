@@ -28,6 +28,11 @@ summary {
    display: block;
 }
 
+html,
+body {
+   overscroll-behavior: none;
+}
+
 ::-webkit-scrollbar {
    display: none;
    width: 6px;
@@ -43,7 +48,7 @@ a {
    text-decoration: none;
 }
 
-/* ::selection {
+::selection {
    color: var(--text-normal);
    background: var(--accent-primary);
 }
@@ -51,4 +56,4 @@ a {
 ::-moz-selection {
    color: var(--text-normal);
    background: var(--accent-primary);
-} */
+}

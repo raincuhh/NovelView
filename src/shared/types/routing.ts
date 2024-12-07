@@ -1,3 +1,5 @@
+import LayoutRegistry from "../components/utils/appLayoutRegistry";
+
 export enum RouteTypes {
    public,
    auth,
@@ -11,4 +13,5 @@ export type RouteListProps = {
    element: JSX.Element;
    errorElement?: JSX.Element;
    routeType?: RouteTypes;
+   layout: keyof typeof LayoutRegistry;
 };

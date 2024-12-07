@@ -1,14 +1,15 @@
 import React, { HTMLAttributes, useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 type UserAvatarProps = HTMLAttributes<HTMLDivElement> & {};
 
 const UserAvatar = ({ ...props }: UserAvatarProps): React.JSX.Element => {
    const [loading, setLoading] = useState<boolean>(true);
-   const [userAvatarUrl, setUserAvatarUrl] = useState<string>(
+   const [avatarUrl, setAvatarUrl] = useState<string>(
       "/assets/placeholders/avatars/placeholder.jpg",
    );
 
-   const fetchUserAvatarUrl = async () => {
+   const fetchavatarUrl = async () => {
       setLoading(true);
       setTimeout(() => {
          setLoading(false);
@@ -16,20 +17,22 @@ const UserAvatar = ({ ...props }: UserAvatarProps): React.JSX.Element => {
    };
 
    useEffect(() => {
-      fetchUserAvatarUrl();
+      fetchavatarUrl();
    }, []);
 
    return (
       <>
          <div {...props}>
-            <div className="w-full h-full">
-               <div className="w-full h-full bg-interactive-base rounded-radius-full">
-                  {loading ? (
-                     <div></div>
-                  ) : (
-                     <img src={userAvatarUrl} alt="pfp" className="rounded-radius-full" />
-                  )}
-               </div>
+            <div className="flex items-center justify-center">
+               {loading ? (
+                  <Skeleton height={"100%"} width={"100%"} />
+               ) : (
+                  <img
+                     src={avatarUrl}
+                     alt="pfp"
+                     className="rounded-radius-full w-full h-full"
+                  />
+               )}
             </div>
          </div>
       </>
