@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-import { TitlebarButtonTypes } from "../types";
+import { TitlebarButtonTypes } from "@/widgets/titlebar";
 
 type EnvironmentContextProps = {
    isTauri: boolean;

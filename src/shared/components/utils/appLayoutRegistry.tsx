@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+
 import BaseLayout from "../layout/baseLayout";
 import { SingleSidebarLayout } from "../layout";
 

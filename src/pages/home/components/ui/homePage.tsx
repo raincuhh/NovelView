@@ -12,7 +12,7 @@ const HomePage = (): React.JSX.Element => {
 
    return (
       <>
-         <div className="pt-10">
+         <div className="pt-10 h-[200dvh]">
             {isMobile && <HomeNavbar />}
             <div className="h-full mt-2 sm:mt-0 sm:px-0">
                <div className="flex flex-col gap-6 px-4">

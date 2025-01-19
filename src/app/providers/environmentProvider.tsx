@@ -53,14 +53,14 @@ const EnvironmentProvider = ({
    }, [isSm]);
 
    useEffect(() => {
-      // console.log("<======= EnvInfo =========>");
-      // console.log("tauri: ", isTauri);
-      // console.log("titlebar: ", showTitlebar);
-      // console.log("capacitor: ", isCapacitor);
-      // console.log("mobile: ", isMobile);
-      // console.log("prod: ", isProd);
-      // console.log("dev: ", isDev);
-      // console.log("osinfo: ", osInfo);
+      console.log("<=)== EnvInfo ==(>");
+      console.log("tauri: ", isTauri);
+      console.log("titlebar: ", showTitlebar);
+      console.log("capacitor: ", isCapacitor);
+      console.log("mobile: ", isMobile);
+      console.log("prod: ", isProd);
+      console.log("dev: ", isDev);
+      console.log("osinfo: ", osInfo);
    }, [isTauri, showTitlebar, isCapacitor, isMobile, isProd, isDev, osInfo]);
 
    const contextValue = useMemo(

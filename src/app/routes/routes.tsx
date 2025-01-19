@@ -8,7 +8,6 @@ import {
 
 import AppLayoutRegistry from "@/shared/components/utils/appLayoutRegistry";
 import { PageLayout, AppLayout } from "@/shared/components/layout";
-
 import SuspenseWithDelay from "@/shared/components/utils/suspenseWithDelay";
 import RouteList from "./routeList";
 import { RouteListProps } from "@/shared/types";

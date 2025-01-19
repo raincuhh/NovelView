@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { RenderList } from "@/shared/components/utils";
 import RecentlyReadItem from "./recentlyReadItem";
 import { RecentlyReadMetadata } from "@/pages/home/types/recentlyRead";
+import { ChevronRightIcon } from "@/shared/components/icons";
 
 const RecentlyRead = (): React.JSX.Element | null => {
    const [recentlyRead, setRecentlyRead] = useState<RecentlyReadMetadata[]>([]);
@@ -27,6 +28,11 @@ const RecentlyRead = (): React.JSX.Element | null => {
                library: "dark",
                bookId: "shadow-slave",
             },
+            {
+               title: "Pursuit of Truth",
+               library: "dark",
+               bookId: "pursuit-of-truth",
+            },
          ]);
          setTimeout(() => {
             setIsLoading(false);
@@ -43,12 +49,17 @@ const RecentlyRead = (): React.JSX.Element | null => {
 
    return recentlyRead.length > 0 ? (
       <div className="flex flex-col">
-         <header className="flex flex-row w-full justify-between items-end sm:px-3">
-            <h1 className="text-fs-2xl font-weight-xl hover:underline underline-offset-4">
+         <header className="flex flex-row w-full justify-between items-center sm:px-3">
+            <h1 className="text-fs-xl font-weight-xl hover:underline underline-offset-4">
                <Link to={"/recents"}>Recently Read</Link>
             </h1>
-            <div className="text-fs-lg text-muted font-weight-lg hover:text-normal">
-               <Link to={"/recents"}>View All</Link>
+            <div className="text-fs-lg text-muted font-weight-lg hover:text-normal h-full items-center">
+               <Link to={"/recents"}>
+                  <div className="flex items-center">
+                     <div>View All</div>
+                     <ChevronRightIcon className="!h-6 !w-6 fill-muted" />
+                  </div>
+               </Link>
             </div>
          </header>
          <div className="mt-2 sm:mt-0">

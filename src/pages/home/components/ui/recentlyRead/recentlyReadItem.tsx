@@ -30,7 +30,8 @@ const RecentlyReadItem = ({
                   ) : (
                      <img
                         src={
-                           data.coverUrl || "/assets/placeholders/avatars/placeholder.jpg"
+                           data.coverUrl ||
+                           "/assets/placeholders/backgrounds/bookCoverPlaceholder.png"
                         }
                         alt={data.title.concat(" Cover") || "recentlyReadCover"}
                         className="absolute object-cover w-full h-full inset-0 bg-cover rounded-radius-md"

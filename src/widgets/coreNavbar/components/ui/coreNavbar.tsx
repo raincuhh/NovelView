@@ -9,6 +9,7 @@ const CoreNavbar = (): React.JSX.Element => {
 
    return (
       <>
+         whatthesigmaaa
          <nav className="w-full fixed bottom-0 z-layer-menu">
             <div className="pt-4 flex justify-center w-full bg-gradient-to-t from-primary to-transparent">
                <ul className="flex gap-12 justify-around w-full px-4">
