@@ -1,6 +1,6 @@
-import React, { forwardRef, LabelHTMLAttributes } from "react";
+import { forwardRef, LabelHTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/shared/lib/utils";
+import { cn } from "@/shared/lib/globalUtils";
 
 const labelVariants = cva(
 	"text-sm text-normal font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"

@@ -1,5 +1,5 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
-import { cn } from "@/shared/lib/utils";
+import { forwardRef, InputHTMLAttributes } from "react";
+import { cn } from "@/shared/lib/globalUtils";
 
 type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & { text?: string };
 

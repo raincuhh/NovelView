@@ -1,6 +1,6 @@
-import React, { forwardRef, HTMLAttributes, LabelHTMLAttributes } from "react";
+import { forwardRef, HTMLAttributes, LabelHTMLAttributes } from "react";
 import Label from "./label";
-import { cn } from "@/shared/lib/utils";
+import { cn } from "@/shared/lib/globalUtils";
 
 const Form = forwardRef<HTMLFormElement, HTMLAttributes<HTMLFormElement>>(
 	({ className, children, ...props }, ref) => {
@@ -60,7 +60,7 @@ const FormDescription = forwardRef<
 	HTMLAttributes<HTMLParagraphElement> & FormDescriptionProps
 >(({ className, children, ...props }, ref) => {
 	return (
-		<p ref={ref} className={cn("text-muted text-sm", className)} {...props}>
+		<p ref={ref} className={cn("text-muted text-sm select-none", className)} {...props}>
 			{children}
 		</p>
 	);

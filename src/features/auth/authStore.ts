@@ -2,16 +2,16 @@ import { User } from "@/shared/lib/types";
 import { Session } from "@supabase/supabase-js";
 import { create } from "zustand";
 // import { supabase } from "@/shared/lib/services";
-import { logoutUser, registerUser, loginUser } from "./authService";
-import { useSupabase } from "@/shared/providers/systemProvider";
+// import { logoutUser, registerUser, loginUser } from "./authService";
+// import { useSupabase } from "@/shared/providers/systemProvider";
 
 type AuthState = {
 	user: User | null;
 	session: Session | null;
 	loading: boolean;
-	register: (email: string, password: string, username: string) => Promise<User | null>;
-	login: (email: string, password: string) => Promise<void>;
-	logout: () => Promise<void>;
+	// register: (email: string, password: string, username: string) => Promise<User | null>;
+	// login: (email: string, password: string) => Promise<void>;
+	// logout: () => Promise<void>;
 	setUser: (user: User | null) => void;
 	setSession: (session: Session | null) => void;
 	setLoading: (loading: boolean) => void;
@@ -27,23 +27,23 @@ export const useAuthStore = create<AuthState>((set) => ({
 	setSession: (session) => set({ session }),
 	setLoading: (loading) => set({ loading }),
 
-	register: async (email, password, username) => {
-		const user = await registerUser(email, password, username);
-		set({ user });
-		return user;
-	},
+	// register: async (email, password, username) => {
+	// 	const user = await registerUser(email, password, username);
+	// 	set({ user });
+	// 	return user;
+	// },
 
-	login: async (email, password) => {
-		const authData = await loginUser(email, password);
-		if (authData) {
-			set({ session: authData.session, user: authData.user });
-		}
-	},
+	// login: async (email, password) => {
+	// 	const authData = await loginUser(email, password);
+	// 	if (authData) {
+	// 		set({ session: authData.session, user: authData.user });
+	// 	}
+	// },
 
-	logout: async () => {
-		await logoutUser();
-		set({ user: null, session: null });
-	},
+	// logout: async () => {
+	// 	await logoutUser();
+	// 	set({ user: null, session: null });
+	// },
 
 	// initAuth: () => {
 	// 	console.log("initializing auth...");

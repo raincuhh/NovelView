@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import OnboardingViewContainer from "./onboardingViewContainer";
 import { Button } from "@/shared/components/ui/button";
-import Checkbox from "@/shared/components/ui/checkbox";
 import ReadOnlyFormDisplay from "@/shared/components/ui/readOnlyFormDisplay";
 import { Form } from "@/shared/components/ui/form";
 import { Link } from "@tanstack/react-router";
 import Separator from "@/shared/components/ui/separator";
 import { useRegisterFormStore } from "../../registerFormStore";
-import { cn } from "@/shared/lib/utils";
+import { cn } from "@/shared/lib/globalUtils";
 
 export default function RegisterFinish() {
 	const { formData } = useRegisterFormStore();

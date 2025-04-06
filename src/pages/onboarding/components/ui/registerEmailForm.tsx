@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useRegisterFormStore, baseRegisterFormSchema } from "../../registerFormStore";
+import { useRegisterFormStore, registerFormSchema } from "../../registerFormStore";
 import { Button } from "@/shared/components/ui/button";
 import { CombinedOnboardingViews } from "../../types";
 import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
@@ -14,7 +14,7 @@ import {
 import { Input } from "@/shared/components/ui/input";
 import OnboardingViewContainer from "./onboardingViewContainer";
 
-const registerEmailSchema = baseRegisterFormSchema.pick({
+const registerEmailSchema = registerFormSchema.pick({
 	email: true,
 });
 

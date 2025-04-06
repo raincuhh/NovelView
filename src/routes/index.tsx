@@ -6,8 +6,10 @@ export const Route = createFileRoute("/")({
 
 function RouteComponent() {
 	return (
-		<div>
-			Hello "/"! <Link to="/test">to test</Link>
+		<div className="flex flex-col">
+			<div>Hello "/"!</div>
+			<Link to="/test">to test</Link>
+			<Link to="/onboarding">to onboarding</Link>
 		</div>
 	);
 }

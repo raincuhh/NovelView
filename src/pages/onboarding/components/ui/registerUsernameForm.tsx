@@ -10,11 +10,11 @@ import {
 } from "@/shared/components/ui/form";
 import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
 import { CombinedOnboardingViews } from "../../types";
-import { baseRegisterFormSchema, useRegisterFormStore } from "../../registerFormStore";
+import { registerFormSchema, useRegisterFormStore } from "../../registerFormStore";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 
-const registerUsernameSchema = baseRegisterFormSchema.pick({
+const registerUsernameSchema = registerFormSchema.pick({
 	username: true,
 });
 

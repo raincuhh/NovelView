@@ -1,4 +1,4 @@
-import { cn } from "@/shared/lib/utils";
+import { cn } from "@/shared/lib/globalUtils";
 
 const defaultStyling = "fill-normal h-6 w-6";
 

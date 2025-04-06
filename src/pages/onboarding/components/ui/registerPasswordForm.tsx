@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { baseRegisterFormSchema, useRegisterFormStore } from "../../registerFormStore";
+import { registerFormSchema, useRegisterFormStore } from "../../registerFormStore";
 import { Button } from "@/shared/components/ui/button";
 import { CombinedOnboardingViews } from "../../types";
 import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
@@ -14,7 +14,7 @@ import {
 } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
 
-const RegisterPasswordSchema = baseRegisterFormSchema.pick({
+const RegisterPasswordSchema = registerFormSchema.pick({
 	password: true,
 	repeatPassword: true,
 });

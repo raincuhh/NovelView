@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { z } from "zod";
 
-export const baseRegisterFormSchema = z.object({
+export const registerFormSchema = z.object({
 	email: z.string().email("Invalid email"),
 	password: z.string().min(10, "Password must be at least 10 characters"),
 	repeatPassword: z.string().min(10, "Password must be at least 10 characters"),
@@ -12,14 +12,6 @@ export const baseRegisterFormSchema = z.object({
 		.nullable(),
 	username: z.string().min(2, "Username must be at least 2 characters"),
 });
-
-export const registerFormSchema = baseRegisterFormSchema.refine(
-	(data) => data.password === data.repeatPassword,
-	{
-		message: "Passwords do not match",
-		path: ["repeatPassword"],
-	}
-);
 
 export type RegisterFormData = z.infer<typeof registerFormSchema>;
 

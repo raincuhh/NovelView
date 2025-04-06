@@ -1,4 +1,4 @@
-import React, { ElementType } from "react";
+import { ElementType } from "react";
 import { ViewTransitionProvider } from "@/shared/providers/viewTransitionProvider";
 import { createFileRoute } from "@tanstack/react-router";
 import { CombinedOnboardingViews } from "@/pages/onboarding/types";
@@ -16,6 +16,7 @@ import RegisterGenderForm from "@/pages/onboarding/components/ui/registerGenderF
 import RegisterDOBForm from "@/pages/onboarding/components/ui/registerDOBForm";
 import RegisterUsernameForm from "@/pages/onboarding/components/ui/registerUsernameForm";
 import RegisterFinish from "@/pages/onboarding/components/ui/registerFinish";
+import { OnboardingHeader } from "@/pages/onboarding/components/ui/onboardingHeader";
 
 const viewComponents: Record<CombinedOnboardingViews, ElementType> = {
 	//top
@@ -51,7 +52,8 @@ function RouteComponent() {
 					duration={250}
 					type={CombinedOnboardingViews}
 				>
-					<div className="flex-1 overflow-hidden w-full h-full relative ">
+					<div className="flex flex-col flex-1 overflow-hidden w-full h-full relative ">
+						<OnboardingHeader />
 						<AnimatedTransitionContent<CombinedOnboardingViews>
 							viewComponents={viewComponents}
 							initial="enter"

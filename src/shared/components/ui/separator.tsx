@@ -1,5 +1,5 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
-import { cn } from "@/shared/lib/utils";
+import { forwardRef, InputHTMLAttributes } from "react";
+import { cn } from "@/shared/lib/globalUtils";
 
 type SeparatorProps = {
 	orientation?: "vertical" | "horizontal";

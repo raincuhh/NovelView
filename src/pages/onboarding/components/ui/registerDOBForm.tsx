@@ -3,19 +3,21 @@ import OnboardingViewContainer from "./onboardingViewContainer";
 import { Button } from "@/shared/components/ui/button";
 import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
 import { CombinedOnboardingViews } from "../../types";
-import { baseRegisterFormSchema, useRegisterFormStore } from "../../registerFormStore";
-import { DateOfBirth } from "@/shared/lib/types";
-import DOB from "@/shared/components/ui/DOB";
+import { useRegisterFormStore, registerFormSchema } from "../../registerFormStore";
+// import { DateOfBirth } from "@/shared/lib/types";
+// import DOB from "@/shared/components/ui/DOB";
 import { Form } from "@/shared/components/ui/form";
 
-const registerDOBSchema = baseRegisterFormSchema.pick({
+const registerDOBSchema = registerFormSchema.pick({
 	DOB: true,
 });
 
 export default function RegisterDOBForm() {
 	const { viewSwitcherNavigate } = useViewTransition<CombinedOnboardingViews>();
+	// @ts-ignore
 	const { formData, updateField } = useRegisterFormStore();
 
+	// @ts-ignore
 	const [isValid, setIsValid] = useState<boolean>(
 		registerDOBSchema.safeParse({ DOB: formData.DOB }).success
 	);

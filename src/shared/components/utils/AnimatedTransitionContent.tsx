@@ -37,7 +37,7 @@ export const AnimatedTransitionContent = <T extends string | number | symbol>({
 
 	return (
 		<AnimatePresence mode="popLayout" custom={direction}>
-			<motion.div
+			<motion.main
 				key={currentView as string}
 				custom={direction}
 				initial={initial}
@@ -48,7 +48,7 @@ export const AnimatedTransitionContent = <T extends string | number | symbol>({
 				className="inset-0 w-full h-full overflow-hidden relative"
 			>
 				{Comp && <Comp />}
-			</motion.div>
+			</motion.main>
 		</AnimatePresence>
 	);
 };

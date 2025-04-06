@@ -1,6 +1,6 @@
-import React, { forwardRef, HTMLAttributes, useEffect, useRef, useState } from "react";
+import { forwardRef, HTMLAttributes, useEffect, useRef, useState } from "react";
 import RenderList from "../utils/renderList";
-import { cn } from "@/shared/lib/utils";
+import { cn } from "@/shared/lib/globalUtils";
 
 const DOB = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => {
 	const [currentDay, setCurrentDay] = useState<number>(new Date().getDate());
@@ -60,7 +60,7 @@ const DOB = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ classN
 	}, [currentDay, currentMonth, currentYear]);
 
 	return (
-		<div className="w-min mx-4 relative" {...props}>
+		<div ref={ref} className="w-min mx-4 relative" {...props}>
 			<div className="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">
 				<div
 					className="w-full h-full"
@@ -195,7 +195,9 @@ const DOBScrollbar = forwardRef<
 				else if (ref && typeof ref === "object") ref.current = node;
 			}}
 			onScroll={handleScroll}
-			className={`flex flex-col snap-y snap-mandatory overflow-y-scroll scrollbar-hidden pt-[14.5px] ${className || ""}`}
+			className={`flex flex-col snap-y snap-mandatory overflow-y-scroll scrollbar-hidden pt-[14.5px] ${
+				className || ""
+			}`}
 			{...props}
 		>
 			<RenderList

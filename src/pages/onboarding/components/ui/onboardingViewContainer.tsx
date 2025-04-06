@@ -1,5 +1,5 @@
-import { cn } from "@/shared/lib/utils";
-import React, { forwardRef, HTMLAttributes } from "react";
+import { cn } from "@/shared/lib/globalUtils";
+import { forwardRef, HTMLAttributes } from "react";
 
 const OnboardingViewContainer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 	({ className, children, ...props }, ref) => {

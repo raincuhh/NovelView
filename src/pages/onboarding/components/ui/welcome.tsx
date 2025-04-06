@@ -2,14 +2,13 @@ import { Button } from "@/shared/components/ui/button";
 import Icon from "@/shared/components/ui/icon";
 import { CombinedOnboardingViews } from "../../types";
 import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
-import React from "react";
-import OnboaridngViewContainer from "./onboardingViewContainer";
+import OnboardingViewContainer from "./onboardingViewContainer";
 
 export default function Welcome() {
 	const { viewSwitcherNavigate } = useViewTransition<CombinedOnboardingViews>();
 
 	return (
-		<OnboaridngViewContainer>
+		<OnboardingViewContainer>
 			<div className="flex flex-col h-full justify-center">
 				<div className="flex justify-center pb-4">
 					<Icon.brandLogo className="w-[6rem] h-[6rem] md:w-[8rem] md:h-[8rem] fill-accent hover:fill-accent-hover transition-discrete duration-100 ease-in-out" />
@@ -44,6 +43,6 @@ export default function Welcome() {
 					<span className="font-bold">Privacy Policy</span>.
 				</div>
 			</div>
-		</OnboaridngViewContainer>
+		</OnboardingViewContainer>
 	);
 }

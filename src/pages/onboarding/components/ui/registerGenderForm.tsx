@@ -5,7 +5,7 @@ import { CombinedOnboardingViews } from "../../types";
 import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
 import { Gender, GenderType } from "@/shared/lib/types";
 import RenderList from "@/shared/components/utils/renderList";
-import { genderEnumToFullWord } from "@/shared/lib/utils";
+import { genderEnumToFullWord } from "@/shared/lib/projectUtils";
 import OnboardingViewContainer from "./onboardingViewContainer";
 import { Form } from "@/shared/components/ui/form";
 

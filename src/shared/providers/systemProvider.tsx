@@ -2,16 +2,11 @@ import { PowerSyncContext } from "@powersync/react";
 import { PowerSyncDatabase, SyncStreamConnectionMethod } from "@powersync/web";
 import { SupabaseConnector } from "../lib/supabaseConnector";
 import { createContext, ReactNode, Suspense, useContext, useEffect, useState } from "react";
-import BackendConnector from "../lib/backendConnector";
 import { AppSchema } from "../lib/appSchema";
 
 const SupabaseContext = createContext<SupabaseConnector | null>(null);
 export const useSupabase = () => useContext(SupabaseContext);
 const supabase = new SupabaseConnector();
-
-// backendconnector example.
-// @ts-ignore
-const backend = new BackendConnector();
 
 const db = new PowerSyncDatabase({
 	database: { dbFilename: "local.db" },

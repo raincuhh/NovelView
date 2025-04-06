@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { censorStr } from "@/shared/lib/utils";
+import { useState } from "react";
+import { censorStr } from "@/shared/lib/globalUtils";
 import Icon from "./icon";
 
 type ReadOnlyFormDisplayProps = {
@@ -28,7 +28,7 @@ const ReadOnlyFormDisplay = ({ data, label, isCensored }: ReadOnlyFormDisplayPro
 					</div>
 				</div>
 			) : (
-				<p className="text-muted select-none">{data ? (data ?? "Not specified") : "Not specified"}</p>
+				<p className="text-muted select-none">{data ? data ?? "Not specified" : "Not specified"}</p>
 			)}
 		</div>
 	);
