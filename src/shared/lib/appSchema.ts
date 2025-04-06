@@ -2,15 +2,16 @@ import { column, Schema, Table } from "@powersync/web";
 
 const profiles = new Table(
 	{
-		profile_id: column.integer, // INTEGER for primary key and auto increment
-		user_id: column.text, // TEXT for UUID since SQLite doesnt support UUIDs
+		// id column (text) is automatically included
+		profile_id: column.text,
+		user_id: column.text,
 		username: column.text,
 		email: column.text,
-		gender: column.text, // TEXT for gender
-		dob: column.text, // TEXT for datetime (timestamps can be stored as ISO strings)
-		synced: column.integer, // INTEGER for boolean values
-		created_at: column.text, // TEXT for timestamps
-		updated_at: column.text, // TEXT for timestamps
+		gender: column.text,
+		dob: column.text,
+		synced: column.integer,
+		created_at: column.text,
+		updated_at: column.text,
 	},
 	{
 		indexes: {
@@ -20,79 +21,219 @@ const profiles = new Table(
 	}
 );
 
-const libraries = new Table({
-	library_id: column.integer, // INTEGER for primary key
-	user_id: column.text, // TEXT for UUID
-	name: column.text,
-	description: column.text,
-	cover_url: column.text,
-	type: column.text, // TEXT for ENUMs
-	synced: column.integer, // INTEGER for boolean values
-	author: column.text,
-	created_at: column.text,
-	updated_at: column.text,
-});
-
-const books = new Table(
+const user_settings = new Table(
 	{
-		book_id: column.integer, // INTEGER for primary key
-		library_id: column.integer, // INTEGER for foreign key reference
-		user_id: column.text, // TEXT for UUID
-		title: column.text,
-		author: column.text,
-		metadata: column.text, // TEXT for JSON data
-		toc: column.text, // TEXT for JSON data
-		cover_image_url: column.text,
-		epub_url: column.text,
-		is_saved: column.integer, // INTEGER for boolean values
-		read_count: column.integer, // INTEGER for integer values
-		last_read_at: column.text, // TEXT for datetime
-		synced: column.integer, // INTEGER for boolean values
+		// id column (text) is automatically included
+		setting_id: column.text,
+		user_id: column.text,
+		onboarding_completed: column.integer,
+		app_theme: column.text,
+		app_accent: column.text,
+		font_size: column.integer,
+		language: column.text,
+		notifications_enabled: column.integer,
 		created_at: column.text,
 		updated_at: column.text,
 	},
-	{ indexes: { user_id: ["user_id"] } }
+	{
+		indexes: {
+			user_id: ["user_id"],
+		},
+	}
 );
 
-const bookContents = new Table(
+const libraries = new Table(
 	{
-		book_content_id: column.integer, // INTEGER for primary key
-		book_id: column.integer, // INTEGER for foreign key reference
-		content_json: column.text, // TEXT for JSON data
+		// id column (text) is automatically included
+		library_id: column.text,
+		user_id: column.text,
+		name: column.text,
+		description: column.text,
+		cover_url: column.text,
+		type: column.text,
+		synced: column.integer,
+		author: column.text,
+		created_at: column.text,
+		updated_at: column.text,
+	},
+	{ indexes: {} }
+);
+
+const books = new Table(
+	{
+		// id column (text) is automatically included
+		book_id: column.text,
+		library_id: column.text,
+		user_id: column.text,
+		title: column.text,
+		author: column.text,
+		metadata: column.text,
+		toc: column.text,
+		cover_image_url: column.text,
+		epub_url: column.text,
+		is_saved: column.integer,
+		read_count: column.integer,
+		last_read_at: column.text,
+		synced: column.integer,
+		created_at: column.text,
+		updated_at: column.text,
+	},
+	{
+		indexes: {
+			user_id: ["user_id"],
+			library_id: ["library_id"],
+		},
+	}
+);
+
+const book_contents = new Table(
+	{
+		// id column (text) is automatically included
+		book_content_id: column.text,
+		book_id: column.text,
+		content_json: column.text,
 		parsing_version: column.integer,
 		created_at: column.text,
 		updated_at: column.text,
 	},
-	{ indexes: { book_id: ["book_id"] } }
-);
-
-const userSettings = new Table(
 	{
-		setting_id: column.integer, // INTEGER for primary key
-		user_id: column.text, // TEXT for UUID
-		onboarding_completed: column.integer, // INTEGER for boolean values
-		app_theme: column.text,
-		app_accent: column.text,
-		font_size: column.integer, // INTEGER for font size
-		language: column.text,
-		notifications_enabled: column.integer, // INTEGER for boolean values
-		created_at: column.text,
-		updated_at: column.text,
-	},
-	{ indexes: { user_id: ["user_id"] } }
+		indexes: {
+			book_id: ["book_id"],
+		},
+	}
 );
 
 export const AppSchema = new Schema({
 	profiles,
+	user_settings,
 	libraries,
 	books,
-	bookContents,
-	userSettings,
+	book_contents,
 });
 
 export type Database = (typeof AppSchema)["types"];
+
 export type ProfileRecord = Database["profiles"];
 export type LibraryRecord = Database["libraries"];
 export type BookRecord = Database["books"];
-export type BookContentRecord = Database["bookContents"];
-export type UserSettingRecord = Database["userSettings"];
+export type BookContentRecord = Database["book_contents"];
+export type UserSettingRecord = Database["user_settings"];
+
+// import { column, Schema, Table } from "@powersync/web";
+
+// const profiles = new Table(
+// 	{
+// 		id: column.text, // uuid
+// 		user_id: column.text, // uuid
+// 		username: column.text,
+// 		email: column.text,
+// 		gender: column.text, // ""
+// 		dob: column.text, // iso
+// 		synced: column.integer, // // boolean as integer (0/1)
+// 		created_at: column.text, // iso
+// 		updated_at: column.text, // iso
+// 	},
+// 	{
+// 		indexes: {
+// 			username: ["username"],
+// 			user_id: ["user_id"],
+// 		},
+// 	}
+// );
+
+// const libraries = new Table(
+// 	{
+// 		id: column.text,
+// 		user_id: column.text,
+// 		name: column.text,
+// 		description: column.text,
+// 		cover_url: column.text,
+// 		type: column.text, // "synced" | "local"
+// 		synced: column.integer, // boolean as integer (0/1)
+// 		author: column.text,
+// 		created_at: column.text,
+// 		updated_at: column.text,
+// 	},
+// 	{
+// 		indexes: {
+// 			user_id: ["user_id"],
+// 		},
+// 	}
+// );
+
+// const books = new Table(
+// 	{
+// 		id: column.text,
+// 		library_id: column.text,
+// 		user_id: column.text,
+// 		title: column.text,
+// 		author: column.text,
+// 		metadata: column.text, // json
+// 		toc: column.text, // json
+// 		cover_image_url: column.text,
+// 		epub_url: column.text,
+// 		is_saved: column.integer, // boolean as integer (0/1)
+// 		read_count: column.integer,
+// 		last_read_at: column.text, // iso
+// 		synced: column.integer, // boolean as integer (0/1)
+// 		created_at: column.text, // iso
+// 		updated_at: column.text, // iso
+// 	},
+// 	{
+// 		indexes: {
+// 			user_id: ["user_id"],
+// 			library_id: ["library_id"],
+// 		},
+// 	}
+// );
+
+// const bookContents = new Table(
+// 	{
+// 		id: column.text,
+// 		book_id: column.text,
+// 		content_json: column.text, // json
+// 		parsing_version: column.integer,
+// 		created_at: column.text, // iso
+// 		updated_at: column.text, // iso
+// 	},
+// 	{
+// 		indexes: {
+// 			book_id: ["book_id"],
+// 		},
+// 	}
+// );
+
+// const userSettings = new Table(
+// 	{
+// 		id: column.text, // uuid
+// 		user_id: column.text, // uuid
+// 		onboarding_completed: column.integer, // boolean as integer (0/1)
+// 		app_theme: column.text,
+// 		app_accent: column.text,
+// 		font_size: column.integer,
+// 		language: column.text,
+// 		notifications_enabled: column.integer, // boolean as integer (0/1)
+// 		created_at: column.text, // iso
+// 		updated_at: column.text, // iso
+// 	},
+// 	{
+// 		indexes: {
+// 			user_id: ["user_id"],
+// 		},
+// 	}
+// );
+
+// export const AppSchema = new Schema({
+// 	profiles,
+// 	libraries,
+// 	books,
+// 	bookContents,
+// 	userSettings,
+// });
+
+// export type Database = (typeof AppSchema)["types"];
+// export type ProfileRecord = Database["profiles"];
+// export type LibraryRecord = Database["libraries"];
+// export type BookRecord = Database["books"];
+// export type BookContentRecord = Database["bookContents"];
+// export type UserSettingRecord = Database["userSettings"];

@@ -1,5 +1,3 @@
-// see https://github.com/powersync-ja/powersync-js/blob/58fd05937ec9ac993622666742f53200ee694585/demos/react-supabase-todolist/src/library/powersync/SupabaseConnector.ts base example
-
 import {
 	AbstractPowerSyncDatabase,
 	BaseObserver,

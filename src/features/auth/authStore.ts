@@ -1,8 +1,9 @@
 import { User } from "@/shared/lib/types";
 import { Session } from "@supabase/supabase-js";
 import { create } from "zustand";
-import { supabase } from "@/shared/lib/services";
+// import { supabase } from "@/shared/lib/services";
 import { logoutUser, registerUser, loginUser } from "./authService";
+import { useSupabase } from "@/shared/providers/systemProvider";
 
 type AuthState = {
 	user: User | null;
@@ -14,7 +15,7 @@ type AuthState = {
 	setUser: (user: User | null) => void;
 	setSession: (session: Session | null) => void;
 	setLoading: (loading: boolean) => void;
-	initAuth: () => void;
+	// initAuth: () => void;
 };
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -44,41 +45,41 @@ export const useAuthStore = create<AuthState>((set) => ({
 		set({ user: null, session: null });
 	},
 
-	initAuth: () => {
-		console.log("initializing auth...");
-		const fetchUser = async (session: Session | null) => {
-			set({ loading: true });
+	// initAuth: () => {
+	// 	console.log("initializing auth...");
+	// 	const fetchUser = async (session: Session | null) => {
+	// 		set({ loading: true });
 
-			if (!session?.user) {
-				set({ user: null, session: null, loading: false });
-				return;
-			}
+	// 		if (!session?.user) {
+	// 			set({ user: null, session: null, loading: false });
+	// 			return;
+	// 		}
 
-			const { data, error } = await supabase
-				.from("profiles")
-				.select("*")
-				.eq("user_id", session.user.id)
-				.single();
+	// 		const { data, error } = await supabase
+	// 			.from("profiles")
+	// 			.select("*")
+	// 			.eq("user_id", session.user.id)
+	// 			.single();
 
-			if (error) {
-				console.error("Error fetching user: ", error);
-				set({ loading: false });
-				return;
-			}
+	// 		if (error) {
+	// 			console.error("Error fetching user: ", error);
+	// 			set({ loading: false });
+	// 			return;
+	// 		}
 
-			set({ user: data, session, loading: false });
-		};
+	// 		set({ user: data, session, loading: false });
+	// 	};
 
-		supabase.auth.getSession().then(({ data }) => {
-			fetchUser(data.session);
-		});
+	// 	supabase.auth.getSession().then(({ data }) => {
+	// 		fetchUser(data.session);
+	// 	});
 
-		const { data: authListener } = supabase.auth.onAuthStateChange((_, session) => {
-			fetchUser(session);
-		});
+	// 	const { data: authListener } = supabase.auth.onAuthStateChange((_, session) => {
+	// 		fetchUser(session);
+	// 	});
 
-		return () => {
-			authListener?.subscription?.unsubscribe();
-		};
-	},
+	// 	return () => {
+	// 		authListener?.subscription?.unsubscribe();
+	// 	};
+	// },
 }));
