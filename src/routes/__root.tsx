@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, createRootRoute, Scripts } from "@tanstack/react-router";
 import "../../src/global.css";
 import AppProvider from "@/shared/providers/appProvider";
 
@@ -19,21 +19,14 @@ type RootDocumentProps = PropsWithChildren;
 
 function RootDocument({ children }: RootDocumentProps) {
 	return (
-		<html>
-			<head>
-				<HeadContent />
-			</head>
-			<body className="scroll-smooth">
-				<AppProvider>
-					<RootLayout>{children}</RootLayout>
-					<div className="absolute">
-						{/* <ReactQueryDevtools buttonPosition="bottom-left" />
-					<TanStackRouterDevtools position="bottom-right" /> */}
-					</div>
-					<Scripts />
-				</AppProvider>
-			</body>
-		</html>
+		<AppProvider>
+			<RootLayout>{children}</RootLayout>
+			<div className="absolute">
+				{/* <ReactQueryDevtools buttonPosition="bottom-left" /> */}
+				{/* <TanStackRouterDevtools position="bottom-right" /> */}
+			</div>
+			<Scripts />
+		</AppProvider>
 	);
 }
 

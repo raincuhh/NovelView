@@ -8,8 +8,6 @@ const powerSync = new PowerSyncDatabase({
 	database: { dbFilename: "local.db" },
 	schema: AppSchema,
 	flags: {
-		// Web worker causes PowerSync engine fail to start (flaky behaviour).
-		// Learn more: https://github.com/romatallinn/powersync-tauri/issues/4
 		useWebWorker: false,
 	},
 });
@@ -21,8 +19,8 @@ const SystemProvider = ({ children }: { children: ReactNode }) => {
 	const [connector] = useState<BackendConnector>(backend);
 
 	useEffect(() => {
-		// powerSync.init();
-		// powerSync.connect(connector);
+		powerSync.init();
+		powerSync.connect(connector);
 		console.log("yo");
 	}, [db, connector]);
 

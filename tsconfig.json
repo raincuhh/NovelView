@@ -17,7 +17,6 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
-		"types": ["vinxi/types/client"],
 		"baseUrl": "./",
 		"paths": {
 			"@/*": ["src/*"],

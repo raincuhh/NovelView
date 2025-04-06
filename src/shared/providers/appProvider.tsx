@@ -1,6 +1,7 @@
 import { PropsWithChildren, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SystemProvider } from "./systemProvider";
+import { PowerSyncDatabase } from "@powersync/web";
 
 type AppProviderProps = PropsWithChildren<{}>;
 
@@ -22,10 +23,11 @@ const AppProvider = ({ children }: AppProviderProps) => {
 	// 	return cleanup;
 	// }, [initAuth]);
 
-	// the second i include systemprovider it gives the ssr error.
+	console.log("PowerSyncDatabase", PowerSyncDatabase);
 	return (
 		<QueryClientProvider client={queryClient}>
 			<SystemProvider>{children}</SystemProvider>
+			{/* {children} */}
 		</QueryClientProvider>
 	);
 };
