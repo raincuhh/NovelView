@@ -1,0 +1,187 @@
+@import "tailwindcss";
+@import url("./satoshi.css");
+
+/* eslint-disable @typescript-eslint/no-unknown-ast */
+@theme {
+	--color-*: initial;
+
+	--color-info-danger-bg: var(--color-danger-900);
+	--color-info-danger-text: var(--color-danger-600);
+	--color-info-danger-border: var(--color-danger-600);
+
+	--color-info-warning-bg: var(--color-warning-900);
+	--color-info-warning-text: var(--color-warning-700);
+	--color-info-warning-border: var(--color-warning-600);
+
+	--color-info-success-bg: var(--color-success-900);
+	--color-info-success-text: var(--color-success-600);
+	--color-info-success-border: var(--color-success-600);
+
+	/*bg*/
+	--color-primary: var(--color-base-05);
+	--color-primary-alt: var(--color-base-10);
+	--color-secondary: var(--color-base-20);
+	--color-secondary-alt: var(--color-base-20);
+
+	/*accent*/
+	--color-accent: var(--color-accent);
+	--color-accent-hover: var(--color-accent-1);
+	--color-accent-active: var(--color-accent-2);
+
+	/*text*/
+	--color-normal: var(--color-base-80);
+	--color-muted: var(--color-base-60);
+	--color-faint: var(--color-base-50);
+	--color-accent: var(--color-accent);
+
+	/*btns, inputs, etc.*/
+	--color-interactive-normal: var(--color-base-30);
+	--color-interactive-hover: var(--color-base-35);
+	--color-interactive-accent: var(--color-accent);
+	--color-interactive-accent-hover: var(--color-accent-hover);
+	--color-interactive-input-bg: var(--color-base-10);
+	--color-interactive-input-border: var(--color-base-30);
+	--color-interactive-input-border-hover: var(--color-base-40);
+	--color-interactive-input-border-focus: var(--color-base-50);
+	--color-interactive-input-placeholder: var(--color-text-form-placeholder);
+
+	--shadow-sm: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.25);
+	--shadow-md: 0 2px 6px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.4);
+	--shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5);
+
+	--color-border: var(--color-base-30);
+	--color-border-hover: var(--color-base-35);
+	--color-border-focus: var(--color-base-40);
+
+	--color-link-color: var(--color-text-accent);
+	--color-link-color-hover: var(--color-text-accent-hover);
+}
+
+:root {
+	--color-base-00: oklch(0.05 0 0);
+	--color-base-05: oklch(0.075 0 270);
+	--color-base-10: oklch(0.1 0 270);
+	--color-base-10: oklch(0.15 0 270);
+	--color-base-20: oklch(0.2 0 270);
+	--color-base-25: oklch(0.25 0 270);
+	--color-base-30: oklch(0.3 0 270);
+	--color-base-35: oklch(0.35 0 270);
+	--color-base-40: oklch(0.4 0 270);
+	--color-base-50: oklch(0.5 0 270);
+	--color-base-60: oklch(0.6 0 270);
+	--color-base-70: oklch(0.7 0 270);
+	--color-base-80: oklch(0.8 0 270);
+	--color-base-100: oklch(0.9 0 270);
+	--color-base-200: oklch(0.97 0 270);
+	--color-base-255: oklch(1 0 270);
+
+	/* --accent-h: 300; hue
+	--accent-s: 0.35; saturation
+	--accent-l: 0.55; light */
+	--accent-l: 0.454;
+	--accent-c: 0.176;
+	--accent-h: 292.5;
+
+	--color-accent: oklch(var(--accent-l) var(--accent-c) var(--accent-h));
+
+	--color-accent-1: oklch(calc(var(--accent-l) * 1.05) var(--accent-c) var(--accent-h));
+	--color-accent-2: oklch(calc(var(--accent-l) * 1.1) var(--accent-c) var(--accent-h));
+
+	--color-accent-hover: oklch(calc(var(--accent-l) * 1.2) var(--accent-c) var(--accent-h));
+	--color-accent-active: oklch(calc(var(--accent-l) * 0.95) var(--accent-c) var(--accent-h));
+
+	--color-warning-1000: hsl(33, 100%, 10%);
+	--color-warning-900: hsl(35, 100%, 15%);
+	--color-warning-800: hsl(37, 100%, 27%);
+	--color-warning-700: hsl(38.9, 100%, 39.9%);
+	--color-warning-600: hsl(38.9, 100%, 55%);
+	--color-warning-500: hsl(38.9, 100%, 62%);
+
+	--color-danger-1000: hsl(7, 80%, 10%);
+	--color-danger-900: hsl(8, 75%, 15%);
+	--color-danger-800: hsl(8, 70%, 20%);
+	--color-danger-700: hsl(9, 65%, 30%);
+	--color-danger-600: hsl(10, 60%, 40%);
+	--color-danger-500: hsl(10, 60%, 51%);
+
+	--color-success-1000: hsl(141, 20%, 5%);
+	--color-success-900: hsl(141, 25%, 10%);
+	--color-success-800: hsl(141, 30%, 20%);
+	--color-success-700: hsl(141, 35%, 30%);
+	--color-success-600: hsl(141, 40%, 40%);
+	--color-success-500: hsl(141, 45%, 52%);
+
+	--rgb-none: oklch(0 0 0);
+	--rgb-full: oklch(100 0 0);
+
+	--titlebar-height: 36px;
+
+	--color-text-selection: oklch(calc(var(--accent-l) * 1.05) var(--accent-c) var(--accent-h));
+	--color-bg-hover: rgba(var(--mono-rgb-100), 0.075);
+	--color-bg-active-hover: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.15);
+}
+
+.dark {
+	--color-base-00: oklch(0 0 0);
+	--color-base-05: oklch(0.05 0 270);
+	--color-base-10: oklch(0.1 0 270);
+	--color-base-20: oklch(0.2 0 270);
+	--color-base-25: oklch(0.25 0 270);
+	--color-base-30: oklch(0.3 0 270);
+	--color-base-35: oklch(0.35 0 270);
+	--color-base-40: oklch(0.4 0 270);
+	--color-base-50: oklch(0.5 0 270);
+	--color-base-60: oklch(0.6 0 270);
+	--color-base-70: oklch(0.7 0 270);
+	--color-base-100: oklch(0.9 0 270);
+	--color-base-200: oklch(0.97 0 270);
+	--color-base-255: oklch(1 0 270);
+
+	--shadow-shallow: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.25),
+		0 6px 12px rgba(0, 0, 0, 0.3);
+	--shadow-deep: 0 2px 6px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.4), 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+@layer base {
+	* {
+		@apply m-0 p-0 border-0 box-border;
+	}
+	body {
+		font-family: "Satoshi-Variable", sans-serif;
+		font-weight: 500;
+		font-synthesis: none;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-text-size-adjust: 100%;
+	}
+}
+
+@layer utilities {
+	.autofill\:bg-autofill-interactive-input-bg:-webkit-autofill {
+		background: var(--color-base-10) !important;
+	}
+}
+
+::selection {
+	background: var(--color-text-selection);
+	color: var(--rgb-full);
+}
+
+.scrollbar-hidden {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+	display: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+.hide-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
