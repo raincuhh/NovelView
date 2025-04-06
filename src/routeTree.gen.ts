@@ -8,13 +8,35 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as UnauthorizedImport } from './routes/unauthorized'
 import { Route as TestImport } from './routes/test'
 import { Route as IndexImport } from './routes/index'
+import { Route as onboardingOnboardingRouteImport } from './routes/(onboarding)/_onboarding/route'
+import { Route as onboardingOnboardingOnboardingImport } from './routes/(onboarding)/_onboarding/onboarding'
+import { Route as legalLegalTosImport } from './routes/(legal)/legal/tos'
+import { Route as legalLegalPrivacyPolicyImport } from './routes/(legal)/legal/privacy-policy'
+
+// Create Virtual Routes
+
+const onboardingImport = createFileRoute('/(onboarding)')()
 
 // Create/Update Routes
+
+const onboardingRoute = onboardingImport.update({
+  id: '/(onboarding)',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const UnauthorizedRoute = UnauthorizedImport.update({
+  id: '/unauthorized',
+  path: '/unauthorized',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const TestRoute = TestImport.update({
   id: '/test',
@@ -25,6 +47,30 @@ const TestRoute = TestImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const onboardingOnboardingRouteRoute = onboardingOnboardingRouteImport.update({
+  id: '/_onboarding',
+  getParentRoute: () => onboardingRoute,
+} as any)
+
+const onboardingOnboardingOnboardingRoute =
+  onboardingOnboardingOnboardingImport.update({
+    id: '/onboarding',
+    path: '/onboarding',
+    getParentRoute: () => onboardingOnboardingRouteRoute,
+  } as any)
+
+const legalLegalTosRoute = legalLegalTosImport.update({
+  id: '/(legal)/legal/tos',
+  path: '/legal/tos',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const legalLegalPrivacyPolicyRoute = legalLegalPrivacyPolicyImport.update({
+  id: '/(legal)/legal/privacy-policy',
+  path: '/legal/privacy-policy',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,44 +92,155 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TestImport
       parentRoute: typeof rootRoute
     }
+    '/unauthorized': {
+      id: '/unauthorized'
+      path: '/unauthorized'
+      fullPath: '/unauthorized'
+      preLoaderRoute: typeof UnauthorizedImport
+      parentRoute: typeof rootRoute
+    }
+    '/(onboarding)': {
+      id: '/(onboarding)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof onboardingImport
+      parentRoute: typeof rootRoute
+    }
+    '/(onboarding)/_onboarding': {
+      id: '/(onboarding)/_onboarding'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof onboardingOnboardingRouteImport
+      parentRoute: typeof onboardingRoute
+    }
+    '/(legal)/legal/privacy-policy': {
+      id: '/(legal)/legal/privacy-policy'
+      path: '/legal/privacy-policy'
+      fullPath: '/legal/privacy-policy'
+      preLoaderRoute: typeof legalLegalPrivacyPolicyImport
+      parentRoute: typeof rootRoute
+    }
+    '/(legal)/legal/tos': {
+      id: '/(legal)/legal/tos'
+      path: '/legal/tos'
+      fullPath: '/legal/tos'
+      preLoaderRoute: typeof legalLegalTosImport
+      parentRoute: typeof rootRoute
+    }
+    '/(onboarding)/_onboarding/onboarding': {
+      id: '/(onboarding)/_onboarding/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof onboardingOnboardingOnboardingImport
+      parentRoute: typeof onboardingOnboardingRouteImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface onboardingOnboardingRouteRouteChildren {
+  onboardingOnboardingOnboardingRoute: typeof onboardingOnboardingOnboardingRoute
+}
+
+const onboardingOnboardingRouteRouteChildren: onboardingOnboardingRouteRouteChildren =
+  {
+    onboardingOnboardingOnboardingRoute: onboardingOnboardingOnboardingRoute,
+  }
+
+const onboardingOnboardingRouteRouteWithChildren =
+  onboardingOnboardingRouteRoute._addFileChildren(
+    onboardingOnboardingRouteRouteChildren,
+  )
+
+interface onboardingRouteChildren {
+  onboardingOnboardingRouteRoute: typeof onboardingOnboardingRouteRouteWithChildren
+}
+
+const onboardingRouteChildren: onboardingRouteChildren = {
+  onboardingOnboardingRouteRoute: onboardingOnboardingRouteRouteWithChildren,
+}
+
+const onboardingRouteWithChildren = onboardingRoute._addFileChildren(
+  onboardingRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof onboardingOnboardingRouteRouteWithChildren
   '/test': typeof TestRoute
+  '/unauthorized': typeof UnauthorizedRoute
+  '/legal/privacy-policy': typeof legalLegalPrivacyPolicyRoute
+  '/legal/tos': typeof legalLegalTosRoute
+  '/onboarding': typeof onboardingOnboardingOnboardingRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof onboardingOnboardingRouteRouteWithChildren
   '/test': typeof TestRoute
+  '/unauthorized': typeof UnauthorizedRoute
+  '/legal/privacy-policy': typeof legalLegalPrivacyPolicyRoute
+  '/legal/tos': typeof legalLegalTosRoute
+  '/onboarding': typeof onboardingOnboardingOnboardingRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/test': typeof TestRoute
+  '/unauthorized': typeof UnauthorizedRoute
+  '/(onboarding)': typeof onboardingRouteWithChildren
+  '/(onboarding)/_onboarding': typeof onboardingOnboardingRouteRouteWithChildren
+  '/(legal)/legal/privacy-policy': typeof legalLegalPrivacyPolicyRoute
+  '/(legal)/legal/tos': typeof legalLegalTosRoute
+  '/(onboarding)/_onboarding/onboarding': typeof onboardingOnboardingOnboardingRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/test'
+  fullPaths:
+    | '/'
+    | '/test'
+    | '/unauthorized'
+    | '/legal/privacy-policy'
+    | '/legal/tos'
+    | '/onboarding'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/test'
-  id: '__root__' | '/' | '/test'
+  to:
+    | '/'
+    | '/test'
+    | '/unauthorized'
+    | '/legal/privacy-policy'
+    | '/legal/tos'
+    | '/onboarding'
+  id:
+    | '__root__'
+    | '/'
+    | '/test'
+    | '/unauthorized'
+    | '/(onboarding)'
+    | '/(onboarding)/_onboarding'
+    | '/(legal)/legal/privacy-policy'
+    | '/(legal)/legal/tos'
+    | '/(onboarding)/_onboarding/onboarding'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   TestRoute: typeof TestRoute
+  UnauthorizedRoute: typeof UnauthorizedRoute
+  onboardingRoute: typeof onboardingRouteWithChildren
+  legalLegalPrivacyPolicyRoute: typeof legalLegalPrivacyPolicyRoute
+  legalLegalTosRoute: typeof legalLegalTosRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   TestRoute: TestRoute,
+  UnauthorizedRoute: UnauthorizedRoute,
+  onboardingRoute: onboardingRouteWithChildren,
+  legalLegalPrivacyPolicyRoute: legalLegalPrivacyPolicyRoute,
+  legalLegalTosRoute: legalLegalTosRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +254,11 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/test"
+        "/test",
+        "/unauthorized",
+        "/(onboarding)",
+        "/(legal)/legal/privacy-policy",
+        "/(legal)/legal/tos"
       ]
     },
     "/": {
@@ -105,6 +266,32 @@ export const routeTree = rootRoute
     },
     "/test": {
       "filePath": "test.tsx"
+    },
+    "/unauthorized": {
+      "filePath": "unauthorized.tsx"
+    },
+    "/(onboarding)": {
+      "filePath": "(onboarding)/_onboarding",
+      "children": [
+        "/(onboarding)/_onboarding"
+      ]
+    },
+    "/(onboarding)/_onboarding": {
+      "filePath": "(onboarding)/_onboarding/route.tsx",
+      "parent": "/(onboarding)",
+      "children": [
+        "/(onboarding)/_onboarding/onboarding"
+      ]
+    },
+    "/(legal)/legal/privacy-policy": {
+      "filePath": "(legal)/legal/privacy-policy.tsx"
+    },
+    "/(legal)/legal/tos": {
+      "filePath": "(legal)/legal/tos.tsx"
+    },
+    "/(onboarding)/_onboarding/onboarding": {
+      "filePath": "(onboarding)/_onboarding/onboarding.tsx",
+      "parent": "/(onboarding)/_onboarding"
     }
   }
 }

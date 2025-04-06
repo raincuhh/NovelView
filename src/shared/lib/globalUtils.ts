@@ -54,36 +54,9 @@ export const formatTextWithLineBreaks = (text: string): string => {
 	return text.replace(/\n+/g, '<span class="block mb-4"></span>');
 };
 
-export const getRandomGradient = (): string => {
-	const colors = [
-		"#FF5733",
-		"#33FF57",
-		"#3357FF",
-		"#FF33A1",
-		"#FFD700",
-		"#00CED1",
-		"#FF4500",
-		"#8A2BE2",
-		"#20B2AA",
-		"#DC143C",
-		"#FF8C00",
-		"#32CD32",
-	];
-
-	const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
-
-	return `linear-gradient(to right, ${getRandomColor()} 20%, ${getRandomColor()} 80%)`;
-};
-
 export const cn = (...inputs: ClassValue[]) => {
 	return twMerge(clsx(inputs));
 };
-
-export const getEnvVar = (key: string): string =>
-	import.meta.env[`VITE_${key}`] ||
-	(() => {
-		throw new Error(`Env variable VITE_${key} is required`);
-	})();
 
 export const censorStr = (str: string) => {
 	return str.replace(/./g, "*");

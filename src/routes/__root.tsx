@@ -1,7 +1,9 @@
 import { PropsWithChildren } from "react";
 import { Outlet, createRootRoute, Scripts } from "@tanstack/react-router";
-import "../../src/global.css";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import AppProvider from "@/shared/providers/appProvider";
+import "../../src/global.css";
 
 export const Route = createRootRoute({
 	component: RootComponent,
@@ -22,8 +24,8 @@ function RootDocument({ children }: RootDocumentProps) {
 		<AppProvider>
 			<RootLayout>{children}</RootLayout>
 			<div className="absolute">
-				{/* <ReactQueryDevtools buttonPosition="bottom-left" /> */}
-				{/* <TanStackRouterDevtools position="bottom-right" /> */}
+				<ReactQueryDevtools buttonPosition="bottom-left" />
+				<TanStackRouterDevtools position="bottom-right" />
 			</div>
 			<Scripts />
 		</AppProvider>

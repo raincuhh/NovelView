@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import url("./satoshi.css");
 
-/* eslint-disable @typescript-eslint/no-unknown-ast */
 @theme {
 	--color-*: initial;
 
