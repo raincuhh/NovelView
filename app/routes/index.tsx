@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { seo } from "@/shared/components/utils/seo";
 
 export const Route = createFileRoute("/")({
@@ -22,5 +22,9 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-	return <div>Hello "/"!</div>;
+	return (
+		<div>
+			Hello "/"! <Link to="/test">to test</Link>
+		</div>
+	);
 }

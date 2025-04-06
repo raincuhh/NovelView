@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import "../../src/global.css";
+import AppProvider from "@/shared/providers/appProvider";
 
 export const Route = createRootRoute({
 	component: RootComponent,
@@ -23,20 +24,22 @@ function RootDocument({ children }: RootDocumentProps) {
 				<HeadContent />
 			</head>
 			<body className="scroll-smooth">
-				<Layout>{children}</Layout>
-				<div className="absolute">
-					{/* <ReactQueryDevtools buttonPosition="bottom-left" />
+				<AppProvider>
+					<RootLayout>{children}</RootLayout>
+					<div className="absolute">
+						{/* <ReactQueryDevtools buttonPosition="bottom-left" />
 					<TanStackRouterDevtools position="bottom-right" /> */}
-				</div>
-				<Scripts />
+					</div>
+					<Scripts />
+				</AppProvider>
 			</body>
 		</html>
 	);
 }
 
-type LayoutProps = PropsWithChildren;
+type RootLayoutProps = PropsWithChildren;
 
-function Layout({ children }: LayoutProps) {
+function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<div className="flex flex-col bg-primary text-normal font-medium">
 			<main>{children}</main>
