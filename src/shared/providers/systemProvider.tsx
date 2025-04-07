@@ -7,6 +7,7 @@ import { AppSchema } from "../lib/appSchema";
 const SupabaseContext = createContext<SupabaseConnector | null>(null);
 export const useSupabase = () => useContext(SupabaseContext);
 const supabase = new SupabaseConnector();
+export { supabase };
 
 const db = new PowerSyncDatabase({
 	database: { dbFilename: "local.db" },
@@ -26,9 +27,23 @@ const SystemProvider = ({ children }: { children: ReactNode }) => {
 		powerSync.init();
 
 		const l = connector.registerListener({
-			initialized: () => {},
+			initialized: () => {
+				console.log("Connector Initialized");
+			},
 			sessionStarted: () => {
-				powerSync.connect(connector, { connectionMethod: SyncStreamConnectionMethod.WEB_SOCKET });
+				powerSync
+					.connect(connector, { connectionMethod: SyncStreamConnectionMethod.WEB_SOCKET })
+					.then(() => console.log("Successfully connected"))
+					.catch((error) => {
+						console.error("Error connecting to PowerSync:", error);
+
+						setTimeout(() => {
+							console.log("retrying websocket connection");
+							powerSync.connect(connector, {
+								connectionMethod: SyncStreamConnectionMethod.WEB_SOCKET,
+							});
+						}, 5000); // 5sec delay
+					});
 			},
 		});
 
@@ -36,6 +51,8 @@ const SystemProvider = ({ children }: { children: ReactNode }) => {
 
 		return () => l?.();
 	}, [powerSync, connector]);
+
+	useEffect(() => {}, []);
 
 	return (
 		<Suspense fallback={<>Loading...</>}>

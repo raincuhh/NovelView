@@ -1,4 +1,3 @@
-import React from "react";
 import { CombinedOnboardingViews } from "../../types";
 import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
 import { Button } from "@/shared/components/ui/button";

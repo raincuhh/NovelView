@@ -36,78 +36,83 @@ export class SupabaseConnector
 	extends BaseObserver<SupabaseConnectorListener>
 	implements PowerSyncBackendConnector
 {
-	readonly client: SupabaseClient;
-	readonly config: SupabaseConfig;
-
-	ready: boolean;
-
-	currentSession: Session | null;
+	private readonly _client: SupabaseClient;
+	private readonly _config: SupabaseConfig;
+	private _ready: boolean = false;
+	private _currentSession: Session | null;
 
 	constructor() {
 		super();
-		this.config = {
+		this._config = {
 			supabaseUrl: env.SUPABASE_URL,
 			powersyncUrl: env.POWERSYNC_URL,
 			supabaseAnonKey: env.SUPABASE_ANON_KEY,
 		};
 
-		this.client = createClient(this.config.supabaseUrl, this.config.supabaseAnonKey, {
+		this._client = createClient(this._config.supabaseUrl, this._config.supabaseAnonKey, {
 			auth: {
 				persistSession: true,
 			},
 		});
-		this.currentSession = null;
-		this.ready = false;
+		this._currentSession = null;
+		this._ready = false;
 	}
 
 	async init() {
-		if (this.ready) {
-			return;
-		}
+		if (this._ready) return;
 
-		const sessionResponse = await this.client.auth.getSession();
+		const sessionResponse = await this._client.auth.getSession();
 		this.updateSession(sessionResponse.data.session);
 
-		this.ready = true;
+		this._ready = true;
 		this.iterateListeners((cb) => cb.initialized?.());
 	}
 
-	async login(username: string, password: string) {
+	async login(email: string, password: string) {
 		const {
 			data: { session },
 			error,
-		} = await this.client.auth.signInWithPassword({
-			email: username,
+		} = await this._client.auth.signInWithPassword({
+			email: email,
 			password: password,
 		});
-
-		if (error) {
-			throw error;
-		}
+		if (error) throw error;
 
 		this.updateSession(session);
 	}
 
-	async fetchCredentials() {
+	async signOut() {
+		await this._client.auth.signOut();
+		this._currentSession = null;
+	}
+
+	get currentSession(): Session | null {
+		return this._currentSession;
+	}
+
+	async getSession(): Promise<Session | null> {
+		if (!this._ready) await this.init();
+		return this._currentSession;
+	}
+
+	public async fetchCredentials() {
 		const {
 			data: { session },
 			error,
-		} = await this.client.auth.getSession();
+		} = await this._client.auth.getSession();
 
-		if (!session || error) {
-			throw new Error(`Could not fetch Supabase credentials: ${error}`);
-		}
+		if (!session || error) throw new Error(`Could not fetch Supabase credentials: ${error}`);
 
 		console.debug("session expires at", session.expires_at);
 
 		return {
-			endpoint: this.config.powersyncUrl,
+			endpoint: this._config.powersyncUrl,
 			token: session.access_token ?? "",
 			expiresAt: session.expires_at ? new Date(session.expires_at * 1000) : undefined,
 		};
 	}
 
-	async uploadData(database: AbstractPowerSyncDatabase): Promise<void> {
+	public async uploadData(database: AbstractPowerSyncDatabase): Promise<void> {
 		const transaction = await database.getNextCrudTransaction();
 
 		if (!transaction) {
@@ -120,7 +125,7 @@ export class SupabaseConnector
 			// or edge functions to process the entire transaction in a single call.
 			for (const op of transaction.crud) {
 				lastOp = op;
-				const table = this.client.from(op.table);
+				const table = this._client.from(op.table);
 				let result: any;
 				switch (op.op) {
 					case UpdateType.PUT:
@@ -164,8 +169,8 @@ export class SupabaseConnector
 		}
 	}
 
-	updateSession(session: Session | null) {
-		this.currentSession = session;
+	private updateSession(session: Session | null) {
+		this._currentSession = session;
 		if (!session) {
 			return;
 		}

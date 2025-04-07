@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { z } from "zod";
-import { useAuthStore } from "../../authStore";
 import OnboardingViewContainer from "@/pages/onboarding/components/ui/onboardingViewContainer";
 import { Form, FormControl, FormItem, FormLabel, FormMessage } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
+import { useSupabase } from "@/shared/providers/systemProvider";
 
 const loginFormSchema = z.object({
 	email: z.string().email("Invalid email"),
@@ -12,7 +12,7 @@ const loginFormSchema = z.object({
 });
 
 export default function LoginForm() {
-	const { login, user, loading } = useAuthStore();
+	const supabase = useSupabase();
 
 	const [formData, setFormData] = useState({ email: "", password: "" });
 	const [errors, setErrors] = useState<Partial<Record<"email" | "password", string>>>({});
@@ -44,6 +44,8 @@ export default function LoginForm() {
 		e.preventDefault();
 		if (isValid) {
 			console.log("Form submitted:", formData);
+			supabase?.login(formData.email, formData.password);
+			console.log("session: ", supabase?.getSession());
 		}
 	};
 
@@ -96,14 +98,8 @@ export default function LoginForm() {
 					</FormItem>
 				</div>
 				<div className="flex w-full justify-center">
-					<Button
-						size="lg"
-						rounded="full"
-						variant="accent"
-						disabled={!isValid || loading}
-						aria-label="next"
-					>
-						{loading ? "Logging in..." : "Log in"}
+					<Button size="lg" rounded="full" variant="accent" disabled={!isValid} aria-label="next">
+						Log in
 					</Button>
 				</div>
 			</Form>

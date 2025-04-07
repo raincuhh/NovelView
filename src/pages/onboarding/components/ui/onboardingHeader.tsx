@@ -30,8 +30,8 @@ export function OnboardingHeader() {
 	return (
 		<header
 			className={cn(
-				"flex items-center justify-center px-6 py-3 min-h-14",
-				canGoBack ? "border-solid border-b border-border" : ""
+				"flex items-center justify-center px-6 py-3 min-h-14"
+				// canGoBack ? "border-solid border-b border-border" : ""
 			)}
 		>
 			<div className="relative h-full w-full flex justify-center items-center">

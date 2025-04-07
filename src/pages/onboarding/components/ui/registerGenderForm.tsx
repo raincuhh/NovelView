@@ -40,7 +40,9 @@ export default function RegisterGenderForm() {
 				e.preventDefault();
 				setFocusedIndex((prev) => (prev - 1 + genderList.length) % genderList.length);
 			} else if (e.key === "Enter" && isValid) {
-				viewSwitcherNavigate(CombinedOnboardingViews.registerDOBForm);
+				setTimeout(() => {
+					viewSwitcherNavigate(CombinedOnboardingViews.registerDOBForm);
+				}, 250);
 			}
 		};
 
@@ -51,7 +53,9 @@ export default function RegisterGenderForm() {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (isValid) {
-			viewSwitcherNavigate(CombinedOnboardingViews.registerDOBForm);
+			setTimeout(() => {
+				viewSwitcherNavigate(CombinedOnboardingViews.registerDOBForm);
+			}, 250);
 		}
 	};
 
