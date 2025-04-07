@@ -39,7 +39,7 @@ const viewComponents: Record<CombinedOnboardingViews, ElementType> = {
 	[CombinedOnboardingViews.registerFinish]: RegisterFinish,
 };
 
-export const Route = createFileRoute("/(onboarding)/_onboarding/onboarding")({
+export const Route = createFileRoute("/_onboarding/onboarding")({
 	component: RouteComponent,
 });
 

@@ -7,7 +7,6 @@ import { AppSchema } from "../lib/appSchema";
 const SupabaseContext = createContext<SupabaseConnector | null>(null);
 export const useSupabase = () => useContext(SupabaseContext);
 const supabase = new SupabaseConnector();
-export { supabase };
 
 const db = new PowerSyncDatabase({
 	database: { dbFilename: "local.db" },
@@ -63,4 +62,4 @@ const SystemProvider = ({ children }: { children: ReactNode }) => {
 	);
 };
 
-export { SystemProvider };
+export { supabase, SystemProvider, db };

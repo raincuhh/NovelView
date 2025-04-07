@@ -37,6 +37,11 @@ const Icon = {
 			<path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
 		</svg>
 	),
+	chevronLeft: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
+		</svg>
+	),
 	dottedHorizontalRounded: ({ className }: IconProps) => (
 		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
 			<path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />

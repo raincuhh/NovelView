@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import OnboardingViewContainer from "@/pages/onboarding/components/ui/onboardingViewContainer";
 import { Form, FormControl, FormItem, FormLabel, FormMessage } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 import { useSupabase } from "@/shared/providers/systemProvider";
+import { useNavigate } from "@tanstack/react-router";
 
 const loginFormSchema = z.object({
 	email: z.string().email("Invalid email"),
@@ -13,6 +14,7 @@ const loginFormSchema = z.object({
 
 export default function LoginForm() {
 	const supabase = useSupabase();
+	const navigate = useNavigate();
 
 	const [formData, setFormData] = useState({ email: "", password: "" });
 	const [errors, setErrors] = useState<Partial<Record<"email" | "password", string>>>({});
@@ -43,11 +45,15 @@ export default function LoginForm() {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (isValid) {
-			console.log("Form submitted:", formData);
+			// console.log("Form submitted:", formData);
 			supabase?.login(formData.email, formData.password);
 			console.log("session: ", supabase?.getSession());
 		}
 	};
+
+	useEffect(() => {
+		navigate({ to: "/home" });
+	}, [supabase?.getSession()]);
 
 	return (
 		<OnboardingViewContainer>

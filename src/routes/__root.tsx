@@ -23,7 +23,7 @@ function RootDocument({ children }: RootDocumentProps) {
 	return (
 		<AppProvider>
 			<RootLayout>{children}</RootLayout>
-			<div className="absolute">
+			<div className="absolute hidden">
 				<ReactQueryDevtools buttonPosition="bottom-left" />
 				<TanStackRouterDevtools position="bottom-right" />
 			</div>
