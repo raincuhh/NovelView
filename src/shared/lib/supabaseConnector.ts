@@ -36,7 +36,7 @@ export class SupabaseConnector
 	extends BaseObserver<SupabaseConnectorListener>
 	implements PowerSyncBackendConnector
 {
-	private readonly _client: SupabaseClient;
+	readonly client: SupabaseClient;
 	private readonly _config: SupabaseConfig;
 	private _ready: boolean = false;
 	private _currentSession: Session | null;
@@ -49,7 +49,7 @@ export class SupabaseConnector
 			supabaseAnonKey: env.SUPABASE_ANON_KEY,
 		};
 
-		this._client = createClient(this._config.supabaseUrl, this._config.supabaseAnonKey, {
+		this.client = createClient(this._config.supabaseUrl, this._config.supabaseAnonKey, {
 			auth: {
 				persistSession: true,
 			},
@@ -61,7 +61,7 @@ export class SupabaseConnector
 	async init() {
 		if (this._ready) return;
 
-		const sessionResponse = await this._client.auth.getSession();
+		const sessionResponse = await this.client.auth.getSession();
 		this.updateSession(sessionResponse.data.session);
 
 		this._ready = true;
@@ -72,7 +72,7 @@ export class SupabaseConnector
 		const {
 			data: { session },
 			error,
-		} = await this._client.auth.signInWithPassword({
+		} = await this.client.auth.signInWithPassword({
 			email: email,
 			password: password,
 		});
@@ -82,7 +82,7 @@ export class SupabaseConnector
 	}
 
 	async signOut() {
-		await this._client.auth.signOut();
+		await this.client.auth.signOut();
 		this._currentSession = null;
 	}
 
@@ -99,7 +99,7 @@ export class SupabaseConnector
 		const {
 			data: { session },
 			error,
-		} = await this._client.auth.getSession();
+		} = await this.client.auth.getSession();
 
 		if (!session || error) throw new Error(`Could not fetch Supabase credentials: ${error}`);
 
@@ -125,7 +125,7 @@ export class SupabaseConnector
 			// or edge functions to process the entire transaction in a single call.
 			for (const op of transaction.crud) {
 				lastOp = op;
-				const table = this._client.from(op.table);
+				const table = this.client.from(op.table);
 				let result: any;
 				switch (op.op) {
 					case UpdateType.PUT:
