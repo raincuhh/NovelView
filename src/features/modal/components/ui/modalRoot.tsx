@@ -7,9 +7,15 @@ export default function ModalRoot() {
 	const { modals } = useModalStore((state) => state);
 
 	return (
-		<RenderList
-			data={modals}
-			render={(modal: Modal, i: number) => <ModalBackground key={i}>{modal.content}</ModalBackground>}
-		/>
+		<div>
+			<RenderList
+				data={modals}
+				render={(modal: Modal, i: number) => (
+					<div key={i} className="w-screen h-screen absolute top-0 left-0">
+						{modal.content}
+					</div>
+				)}
+			/>
+		</div>
 	);
 }

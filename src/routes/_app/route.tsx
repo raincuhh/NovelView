@@ -1,8 +1,9 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { supabase } from "@/shared/providers/systemProvider";
 import { useMediaQuery } from "react-responsive";
-import Titlebar from "@/widgets/titlebar/components/ui/titlebar";
-import MobileNavigation from "@/widgets/mobileNav/components/ui/mobileNavigation";
+import Titlebar from "@/widgets/desktop/titlebar/components/ui/titlebar";
+import MobileNavigation from "@/widgets/mobile/mobileNav/components/ui/mobileNavigation";
+import DesktopLibraries from "@/widgets/desktop/desktopLibraries/components/ui/desktopLibraries";
 
 export const Route = createFileRoute("/_app")({
 	component: RouteComponent,
@@ -38,15 +39,18 @@ function DesktopLayout() {
 				gridTemplateRows: "36px min-content 1fr",
 				gridTemplateAreas: `
             "titlebar titlebar titlebar"
-            "libraries notice notice"
+            "libraries page page"
             "libraries page page"
           `,
 			}}
 		>
 			<Titlebar />
-			<div style={{ gridArea: "libraries" }}>libraries</div>
-			<div style={{ gridArea: "notice" }}>notice (notice)</div>
-			<div style={{ gridArea: "page" }}>
+			<DesktopLibraries />
+			{/* <div style={{ gridArea: "notice" }}>notice (notice)</div> */}
+			<div
+				style={{ gridArea: "page" }}
+				className="bg-primary-alt border-border border-t border-l rounded-tl-md pl-2 pt-2"
+			>
 				<Outlet />
 			</div>
 		</div>
