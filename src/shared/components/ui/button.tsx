@@ -10,10 +10,12 @@ const buttonVariants = cva(
 				default: "bg-interactive-normal hover:bg-interactive-hover",
 				accent:
 					"bg-interactive-accent hover:bg-interactive-accent-hover border-interactive-accent border",
-				outline: "border border-border hover:border-border-hover hover:bg-interactive-normal/70",
+				outline:
+					"border border-border hover:border-border-hover hover:bg-interactive-normal/70 text-normal",
 				link: "text-normal underline-offset-4 hover:underline",
 				ghost: "bg-transparent hover:bg-interactive-normal/70",
-				destructive: "",
+				destructive:
+					"bg-interactive-danger hover:bg-interactive-danger-hover border-interactive-danger border text-normal",
 				warning: "",
 				success: "",
 			},

@@ -4,10 +4,6 @@
 @theme {
 	--color-*: initial;
 
-	--color-info-danger-bg: var(--color-danger-900);
-	--color-info-danger-text: var(--color-danger-600);
-	--color-info-danger-border: var(--color-danger-600);
-
 	--color-info-warning-bg: var(--color-warning-900);
 	--color-info-warning-text: var(--color-warning-700);
 	--color-info-warning-border: var(--color-warning-600);
@@ -43,6 +39,8 @@
 	--color-interactive-input-border-hover: var(--color-base-40);
 	--color-interactive-input-border-focus: var(--color-base-50);
 	--color-interactive-input-placeholder: var(--color-text-form-placeholder);
+	--color-interactive-danger: var(--color-danger-900);
+	--color-interactive-danger-hover: var(--color-danger-800);
 
 	--shadow-sm: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.25);
 	--shadow-md: 0 2px 6px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.4);

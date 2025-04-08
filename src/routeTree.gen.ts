@@ -19,8 +19,11 @@ import { Route as IndexImport } from './routes/index'
 import { Route as LegalTosImport } from './routes/legal/tos'
 import { Route as LegalPrivacyPolicyImport } from './routes/legal/privacy-policy'
 import { Route as OnboardingOnboardingImport } from './routes/_onboarding/onboarding'
-import { Route as AppSearchImport } from './routes/_app/search'
-import { Route as AppHomeImport } from './routes/_app/home'
+import { Route as AppSearchRouteImport } from './routes/_app/_search/route'
+import { Route as AppHomeRouteImport } from './routes/_app/_home/route'
+import { Route as AppSearchSearchImport } from './routes/_app/_search/search'
+import { Route as AppLibrariesLibrariesImport } from './routes/_app/_libraries/libraries'
+import { Route as AppHomeHomeImport } from './routes/_app/_home/home'
 
 // Create/Update Routes
 
@@ -70,16 +73,32 @@ const OnboardingOnboardingRoute = OnboardingOnboardingImport.update({
   getParentRoute: () => OnboardingRouteRoute,
 } as any)
 
-const AppSearchRoute = AppSearchImport.update({
-  id: '/search',
-  path: '/search',
+const AppSearchRouteRoute = AppSearchRouteImport.update({
+  id: '/_search',
   getParentRoute: () => AppRouteRoute,
 } as any)
 
-const AppHomeRoute = AppHomeImport.update({
+const AppHomeRouteRoute = AppHomeRouteImport.update({
+  id: '/_home',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+
+const AppSearchSearchRoute = AppSearchSearchImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => AppSearchRouteRoute,
+} as any)
+
+const AppLibrariesLibrariesRoute = AppLibrariesLibrariesImport.update({
+  id: '/_libraries/libraries',
+  path: '/libraries',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+
+const AppHomeHomeRoute = AppHomeHomeImport.update({
   id: '/home',
   path: '/home',
-  getParentRoute: () => AppRouteRoute,
+  getParentRoute: () => AppHomeRouteRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -121,18 +140,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UnauthorizedImport
       parentRoute: typeof rootRoute
     }
-    '/_app/home': {
-      id: '/_app/home'
-      path: '/home'
-      fullPath: '/home'
-      preLoaderRoute: typeof AppHomeImport
+    '/_app/_home': {
+      id: '/_app/_home'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppHomeRouteImport
       parentRoute: typeof AppRouteImport
     }
-    '/_app/search': {
-      id: '/_app/search'
-      path: '/search'
-      fullPath: '/search'
-      preLoaderRoute: typeof AppSearchImport
+    '/_app/_search': {
+      id: '/_app/_search'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppSearchRouteImport
       parentRoute: typeof AppRouteImport
     }
     '/_onboarding/onboarding': {
@@ -156,19 +175,66 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LegalTosImport
       parentRoute: typeof rootRoute
     }
+    '/_app/_home/home': {
+      id: '/_app/_home/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof AppHomeHomeImport
+      parentRoute: typeof AppHomeRouteImport
+    }
+    '/_app/_libraries/libraries': {
+      id: '/_app/_libraries/libraries'
+      path: '/libraries'
+      fullPath: '/libraries'
+      preLoaderRoute: typeof AppLibrariesLibrariesImport
+      parentRoute: typeof AppRouteImport
+    }
+    '/_app/_search/search': {
+      id: '/_app/_search/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof AppSearchSearchImport
+      parentRoute: typeof AppSearchRouteImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface AppHomeRouteRouteChildren {
+  AppHomeHomeRoute: typeof AppHomeHomeRoute
+}
+
+const AppHomeRouteRouteChildren: AppHomeRouteRouteChildren = {
+  AppHomeHomeRoute: AppHomeHomeRoute,
+}
+
+const AppHomeRouteRouteWithChildren = AppHomeRouteRoute._addFileChildren(
+  AppHomeRouteRouteChildren,
+)
+
+interface AppSearchRouteRouteChildren {
+  AppSearchSearchRoute: typeof AppSearchSearchRoute
+}
+
+const AppSearchRouteRouteChildren: AppSearchRouteRouteChildren = {
+  AppSearchSearchRoute: AppSearchSearchRoute,
+}
+
+const AppSearchRouteRouteWithChildren = AppSearchRouteRoute._addFileChildren(
+  AppSearchRouteRouteChildren,
+)
+
 interface AppRouteRouteChildren {
-  AppHomeRoute: typeof AppHomeRoute
-  AppSearchRoute: typeof AppSearchRoute
+  AppHomeRouteRoute: typeof AppHomeRouteRouteWithChildren
+  AppSearchRouteRoute: typeof AppSearchRouteRouteWithChildren
+  AppLibrariesLibrariesRoute: typeof AppLibrariesLibrariesRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
-  AppHomeRoute: AppHomeRoute,
-  AppSearchRoute: AppSearchRoute,
+  AppHomeRouteRoute: AppHomeRouteRouteWithChildren,
+  AppSearchRouteRoute: AppSearchRouteRouteWithChildren,
+  AppLibrariesLibrariesRoute: AppLibrariesLibrariesRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
@@ -189,26 +255,28 @@ const OnboardingRouteRouteWithChildren = OnboardingRouteRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '': typeof OnboardingRouteRouteWithChildren
+  '': typeof AppSearchRouteRouteWithChildren
   '/test': typeof TestRoute
   '/unauthorized': typeof UnauthorizedRoute
-  '/home': typeof AppHomeRoute
-  '/search': typeof AppSearchRoute
   '/onboarding': typeof OnboardingOnboardingRoute
   '/legal/privacy-policy': typeof LegalPrivacyPolicyRoute
   '/legal/tos': typeof LegalTosRoute
+  '/home': typeof AppHomeHomeRoute
+  '/libraries': typeof AppLibrariesLibrariesRoute
+  '/search': typeof AppSearchSearchRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '': typeof OnboardingRouteRouteWithChildren
+  '': typeof AppSearchRouteRouteWithChildren
   '/test': typeof TestRoute
   '/unauthorized': typeof UnauthorizedRoute
-  '/home': typeof AppHomeRoute
-  '/search': typeof AppSearchRoute
   '/onboarding': typeof OnboardingOnboardingRoute
   '/legal/privacy-policy': typeof LegalPrivacyPolicyRoute
   '/legal/tos': typeof LegalTosRoute
+  '/home': typeof AppHomeHomeRoute
+  '/libraries': typeof AppLibrariesLibrariesRoute
+  '/search': typeof AppSearchSearchRoute
 }
 
 export interface FileRoutesById {
@@ -218,11 +286,14 @@ export interface FileRoutesById {
   '/_onboarding': typeof OnboardingRouteRouteWithChildren
   '/test': typeof TestRoute
   '/unauthorized': typeof UnauthorizedRoute
-  '/_app/home': typeof AppHomeRoute
-  '/_app/search': typeof AppSearchRoute
+  '/_app/_home': typeof AppHomeRouteRouteWithChildren
+  '/_app/_search': typeof AppSearchRouteRouteWithChildren
   '/_onboarding/onboarding': typeof OnboardingOnboardingRoute
   '/legal/privacy-policy': typeof LegalPrivacyPolicyRoute
   '/legal/tos': typeof LegalTosRoute
+  '/_app/_home/home': typeof AppHomeHomeRoute
+  '/_app/_libraries/libraries': typeof AppLibrariesLibrariesRoute
+  '/_app/_search/search': typeof AppSearchSearchRoute
 }
 
 export interface FileRouteTypes {
@@ -232,22 +303,24 @@ export interface FileRouteTypes {
     | ''
     | '/test'
     | '/unauthorized'
-    | '/home'
-    | '/search'
     | '/onboarding'
     | '/legal/privacy-policy'
     | '/legal/tos'
+    | '/home'
+    | '/libraries'
+    | '/search'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | ''
     | '/test'
     | '/unauthorized'
-    | '/home'
-    | '/search'
     | '/onboarding'
     | '/legal/privacy-policy'
     | '/legal/tos'
+    | '/home'
+    | '/libraries'
+    | '/search'
   id:
     | '__root__'
     | '/'
@@ -255,11 +328,14 @@ export interface FileRouteTypes {
     | '/_onboarding'
     | '/test'
     | '/unauthorized'
-    | '/_app/home'
-    | '/_app/search'
+    | '/_app/_home'
+    | '/_app/_search'
     | '/_onboarding/onboarding'
     | '/legal/privacy-policy'
     | '/legal/tos'
+    | '/_app/_home/home'
+    | '/_app/_libraries/libraries'
+    | '/_app/_search/search'
   fileRoutesById: FileRoutesById
 }
 
@@ -308,8 +384,9 @@ export const routeTree = rootRoute
     "/_app": {
       "filePath": "_app/route.tsx",
       "children": [
-        "/_app/home",
-        "/_app/search"
+        "/_app/_home",
+        "/_app/_search",
+        "/_app/_libraries/libraries"
       ]
     },
     "/_onboarding": {
@@ -324,13 +401,19 @@ export const routeTree = rootRoute
     "/unauthorized": {
       "filePath": "unauthorized.tsx"
     },
-    "/_app/home": {
-      "filePath": "_app/home.tsx",
-      "parent": "/_app"
+    "/_app/_home": {
+      "filePath": "_app/_home/route.tsx",
+      "parent": "/_app",
+      "children": [
+        "/_app/_home/home"
+      ]
     },
-    "/_app/search": {
-      "filePath": "_app/search.tsx",
-      "parent": "/_app"
+    "/_app/_search": {
+      "filePath": "_app/_search/route.tsx",
+      "parent": "/_app",
+      "children": [
+        "/_app/_search/search"
+      ]
     },
     "/_onboarding/onboarding": {
       "filePath": "_onboarding/onboarding.tsx",
@@ -341,6 +424,18 @@ export const routeTree = rootRoute
     },
     "/legal/tos": {
       "filePath": "legal/tos.tsx"
+    },
+    "/_app/_home/home": {
+      "filePath": "_app/_home/home.tsx",
+      "parent": "/_app/_home"
+    },
+    "/_app/_libraries/libraries": {
+      "filePath": "_app/_libraries/libraries.tsx",
+      "parent": "/_app"
+    },
+    "/_app/_search/search": {
+      "filePath": "_app/_search/search.tsx",
+      "parent": "/_app/_search"
     }
   }
 }

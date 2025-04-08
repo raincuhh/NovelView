@@ -1,25 +1,61 @@
-import { Cover, CoverImage, CoverImageFallback } from "@/shared/components/ui/CoverImage";
+import { FileRouteTypes } from "@/routeTree.gen";
+import { Cover, CoverImage, CoverImageFallback } from "@/shared/components/ui/cover";
+import { ElementType, forwardRef, HTMLAttributes } from "react";
+import { Link } from "@tanstack/react-router";
 
-export default function MobileNavigationRecentRead() {
+type MobileNavigationRecentReadProps = {
+	coverSrc?: string;
+	title?: string;
+	sectionPrefix?: string | number;
+	sectionSuffix?: string | number;
+	to?: FileRouteTypes["to"] | string;
+};
+
+const MobileNavigationRecentRead = forwardRef<
+	HTMLDivElement,
+	HTMLAttributes<HTMLDivElement> & MobileNavigationRecentReadProps
+>(({ className, coverSrc, title, sectionPrefix, sectionSuffix, to, ...props }, ref) => {
+	const placeholderConfig: Omit<MobileNavigationRecentReadProps, "to"> = {
+		coverSrc: "/assets/images/placeholder/shadowSlavePlaceholder.jpg",
+		title: "Shadow Slave",
+		sectionPrefix: "1454",
+		sectionSuffix: "An Oath and a Promise",
+	};
+
+	const Comp: ElementType = to ? Link : "div";
+
 	return (
-		<div className="flex w-full px-2 py-2">
-			<div className="bg-accent w-full rounded-md p-2">
-				<div className="flex w-full h-full items-center gap-4">
+		<Comp {...(to ? { to } : {})} className="relative flex w-full h-17" ref={ref} {...props}>
+			<div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-center mx-2">
+				<div className="relative flex w-full h-full items-center gap-4 px-2 py-2 border border-border hover:border-border-hover rounded-md select-none">
+					<div className="absolute inset-0 z-0 overflow-hidden">
+						<img
+							className="w-full h-full object-cover blur-md opacity-30"
+							src={coverSrc ?? String(placeholderConfig.coverSrc)}
+							alt="bg blur cover"
+						/>
+					</div>
 					<div className="flex gap-2 h-full w-full items-center">
 						<Cover className="h-12 w-12 rounded-sm">
-							<CoverImage
-								src="../../../../../public/assets/images/placeholder/shadowSlavePlaceholder.jpg"
-								alt="cat"
-							/>
+							<CoverImage src={coverSrc ?? String(placeholderConfig.coverSrc)} alt="cover" />
 							<CoverImageFallback isLoading={false}></CoverImageFallback>
 						</Cover>
-						<div className="flex flex-col max-w-[55%]">
-							<h1 className="text-md truncate overflow-hidden text-ellipsis">Shadow Slave</h1>
-							<span className="text-xs text-muted">1454 · An Oath and a Promise</span>
+						<div className="flex flex-col max-w-[60%] h-full">
+							<h1 className="text-md truncate overflow-hidden text-ellipsis">
+								{title ?? placeholderConfig.title}
+							</h1>
+							<span className="text-xs text-muted truncate overflow-hidden text-ellipsis">
+								{String(sectionPrefix ?? placeholderConfig.sectionPrefix)}{" "}
+								{"· ".concat(String(sectionSuffix ?? placeholderConfig.sectionSuffix))}
+							</span>
 						</div>
+						<div></div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</Comp>
 	);
-}
+});
+
+MobileNavigationRecentRead.displayName = "MobileNavigationRecentRead";
+export default MobileNavigationRecentRead;

@@ -1,5 +1,6 @@
 import MobileNavigationRecentRead from "./mobileRecentRead";
 import MobileNavigationButtons from "./mobileNavigationButtons";
+import { FileRouteTypes } from "@/routeTree.gen";
 
 export default function MobileNavigation() {
 	return (
@@ -13,8 +14,8 @@ export default function MobileNavigation() {
 				}}
 			/>
 
-			<div className="relative z-10 w-full">
-				<MobileNavigationRecentRead />
+			<div className="relative z-10 w-full flex flex-col">
+				<MobileNavigationRecentRead to={"/home" as FileRouteTypes["to"]} />
 				<MobileNavigationButtons />
 			</div>
 		</div>

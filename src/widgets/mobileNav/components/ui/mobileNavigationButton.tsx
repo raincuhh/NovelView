@@ -14,7 +14,7 @@ const MobileNavigationButton = forwardRef<HTMLDivElement, MobileNavigationButton
 		return (
 			<Comp
 				ref={ref}
-				className={cn("flex flex-col gap-2 justify-center items-center min-w-14", className)}
+				className={cn("flex flex-col gap-1 justify-center items-center min-w-14", className)}
 				{...props}
 			>
 				{children}
