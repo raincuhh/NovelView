@@ -5,9 +5,21 @@ import {
 	PowerSyncBackendConnector,
 	UpdateType,
 } from "@powersync/web";
-
 import { Session, SupabaseClient, createClient } from "@supabase/supabase-js";
 import { env } from "./env";
+import { isTauri } from "@tauri-apps/api/core";
+let getLocalSession: any;
+let storeLocalSession: any;
+
+if (isTauri()) {
+	import("./session").then((module) => {
+		getLocalSession = module.getLocalSession;
+		storeLocalSession = module.storeLocalSession;
+		console.log("Tauri environment detected. session functions loaded.");
+	});
+} else {
+	console.log("Not in a Tauri environment.");
+}
 
 export type SupabaseConfig = {
 	supabaseUrl: string;
@@ -17,14 +29,9 @@ export type SupabaseConfig = {
 
 /// Postgres Response codes that we cannot recover from by retrying.
 const FATAL_RESPONSE_CODES = [
-	// Class 22 — Data Exception
-	// Examples include data type mismatch.
-	new RegExp("^22...$"),
-	// Class 23 — Integrity Constraint Violation.
-	// Examples include NOT NULL, FOREIGN KEY and UNIQUE violations.
-	new RegExp("^23...$"),
-	// INSUFFICIENT PRIVILEGE - typically a row-level security violation
-	new RegExp("^42501$"),
+	new RegExp("^22...$"), // Class 22 — Data Exception (e.g. data type mismatch)
+	new RegExp("^23...$"), // Class 23 — Integrity Constraint Violation (e.g. UNIQUE violation)
+	new RegExp("^42501$"), // INSUFFICIENT PRIVILEGE - typically a row-level security violation
 ];
 
 export type SupabaseConnectorListener = {
@@ -61,8 +68,32 @@ export class SupabaseConnector
 	async init() {
 		if (this._ready) return;
 
+		if (isTauri()) {
+			const localSession = await getLocalSession();
+			console.log(localSession);
+		}
+
+		// if (localSession) {
+		// 	this.updateSession(localSession);
+		// } else {
+		// 	const sessionResponse = await this.client.auth.getSession();
+		// 	if (sessionResponse.error) {
+		// 		throw new Error(`Error fetching session: ${sessionResponse.error.message}`);
+		// 	}
+		// 	this.updateSession(sessionResponse.data.session);
+		// }
+
 		const sessionResponse = await this.client.auth.getSession();
-		this.updateSession(sessionResponse.data.session);
+
+		if (sessionResponse.data.session) {
+			this.updateSession(sessionResponse.data.session);
+
+			if (isTauri()) {
+				storeLocalSession(sessionResponse.data.session);
+			}
+		} else {
+			console.log("No session available");
+		}
 
 		this._ready = true;
 		this.iterateListeners((cb) => cb.initialized?.());
@@ -79,6 +110,8 @@ export class SupabaseConnector
 		if (error) throw error;
 
 		this.updateSession(session);
+
+		return session;
 	}
 
 	async signOut() {

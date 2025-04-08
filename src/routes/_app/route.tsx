@@ -1,23 +1,14 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
-import { supabase } from "@/shared/providers/systemProvider";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
+// import { supabase } from "@/shared/providers/systemProvider";
 import { useMediaQuery } from "react-responsive";
 import Titlebar from "@/widgets/desktop/titlebar/components/ui/titlebar";
 import MobileNavigation from "@/widgets/mobile/mobileNav/components/ui/mobileNavigation";
 import DesktopLibraries from "@/widgets/desktop/desktopLibraries/components/ui/desktopLibraries";
+import { requireAuth } from "@/features/auth/lib/authGuard";
 
 export const Route = createFileRoute("/_app")({
 	component: RouteComponent,
-	beforeLoad: async ({ location }) => {
-		const session = await supabase.getSession();
-		if (!session) {
-			throw redirect({
-				to: "/onboarding",
-				search: {
-					redirect: location.href,
-				},
-			});
-		}
-	},
+	beforeLoad: requireAuth,
 });
 
 function RouteComponent() {
@@ -47,11 +38,10 @@ function DesktopLayout() {
 			<Titlebar />
 			<DesktopLibraries />
 			{/* <div style={{ gridArea: "notice" }}>notice (notice)</div> */}
-			<div
-				style={{ gridArea: "page" }}
-				className="bg-primary-alt border-border border-t border-l rounded-tl-md pl-2 pt-2"
-			>
-				<Outlet />
+			<div style={{ gridArea: "page" }}>
+				<div className="bg-primary-alt border-border border-t border-l rounded-tl-md h-full overflow-hidden">
+					<Outlet />
+				</div>
 			</div>
 		</div>
 	);

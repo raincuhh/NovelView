@@ -1,3 +1,3 @@
 export default function QuickAccess() {
-	return <div>QuickAccess</div>;
+	return <div className="px-4">QuickAccess</div>;
 }

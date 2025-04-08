@@ -17,11 +17,11 @@ const Avatar = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
 
 				const userId = session?.user.id;
 
-				for await (const result of db.watch("SELECT avatar_url FROM profiles WHERE id = ?", [userId], {
+				for await (const result of db.watch("SELECT * FROM profiles WHERE id = ?", [userId], {
 					signal: abortController.signal,
 				})) {
 					const avatarUrl = result.rows?._array?.[0]?.avatar_url;
-					// console.log(result);
+					console.log(result);
 
 					if (avatarUrl && typeof avatarUrl === "string") {
 						setUrl(avatarUrl);

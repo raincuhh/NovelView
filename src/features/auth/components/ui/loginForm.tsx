@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { z } from "zod";
 import OnboardingViewContainer from "@/pages/onboarding/components/ui/onboardingViewContainer";
 import { Form, FormControl, FormItem, FormLabel, FormMessage } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
-import { useSupabase } from "@/shared/providers/systemProvider";
+import { db, useSupabase } from "@/shared/providers/systemProvider";
 import { useNavigate } from "@tanstack/react-router";
 
 const loginFormSchema = z.object({
@@ -42,18 +42,69 @@ export default function LoginForm() {
 		validate();
 	};
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (isValid) {
-			// console.log("Form submitted:", formData);
-			supabase?.login(formData.email, formData.password);
-			console.log("session: ", supabase?.getSession());
+		if (!isValid) return;
+
+		try {
+			const session = await supabase?.login(formData.email, formData.password);
+			if (!session) {
+				console.error("Login returned no session");
+				return;
+			}
+
+			const userId = session.user.id;
+			console.log("Logged in as:", userId);
+
+			await db.writeTransaction(async (tx) => {
+				const userSettingsExisted = await tx.getOptional(
+					"SELECT * FROM user_settings WHERE user_id = ?",
+					[userId]
+				);
+
+				const userProfileExisted = await tx.getOptional("SELECT * FROM profiles WHERE user_id = ?", [
+					userId,
+				]);
+
+				if (!userSettingsExisted) {
+					await tx.execute(
+						`INSERT INTO user_settings (
+								id,
+								user_id,
+								onboarding_completed,
+								app_theme,
+								app_accent,
+								font_size,
+								language,
+								notifications_enabled,
+								created_at,
+								updated_at
+						  ) VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, datetime(), datetime())`,
+						[userId, false, "default", "", 14, "en", true]
+					);
+					console.log("Seeded local user_settings row for:", userId);
+				}
+
+				if (!userProfileExisted) {
+					await tx.execute(
+						`INSERT INTO profiles (
+								id,
+								user_id,
+								username,
+								created_at,
+								updated_at
+						  ) VALUES (uuid(), ?, ?, datetime(), datetime())`,
+						[userId, session.user.email]
+					);
+					console.log("Seeded local profiles row for:", userId);
+				}
+			});
+
+			navigate({ to: "/home" });
+		} catch (err: any) {
+			console.error("Login or local setup failed:", err);
 		}
 	};
-
-	useEffect(() => {
-		navigate({ to: "/home" });
-	}, [supabase?.getSession()]);
 
 	return (
 		<OnboardingViewContainer>

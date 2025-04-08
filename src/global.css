@@ -28,6 +28,7 @@
 	--color-muted: var(--color-base-60);
 	--color-faint: var(--color-base-50);
 	--color-accent: var(--color-accent);
+	--color-danger: var(--color-danger-700)
 
 	/*btns, inputs, etc.*/
 	--color-interactive-normal: var(--color-base-30);
@@ -162,6 +163,14 @@
 @layer utilities {
 	.autofill\:bg-autofill-interactive-input-bg:-webkit-autofill {
 		background: var(--color-base-10) !important;
+	}
+	.hide-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	.hide-scrollbar {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
 	}
 }
 
