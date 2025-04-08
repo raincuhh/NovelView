@@ -7,8 +7,12 @@ import { Link } from "@tanstack/react-router";
 import Separator from "@/shared/components/ui/separator";
 import { useRegisterFormStore } from "../../registerFormStore";
 import { cn } from "@/shared/lib/globalUtils";
+import { db, supabase } from "@/shared/providers/systemProvider";
+import { CombinedOnboardingViews } from "../../types";
+import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
 
 export default function RegisterFinish() {
+	const { viewSwitcherNavigate } = useViewTransition<CombinedOnboardingViews>();
 	const { formData } = useRegisterFormStore();
 
 	const [isSticky, setIsSticky] = useState<boolean>(true);
@@ -29,9 +33,58 @@ export default function RegisterFinish() {
 		};
 	}, []);
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		console.log("formData: ", formData);
+
+		try {
+			const { data, error } = await supabase.client.auth.signUp({
+				email: formData.email,
+				password: formData.password,
+			});
+
+			if (error) throw error;
+
+			if (data.user) {
+				const user = data.user;
+
+				await db.writeTransaction(async (tx) => {
+					tx.execute(
+						`INSERT INTO profiles (
+							id,
+							user_id,
+							username,
+							gender,
+							dob,
+							created_at,
+							updated_at,
+							avatar_url
+						) VALUES (uuid(), ?, ?, ?, ?, datetime(), datetime(), ?)`,
+						[user.id, formData.username, formData.gender, formData.DOB, null]
+					);
+
+					tx.execute(
+						`INSERT INTO user_settings (
+								id,
+								user_id,
+								onboarding_completed,
+								app_theme,
+								app_accent,
+								font_size,
+								language,
+								notifications_enabled,
+								created_at,
+								updated_at
+						  ) VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, datetime(), datetime())`,
+						[user.id, false, "default", "", 14, "en", true]
+					);
+				});
+			}
+
+			viewSwitcherNavigate(CombinedOnboardingViews.registerVerifyEmail);
+		} catch (err: any) {
+			console.error("Register failed: ", err);
+		}
 	};
 
 	return (

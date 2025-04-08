@@ -21,7 +21,7 @@ const Avatar = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
 					signal: abortController.signal,
 				})) {
 					const avatarUrl = result.rows?._array?.[0]?.avatar_url;
-					console.log(result);
+					// console.log(result);
 
 					if (avatarUrl && typeof avatarUrl === "string") {
 						setUrl(avatarUrl);

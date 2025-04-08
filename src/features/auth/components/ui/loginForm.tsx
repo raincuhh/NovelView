@@ -82,7 +82,7 @@ export default function LoginForm() {
 						  ) VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, datetime(), datetime())`,
 						[userId, false, "default", "", 14, "en", true]
 					);
-					console.log("Seeded local user_settings row for:", userId);
+					// console.log("seeded local user_settings row for:", userId);
 				}
 
 				if (!userProfileExisted) {

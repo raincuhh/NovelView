@@ -17,4 +17,5 @@ export enum CombinedOnboardingViews {
 	registerDOBForm = "registerDOBForm",
 	registerUsernameForm = "registerUsernameForm",
 	registerFinish = "registerFinish",
+	registerVerifyEmail = "registerVerifyEmail",
 }

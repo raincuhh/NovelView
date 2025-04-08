@@ -1,9 +1,32 @@
 import Avatar from "@/shared/components/ui/avatar";
+import { db, supabase } from "@/shared/providers/systemProvider";
+import { useEffect } from "react";
 // import { Button } from "@/shared/components/ui/button";
 import { useMediaQuery } from "react-responsive";
 
 export default function HomeNavbar() {
 	const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
+	const fetchUsername = async () => {
+		try {
+			const session = await supabase.getSession();
+			if (!session) throw "no session";
+
+			const userId = session?.user.id;
+
+			const username = await db.getOptional("SELECT username FROM profiles WHERE user_id = ?", [userId]);
+
+			if (username) {
+			}
+		} catch (err: any) {
+			console.error("Error fetching username: ", err);
+		} finally {
+		}
+	};
+
+	useEffect(() => {
+		fetchUsername();
+	}, [fetchUsername]);
 
 	return (
 		<div className="sticky top-0 z-20 w-full bg-primary border-b border-border md:border-none">

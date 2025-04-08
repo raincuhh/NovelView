@@ -16,27 +16,26 @@ import RegisterGenderForm from "@/pages/onboarding/components/ui/registerGenderF
 import RegisterDOBForm from "@/pages/onboarding/components/ui/registerDOBForm";
 import RegisterUsernameForm from "@/pages/onboarding/components/ui/registerUsernameForm";
 import RegisterFinish from "@/pages/onboarding/components/ui/registerFinish";
+import RegisterVerifyEmail from "@/pages/onboarding/components/ui/registerVerifyEmail";
 import { OnboardingHeader } from "@/pages/onboarding/components/ui/onboardingHeader";
 
 const viewComponents: Record<CombinedOnboardingViews, ElementType> = {
-	//top
 	[CombinedOnboardingViews.welcome]: Welcome,
 	[CombinedOnboardingViews.loginOptions]: LoginOptions,
 	[CombinedOnboardingViews.registerOptions]: RegisterOptions,
 
-	//login flow
 	[CombinedOnboardingViews.loginForm]: LoginForm,
 	[CombinedOnboardingViews.resetPasswordForm]: ResetPasswordForm,
 	[CombinedOnboardingViews.forgotPasswordForm]: ForgotPasswordForm,
 	[CombinedOnboardingViews.verifyEmailForm]: VerifyEmailForm,
 
-	//register flow
 	[CombinedOnboardingViews.registerEmailForm]: RegisterEmailForm,
 	[CombinedOnboardingViews.registerPasswordForm]: RegisterPasswordForm,
 	[CombinedOnboardingViews.registerGenderForm]: RegisterGenderForm,
 	[CombinedOnboardingViews.registerDOBForm]: RegisterDOBForm,
 	[CombinedOnboardingViews.registerUsernameForm]: RegisterUsernameForm,
 	[CombinedOnboardingViews.registerFinish]: RegisterFinish,
+	[CombinedOnboardingViews.registerVerifyEmail]: RegisterVerifyEmail,
 };
 
 export const Route = createFileRoute("/_onboarding/onboarding")({

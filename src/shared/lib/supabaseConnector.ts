@@ -7,19 +7,6 @@ import {
 } from "@powersync/web";
 import { Session, SupabaseClient, createClient } from "@supabase/supabase-js";
 import { env } from "./env";
-import { isTauri } from "@tauri-apps/api/core";
-let getLocalSession: any;
-let storeLocalSession: any;
-
-if (isTauri()) {
-	import("./session").then((module) => {
-		getLocalSession = module.getLocalSession;
-		storeLocalSession = module.storeLocalSession;
-		console.log("Tauri environment detected. session functions loaded.");
-	});
-} else {
-	console.log("Not in a Tauri environment.");
-}
 
 export type SupabaseConfig = {
 	supabaseUrl: string;
@@ -68,10 +55,7 @@ export class SupabaseConnector
 	async init() {
 		if (this._ready) return;
 
-		if (isTauri()) {
-			const localSession = await getLocalSession();
-			console.log(localSession);
-		}
+		// TODO: invoke tauri to check if i have a localsession, if i dont, fallback to supabase login.
 
 		// if (localSession) {
 		// 	this.updateSession(localSession);
@@ -88,9 +72,7 @@ export class SupabaseConnector
 		if (sessionResponse.data.session) {
 			this.updateSession(sessionResponse.data.session);
 
-			if (isTauri()) {
-				storeLocalSession(sessionResponse.data.session);
-			}
+			// await storelocalSession // TODO: implement this
 		} else {
 			console.log("No session available");
 		}
@@ -115,6 +97,7 @@ export class SupabaseConnector
 	}
 
 	async signOut() {
+		// TODO: when you signout, clear saved localsession aswell.
 		await this.client.auth.signOut();
 		this._currentSession = null;
 	}
