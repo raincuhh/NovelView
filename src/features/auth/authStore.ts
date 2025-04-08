@@ -5,6 +5,24 @@ import { create } from "zustand";
 // import { logoutUser, registerUser, loginUser } from "./authService";
 // import { useSupabase } from "@/shared/providers/systemProvider";
 
+// import { create } from "zustand";
+// import { supabase } from "@/shared/providers/systemProvider";
+
+// type AuthStore = {
+// 	session: Session | null;
+// 	setSession: (session: Session | null) => void;
+// 	init: () => Promise<void>;
+// };
+
+// export const useAuthStore = create<AuthStore>((set) => ({
+// 	session: null,
+// 	setSession: (session) => set({ session }),
+// 	init: async () => {
+// 		const session = await supabase.getSession();
+// 		set({ session });
+// 	},
+// }));
+
 type AuthState = {
 	user: User | null;
 	session: Session | null;
