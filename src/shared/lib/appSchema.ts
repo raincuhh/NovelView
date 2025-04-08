@@ -10,6 +10,7 @@ const profiles = new Table(
 		gender: column.text,
 		dob: column.text,
 		synced: column.integer,
+		avatar_url: column.text,
 		created_at: column.text,
 		updated_at: column.text,
 	},

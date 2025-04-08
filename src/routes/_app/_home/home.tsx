@@ -1,9 +1,14 @@
-import { createFileRoute } from '@tanstack/react-router'
+import HomeNavbar from "@/pages/home/components/ui/homeNavbar";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/_app/_home/home')({
-  component: RouteComponent,
-})
+export const Route = createFileRoute("/_app/_home/home")({
+	component: RouteComponent,
+});
 
 function RouteComponent() {
-  return <div>Hello "/_app/home"!</div>
+	return (
+		<div className="flex flex-col h-[150dvh]">
+			<HomeNavbar />
+		</div>
+	);
 }

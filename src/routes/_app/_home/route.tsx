@@ -6,7 +6,7 @@ export const Route = createFileRoute("/_app/_home")({
 
 function RouteComponent() {
 	return (
-		<div>
+		<div className="pt-14 flex flex-col">
 			<Outlet />
 		</div>
 	);
