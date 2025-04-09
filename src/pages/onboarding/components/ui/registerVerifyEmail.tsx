@@ -13,7 +13,7 @@ export default function RegisterVerifyEmail() {
 			const { data } = await supabase.client.auth.getUser();
 			if (data.user?.email_confirmed_at) {
 				clearInterval(interval);
-				navigate({ to: "/" });
+				navigate({ to: "/home" });
 			}
 		};
 

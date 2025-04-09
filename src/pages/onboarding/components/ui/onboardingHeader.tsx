@@ -19,6 +19,7 @@ const viewTitles: Partial<Record<CombinedOnboardingViews, string>> = {
 	[CombinedOnboardingViews.registerDOBForm]: "Register",
 	[CombinedOnboardingViews.registerUsernameForm]: "Register",
 	[CombinedOnboardingViews.registerFinish]: "Finalize",
+	// [CombinedOnboardingViews.registerVerifyEmail]: "VerifyEmail",
 };
 
 export function OnboardingHeader() {
