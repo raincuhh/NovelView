@@ -1,11 +1,12 @@
 import Avatar from "@/shared/components/ui/avatar";
 import { db, supabase } from "@/shared/providers/systemProvider";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import { Button } from "@/shared/components/ui/button";
 import { useMediaQuery } from "react-responsive";
 
 export default function HomeNavbar() {
 	const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+	const [username, setUsername] = useState<string>("...");
 
 	const fetchUsername = async () => {
 		try {
@@ -14,9 +15,18 @@ export default function HomeNavbar() {
 
 			const userId = session?.user.id;
 
-			const username = await db.getOptional("SELECT username FROM profiles WHERE user_id = ?", [userId]);
+			const result = await db.getOptional<{ username: string }>(
+				"SELECT username FROM profiles WHERE user_id = ?",
+				[userId]
+			);
 
-			if (username) {
+			if (result) {
+				const name = result.username;
+				if (name) {
+					setUsername(name);
+				} else {
+					setUsername("error");
+				}
 			}
 		} catch (err: any) {
 			console.error("Error fetching username: ", err);
@@ -32,7 +42,7 @@ export default function HomeNavbar() {
 		<div className="sticky top-0 z-20 w-full bg-primary border-b border-border md:border-none">
 			<div className="flex flex-col pt-12 md:pt-0 px-4 pb-2">
 				<h1>
-					Hello <span className="font-bold">{"RainCuh"}.</span>
+					Hello <span className="font-extrabold">{username}.</span>
 				</h1>
 			</div>
 			<div className="flex px-4 py-4 gap-4 h-full w-full flex-nowrap max-w-full">
