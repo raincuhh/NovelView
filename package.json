@@ -2,6 +2,11 @@
 	"name": "novelview",
 	"private": true,
 	"version": "0.1.0",
+	"workspaces": [
+		"src",
+		"src-tauri",
+		"web"
+	],
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
