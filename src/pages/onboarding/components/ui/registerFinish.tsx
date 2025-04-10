@@ -76,14 +76,14 @@ export default function RegisterFinish() {
 								created_at,
 								updated_at
 						  ) VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, datetime(), datetime())`,
-						[user.id, false, "default", "", 14, "en", true]
+						[user.id, true, "default", "default", 14, "en", true]
 					);
 				});
 			}
 
 			viewSwitcherNavigate(CombinedOnboardingViews.registerVerifyEmail);
 		} catch (err: any) {
-			console.error("Register failed: ", err);
+			console.error("Registration failed: ", err);
 		}
 	};
 

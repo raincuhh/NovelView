@@ -23,5 +23,14 @@ export default function RegisterVerifyEmail() {
 		return () => clearInterval(interval);
 	}, []);
 
-	return <OnboardingViewContainer>Please check your email for verifying email</OnboardingViewContainer>;
+	return (
+		<OnboardingViewContainer>
+			<div className="flex flex-col gap-2 mt-12">
+				<h1 className="text-2xl font-semibold select-none">Verify Your Email</h1>
+				<div className="flex flex-col">
+					<p className="text-muted text-sm">Please check your Email for the one time link.</p>
+				</div>
+			</div>
+		</OnboardingViewContainer>
+	);
 }

@@ -37,6 +37,15 @@ export default function Welcome() {
 					>
 						Log in
 					</Button>
+					<Button
+						variant="outline"
+						rounded="full"
+						size="lg"
+						onClick={() => viewSwitcherNavigate(CombinedOnboardingViews.registerVerifyEmail)}
+						aria-label="login options"
+					>
+						test ( go to email verify view)
+					</Button>
 				</div>
 				<div className="mb-2 text-sm text-muted text-center">
 					By continuing, you agree to our <span className="font-bold">Terms of Service</span> and{" "}

@@ -80,7 +80,7 @@ export default function LoginForm() {
 								created_at,
 								updated_at
 						  ) VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, datetime(), datetime())`,
-						[userId, false, "default", "", 14, "en", true]
+						[userId, true, "default", "", 14, "en", true]
 					);
 					// console.log("seeded local user_settings row for:", userId);
 				}
