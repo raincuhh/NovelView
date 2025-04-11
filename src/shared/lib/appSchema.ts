@@ -1,6 +1,6 @@
-import { column, Schema, Table } from "@powersync/web";
+import { column, RowType, Schema, Table } from "@powersync/web";
 
-const profiles = new Table(
+export const profilesTable = new Table(
 	{
 		// id column (text) is automatically included
 		user_id: column.text,
@@ -14,7 +14,7 @@ const profiles = new Table(
 	{ indexes: {} }
 );
 
-const user_settings = new Table(
+export const userSettingsTable = new Table(
 	{
 		// id column (text) is automatically included
 		user_id: column.text,
@@ -30,7 +30,7 @@ const user_settings = new Table(
 	{ indexes: {} }
 );
 
-const libraries = new Table(
+export const librariesTable = new Table(
 	{
 		// id column (text) is automatically included
 		user_id: column.text,
@@ -46,7 +46,7 @@ const libraries = new Table(
 	{ indexes: {} }
 );
 
-const premium_subscriptions = new Table(
+export const premiumSubscriptionsTable = new Table(
 	{
 		// id column (text) is automatically included
 		user_id: column.text,
@@ -58,7 +58,7 @@ const premium_subscriptions = new Table(
 	{ indexes: {} }
 );
 
-const books = new Table(
+export const booksTable = new Table(
 	{
 		// id column (text) is automatically included
 		library_id: column.text,
@@ -79,7 +79,7 @@ const books = new Table(
 	{ indexes: {} }
 );
 
-const book_contents = new Table(
+export const bookContentsTable = new Table(
 	{
 		// id column (text) is automatically included
 		book_id: column.text,
@@ -92,17 +92,29 @@ const book_contents = new Table(
 );
 
 export const AppSchema = new Schema({
-	profiles,
-	user_settings,
-	libraries,
-	premium_subscriptions,
-	books,
-	book_contents,
+	profiles: profilesTable,
+	user_settings: userSettingsTable,
+	libraries: librariesTable,
+	premium_subscriptions: premiumSubscriptionsTable,
+	books: booksTable,
+	book_contents: bookContentsTable,
 });
 
+export const Tables = {
+	profiles: profilesTable,
+	user_settings: userSettingsTable,
+	libraries: librariesTable,
+	premium_subscriptions: premiumSubscriptionsTable,
+	books: booksTable,
+	book_contents: bookContentsTable,
+} as const;
+
 export type Database = (typeof AppSchema)["types"];
-export type BookContents = Database["book_contents"];
-export type Books = Database["books"];
-export type premiumSubscriptions = Database["premium_subscriptions"];
-export type UserSettings = Database["user_settings"];
-export type Profiles = Database["profiles"];
+export type TableRow<T extends keyof typeof Tables> = RowType<(typeof Tables)[T]>;
+
+export type Profiles = TableRow<"profiles">;
+export type UserSettings = TableRow<"user_settings">;
+export type Libraries = TableRow<"libraries">;
+export type PremiumSubscriptions = TableRow<"premium_subscriptions">;
+export type Books = TableRow<"books">;
+export type BookContents = TableRow<"book_contents">;

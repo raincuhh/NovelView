@@ -2,6 +2,7 @@ import { PropsWithChildren, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SystemProvider } from "./systemProvider";
 import AuthInitializer from "@/features/auth/components/utils/authInitializer";
+import { SkeletonTheme } from "react-loading-skeleton";
 
 type AppProviderProps = PropsWithChildren<{}>;
 
@@ -20,8 +21,10 @@ const AppProvider = ({ children }: AppProviderProps) => {
 	return (
 		<SystemProvider>
 			<QueryClientProvider client={queryClient}>
-				<AuthInitializer />
-				{children}
+				<SkeletonTheme baseColor="var(--color-base-10)" highlightColor="var(--color-base-20)">
+					<AuthInitializer />
+					{children}
+				</SkeletonTheme>
 			</QueryClientProvider>
 		</SystemProvider>
 	);

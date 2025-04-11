@@ -16,7 +16,7 @@
 	--color-primary: var(--color-base-05);
 	--color-primary-alt: var(--color-base-10);
 	--color-secondary: var(--color-base-20);
-	--color-secondary-alt: var(--color-base-20);
+	--color-secondary-alt: var(--color-base-25);
 
 	/*accent*/
 	--color-accent: var(--color-accent);
@@ -28,7 +28,7 @@
 	--color-muted: var(--color-base-60);
 	--color-faint: var(--color-base-50);
 	--color-accent: var(--color-accent);
-	--color-danger: var(--color-danger-700)
+	--color-danger: var(--danger-700)
 
 	/*btns, inputs, etc.*/
 	--color-interactive-normal: var(--color-base-30);
@@ -40,8 +40,8 @@
 	--color-interactive-input-border-hover: var(--color-base-40);
 	--color-interactive-input-border-focus: var(--color-base-50);
 	--color-interactive-input-placeholder: var(--color-text-form-placeholder);
-	--color-interactive-danger: var(--color-danger-900);
-	--color-interactive-danger-hover: var(--color-danger-800);
+	--color-interactive-danger: var(--danger-900);
+	--color-interactive-danger-hover: var(--danger-800);
 
 	--shadow-sm: 0 0.5px 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.25);
 	--shadow-md: 0 2px 6px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.4);
@@ -95,12 +95,12 @@
 	--color-warning-600: hsl(38.9, 100%, 55%);
 	--color-warning-500: hsl(38.9, 100%, 62%);
 
-	--color-danger-1000: hsl(7, 80%, 10%);
-	--color-danger-900: hsl(8, 75%, 15%);
-	--color-danger-800: hsl(8, 70%, 20%);
-	--color-danger-700: hsl(9, 65%, 30%);
-	--color-danger-600: hsl(10, 60%, 40%);
-	--color-danger-500: hsl(10, 60%, 51%);
+	--danger-1000: hsl(7, 80%, 10%);
+	--danger-900: hsl(8, 75%, 15%);
+	--danger-800: hsl(8, 70%, 20%);
+	--danger-700: hsl(9, 65%, 30%);
+	--danger-600: hsl(10, 60%, 40%);
+	--danger-500: hsl(10, 60%, 51%);
 
 	--color-success-1000: hsl(141, 20%, 5%);
 	--color-success-900: hsl(141, 25%, 10%);

@@ -1,46 +1,64 @@
 import RenderList from "@/shared/components/utils/renderList";
-import { Database } from "@/shared/lib/appSchema";
-import { db, supabase } from "@/shared/providers/systemProvider";
-import { useEffect, useState } from "react";
+// import {  Libraries as LibrariesTable } from "@/shared/lib/appSchema";
 import QuickAccessItem from "./quickAccessItem";
+import { useAuthStore } from "@/features/auth/authStore";
+import { useQuery } from "@powersync/tanstack-react-query";
+import { Libraries } from "@/shared/lib/appSchema";
+import Skeleton from "react-loading-skeleton";
 
 export default function QuickAccess() {
-	const [libraries, setLibraries] = useState<Database["libraries"][]>([]);
+	const userId = useAuthStore((state) => state.user?.auth.id);
 
-	useEffect(() => {
-		const fetchUserMostInteractedWithLibraries = async () => {
-			const session = await supabase.getSession();
-			if (!session) return;
+	const {
+		data: libraries,
+		isLoading,
+		isFetching,
+		error,
+	} = useQuery<Libraries>({
+		queryKey: ["mostInteractedLibraries"],
+		query: `SELECT l.id, l.name, l.cover_url,
+			(SELECT COUNT(*) FROM books b WHERE b.library_id = l.id) as total_reads
+			FROM libraries l
+			WHERE l.user_id = ?
+			GROUP BY l.id
+			ORDER BY total_reads DESC
+			LIMIT 6`,
+		parameters: [userId],
+	});
 
-			const userId = session.user.id;
+	if (isLoading) {
+		return (
+			<div className="px-4">
+				<div className="flex flex-col">
+					<div className="grid grid-cols-2 grid-rows-3 gap-2">
+						{[...Array(5)].map((_, i) => (
+							<Skeleton key={i} height="3rem" width="100%" />
+						))}
+					</div>
+				</div>
+			</div>
+		);
+	}
 
-			return db.watch(
-				`SELECT l.id, l.name, l.cover_url,
-				(SELECT COUNT(*) FROM books b WHERE b.library_id = l.id) as total_reads
-				FROM libraries l
-				WHERE l.user_id = ?
-				GROUP BY l.id
-				ORDER BY total_reads DESC
-				LIMIT 6`,
-				[userId],
-				{
-					onResult: (result) => {
-						setLibraries(result.rows?._array ?? []);
-						// console.log(result);
-					},
-				}
-			);
-		};
-
-		fetchUserMostInteractedWithLibraries();
-	}, []);
+	if (error) {
+		return <>error... {error.message}</>;
+	}
 
 	return (
 		<div className="px-4">
 			<div className="flex flex-col">
-				<ul className="grid grid-cols-2 grid-rows-3">
-					<RenderList data={libraries} render={(item, i: number) => <QuickAccessItem key={i} />} />
-				</ul>
+				{libraries && libraries.length > 0 ? (
+					<ul className="grid grid-cols-2 grid-rows-3 gap-2">
+						<RenderList
+							data={libraries}
+							render={(item: Libraries, i: number) => <QuickAccessItem key={i} data={item} />}
+						/>
+					</ul>
+				) : libraries ? (
+					<>
+						<Skeleton height="3rem" width="100%" />
+					</>
+				) : null}
 			</div>
 		</div>
 	);

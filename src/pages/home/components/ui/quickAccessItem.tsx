@@ -1,5 +1,9 @@
-type QuickAccessItemProps = {};
+import { Libraries } from "@/shared/lib/appSchema";
 
-export default function QuickAccessItem() {
-	return <div>QuickAccessItem</div>;
+type QuickAccessItemProps = {
+	data: Libraries;
+};
+
+export default function QuickAccessItem({ data }: QuickAccessItemProps) {
+	return <div>{data.id}</div>;
 }
