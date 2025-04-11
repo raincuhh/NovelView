@@ -1,5 +1,4 @@
 import { column, Schema, Table } from "@powersync/web";
-// OR: import { column, Schema, Table } from '@powersync/react-native';
 
 const profiles = new Table(
 	{
@@ -102,3 +101,8 @@ export const AppSchema = new Schema({
 });
 
 export type Database = (typeof AppSchema)["types"];
+export type BookContents = Database["book_contents"];
+export type Books = Database["books"];
+export type premiumSubscriptions = Database["premium_subscriptions"];
+export type UserSettings = Database["user_settings"];
+export type Profiles = Database["profiles"];

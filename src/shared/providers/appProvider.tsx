@@ -18,12 +18,12 @@ const AppProvider = ({ children }: AppProviderProps) => {
 	);
 
 	return (
-		<QueryClientProvider client={queryClient}>
-			<SystemProvider>
+		<SystemProvider>
+			<QueryClientProvider client={queryClient}>
 				<AuthInitializer />
 				{children}
-			</SystemProvider>
-		</QueryClientProvider>
+			</QueryClientProvider>
+		</SystemProvider>
 	);
 };
 

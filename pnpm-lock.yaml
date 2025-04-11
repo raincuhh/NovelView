@@ -17,6 +17,9 @@ importers:
       '@powersync/react':
         specifier: ^1.5.2
         version: 1.5.2(@powersync/common@1.27.1)(react@18.3.1)
+      '@powersync/tanstack-react-query':
+        specifier: ^0.0.20
+        version: 0.0.20(@powersync/common@1.27.1)(react@18.3.1)
       '@powersync/web':
         specifier: ^1.17.0
         version: 1.17.2(@journeyapps/wa-sqlite@1.2.2)(@powersync/common@1.27.1)
@@ -557,6 +560,12 @@ packages:
     resolution: {integrity: sha512-+9HwpCwZSv0PHG6kgI9OQgOwhebS5Pa1p9ezVIFWVIPx+qaVLH2L3db/KUX0Zym5voQrLzgGUf7j6tl5lMYp+Q==}
     peerDependencies:
       '@powersync/common': ^1.25.0
+      react: '*'
+
+  '@powersync/tanstack-react-query@0.0.20':
+    resolution: {integrity: sha512-xhDpWhChrX8ZxgLzjKiWqvaUpMH41gGrbMgJZyMcPOQcbT7+BO6HwgtYaGLWM/oHWqN3Y/c+03K5O4LenWrEeQ==}
+    peerDependencies:
+      '@powersync/common': ^1.27.1
       react: '*'
 
   '@powersync/web@1.17.2':
@@ -2385,6 +2394,13 @@ snapshots:
   '@powersync/react@1.5.2(@powersync/common@1.27.1)(react@18.3.1)':
     dependencies:
       '@powersync/common': 1.27.1
+      react: 18.3.1
+
+  '@powersync/tanstack-react-query@0.0.20(@powersync/common@1.27.1)(react@18.3.1)':
+    dependencies:
+      '@powersync/common': 1.27.1
+      '@powersync/react': 1.5.2(@powersync/common@1.27.1)(react@18.3.1)
+      '@tanstack/react-query': 5.71.10(react@18.3.1)
       react: 18.3.1
 
   '@powersync/web@1.17.2(@journeyapps/wa-sqlite@1.2.2)(@powersync/common@1.27.1)':
