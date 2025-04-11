@@ -54,6 +54,9 @@ export default function LoginForm() {
 			const session = await supabase?.login(formData.email, formData.password);
 			if (!session) {
 				console.error("Login returned no session");
+				setErrors({
+					email: "Invalid email or password. Please try again.",
+				});
 				return;
 			}
 

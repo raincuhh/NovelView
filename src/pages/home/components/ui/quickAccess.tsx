@@ -53,11 +53,20 @@ export default function QuickAccess() {
 							data={libraries}
 							render={(item: Libraries, i: number) => <QuickAccessItem key={i} data={item} />}
 						/>
+						{isFetching ? null : null}
 					</ul>
 				) : libraries ? (
-					<>
-						<Skeleton height="3rem" width="100%" />
-					</>
+					<div className="border border-border rounded-md px-4 py-2 bg-primary-alt flex flex-col gap-4 justify-center items-center">
+						<div className="flex">some png img</div>
+						<div>
+							<p className="flex gap-1 flex-col items-center sm:flex-row">
+								No recent libraries found found.
+								<span className="hover:underline underline-offset-4 text-accent hover:text-accent-hover cursor-pointer">
+									Make one?
+								</span>
+							</p>
+						</div>
+					</div>
 				) : null}
 			</div>
 		</div>
