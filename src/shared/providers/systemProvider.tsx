@@ -6,7 +6,7 @@ import { AppSchema } from "../lib/appSchema";
 
 const SupabaseContext = createContext<SupabaseConnector | null>(null);
 export const useSupabase = () => useContext(SupabaseContext);
-const supabase = new SupabaseConnector();
+const supabase: SupabaseConnector = new SupabaseConnector();
 
 const db = new PowerSyncDatabase({
 	database: { dbFilename: "local.db" },
@@ -33,15 +33,15 @@ const SystemProvider = ({ children }: { children: ReactNode }) => {
 				powerSync
 					.connect(connector, { connectionMethod: SyncStreamConnectionMethod.WEB_SOCKET })
 					.then(() => console.log("Successfully connected"))
-					.catch((error) => {
-						console.error("Error connecting to PowerSync:", error);
+					.catch((err: any) => {
+						console.error("Error connecting to PowerSync:", err);
 
 						setTimeout(() => {
 							console.log("retrying websocket connection");
 							powerSync.connect(connector, {
 								connectionMethod: SyncStreamConnectionMethod.WEB_SOCKET,
 							});
-						}, 5000); // 5sec delay
+						}, 5000);
 					});
 			},
 		});

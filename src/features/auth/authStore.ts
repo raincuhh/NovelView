@@ -1,103 +1,81 @@
-import { User } from "@/shared/lib/types";
-import { Session } from "@supabase/supabase-js";
+import { Session, User as SupabaseUser } from "@supabase/supabase-js";
 import { create } from "zustand";
-// import { supabase } from "@/shared/lib/services";
-// import { logoutUser, registerUser, loginUser } from "./authService";
-// import { useSupabase } from "@/shared/providers/systemProvider";
+import { db, supabase } from "@/shared/providers/systemProvider";
+import { Profile, User } from "./types";
 
-// import { create } from "zustand";
-// import { supabase } from "@/shared/providers/systemProvider";
-
-// type AuthStore = {
-// 	session: Session | null;
-// 	setSession: (session: Session | null) => void;
-// 	init: () => Promise<void>;
-// };
-
-// export const useAuthStore = create<AuthStore>((set) => ({
-// 	session: null,
-// 	setSession: (session) => set({ session }),
-// 	init: async () => {
-// 		const session = await supabase.getSession();
-// 		set({ session });
-// 	},
-// }));
-
-type AuthState = {
-	user: User | null;
+type AuthStoreState = {
 	session: Session | null;
+	user: User | null;
 	loading: boolean;
-	// register: (email: string, password: string, username: string) => Promise<User | null>;
-	// login: (email: string, password: string) => Promise<void>;
-	// logout: () => Promise<void>;
-	setUser: (user: User | null) => void;
 	setSession: (session: Session | null) => void;
-	setLoading: (loading: boolean) => void;
-	// initAuth: () => void;
+	init: () => Promise<void>;
+	refreshUser: () => Promise<void>;
+	signOut: () => Promise<void>;
 };
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthStoreState>((set, get) => ({
 	user: null,
 	session: null,
-	loading: false,
+	loading: true,
 
-	setUser: (user) => set({ user }),
-	setSession: (session) => set({ session }),
-	setLoading: (loading) => set({ loading }),
+	setSession: (session) => {
+		set({ session });
 
-	// register: async (email, password, username) => {
-	// 	const user = await registerUser(email, password, username);
-	// 	set({ user });
-	// 	return user;
-	// },
+		if (session) {
+			get().refreshUser();
+		} else {
+			set({ user: null });
+		}
+	},
 
-	// login: async (email, password) => {
-	// 	const authData = await loginUser(email, password);
-	// 	if (authData) {
-	// 		set({ session: authData.session, user: authData.user });
-	// 	}
-	// },
+	init: async () => {
+		set({ loading: true });
+		try {
+			if (!supabase) throw new Error("Supabase not initialized yet");
 
-	// logout: async () => {
-	// 	await logoutUser();
-	// 	set({ user: null, session: null });
-	// },
+			const session = await supabase.getSession();
+			if (session) {
+				set({ session });
+				await get().refreshUser();
+			}
+		} finally {
+			set({ loading: false });
+		}
+	},
 
-	// initAuth: () => {
-	// 	console.log("initializing auth...");
-	// 	const fetchUser = async (session: Session | null) => {
-	// 		set({ loading: true });
+	refreshUser: async () => {
+		const session = get().session;
 
-	// 		if (!session?.user) {
-	// 			set({ user: null, session: null, loading: false });
-	// 			return;
-	// 		}
+		if (!session) {
+			set({ user: null });
+			return;
+		}
 
-	// 		const { data, error } = await supabase
-	// 			.from("profiles")
-	// 			.select("*")
-	// 			.eq("user_id", session.user.id)
-	// 			.single();
+		const baseUser = session.user;
+		const profile = await db.getOptional<Profile>(
+			"SELECT user_id, username, gender, dob FROM profiles WHERE user_id = ?",
+			[baseUser.id]
+		);
 
-	// 		if (error) {
-	// 			console.error("Error fetching user: ", error);
-	// 			set({ loading: false });
-	// 			return;
-	// 		}
+		if (profile) {
+			set({
+				user: {
+					auth: baseUser,
+					profile: profile,
+				},
+				loading: false,
+			});
+		} else {
+			set({ user: null, loading: false });
+		}
+	},
 
-	// 		set({ user: data, session, loading: false });
-	// 	};
+	signOut: async () => {
+		if (supabase) await supabase.signOut();
 
-	// 	supabase.auth.getSession().then(({ data }) => {
-	// 		fetchUser(data.session);
-	// 	});
-
-	// 	const { data: authListener } = supabase.auth.onAuthStateChange((_, session) => {
-	// 		fetchUser(session);
-	// 	});
-
-	// 	return () => {
-	// 		authListener?.subscription?.unsubscribe();
-	// 	};
-	// },
+		set({
+			session: null,
+			user: null,
+		});
+	},
 }));

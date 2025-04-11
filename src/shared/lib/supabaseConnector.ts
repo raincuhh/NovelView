@@ -97,13 +97,9 @@ export class SupabaseConnector
 	}
 
 	async signOut() {
-		// TODO: when you signout, clear saved localsession aswell.
+		// TODO: when you signout, clear saved localsession in sqlite aswell.
 		await this.client.auth.signOut();
 		this._currentSession = null;
-	}
-
-	get currentSession(): Session | null {
-		return this._currentSession;
 	}
 
 	async getSession(): Promise<Session | null> {

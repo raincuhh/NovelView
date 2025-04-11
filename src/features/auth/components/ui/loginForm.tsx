@@ -6,6 +6,8 @@ import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 import { db, useSupabase } from "@/shared/providers/systemProvider";
 import { useNavigate } from "@tanstack/react-router";
+import { CombinedOnboardingViews } from "@/pages/onboarding/types";
+import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
 
 const loginFormSchema = z.object({
 	email: z.string().email("Invalid email"),
@@ -15,10 +17,12 @@ const loginFormSchema = z.object({
 export default function LoginForm() {
 	const supabase = useSupabase();
 	const navigate = useNavigate();
+	const { viewSwitcherNavigate } = useViewTransition<CombinedOnboardingViews>();
 
 	const [formData, setFormData] = useState({ email: "", password: "" });
 	const [errors, setErrors] = useState<Partial<Record<"email" | "password", string>>>({});
 	const [isValid, setIsValid] = useState<boolean>(false);
+	const [firstTimeForgotPassword, setFirstTimeForgotPassword] = useState<boolean>(false);
 
 	const validate = () => {
 		const result = loginFormSchema.safeParse(formData);
@@ -103,6 +107,17 @@ export default function LoginForm() {
 			navigate({ to: "/home" });
 		} catch (err: any) {
 			console.error("Login or local setup failed:", err);
+			if (err.message === "Invalid login credentials") {
+				setErrors({
+					email: "Invalid email or password. Please try again.",
+				});
+				setFirstTimeForgotPassword(true);
+			} else {
+				setErrors({
+					email: "An unexpected error occurred. Please try again later.",
+				});
+				setFirstTimeForgotPassword(true);
+			}
 		}
 	};
 
@@ -152,6 +167,14 @@ export default function LoginForm() {
 							/>
 						</FormControl>
 						<FormMessage error={errors.password} />
+						{firstTimeForgotPassword ? (
+							<span
+								className="text-accent font-semibold cursor-pointer hover:underline underline-offset-4 hover:text-accent-hover"
+								onClick={() => viewSwitcherNavigate(CombinedOnboardingViews.forgotPasswordForm)}
+							>
+								Forgot Password?
+							</span>
+						) : null}
 					</FormItem>
 				</div>
 				<div className="flex w-full justify-center">

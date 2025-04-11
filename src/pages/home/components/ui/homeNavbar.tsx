@@ -8,7 +8,7 @@ export default function HomeNavbar() {
 	return (
 		<div className="sticky top-0 z-20 w-full border-none border-border md:border-none">
 			<div className="relative">
-				<div className="absolute inset-0 bg-primary/50 backdrop-blur-md z-[-1]"></div>
+				<div className="absolute inset-0 bg-primary/80 backdrop-blur-md z-[-1]"></div>
 
 				<div className="flex px-4 py-3 gap-4 h-full w-full flex-nowrap max-w-full relative z-10">
 					{isMobile ? (
