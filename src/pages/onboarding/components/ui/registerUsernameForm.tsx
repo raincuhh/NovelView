@@ -54,7 +54,7 @@ export default function RegisterUsernameForm() {
 							error={error}
 							className="text-2xl font-extrabold"
 						>
-							What's your username?
+							What's your username?<span className="text-muted">*</span>
 						</FormLabel>
 						<FormControl>
 							<Input

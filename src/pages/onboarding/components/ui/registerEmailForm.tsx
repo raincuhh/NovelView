@@ -54,7 +54,7 @@ export default function RegisterEmailForm() {
 							error={error}
 							className="text-2xl font-extrabold"
 						>
-							What's your email address?
+							What's your email address?<span className="text-muted">*</span>
 						</FormLabel>
 						<FormControl>
 							<Input

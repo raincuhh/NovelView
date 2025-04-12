@@ -12,7 +12,6 @@ export default function QuickAccess() {
 	const {
 		data: libraries,
 		isLoading,
-		isFetching,
 		error,
 	} = useQuery<Libraries>({
 		queryKey: ["mostInteractedLibraries"],
@@ -28,47 +27,69 @@ export default function QuickAccess() {
 
 	if (isLoading) {
 		return (
-			<div className="px-4">
-				<div className="flex flex-col">
-					<div className="grid grid-cols-2 grid-rows-3 gap-2">
-						{[...Array(5)].map((_, i) => (
-							<Skeleton key={i} height="3rem" width="100%" />
-						))}
-					</div>
-				</div>
-			</div>
+			<Wrapper>
+				<Grid>
+					{Array.from({ length: 6 }).map((_, i) => (
+						<Skeleton key={i} height="3rem" width="100%" />
+					))}
+				</Grid>
+			</Wrapper>
 		);
 	}
 
 	if (error) {
-		return <>error... {error.message}</>;
+		return (
+			<Wrapper>
+				<p className="text-red-500">Error: {error.message}</p>
+			</Wrapper>
+		);
+	}
+
+	if (!libraries || libraries.length === 0) {
+		return null;
+		// testing
+		// return (
+		// 	<Wrapper>
+		// 		<Grid>
+		// 			{Array.from({ length: 6 }).map((_, i) => (
+		// 				<Skeleton key={i} height="3rem" width="100%" />
+		// 			))}
+		// 		</Grid>
+		// 	</Wrapper>
+		// );
 	}
 
 	return (
-		<div className="px-4">
-			<div className="flex flex-col">
-				{libraries && libraries.length > 0 ? (
-					<ul className="grid grid-cols-2 grid-rows-3 gap-2">
-						<RenderList
-							data={libraries}
-							render={(item: Libraries, i: number) => <QuickAccessItem key={i} data={item} />}
-						/>
-						{isFetching ? null : null}
-					</ul>
-				) : libraries ? (
-					<div className="border border-border rounded-md px-4 py-2 bg-primary-alt flex flex-col gap-4 justify-center items-center">
-						<div className="flex">some png img</div>
-						<div>
-							<p className="flex gap-1 flex-col items-center sm:flex-row">
-								No recent libraries found found.
-								<span className="hover:underline underline-offset-4 text-accent hover:text-accent-hover cursor-pointer">
-									Make one?
-								</span>
-							</p>
-						</div>
-					</div>
-				) : null}
-			</div>
-		</div>
+		<Wrapper>
+			<Grid>
+				<RenderList
+					data={libraries}
+					render={(item: Libraries, i: number) => <QuickAccessItem key={i} data={item} />}
+				/>
+			</Grid>
+			{/* {!isFetching && <EmptyState />} */}
+		</Wrapper>
 	);
 }
+
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
+	<div className="px-4">
+		<div className="flex flex-col">{children}</div>
+	</div>
+);
+
+const Grid = ({ children }: { children: React.ReactNode }) => (
+	<ul className="grid grid-cols-2 grid-rows-3 gap-2">{children}</ul>
+);
+
+// const EmptyState = () => (
+// 	<div className="border border-border rounded-md px-4 py-2 bg-primary-alt flex flex-col gap-4 justify-center items-center">
+// 		<div className="flex">some png img</div>
+// 		<p className="flex gap-1 flex-col items-center sm:flex-row">
+// 			No recent libraries found.
+// 			<span className="hover:underline underline-offset-4 text-accent hover:text-accent-hover cursor-pointer">
+// 				Make one?
+// 			</span>
+// 		</p>
+// 	</div>
+// );

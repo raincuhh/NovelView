@@ -13,6 +13,7 @@ import {
 	Form,
 } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
+import Icon from "@/shared/components/ui/icon";
 
 const RegisterPasswordSchema = registerFormSchema.pick({
 	password: true,
@@ -27,6 +28,8 @@ export default function RegisterPasswordForm() {
 	const [repeatPassword, setRepeatPassword] = useState<string>(formData.repeatPassword);
 	const [errors, setErrors] = useState<Partial<Record<"password" | "repeatPassword", string>>>({});
 	const [isValid, setIsValid] = useState<boolean>(false);
+
+	const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
 	const validate = (pwd: string, repeat: string) => {
 		const result = RegisterPasswordSchema.safeParse({ password: pwd, repeatPassword: repeat });
@@ -77,19 +80,21 @@ export default function RegisterPasswordForm() {
 							error={errors.password}
 							className="text-2xl font-extrabold"
 						>
-							What's your password?
+							What's your password?<span className="text-muted">*</span>
 						</FormLabel>
 						<FormControl>
-							<Input
-								id="password"
-								name="password"
-								type="password"
-								autoComplete="off"
-								onChange={handlePasswordChange}
-								// placeholder="Enter password"
-								aria-labelledby="passwordLabel"
-								value={formData.password ?? ""}
-							/>
+							<div className="relative w-full">
+								<Input
+									id="password"
+									name="password"
+									type="password"
+									autoComplete="off"
+									onChange={handlePasswordChange}
+									// placeholder="Enter password"
+									aria-labelledby="passwordLabel"
+									value={formData.password ?? ""}
+								/>
+							</div>
 						</FormControl>
 						<FormDescription>Remember your password, minimum 10 characters.</FormDescription>
 						<FormMessage error={errors.password} />
@@ -101,19 +106,33 @@ export default function RegisterPasswordForm() {
 							error={errors.repeatPassword}
 							className="text-2xl font-extrabold"
 						>
-							Repeat your password
+							Repeat your password<span className="text-muted">*</span>
 						</FormLabel>
 						<FormControl>
-							<Input
-								id="repeatPassword"
-								name="repeatPassword"
-								type="password"
-								autoComplete="off"
-								onChange={handleRepeatPasswordChange}
-								// placeholder="Repeat your password"
-								aria-labelledby="repeatPasswordLabel"
-								value={formData.repeatPassword ?? ""}
-							/>
+							<div className="relative w-full">
+								<Input
+									id="repeatPassword"
+									name="repeatPassword"
+									type={showRepeatPassword ? "text" : "password"}
+									autoComplete="off"
+									onChange={handleRepeatPasswordChange}
+									// placeholder="Repeat your password"
+									aria-labelledby="repeatPasswordLabel"
+									value={formData.repeatPassword ?? ""}
+								/>
+								<button
+									type="button"
+									onClick={() => setShowRepeatPassword(!showRepeatPassword)}
+									className="absolute right-3 top-1/2 transform -translate-y-1/2"
+									aria-label={showRepeatPassword ? "Hide repeat password" : "Show repeat password"}
+								>
+									{showRepeatPassword ? (
+										<Icon.eyeOpen className="fill-muted w-5 h-5" />
+									) : (
+										<Icon.eyeClosed className="fill-muted w-5 h-5" />
+									)}
+								</button>
+							</div>
 						</FormControl>
 						<FormDescription>Make sure its spelled correctly.</FormDescription>
 						<FormMessage error={errors.repeatPassword} />
