@@ -1,11 +1,15 @@
 import { cn } from "@/shared/lib/globalUtils";
 import { HTMLAttributes, forwardRef } from "react";
 
-const Modal = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-	({ className, children, ...props }, ref) => {
+type ModalProps = {
+	innerClassName?: string;
+};
+
+const Modal = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & ModalProps>(
+	({ className, innerClassName, children, ...props }, ref) => {
 		return (
 			<div
-				onClick={(e) => e.preventDefault()}
+				// onClick={(e) => e.preventDefault()}
 				ref={ref}
 				className={cn(
 					"bg-primary-alt px-4 py-6 rounded-md border border-border mx-4 pointer-events-none",
@@ -13,7 +17,7 @@ const Modal = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 				)}
 				{...props}
 			>
-				<div className="pointer-events-auto flex flex-col">{children}</div>
+				<div className={cn("flex flex-col pointer-events-auto", innerClassName)}>{children}</div>
 			</div>
 		);
 	}
@@ -54,7 +58,7 @@ const ModalControl = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 		return (
 			<div
 				ref={ref}
-				className={cn("flex flex-row w-full gap-2 mt-4 items-center justify-end", className)}
+				className={cn("flex flex-row w-full gap-4 mt-4 items-center justify-end", className)}
 				{...props}
 			>
 				{children}
