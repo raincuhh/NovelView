@@ -18,7 +18,7 @@ const MobileNavigationButton = forwardRef<HTMLDivElement, MobileNavigationButton
 				{...props}
 			>
 				{children}
-				{label ? <h3 className="text-xs text-muted">{label}</h3> : null}
+				{label ? <h3 className="text-xs text-muted select-none">{label}</h3> : null}
 			</Comp>
 		);
 	}

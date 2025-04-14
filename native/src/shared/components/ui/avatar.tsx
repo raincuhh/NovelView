@@ -9,7 +9,7 @@ const Avatar = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
 	const { user } = useAuthStore();
 
 	useEffect(() => {
-		console.log(user?.profile);
+		// console.log(user?.profile);
 		if (user?.profile.avatar_url) {
 			setUrl(user?.profile.avatar_url);
 			setLoading(false);
