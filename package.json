@@ -1,0 +1,14 @@
+{
+	"name": "novelview",
+	"private": true,
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"dev:native": "pnpm --filter ./native dev",
+		"dev:web": "pnpm --filter ./web dev",
+		"build:native": "pnpm --filter ./native build",
+		"build:web": "pnpm --filter ./web build",
+		"tauri": "pnpm --filter ./native tauri"
+	},
+	"devDependencies": {}
+}
