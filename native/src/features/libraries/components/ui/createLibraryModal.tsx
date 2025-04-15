@@ -9,7 +9,6 @@ import { useState } from "react";
 import { Switch } from "@/shared/components/ui/switch";
 import { useAuthStore } from "@/features/auth/authStore";
 import Label from "@/shared/components/ui/label";
-import { sync } from "framer-motion";
 
 const libraryCreateFormSchema = z.object({
 	name: z.string().min(1, "Library name must be at least 1 character"),
@@ -23,7 +22,7 @@ type CreateLibraryModalProps = {
 
 export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps) {
 	const [image, setImage] = useState<File | null>(null);
-	const [libraryName, setLibraryName] = useState("");
+	const [libraryName, setLibraryName] = useState<string>("");
 	const [error, setError] = useState<string | null>(null);
 	const [isValid, setIsValid] = useState<boolean>(false);
 	const [synced, setSynced] = useState<boolean>(false);

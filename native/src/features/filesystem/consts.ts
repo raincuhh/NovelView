@@ -1,3 +1,5 @@
+import { BaseDirectory } from "@tauri-apps/plugin-fs";
+
 export const LIBRARIES_FOLDER = "Libraries";
 export const CONFIG_FOLDER = "config";
 export const CACHE_FOLDER = "_cache";
@@ -15,3 +17,5 @@ export enum LogSeverity {
 	success,
 	critical,
 }
+
+export const BASE_DIR = BaseDirectory.AppLocalData;
