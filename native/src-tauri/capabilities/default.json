@@ -6,8 +6,6 @@
 	"permissions": [
 		"core:default",
 		"opener:default",
-		"sql:default",
-		"sql:allow-execute",
 		"fs:default",
 		{
 			"identifier": "fs:allow-exists",
@@ -48,9 +46,19 @@
 				{
 					"name": "hide_folders",
 					"cmd": "sh",
-					"args": ["-c", { "validator": "\\S+" }]
+					"args": [
+						"-c",
+						{
+							"validator": "\\S+"
+						}
+					]
 				}
 			]
-		}
+		},
+		"sql:default",
+		"sql:allow-load",
+		"sql:allow-execute",
+		"sql:allow-select",
+		"sql:allow-close"
 	]
 }

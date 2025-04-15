@@ -1,9 +1,10 @@
 import { create, mkdir, writeFile } from "@tauri-apps/plugin-fs";
-import { LIBRARIES_FOLDER, BASE_DIR } from "../filesystem/consts";
+import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "../filesystem/consts";
 import { sanitizeAndHyphenate } from "@/shared/lib/globalUtils";
-import { db } from "@/shared/providers/systemProvider";
-import { Libraries } from "@/shared/lib/appSchema";
+import { db } from "@/shared/providers/systemProvider"; // this is powersync db
 import { LibraryType } from "./types";
+import { convertFileSrc } from "@tauri-apps/api/core";
+import { resolve } from "@tauri-apps/api/path";
 
 type createLibraryProps = {
 	name: string;
@@ -17,7 +18,7 @@ export async function createLibrary({ name, cover, type, userId, description }: 
 	const folderName = sanitizeAndHyphenate(name);
 	const localDir = `${LIBRARIES_FOLDER}/${folderName}`;
 	try {
-		await mkdir(localDir, { baseDir: BASE_DIR });
+		await mkdir(localDir, { baseDir: LOCAL_APPDATA });
 		await createLibraryMetadata(localDir, { name, type });
 
 		let coverUrl: string | null = null;
@@ -68,7 +69,7 @@ export async function createLibraryMetadata(
 	const metadataJson = JSON.stringify(metadata);
 
 	try {
-		const file = await create(`${libraryDir}/metadata.json`, { baseDir: BASE_DIR });
+		const file = await create(`${libraryDir}/metadata.json`, { baseDir: LOCAL_APPDATA });
 		await file.write(new TextEncoder().encode(metadataJson));
 		await file.close();
 	} catch (err: any) {
@@ -85,8 +86,28 @@ export async function saveLibraryCover(libraryDir: string, cover: File) {
 
 		const coverFilePath = `${libraryDir}/cover.${fileExtension}`;
 
-		await writeFile(coverFilePath, new Uint8Array(fileBytes), { baseDir: BASE_DIR });
+		await writeFile(coverFilePath, new Uint8Array(fileBytes), { baseDir: LOCAL_APPDATA });
 	} catch (err: any) {
 		console.error("Error saving cover:", err);
 	}
+}
+
+export async function getLibraryCoverPath(libraryId: string, fallbackUrl?: string): Promise<string | null> {
+	const folderPath = `${LIBRARIES_FOLDER}/${libraryId}`;
+	const possibleExtensions = ["jpg", "png", "webp", "jpeg"];
+
+	for (const ext of possibleExtensions) {
+		try {
+			const path = await resolve(folderPath, `cover.${ext}`);
+
+			console.log(path);
+			return convertFileSrc(path);
+		} catch (err: any) {
+			// we dont do anything here, just retry for all possible extensions.
+		}
+	}
+
+	if (fallbackUrl) return fallbackUrl;
+
+	return null;
 }

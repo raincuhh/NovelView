@@ -1,4 +1,3 @@
-import { User } from "@/shared/lib/types";
 import { Session } from "@supabase/supabase-js";
 
 export const isValidEmail = (email: string): boolean => {
@@ -22,9 +21,6 @@ export const extractUserInfo = (session: Session) => {
 	return { id, email };
 };
 
-export const isAdmin = (user: User) => {
-	return user.role === "admin";
-};
 export const sanitizeInput = (input: string): string => {
 	return input.replace(/[<>]/g, "");
 };
