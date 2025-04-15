@@ -1,4 +1,4 @@
-import { Session, User as SupabaseUser } from "@supabase/supabase-js";
+import { Session } from "@supabase/supabase-js";
 import { create } from "zustand";
 import { db, supabase } from "@/shared/providers/systemProvider";
 import { Profile, User } from "./types";

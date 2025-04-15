@@ -3,8 +3,6 @@ import { Outlet, createRootRoute, Scripts } from "@tanstack/react-router";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import AppProvider from "@/shared/providers/appProvider";
-import "../../src/global.css";
-import "react-loading-skeleton/dist/skeleton.css";
 import ModalRoot from "@/features/modal/components/ui/modalRoot";
 
 export const Route = createRootRoute({

@@ -6,10 +6,15 @@ import { Form, FormControl, FormItem, FormLabel, FormMessage } from "@/shared/co
 import { Input } from "@/shared/components/ui/input";
 import CoverPicker from "@/shared/components/ui/coverPicker";
 import { useState } from "react";
+import { Switch } from "@/shared/components/ui/switch";
+import { useAuthStore } from "@/features/auth/authStore";
+import Label from "@/shared/components/ui/label";
+import { sync } from "framer-motion";
 
 const libraryCreateFormSchema = z.object({
 	name: z.string().min(1, "Library name must be at least 1 character"),
 	image: z.instanceof(File).optional(),
+	type: z.enum(["sync", "local"]).default("local"),
 });
 
 type CreateLibraryModalProps = {
@@ -21,6 +26,9 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 	const [libraryName, setLibraryName] = useState("");
 	const [error, setError] = useState<string | null>(null);
 	const [isValid, setIsValid] = useState<boolean>(false);
+	const [synced, setSynced] = useState<boolean>(false);
+
+	const userId = useAuthStore((state) => state.user?.auth.id);
 
 	const handleLibraryNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -37,7 +45,8 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 
 		const result = libraryCreateFormSchema.safeParse({
 			name: libraryName,
-			image,
+			file: image,
+			synced: synced,
 		});
 
 		if (!result.success) {
@@ -45,16 +54,14 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 			setError(issues.name?.[0] ?? null);
 			return;
 		}
-
-		console.log("Creating library with:", { name: libraryName, image });
-
 		onClose();
+		console.log("Creating library with:", { name: libraryName, image, synced });
 	};
 
 	return (
 		<ModalBackground>
 			<Modal
-				className="border-none mx-0 h-full flex flex-col justify-center w-full"
+				className="border-none mx-0 h-full flex flex-col justify-center w-full pb-48"
 				innerClassName="w-full mx-auto flex flex-col gap-4"
 			>
 				<Form onSubmit={handleSubmit}>
@@ -99,6 +106,12 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 								/>
 							</FormControl>
 							<FormMessage error={error} />
+						</FormItem>
+						<FormItem>
+							<FormControl className="gap-2">
+								<Switch onCheckedChange={(checked) => setSynced(checked)} />
+								<Label className="font-bold">Synced Library</Label>
+							</FormControl>
 						</FormItem>
 					</div>
 					<ModalControl className="flex justify-center w-full gap-4">

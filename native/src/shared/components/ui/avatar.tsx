@@ -2,6 +2,7 @@ import { forwardRef, HTMLAttributes, useEffect, useState } from "react";
 import { cn } from "@/shared/lib/globalUtils";
 import { DEFAULT_AVATAR_URL } from "@/shared/lib/consts";
 import { useAuthStore } from "@/features/auth/authStore";
+import Skeleton from "react-loading-skeleton";
 
 const Avatar = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => {
 	const [loading, setLoading] = useState<boolean>(true);
@@ -21,7 +22,11 @@ const Avatar = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ cla
 
 	return (
 		<div ref={ref} className={cn("flex items-center justify-center", className)} {...props}>
-			{loading ? <>...</> : <img src={url} alt="pfp" className="rounded-full w-full h-full" />}
+			{loading ? (
+				<Skeleton className="w-full h-full" circle />
+			) : (
+				<img src={url} alt="pfp" className="rounded-full w-full h-full" />
+			)}
 		</div>
 	);
 });

@@ -30,22 +30,6 @@ export const userSettingsTable = new Table(
 	{ indexes: {} }
 );
 
-export const librariesTable = new Table(
-	{
-		// id column (text) is automatically included
-		user_id: column.text,
-		name: column.text,
-		description: column.text,
-		cover_url: column.text,
-		type: column.text,
-		synced: column.integer,
-		author: column.text,
-		created_at: column.text,
-		updated_at: column.text,
-	},
-	{ indexes: {} }
-);
-
 export const premiumSubscriptionsTable = new Table(
 	{
 		// id column (text) is automatically included
@@ -58,23 +42,34 @@ export const premiumSubscriptionsTable = new Table(
 	{ indexes: {} }
 );
 
+export const librariesTable = new Table(
+	{
+		// id column (text) is automatically included
+		user_id: column.text,
+		name: column.text,
+		description: column.text,
+		cover_url: column.text,
+		type: column.text,
+		created_at: column.text,
+		updated_at: column.text,
+	},
+	{ indexes: {} }
+);
+
 export const booksTable = new Table(
 	{
 		// id column (text) is automatically included
 		library_id: column.text,
 		user_id: column.text,
 		title: column.text,
-		author: column.text,
-		metadata: column.text,
-		toc: column.text,
 		cover_image_url: column.text,
-		epub_url: column.text,
-		is_saved: column.integer,
+		is_saved: column.text,
 		read_count: column.integer,
 		last_read_at: column.text,
-		synced: column.integer,
 		created_at: column.text,
 		updated_at: column.text,
+		file_url: column.text,
+		format: column.text,
 	},
 	{ indexes: {} }
 );
@@ -87,8 +82,28 @@ export const bookContentsTable = new Table(
 		parsing_version: column.integer,
 		created_at: column.text,
 		updated_at: column.text,
+		metadata: column.text,
+		toc: column.text,
+		content_position: column.text,
 	},
 	{ indexes: {} }
+);
+
+export const readerStateTable = new Table(
+	{
+		// id column (text) is automatically included
+		user_id: column.text,
+		book_id: column.text,
+		content_position: column.text,
+		reading_progress: column.integer,
+		is_fullscreen: column.text,
+		last_read_at: column.text,
+		created_at: column.text,
+		updated_at: column.text,
+	},
+	{
+		indexes: {},
+	}
 );
 
 export const AppSchema = new Schema({
@@ -98,6 +113,7 @@ export const AppSchema = new Schema({
 	premium_subscriptions: premiumSubscriptionsTable,
 	books: booksTable,
 	book_contents: bookContentsTable,
+	reader_state: readerStateTable,
 });
 
 export const Tables = {
@@ -107,6 +123,7 @@ export const Tables = {
 	premium_subscriptions: premiumSubscriptionsTable,
 	books: booksTable,
 	book_contents: bookContentsTable,
+	reader_state: readerStateTable,
 } as const;
 
 export type Database = (typeof AppSchema)["types"];
@@ -118,3 +135,4 @@ export type Libraries = TableRow<"libraries">;
 export type PremiumSubscriptions = TableRow<"premium_subscriptions">;
 export type Books = TableRow<"books">;
 export type BookContents = TableRow<"book_contents">;
+export type ReaderState = TableRow<"reader_state">;
