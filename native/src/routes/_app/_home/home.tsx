@@ -1,5 +1,6 @@
 import { useAuthStore } from "@/features/auth/authStore";
 import EmptyLibraries from "@/features/libraries/components/ui/emptyLibraries";
+import ActivityCalendar from "@/pages/home/components/ui/activityCalendar";
 import HomeNavbar from "@/pages/home/components/ui/homeNavbar";
 import QuickAccess from "@/pages/home/components/ui/quickAccess";
 import Recents from "@/pages/home/components/ui/recents";
@@ -37,6 +38,7 @@ function RouteComponent() {
 						<div className="flex flex-col gap-12">
 							<QuickAccess />
 							<Recents />
+							<ActivityCalendar />
 						</div>
 					) : (
 						<div className="px-4 flex flex-col justify-center h-full pb-48">
