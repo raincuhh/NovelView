@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { mkdir, exists, BaseDirectory } from "@tauri-apps/plugin-fs";
+// import { Command } from "@tauri-apps/plugin-shell";
 import {
 	LIBRARIES_FOLDER,
-	USER_FOLDER,
 	CONFIG_FOLDER,
 	CACHE_FOLDER,
 	TEMP_FOLDER,
@@ -10,16 +10,12 @@ import {
 	DATA_FOLDER,
 	BACKUPS_FOLDER,
 } from "../../consts";
-import { appDataDir } from "@tauri-apps/api/path";
 
 export default function SetupAppData() {
 	useEffect(() => {
-		const setup = async () => {
-			console.log("initalizing appdata at: ", appDataDir());
-
+		const setupFolders = async (): Promise<boolean> => {
 			const foldersToInit = [
 				LIBRARIES_FOLDER,
-				USER_FOLDER,
 				CONFIG_FOLDER,
 				CACHE_FOLDER,
 				TEMP_FOLDER,
@@ -33,11 +29,59 @@ export default function SetupAppData() {
 
 				if (!existsAlready) {
 					await mkdir(folder, { baseDir: BaseDirectory.AppLocalData });
-					console.log(`created: ${folder}`);
+					// console.log(`created: ${folder}`);
 				} else {
-					console.log(`already exists: ${folder}`);
+					// console.log(`already exists: ${folder}`);
 				}
 			}
+
+			return true;
+		};
+
+		const hideFolders = async () => {
+			// console.log("hiding folders.");
+			// try {
+			// 	const result = await Command.create("hide_folders", [
+			// 		"-c",
+			// 		`
+			// 		  APPDATA_DIR="./AppData/Local/novelview"
+			// 		  CACHE_FOLDER="$APPDATA_DIR/_cache"
+			// 		  DATA_FOLDER="$APPDATA_DIR/Data"
+			// 		  if [ -d "$CACHE_FOLDER" ]; then
+			// 			 # macOS
+			// 			 if [[ "$OSTYPE" == "darwin"* ]]; then
+			// 				chflags hidden "$CACHE_FOLDER"
+			// 			 else
+			// 				# Linux
+			// 				mv "$CACHE_FOLDER" "$APPDATA_DIR/.cache"
+			// 			 fi
+			// 			 echo "Cache folder is now hidden"
+			// 		  else
+			// 			 echo "Cache folder does not exist."
+			// 		  fi
+			// 		  if [ -d "$DATA_FOLDER" ]; then
+			// 			 # macOS
+			// 			 if [[ "$OSTYPE" == "darwin"* ]]; then
+			// 				chflags hidden "$DATA_FOLDER"
+			// 			 else
+			// 				# Linux
+			// 				mv "$DATA_FOLDER" "$APPDATA_DIR/.data"
+			// 			 fi
+			// 			 echo "Data folder is now hidden"
+			// 		  else
+			// 			 echo "Data folder does not exist."
+			// 		  fi
+			// 		`,
+			// 	]).execute();
+			// 	console.log("Shell command result:", result);
+			// } catch (err: any) {
+			// 	console.error("Error invoking hide_appdata_folders: ", err);
+			// }
+		};
+
+		const setup = async () => {
+			const finished = await setupFolders();
+			if (finished) await hideFolders();
 		};
 
 		setup();

@@ -49,6 +49,9 @@ importers:
       '@tauri-apps/plugin-opener':
         specifier: ^2
         version: 2.2.6
+      '@tauri-apps/plugin-shell':
+        specifier: ~2
+        version: 2.2.1
       '@tauri-apps/plugin-sql':
         specifier: ~2
         version: 2.2.0
@@ -61,6 +64,9 @@ importers:
       framer-motion:
         specifier: ^12.6.3
         version: 12.6.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      i18next:
+        specifier: ^24.2.3
+        version: 24.2.3(typescript@5.6.3)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -1051,6 +1057,9 @@ packages:
   '@tauri-apps/plugin-opener@2.2.6':
     resolution: {integrity: sha512-bSdkuP71ZQRepPOn8BOEdBKYJQvl6+jb160QtJX/i2H9BF6ZySY/kYljh76N2Ne5fJMQRge7rlKoStYQY5Jq1w==}
 
+  '@tauri-apps/plugin-shell@2.2.1':
+    resolution: {integrity: sha512-G1GFYyWe/KlCsymuLiNImUgC8zGY0tI0Y3p8JgBCWduR5IEXlIJS+JuG1qtveitwYXlfJrsExt3enhv5l2/yhA==}
+
   '@tauri-apps/plugin-sql@2.2.0':
     resolution: {integrity: sha512-yGdybpaMENe/p6lTXslvDHYNNvD9qB7palaBBF5fJHdYSkwd3vrLiYU9dFfLwUAwnsBylND55EiivWsjhazejA==}
 
@@ -1469,6 +1478,14 @@ packages:
 
   hyphenate-style-name@1.1.0:
     resolution: {integrity: sha512-WDC/ui2VVRrz3jOVi+XtjqkDjiVjTtFaAGiW37k6b+ohyQ5wYDOGkvCZa8+H0nx3gyvv0+BST9xuOgIyGQ00gw==}
+
+  i18next@24.2.3:
+    resolution: {integrity: sha512-lfbf80OzkocvX7nmZtu7nSTNbrTYR52sLWxPtlXX1zAhVw8WEnFk4puUkCR4B1dNQwbSpEHHHemcZu//7EcB7A==}
+    peerDependencies:
+      typescript: ^5
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
@@ -2815,6 +2832,10 @@ snapshots:
     dependencies:
       '@tauri-apps/api': 2.4.1
 
+  '@tauri-apps/plugin-shell@2.2.1':
+    dependencies:
+      '@tauri-apps/api': 2.4.1
+
   '@tauri-apps/plugin-sql@2.2.0':
     dependencies:
       '@tauri-apps/api': 2.4.1
@@ -3298,6 +3319,12 @@ snapshots:
   has-flag@4.0.0: {}
 
   hyphenate-style-name@1.1.0: {}
+
+  i18next@24.2.3(typescript@5.6.3):
+    dependencies:
+      '@babel/runtime': 7.27.0
+    optionalDependencies:
+      typescript: 5.6.3
 
   ignore@5.3.2: {}
 
