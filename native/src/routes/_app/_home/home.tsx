@@ -9,6 +9,7 @@ import { Libraries } from "@/shared/lib/appSchema";
 import { cn } from "@/shared/lib/globalUtils";
 import { useQuery } from "@powersync/tanstack-react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/_app/_home/home")({
 	component: RouteComponent,
@@ -17,13 +18,25 @@ export const Route = createFileRoute("/_app/_home/home")({
 function RouteComponent() {
 	const userId = useAuthStore((state) => state.user?.auth.id);
 
-	const { data: libraries = [] } = useQuery<Libraries[]>({
+	const {
+		data: libraries = [],
+		status,
+		error,
+	} = useQuery<Libraries[]>({
 		queryKey: ["libraries", userId],
 		query: "SELECT * FROM libraries WHERE user_id = ?",
 		parameters: [userId],
 		enabled: !!userId,
+		staleTime: 60000,
 	});
 
+	useEffect(() => {
+		console.log("Query Status:", status);
+		console.log("Libraries Data:", libraries);
+		if (error) {
+			console.error("Query Error:", error);
+		}
+	}, [libraries, status, error]);
 	const hasLibraries = libraries.length > 0;
 
 	return (

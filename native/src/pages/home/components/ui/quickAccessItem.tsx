@@ -5,5 +5,10 @@ type QuickAccessItemProps = {
 };
 
 export default function QuickAccessItem({ data }: QuickAccessItemProps) {
-	return <div>{data.id}</div>;
+	return (
+		<div>
+			{data.name}
+			{data.type}
+		</div>
+	);
 }

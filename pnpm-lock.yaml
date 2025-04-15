@@ -13,6 +13,9 @@ importers:
       '@journeyapps/wa-sqlite':
         specifier: ^1.2.2
         version: 1.2.2
+      '@powersync/attachments':
+        specifier: ^2.3.0
+        version: 2.3.0(@powersync/common@1.27.1)
       '@powersync/common':
         specifier: ^1.26.0
         version: 1.27.1
@@ -560,6 +563,11 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@powersync/attachments@2.3.0':
+    resolution: {integrity: sha512-90CnwrwoltWMVhdoQohQU/wkzxXXfiuyWDanEu0D1+EnlaaKtd0P5SYq7WfOMV84tJ7RXpGP3257dYbdrQ/ozw==}
+    peerDependencies:
+      '@powersync/common': ^1.25.0
 
   '@powersync/common@1.27.1':
     resolution: {integrity: sha512-8gBtELtD0fPwAlHqx1lEWlz5hJCeGSsh4gb8NwNUGedU798fHEY2T93xQ4FVpKqTA9uIXtrwD3Tz12ADr8l0vA==}
@@ -2385,6 +2393,10 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
+
+  '@powersync/attachments@2.3.0(@powersync/common@1.27.1)':
+    dependencies:
+      '@powersync/common': 1.27.1
 
   '@powersync/common@1.27.1':
     dependencies:

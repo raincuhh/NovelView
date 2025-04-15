@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Switch } from "@/shared/components/ui/switch";
 import { useAuthStore } from "@/features/auth/authStore";
 import Label from "@/shared/components/ui/label";
+import { createLibrary } from "../../libraryService";
 
 const libraryCreateFormSchema = z.object({
 	name: z.string().min(1, "Library name must be at least 1 character"),
@@ -54,7 +55,10 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 			return;
 		}
 		onClose();
-		console.log("Creating library with:", { name: libraryName, image, synced });
+		console.log("Creating library with:", { name: libraryName, image, synced, userId });
+		if (userId) {
+			createLibrary({ name: libraryName, cover: image, type: synced ? "sync" : "local", userId: userId });
+		}
 	};
 
 	return (

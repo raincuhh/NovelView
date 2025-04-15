@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"@journeyapps/wa-sqlite": "^1.2.2",
+		"@powersync/attachments": "^2.3.0",
 		"@powersync/common": "^1.26.0",
 		"@powersync/react": "^1.5.2",
 		"@powersync/tanstack-react-query": "^0.0.20",
