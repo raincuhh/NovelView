@@ -43,14 +43,13 @@ export default function MobileNavigationButtons() {
 	const buttons = [
 		{
 			key: "home",
-			icon: (
-				<Icon.home
-					className={cn(
-						"h-7 w-7",
-						router.state.location.pathname === "/home" ? "fill-accent" : "fill-muted"
-					)}
-				/>
-			),
+			icon: (() => {
+				const isActive = router.state.location.pathname === "/home";
+				const IconComponent = isActive ? Icon.home : Icon.hollowHome;
+				const iconClass = cn("h-7 w-7", isActive ? "fill-accent" : "fill-muted");
+
+				return <IconComponent className={iconClass} />;
+			})(),
 			to: "/home",
 			onclick: () => navigateTo("/home"),
 		},

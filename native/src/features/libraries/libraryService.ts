@@ -18,7 +18,6 @@ type createLibraryProps = {
 
 export async function createLibrary({ name, cover, type, userId, description }: createLibraryProps) {
 	const id = crypto.randomUUID();
-	// const folderName = sanitizeAndHyphenate(name);
 	const localDir = `${LIBRARIES_FOLDER}/${id}`;
 
 	try {

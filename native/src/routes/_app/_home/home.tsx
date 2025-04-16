@@ -9,7 +9,6 @@ import WelcomeUserMessage from "@/shared/components/ui/welcomeUserMessage";
 import { cn } from "@/shared/lib/globalUtils";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
 
 export const Route = createFileRoute("/_app/_home/home")({
 	component: RouteComponent,
@@ -18,7 +17,7 @@ export const Route = createFileRoute("/_app/_home/home")({
 function RouteComponent() {
 	const userId = useAuthStore((state) => state.user?.auth.id);
 
-	const { data: libraries = [], error } = useQuery({
+	const { data: libraries = [] } = useQuery({
 		queryKey: ["libraries", userId],
 		queryFn: async () => {
 			if (!userId) throw new Error("User ID is missing");
@@ -29,21 +28,21 @@ function RouteComponent() {
 
 	const hasLibraries = libraries.length > 0;
 
-	useEffect(() => {
-		console.log("Libraries Data:", libraries);
-		if (error) console.error("Query Error:", error);
-	}, [libraries, error]);
+	// useEffect(() => {
+	// 	console.log("Libraries Data:", libraries);
+	// 	if (error) console.error("Query Error:", error);
+	// }, [libraries, error]);
 
 	return (
 		<div className="flex flex-col h-full">
 			<div className="px-4 min-h-12 pt-4 max-w-full truncate overflow-hidden whitespace-nowrap flex items-center">
 				<WelcomeUserMessage />
 			</div>
-			<div className={cn("flex flex-col relative h-full", hasLibraries ? "h-[150dvh]" : "")}>
+			<div className={cn("flex flex-col relative h-full")}>
 				<HomeNavbar />
 				<div className="flex flex-col mt-2 h-full">
 					{hasLibraries ? (
-						<div className="flex flex-col gap-12">
+						<div className="flex flex-col gap-12 h-[100dvh]">
 							<QuickAccess />
 							<Recents />
 							<ActivityCalendar />

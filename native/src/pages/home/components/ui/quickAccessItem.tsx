@@ -1,37 +1,15 @@
-import { getLibraryCoverPath } from "@/features/libraries/libraryService";
 import { MostInteractedLibrary } from "@/features/libraries/types";
 import { Cover, CoverImage } from "@/shared/components/ui/cover";
-import { useEffect, useState } from "react";
-import { PLACEHOLDER_LIBRARIES_URL } from "@/shared/lib/consts";
+import PlaceholderLibraryCover from "@/features/libraries/components/ui/placeholderLibraryCover";
+import Skeleton from "react-loading-skeleton";
+import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
 
 type QuickAccessItemProps = {
 	data: MostInteractedLibrary;
 };
 
 export default function QuickAccessItem({ data }: QuickAccessItemProps) {
-	const [coverPath, setCoverPath] = useState<string | null>(null);
-
-	useEffect(() => {
-		let timeout: ReturnType<typeof setTimeout> | null = null;
-
-		const fetchCoverPath = async () => {
-			const path = await getLibraryCoverPath(data.id);
-			setCoverPath(path);
-
-			if (!path) {
-				timeout = setTimeout(async () => {
-					const retryPath = await getLibraryCoverPath(data.id);
-					if (retryPath) setCoverPath(retryPath);
-				}, 250);
-			}
-		};
-
-		fetchCoverPath();
-
-		return () => {
-			if (timeout) clearTimeout(timeout);
-		};
-	}, [data.id, data.cover_url]);
+	const { coverPath, loading } = useLibraryCover(data.id);
 
 	const Comp = "div";
 
@@ -43,11 +21,13 @@ export default function QuickAccessItem({ data }: QuickAccessItemProps) {
 						className="h-12 min-w-12 max-w-12 mr-2"
 						style={{ boxShadow: "5px 0px 15px rgba(0, 0, 0, 0.35)" }}
 					>
-						<CoverImage
-							src={coverPath ?? PLACEHOLDER_LIBRARIES_URL}
-							alt="cover"
-							className="rounded-l-sm rounded-r-none"
-						/>
+						{loading ? (
+							<Skeleton className="w-full h-full" />
+						) : coverPath ? (
+							<CoverImage src={coverPath} alt="cover" className="rounded-l-sm rounded-r-none" />
+						) : (
+							<PlaceholderLibraryCover />
+						)}
 					</Cover>
 					<div className="flex w-full h-full items-center pr-2 overflow-hidden">
 						<div className="select-none text-sm font-extrabold flex-grow truncate">{data.name}</div>
