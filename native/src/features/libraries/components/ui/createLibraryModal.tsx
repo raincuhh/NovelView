@@ -10,6 +10,7 @@ import { Switch } from "@/shared/components/ui/switch";
 import { useAuthStore } from "@/features/auth/authStore";
 import Label from "@/shared/components/ui/label";
 import { createLibrary } from "../../libraryService";
+import { useQueryClient } from "@tanstack/react-query";
 
 const libraryCreateFormSchema = z.object({
 	name: z.string().min(1, "Library name must be at least 1 character"),
@@ -28,6 +29,8 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 	const [isValid, setIsValid] = useState<boolean>(false);
 	const [synced, setSynced] = useState<boolean>(false);
 
+	const queryClient = useQueryClient();
+
 	const userId = useAuthStore((state) => state.user?.auth.id);
 
 	const handleLibraryNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +43,7 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 		setIsValid(result.success);
 	};
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement | HTMLInputElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement | HTMLInputElement>) => {
 		e.preventDefault();
 
 		const result = libraryCreateFormSchema.safeParse({
@@ -57,7 +60,18 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 		onClose();
 		console.log("Creating library with:", { name: libraryName, image, synced, userId });
 		if (userId) {
-			createLibrary({ name: libraryName, cover: image, type: synced ? "sync" : "local", userId: userId });
+			try {
+				await createLibrary({
+					name: libraryName,
+					cover: image,
+					type: synced ? "sync" : "local",
+					userId: userId,
+				});
+
+				queryClient.invalidateQueries({ queryKey: ["mostInteractedLibraries", userId] });
+			} catch (err) {
+				console.error("Failed to create library:", err);
+			}
 		}
 	};
 

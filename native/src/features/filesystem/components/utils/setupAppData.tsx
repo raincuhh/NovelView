@@ -12,7 +12,7 @@ import {
 	LOCAL_APPDATA,
 } from "../../consts";
 
-export default function SetupLOCAL_APPDATA() {
+export default function SetupAppdata() {
 	useEffect(() => {
 		const setupFolders = async (): Promise<boolean> => {
 			const foldersToInit = [

@@ -1,10 +1,11 @@
 import { FileRouteTypes } from "@/routeTree.gen";
-import { Cover, CoverImage, CoverImageFallback } from "@/shared/components/ui/cover";
+import { Cover, CoverImage } from "@/shared/components/ui/cover";
 import { ElementType, forwardRef, HTMLAttributes } from "react";
 import { Link } from "@tanstack/react-router";
+import { PLACEHOLDER_RECENTLY_READ_URL } from "@/shared/lib/consts";
 
 type MobileNavigationRecentReadProps = {
-	coverSrc?: string;
+	coverUrl?: string;
 	title?: string;
 	sectionPrefix?: string | number;
 	sectionSuffix?: string | number;
@@ -14,9 +15,9 @@ type MobileNavigationRecentReadProps = {
 const MobileNavigationRecentRead = forwardRef<
 	HTMLDivElement,
 	HTMLAttributes<HTMLDivElement> & MobileNavigationRecentReadProps
->(({ className, coverSrc, title, sectionPrefix, sectionSuffix, to, ...props }, ref) => {
+>(({ className, coverUrl, title, sectionPrefix, sectionSuffix, to, ...props }, ref) => {
 	const placeholderConfig: Omit<MobileNavigationRecentReadProps, "to"> = {
-		coverSrc: "/assets/images/placeholder/shadowSlavePlaceholder.jpg",
+		coverUrl: PLACEHOLDER_RECENTLY_READ_URL,
 		title: "Shadow Slave",
 		sectionPrefix: "1454",
 		sectionSuffix: "An Oath and a Promise",
@@ -31,14 +32,13 @@ const MobileNavigationRecentRead = forwardRef<
 					<div className="absolute inset-0 z-0 overflow-hidden">
 						<img
 							className="w-full h-full object-cover blur-md opacity-30"
-							src={coverSrc ?? String(placeholderConfig.coverSrc)}
+							src={coverUrl ?? String(placeholderConfig.coverUrl)}
 							alt="bg blur cover"
 						/>
 					</div>
 					<div className="flex gap-2 h-full w-full items-center">
 						<Cover className="h-12 w-12 rounded-sm">
-							<CoverImage src={coverSrc ?? String(placeholderConfig.coverSrc)} alt="cover" />
-							<CoverImageFallback isLoading={false}></CoverImageFallback>
+							<CoverImage src={coverUrl ?? String(placeholderConfig.coverUrl)} alt="cover" />
 						</Cover>
 						<div className="flex flex-col max-w-[60%] h-full">
 							<h1 className="text-md truncate overflow-hidden text-ellipsis">

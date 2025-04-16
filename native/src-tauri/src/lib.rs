@@ -11,7 +11,7 @@ pub fn run() {
                     "sqlite:session.db",
                     commands::migrations::setup_session_db(),
                 )
-                .add_migrations("sqlite:main.db", commands::migrations::setup_main_db())
+                .add_migrations("sqlite:local.db", commands::migrations::setup_main_db())
                 .build(),
         )
         .plugin(tauri_plugin_opener::init())

@@ -24,19 +24,57 @@ pub fn setup_main_db() -> Vec<Migration> {
         Migration {
             version: 2,
             description: "create local libraries table",
-            sql: "",
+            sql: "
+            CREATE TABLE IF NOT EXISTS libraries (
+                  id TEXT PRIMARY KEY,
+                  user_id TEXT,
+                  name TEXT,
+                  description TEXT,
+                  cover_url TEXT,
+                  type TEXT,
+                  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                  updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+              );
+              ",
             kind: MigrationKind::Up,
         },
         Migration {
             version: 3,
             description: "create local books table",
-            sql: "",
+            sql: "
+            CREATE TABLE IF NOT EXISTS books (
+                  id TEXT PRIMARY KEY,
+                  library_id TEXT,
+                  user_id TEXT,
+                  title TEXT,
+                  cover_image_url TEXT,
+                  is_saved TEXT,
+                  read_count INTEGER,
+                  last_read_at TEXT,
+                  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                  updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                  file_url TEXT,
+                  format TEXT
+              );
+            ",
             kind: MigrationKind::Up,
         },
         Migration {
             version: 4,
             description: "create local book_contents table",
-            sql: "",
+            sql: "
+            CREATE TABLE IF NOT EXISTS book_contents (
+                  id TEXT PRIMARY KEY,
+                  book_id TEXT,
+                  content_json TEXT,
+                  parsing_version INTEGER,
+                  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                  updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                  metadata TEXT,
+                  toc TEXT,
+                  content_position TEXT
+              );
+            ",
             kind: MigrationKind::Up,
         },
     ]

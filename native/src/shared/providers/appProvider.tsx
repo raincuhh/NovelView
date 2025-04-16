@@ -4,9 +4,9 @@ import { SystemProvider } from "./systemProvider";
 import AuthInitializer from "@/features/auth/components/utils/authInitializer";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { cn } from "../lib/globalUtils";
-import SetupAppData from "@/features/filesystem/components/utils/setupAppData";
+import SetupAppdata from "@/features/filesystem/components/utils/setupAppdata";
 
-type AppProviderProps = PropsWithChildren<{}>;
+type AppProviderProps = PropsWithChildren;
 
 const AppProvider = ({ children }: AppProviderProps) => {
 	const [queryClient] = useState(
@@ -28,7 +28,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
 					highlightColor={cn("var(--color-accent-2)")}
 				>
 					<AuthInitializer />
-					<SetupAppData />
+					<SetupAppdata />
 					{children}
 				</SkeletonTheme>
 			</QueryClientProvider>

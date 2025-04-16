@@ -4,7 +4,7 @@ import OnboardingViewContainer from "@/pages/onboarding/components/ui/onboarding
 import { Form, FormControl, FormItem, FormLabel, FormMessage } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
-import { db, useSupabase } from "@/shared/providers/systemProvider";
+import { powersyncDb, useSupabase } from "@/shared/providers/systemProvider";
 import { useNavigate } from "@tanstack/react-router";
 import { CombinedOnboardingViews } from "@/pages/onboarding/types";
 import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
@@ -63,7 +63,7 @@ export default function LoginForm() {
 			const userId = session.user.id;
 			console.log("Logged in as:", userId);
 
-			await db.writeTransaction(async (tx) => {
+			await powersyncDb.writeTransaction(async (tx) => {
 				const userSettingsExisted = await tx.getOptional(
 					"SELECT * FROM user_settings WHERE user_id = ?",
 					[userId]

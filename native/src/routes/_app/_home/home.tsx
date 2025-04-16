@@ -1,13 +1,13 @@
 import { useAuthStore } from "@/features/auth/authStore";
 import EmptyLibraries from "@/features/libraries/components/ui/emptyLibraries";
+import { getCombinedLibraries } from "@/features/libraries/libraryService";
 import ActivityCalendar from "@/pages/home/components/ui/activityCalendar";
 import HomeNavbar from "@/pages/home/components/ui/homeNavbar";
 import QuickAccess from "@/pages/home/components/ui/quickAccess";
 import Recents from "@/pages/home/components/ui/recents";
 import WelcomeUserMessage from "@/shared/components/ui/welcomeUserMessage";
-import { Libraries } from "@/shared/lib/appSchema";
 import { cn } from "@/shared/lib/globalUtils";
-import { useQuery } from "@powersync/tanstack-react-query";
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 
@@ -18,30 +18,25 @@ export const Route = createFileRoute("/_app/_home/home")({
 function RouteComponent() {
 	const userId = useAuthStore((state) => state.user?.auth.id);
 
-	const {
-		data: libraries = [],
-		status,
-		error,
-	} = useQuery<Libraries[]>({
+	const { data: libraries = [], error } = useQuery({
 		queryKey: ["libraries", userId],
-		query: "SELECT * FROM libraries WHERE user_id = ?",
-		parameters: [userId],
+		queryFn: async () => {
+			if (!userId) throw new Error("User ID is missing");
+			return getCombinedLibraries(userId);
+		},
 		enabled: !!userId,
-		staleTime: 60000,
 	});
 
-	useEffect(() => {
-		console.log("Query Status:", status);
-		console.log("Libraries Data:", libraries);
-		if (error) {
-			console.error("Query Error:", error);
-		}
-	}, [libraries, status, error]);
 	const hasLibraries = libraries.length > 0;
+
+	useEffect(() => {
+		console.log("Libraries Data:", libraries);
+		if (error) console.error("Query Error:", error);
+	}, [libraries, error]);
 
 	return (
 		<div className="flex flex-col h-full">
-			<div className="pt-12 pb-2 px-4 max-w-full truncate overflow-hidden whitespace-nowrap">
+			<div className="px-4 min-h-12 pt-4 max-w-full truncate overflow-hidden whitespace-nowrap flex items-center">
 				<WelcomeUserMessage />
 			</div>
 			<div className={cn("flex flex-col relative h-full", hasLibraries ? "h-[150dvh]" : "")}>

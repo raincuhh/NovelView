@@ -1,10 +1,12 @@
-import { create, mkdir, writeFile } from "@tauri-apps/plugin-fs";
+import { create, exists, mkdir, writeFile } from "@tauri-apps/plugin-fs";
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "../filesystem/consts";
-import { sanitizeAndHyphenate } from "@/shared/lib/globalUtils";
-import { db } from "@/shared/providers/systemProvider"; // this is powersync db
-import { LibraryType } from "./types";
+import { powersyncDb, localDb } from "@/shared/providers/systemProvider";
+import { LibraryType, MostInteractedLibrary } from "./types";
 import { convertFileSrc } from "@tauri-apps/api/core";
-import { resolve } from "@tauri-apps/api/path";
+import { join, appLocalDataDir } from "@tauri-apps/api/path";
+import { Libraries } from "@/shared/lib/appSchema";
+
+const coverCache: { [libraryId: string]: string | null } = {};
 
 type createLibraryProps = {
 	name: string;
@@ -15,11 +17,12 @@ type createLibraryProps = {
 };
 
 export async function createLibrary({ name, cover, type, userId, description }: createLibraryProps) {
-	const folderName = sanitizeAndHyphenate(name);
-	const localDir = `${LIBRARIES_FOLDER}/${folderName}`;
+	const id = crypto.randomUUID();
+	// const folderName = sanitizeAndHyphenate(name);
+	const localDir = `${LIBRARIES_FOLDER}/${id}`;
+
 	try {
 		await mkdir(localDir, { baseDir: LOCAL_APPDATA });
-		await createLibraryMetadata(localDir, { name, type });
 
 		let coverUrl: string | null = null;
 
@@ -31,26 +34,54 @@ export async function createLibrary({ name, cover, type, userId, description }: 
 			await saveLibraryCover(localDir, cover);
 
 			if (type === "sync") {
+				//TODO: implement uploading/ doing attatchmentqueue
+				// to upload cover to supabase storage bucket.
 			} else {
 				coverUrl = coverPath;
 			}
+			console.log("cover path: ", coverUrl);
 		}
 
-		await db.writeTransaction(async (tx) => {
-			tx.execute(
-				`INSERT INTO libraries (
-					id,
-					user_id,
-					name,
-					description,
-					cover_url,
-					type,
-					created_at,
-					updated_at
-				) VALUES (uuid(), ?, ?, ?, ?, ?, datetime(), datetime())`,
-				[userId, name, description, coverUrl, type]
-			);
-		});
+		await createLibraryMetadata(localDir, { name, type, coverUrl });
+
+		switch (type) {
+			case "sync":
+				await powersyncDb.writeTransaction(async (tx) => {
+					tx.execute(
+						`INSERT INTO libraries (
+							id,
+							user_id,
+							name,
+							description,
+							cover_url,
+							type,
+							created_at,
+							updated_at
+						) VALUES (?, ?, ?, ?, ?, ?, datetime(), datetime())`,
+						[id, userId, name, description, coverUrl, type]
+					);
+				});
+
+				break;
+			case "local":
+				localDb.execute(
+					`INSERT INTO libraries (
+						id,
+						user_id,
+						name,
+						description,
+						cover_url,
+						type,
+						created_at,
+						updated_at
+					) VALUES (?, ?, ?, ?, ?, ?, datetime(), datetime())`,
+					[id, userId, name, description, coverUrl, type]
+				);
+
+				break;
+			default:
+				throw new Error(`Unknown library type: ${type}`);
+		}
 	} catch (err: any) {
 		console.error("Error creating library:", err);
 	}
@@ -58,12 +89,13 @@ export async function createLibrary({ name, cover, type, userId, description }: 
 
 export async function createLibraryMetadata(
 	libraryDir: string,
-	{ name, type }: { name: string; type: LibraryType }
+	{ name, type, coverUrl }: { name: string; type: LibraryType; coverUrl: string | null }
 ) {
 	const metadata = {
 		name,
 		created_at: new Date().toISOString(),
 		type: type,
+		cover_url: coverUrl,
 	};
 
 	const metadataJson = JSON.stringify(metadata);
@@ -93,21 +125,68 @@ export async function saveLibraryCover(libraryDir: string, cover: File) {
 }
 
 export async function getLibraryCoverPath(libraryId: string, fallbackUrl?: string): Promise<string | null> {
-	const folderPath = `${LIBRARIES_FOLDER}/${libraryId}`;
+	if (coverCache[libraryId]) return coverCache[libraryId];
+
 	const possibleExtensions = ["jpg", "png", "webp", "jpeg"];
+	const baseDir = await appLocalDataDir();
 
 	for (const ext of possibleExtensions) {
 		try {
-			const path = await resolve(folderPath, `cover.${ext}`);
+			const relativePath = `${LIBRARIES_FOLDER}/${libraryId}/cover.${ext}`;
+			const fullPath = await join(baseDir, relativePath);
+			const fileExists = await exists(relativePath, { baseDir: LOCAL_APPDATA });
 
-			console.log(path);
-			return convertFileSrc(path);
+			if (fileExists) {
+				const fileUrl = convertFileSrc(fullPath, "asset");
+
+				coverCache[libraryId] = fileUrl;
+				return fileUrl;
+			}
 		} catch (err: any) {
-			// we dont do anything here, just retry for all possible extensions.
+			// do nothing
 		}
 	}
 
-	if (fallbackUrl) return fallbackUrl;
+	if (fallbackUrl) {
+		coverCache[libraryId] = fallbackUrl;
+		return fallbackUrl;
+	}
 
+	coverCache[libraryId] = null;
 	return null;
+}
+
+export function clearCoverCache(libraryId: string) {
+	delete coverCache[libraryId];
+}
+
+export async function getCombinedLibraries(userId: string): Promise<Libraries[]> {
+	const powersyncLibraries = await powersyncDb.execute(`SELECT * FROM libraries WHERE user_id = ?`, [
+		userId,
+	]);
+
+	const localLibraries = await localDb.select<Libraries[]>(`SELECT * FROM libraries WHERE user_id = ?`, [
+		userId,
+	]);
+
+	return [...(localLibraries ?? []), ...(powersyncLibraries.rows?._array ?? [])];
+}
+
+export async function getCombinedMostInteractedLibraries(userId: string): Promise<MostInteractedLibrary[]> {
+	const query = `
+    SELECT l.id, l.name, l.cover_url,
+      (SELECT COUNT(*) FROM books b WHERE b.library_id = l.id) as read_count
+    FROM libraries l
+    WHERE l.user_id = ?
+    GROUP BY l.id
+    ORDER BY read_count DESC
+    LIMIT 6
+  `;
+
+	const [local, powersync] = await Promise.all([
+		localDb.select<MostInteractedLibrary[]>(query, [userId]),
+		powersyncDb.execute(query, [userId]),
+	]);
+
+	return [...(local ?? []), ...((powersync.rows?._array as MostInteractedLibrary[]) ?? [])];
 }

@@ -43,7 +43,14 @@ export default function MobileNavigationButtons() {
 	const buttons = [
 		{
 			key: "home",
-			icon: <Icon.home className="h-7 w-7 fill-accent" />,
+			icon: (
+				<Icon.home
+					className={cn(
+						"h-7 w-7",
+						router.state.location.pathname === "/home" ? "fill-accent" : "fill-muted"
+					)}
+				/>
+			),
 			to: "/home",
 			onclick: () => navigateTo("/home"),
 		},
@@ -59,13 +66,27 @@ export default function MobileNavigationButtons() {
 		},
 		{
 			key: "search",
-			icon: <Icon.searchHollow className="h-7 w-7 fill-accent" />,
+			icon: (
+				<Icon.searchHollow
+					className={cn(
+						"h-7 w-7",
+						router.state.location.pathname === "/search" ? "fill-accent" : "fill-muted"
+					)}
+				/>
+			),
 			to: "/search",
 			onclick: () => navigateTo("/search"),
 		},
 		{
 			key: "libraries",
-			icon: <Icon.library className="h-7 w-7 fill-accent" />,
+			icon: (
+				<Icon.library
+					className={cn(
+						"h-7 w-7",
+						router.state.location.pathname === "/libraries" ? "fill-accent" : "fill-muted"
+					)}
+				/>
+			),
 			to: "/libraries",
 			onclick: () => navigateTo("/libraries"),
 		},

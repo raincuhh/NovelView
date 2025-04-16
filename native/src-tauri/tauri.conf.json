@@ -18,7 +18,11 @@
 			}
 		],
 		"security": {
-			"csp": null
+			"csp": "http://asset.localhost",
+			"assetProtocol": {
+				"enable": true,
+				"scope": ["$DESKTOP/series/**", "$APPDATA/**", "$APPLOCALDATA/**"]
+			}
 		}
 	},
 	"bundle": {
@@ -34,7 +38,7 @@
 	},
 	"plugins": {
 		"sql": {
-			"preload": ["sqlite:session.db", "sqlite:main.db"]
+			"preload": ["sqlite:session.db", "sqlite:local.db"]
 		}
 	}
 }

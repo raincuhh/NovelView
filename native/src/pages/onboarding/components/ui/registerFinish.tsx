@@ -7,7 +7,7 @@ import { Link } from "@tanstack/react-router";
 import Separator from "@/shared/components/ui/separator";
 import { useRegisterFormStore } from "../../registerFormStore";
 import { cn } from "@/shared/lib/globalUtils";
-import { db, supabase } from "@/shared/providers/systemProvider";
+import { powersyncDb, supabase } from "@/shared/providers/systemProvider";
 import { CombinedOnboardingViews } from "../../types";
 import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
 
@@ -48,7 +48,7 @@ export default function RegisterFinish() {
 			if (data.user) {
 				const user = data.user;
 
-				await db.writeTransaction(async (tx) => {
+				await powersyncDb.writeTransaction(async (tx) => {
 					tx.execute(
 						`INSERT INTO profiles (
 							id,
