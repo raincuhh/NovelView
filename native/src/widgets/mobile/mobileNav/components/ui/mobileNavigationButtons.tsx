@@ -65,14 +65,13 @@ export default function MobileNavigationButtons() {
 		},
 		{
 			key: "search",
-			icon: (
-				<Icon.searchHollow
-					className={cn(
-						"h-7 w-7",
-						router.state.location.pathname === "/search" ? "fill-accent" : "fill-muted"
-					)}
-				/>
-			),
+			icon: (() => {
+				const isActive = router.state.location.pathname === "/search";
+				const IconComponent = isActive ? Icon.searchFilled : Icon.searchHollow;
+				const iconClass = cn("h-7 w-7", isActive ? "fill-accent" : "fill-muted");
+
+				return <IconComponent className={iconClass} />;
+			})(),
 			to: "/search",
 			onclick: () => navigateTo("/search"),
 		},

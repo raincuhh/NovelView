@@ -17,7 +17,8 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             commands::greet::greet,
-            commands::fs::hide_appdata_folders
+            commands::fs::hide_appdata_folders,
+            commands::epub::parse_epub,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

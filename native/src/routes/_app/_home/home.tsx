@@ -1,6 +1,8 @@
 import { useAuthStore } from "@/features/auth/authStore";
 import EmptyLibraries from "@/features/libraries/components/ui/emptyLibraries";
 import { getCombinedLibraries } from "@/features/libraries/libraryService";
+import { EpubInfo } from "@/features/parsing/types";
+import { parseEpub } from "@/features/parsing/lib/epubParser";
 import ActivityCalendar from "@/pages/home/components/ui/activityCalendar";
 import HomeNavbar from "@/pages/home/components/ui/homeNavbar";
 import QuickAccess from "@/pages/home/components/ui/quickAccess";
@@ -9,6 +11,8 @@ import WelcomeUserMessage from "@/shared/components/ui/welcomeUserMessage";
 import { cn } from "@/shared/lib/globalUtils";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { logParsedEpubContents } from "@/features/parsing/lib/utils";
 
 export const Route = createFileRoute("/_app/_home/home")({
 	component: RouteComponent,
@@ -32,6 +36,25 @@ function RouteComponent() {
 	// 	console.log("Libraries Data:", libraries);
 	// 	if (error) console.error("Query Error:", error);
 	// }, [libraries, error]);
+
+	// const epubObj = parseEpub("/assets/test/epubs/file-1.epub", { type: "path" });
+
+	// console.log("epub content: ", epubObj);
+	useEffect(() => {
+		const examplePath = "C:/Dev/Repos/NovelView/native/public/assets/test/epubs/Kill the Sun (1-384).epub";
+		console.log("parsing path: ", examplePath);
+
+		const fetchEpub = async () => {
+			try {
+				const obj: EpubInfo = await parseEpub(examplePath);
+				logParsedEpubContents(obj);
+			} catch (err) {
+				console.error("Failed to parse EPUB:", err);
+			}
+		};
+
+		fetchEpub();
+	}, []);
 
 	return (
 		<div className="flex flex-col h-full">
