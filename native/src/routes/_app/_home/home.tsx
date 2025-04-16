@@ -47,7 +47,7 @@ function RouteComponent() {
 		const fetchEpub = async () => {
 			try {
 				const obj: EpubInfo = await parseEpub(examplePath);
-				logParsedEpubContents(obj);
+				// logParsedEpubContents(obj);
 			} catch (err) {
 				console.error("Failed to parse EPUB:", err);
 			}
