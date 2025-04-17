@@ -28,8 +28,14 @@ export default function QuickAccess() {
 			<Wrapper>
 				<Grid>
 					{Array.from({ length: 6 }).map((_, i) => (
-						<div className="relative w-full h-full">
-							<Skeleton key={i} height="3rem" width="100%"></Skeleton>
+						<div key={i} className="relative w-full h-12">
+							<Skeleton className="h-full w-full" />
+
+							<div className="absolute top-1/2 left-0 w-full px-4 translate-y-[-50%]">
+								<div className="">
+									<Skeleton className="w-6 h-6" />
+								</div>
+							</div>
 						</div>
 					))}
 				</Grid>
