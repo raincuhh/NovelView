@@ -27,7 +27,7 @@ function DesktopLayout() {
 			className="grid h-full w-full"
 			style={{
 				gridTemplateColumns: "min-content min-content 1fr",
-				gridTemplateRows: "36px min-content 1fr",
+				gridTemplateRows: "32px min-content 1fr",
 				gridTemplateAreas: `
             "titlebar titlebar titlebar"
             "libraries page page"

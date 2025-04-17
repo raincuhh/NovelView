@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { getLibraryCoverPath } from "@/features/libraries/libraryService";
 
-export function useLibraryCover(libraryId: string, retryDelay = 250) {
+export function useLibraryCover(libraryId: string, fallbackUrl?: string, retryDelay = 250) {
 	const [coverPath, setCoverPath] = useState<string | null>(null);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	useEffect(() => {
 		let timeout: ReturnType<typeof setTimeout> | null = null;
@@ -11,16 +11,17 @@ export function useLibraryCover(libraryId: string, retryDelay = 250) {
 		const fetchCover = async () => {
 			setLoading(true);
 			try {
-				const path = await getLibraryCoverPath(libraryId);
+				const path = await getLibraryCoverPath(libraryId, fallbackUrl);
+
 				setCoverPath(path);
 
-				if (!path && retryDelay > 0) {
-					timeout = setTimeout(async () => {
-						const retryPath = await getLibraryCoverPath(libraryId);
-						if (retryPath) setCoverPath(retryPath);
-					}, retryDelay);
-				}
-			} catch (err) {
+				// if (!path && retryDelay > 0) {
+				// 	timeout = setTimeout(async () => {
+				// 		const retryPath = await getLibraryCoverPath(libraryId);
+				// 		if (retryPath) setCoverPath(retryPath);
+				// 	}, retryDelay);
+				// }
+			} catch (err: any) {
 				console.error("Error loading cover: ", err);
 			} finally {
 				setLoading(false);

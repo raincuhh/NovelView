@@ -1,8 +1,8 @@
 import { PropsWithChildren } from "react";
 import { Outlet, createRootRoute, Scripts } from "@tanstack/react-router";
-
 // @ts-ignore
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// @ts-ignore
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import AppProvider from "@/shared/providers/appProvider";
 import ModalRoot from "@/features/modal/components/ui/modalRoot";
@@ -28,7 +28,7 @@ function RootDocument({ children }: RootDocumentProps) {
 			<RootLayout>{children}</RootLayout>
 			<div className="absolute">
 				{/* <ReactQueryDevtools buttonPosition="top-right" /> */}
-				<TanStackRouterDevtools position="top-right" />
+				{/* <TanStackRouterDevtools position="top-right" /> */}
 			</div>
 			<Scripts />
 		</AppProvider>

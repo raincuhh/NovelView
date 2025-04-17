@@ -1,9 +1,19 @@
-import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
-import { useLibraryProvider } from "@/features/libraries/libraryProvider";
+import LibraryHeaderCover from "./libraryHeaderCover";
 
-export default function LibraryHeader() {
-	const { library } = useLibraryProvider();
-	// const { coverPath, loading } = useLibraryCover(data.id);
+type LibraryheaderProps = {
+	coverPath: string;
+};
 
-	return <div className="min-h-128 md:min-h-86">header</div>;
+export default function LibraryHeader({ coverPath }: LibraryheaderProps) {
+	return (
+		<div className="min-h-128 md:min-h-86 w-full">
+			<div className="flex flex-col gap-2 h-full">
+				<div>search</div>
+				<div className="flex flex-col md:flex-row">
+					<LibraryHeaderCover coverPath={coverPath} />
+					<div></div>
+				</div>
+			</div>
+		</div>
+	);
 }

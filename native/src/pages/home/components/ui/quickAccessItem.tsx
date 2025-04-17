@@ -1,17 +1,15 @@
 import { MostInteractedLibrary } from "@/features/libraries/types";
 import { Cover, CoverImage } from "@/shared/components/ui/cover";
 import PlaceholderLibraryCover from "@/features/libraries/components/ui/placeholderLibraryCover";
-import Skeleton from "react-loading-skeleton";
-import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
 import { LibraryLink } from "@/features/libraries/components/ui/libraryLink";
 
 type QuickAccessItemProps = {
 	data: MostInteractedLibrary;
+	coverPath: string | null;
 };
 
-export default function QuickAccessItem({ data }: QuickAccessItemProps) {
-	const { coverPath, loading } = useLibraryCover(data.id);
-
+export default function QuickAccessItem({ data, coverPath }: QuickAccessItemProps) {
+	const hasImage = Boolean(coverPath);
 	return (
 		<LibraryLink libraryId={data.id} className="flex relative w-full">
 			<div className="w-full h-full bg-secondary hover:bg-secondary-alt transition-discrete ease-in-out duration-100 rounded-sm">
@@ -20,10 +18,8 @@ export default function QuickAccessItem({ data }: QuickAccessItemProps) {
 						className="h-12 min-w-12 max-w-12 mr-2"
 						style={{ boxShadow: "5px 0px 15px rgba(0, 0, 0, 0.35)" }}
 					>
-						{loading ? (
-							<Skeleton className="w-full h-full" />
-						) : coverPath ? (
-							<CoverImage src={coverPath} alt="cover" className="rounded-l-sm rounded-r-none" />
+						{hasImage ? (
+							<CoverImage src={coverPath!} alt="cover" className="rounded-l-sm rounded-r-none" />
 						) : (
 							<PlaceholderLibraryCover />
 						)}

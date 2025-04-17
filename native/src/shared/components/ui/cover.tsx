@@ -16,8 +16,14 @@ Cover.displayName = "Cover";
 
 const CoverImage = forwardRef<
 	HTMLImageElement,
-	HTMLAttributes<HTMLImageElement> & { src: string; alt: string; isLoading?: boolean }
->(({ className, src, alt, isLoading = false, ...props }, ref) => {
+	HTMLAttributes<HTMLImageElement> & {
+		src: string;
+		alt: string;
+		isLoading?: boolean;
+		onLoad?: () => void;
+		onError?: () => void;
+	}
+>(({ className, src, alt, isLoading = false, onLoad, onError, ...props }, ref) => {
 	return (
 		<div className="relative w-full h-full">
 			{isLoading ? (
@@ -27,6 +33,8 @@ const CoverImage = forwardRef<
 					ref={ref}
 					src={src}
 					alt={alt}
+					onLoad={onLoad}
+					onError={onError}
 					{...props}
 					className={cn("object-cover w-full h-full rounded-sm absolute", className)}
 				/>

@@ -31,10 +31,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
 	return (
 		<SystemProvider>
 			<QueryClientProvider client={queryClient}>
-				<SkeletonTheme
-					baseColor={cn("var(--color-base-10)")}
-					highlightColor={cn("var(--color-accent-2)")}
-				>
+				<SkeletonTheme baseColor={cn("var(--color-base-10)")} highlightColor={cn("var(--color-base-25)")}>
 					<AuthInitializer />
 					<SetupAppdata />
 					{children}

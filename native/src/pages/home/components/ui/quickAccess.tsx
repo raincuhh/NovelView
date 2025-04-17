@@ -6,6 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import { getCombinedMostInteractedLibraries } from "@/features/libraries/lib/selectLibrary";
 import { MostInteractedLibrary } from "@/features/libraries/types";
 import { cn } from "@/shared/lib/globalUtils";
+import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
 
 export default function QuickAccess() {
 	const userId = useAuthStore((state) => state.user?.auth.id);
@@ -60,9 +61,16 @@ export default function QuickAccess() {
 			<Grid rows={libraries.length}>
 				<RenderList
 					data={libraries}
-					render={(item: MostInteractedLibrary, i: number) => (
-						<QuickAccessItem key={item.id + item.cover_url + i} data={item} />
-					)}
+					render={(library: MostInteractedLibrary, i: number) => {
+						const { coverPath } = useLibraryCover(library.id);
+						return (
+							<QuickAccessItem
+								key={library.id + library.cover_url + i}
+								data={library}
+								coverPath={coverPath}
+							/>
+						);
+					}}
 				/>
 			</Grid>
 		</Wrapper>
