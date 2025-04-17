@@ -26,8 +26,8 @@ function RootDocument({ children }: RootDocumentProps) {
 	return (
 		<AppProvider>
 			<RootLayout>{children}</RootLayout>
-			<div className="absolute hidden">
-				<ReactQueryDevtools buttonPosition="top-right" />
+			<div className="absolute">
+				{/* <ReactQueryDevtools buttonPosition="top-right" /> */}
 				<TanStackRouterDevtools position="top-right" />
 			</div>
 			<Scripts />

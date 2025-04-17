@@ -1,10 +1,9 @@
 import { create, exists, mkdir, writeFile } from "@tauri-apps/plugin-fs";
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "../filesystem/consts";
 import { powersyncDb, localDb } from "@/shared/providers/systemProvider";
-import { LibraryType, MostInteractedLibrary } from "./types";
+import { LibraryType } from "./types";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { join, appLocalDataDir } from "@tauri-apps/api/path";
-import { Libraries } from "@/shared/lib/appSchema";
 
 const coverCache: { [libraryId: string]: string | null } = {};
 
@@ -157,56 +156,4 @@ export async function getLibraryCoverPath(libraryId: string, fallbackUrl?: strin
 
 export function clearCoverCache(libraryId: string) {
 	delete coverCache[libraryId];
-}
-
-export async function getCombinedLibraries(userId: string): Promise<Libraries[]> {
-	const powersyncLibraries = await powersyncDb.execute(`SELECT * FROM libraries WHERE user_id = ?`, [
-		userId,
-	]);
-
-	const localLibraries = await localDb.select<Libraries[]>(`SELECT * FROM libraries WHERE user_id = ?`, [
-		userId,
-	]);
-
-	return [...(localLibraries ?? []), ...(powersyncLibraries.rows?._array ?? [])];
-}
-
-export async function getCombinedMostInteractedLibraries(userId: string): Promise<MostInteractedLibrary[]> {
-	const query = `
-    SELECT l.id, l.name, l.cover_url,
-      (SELECT COUNT(*) FROM books b WHERE b.library_id = l.id) as read_count
-    FROM libraries l
-    WHERE l.user_id = ?
-    GROUP BY l.id
-    ORDER BY read_count DESC
-    LIMIT 6
-  `;
-
-	const [local, powersync] = await Promise.all([
-		localDb.select<MostInteractedLibrary[]>(query, [userId]),
-		powersyncDb.execute(query, [userId]),
-	]);
-
-	return [...(local ?? []), ...((powersync.rows?._array as MostInteractedLibrary[]) ?? [])];
-}
-
-export async function getFirstLibrary(userId: string): Promise<Libraries | null> {
-	const powersyncLibraries = await powersyncDb.execute(`SELECT * FROM libraries WHERE user_id = ? LIMIT 1`, [
-		userId,
-	]);
-
-	const localLibraries = await localDb.select<Libraries[]>(
-		`SELECT * FROM libraries WHERE user_id = ? LIMIT 1`,
-		[userId]
-	);
-
-	if (powersyncLibraries && powersyncLibraries.rows?._array && powersyncLibraries.rows._array.length > 0) {
-		return powersyncLibraries.rows._array[0];
-	}
-
-	if (localLibraries.length > 0) {
-		return localLibraries[0];
-	}
-
-	return null;
 }

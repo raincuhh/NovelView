@@ -1,5 +1,6 @@
 import { useRouter } from "@tanstack/react-router";
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 type HistoryStoreState = {
 	router: ReturnType<typeof useRouter> | null;
@@ -16,48 +17,68 @@ type HistoryStoreState = {
 	canGoForward: boolean;
 };
 
-export const useHistoryStore = create<HistoryStoreState>((set, get) => ({
-	router: null,
-	setRouter: (router) => set({ router: router }),
-	historyStack: ["/home"],
-	currentIndex: 0,
+export const useHistoryStore = create<HistoryStoreState>()(
+	persist(
+		(set, get) => ({
+			router: null,
+			setRouter: (router) => set({ router }),
 
-	navigateTo: (path: string) => {
-		const { currentIndex, historyStack, router } = get();
-		if (!router) return;
+			historyStack: [],
+			currentIndex: 0,
 
-		const trimmed = historyStack.slice(0, currentIndex + 1);
-		const updated = [...trimmed, path];
-		set({
-			historyStack: updated,
-			currentIndex: updated.length - 1,
-		});
-		router.navigate({ to: path });
-	},
+			navigateTo: (path) => {
+				const { currentIndex, historyStack, router } = get();
+				if (!router) return;
 
-	goBack: () => {
-		const { currentIndex, historyStack, router } = get();
-		if (!router || currentIndex <= 0) return;
+				const trimmed = historyStack.slice(0, currentIndex + 1);
+				const updated = [...trimmed, path];
+				set({
+					historyStack: updated,
+					currentIndex: updated.length - 1,
+				});
+				router.navigate({ to: path });
+			},
 
-		const newIndex = currentIndex - 1;
-		set({ currentIndex: newIndex });
-		router.navigate({ to: historyStack[newIndex] });
-	},
+			goBack: () => {
+				const { currentIndex, historyStack, router } = get();
+				if (!router || currentIndex <= 0) return;
 
-	goForward: () => {
-		const { currentIndex, historyStack, router } = get();
-		if (!router || currentIndex >= historyStack.length - 1) return;
+				const newIndex = currentIndex - 1;
+				set({ currentIndex: newIndex });
+				router.navigate({ to: historyStack[newIndex] });
+			},
 
-		const newIndex = currentIndex + 1;
-		set({ currentIndex: newIndex });
-		router.navigate({ to: historyStack[newIndex] });
-	},
+			goForward: () => {
+				const { currentIndex, historyStack, router } = get();
+				if (!router || currentIndex >= historyStack.length - 1) return;
 
-	get canGoBack() {
-		return get().currentIndex > 0;
-	},
+				const newIndex = currentIndex + 1;
+				set({ currentIndex: newIndex });
+				router.navigate({ to: historyStack[newIndex] });
+			},
 
-	get canGoForward() {
-		return get().currentIndex < get().historyStack.length - 1;
-	},
-}));
+			get canGoBack() {
+				return get().currentIndex > 0;
+			},
+
+			get canGoForward() {
+				return get().currentIndex < get().historyStack.length - 1;
+			},
+		}),
+		{
+			name: "history-storage",
+			partialize: (state) => ({
+				historyStack: state.historyStack,
+				currentIndex: state.currentIndex,
+			}),
+			onRehydrateStorage: (state) => {
+				if (state) {
+					if (state.historyStack.length === 0) {
+						state.historyStack = ["/home"];
+						state.currentIndex = 0;
+					}
+				}
+			},
+		}
+	)
+);

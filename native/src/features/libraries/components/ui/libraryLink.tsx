@@ -15,10 +15,10 @@ export const LibraryLink = forwardRef<
 
 	return (
 		<Link
-			to="/libraries/$libraryId"
+			to="/library/$libraryId"
 			params={{ libraryId: libraryId }}
 			ref={ref}
-			onClick={() => navigateTo(`/libraries/${libraryId}`)}
+			onClick={() => navigateTo(`/library/${libraryId}`)}
 			className={className}
 			{...props}
 		>

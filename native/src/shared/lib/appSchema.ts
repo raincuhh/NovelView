@@ -131,7 +131,7 @@ export type TableRow<T extends keyof typeof Tables> = RowType<(typeof Tables)[T]
 
 export type Profiles = TableRow<"profiles">;
 export type UserSettings = TableRow<"user_settings">;
-export type Libraries = TableRow<"libraries">;
+export type Library = TableRow<"libraries">;
 export type PremiumSubscriptions = TableRow<"premium_subscriptions">;
 export type Books = TableRow<"books">;
 export type BookContents = TableRow<"book_contents">;

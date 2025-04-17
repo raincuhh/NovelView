@@ -3,6 +3,8 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import Icon from "@/shared/components/ui/icon";
 import { cn } from "@/shared/lib/globalUtils";
 import RenderList from "@/shared/components/utils/renderList";
+import Separator from "@/shared/components/ui/separator";
+import TitlebarHelperButtons from "./titlebarHelperButtons";
 
 export default function Titlebar() {
 	const appWindow = getCurrentWindow();
@@ -49,11 +51,11 @@ export default function Titlebar() {
 	//const hoverStyle = type === "close" ? "hover:bg-interactive-danger" : "hover:bg-primary";
 	return (
 		<div style={{ gridArea: "titlebar" }}>
-			<div className="w-full h-full">
-				<div className="flex w-full h-full relative">
-					<div></div>
+			<div className="w-full h-full" data-tauri-drag-region>
+				<div className="flex w-full h-full relative pointer-events-none">
 					{alignment === "right" && (
-						<ul className="top-0 right-0 flex w-full absolute h-full justify-end">
+						<ul className="top-0 right-0 flex w-full absolute h-full justify-end pointer-events-none">
+							<TitlebarHelperButtons />
 							<RenderList
 								data={mappedButtons}
 								render={(button, i: number) => {
@@ -64,9 +66,10 @@ export default function Titlebar() {
 										<li
 											key={i}
 											className={cn(
-												"h-full px-2 cursor-pointer flex items-center group",
+												"h-full px-2 pointer-events-auto cursor-pointer flex items-center group",
 												hoverStyle
 											)}
+											onClick={button.onclick}
 										>
 											{button.icon}
 										</li>
