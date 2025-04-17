@@ -28,7 +28,9 @@ export default function QuickAccess() {
 			<Wrapper>
 				<Grid>
 					{Array.from({ length: 6 }).map((_, i) => (
-						<Skeleton key={i} height="3rem" width="100%" />
+						<div className="relative w-full h-full">
+							<Skeleton key={i} height="3rem" width="100%"></Skeleton>
+						</div>
 					))}
 				</Grid>
 			</Wrapper>
@@ -38,7 +40,7 @@ export default function QuickAccess() {
 	if (error) {
 		return (
 			<Wrapper>
-				<p className="text-red-500">Error: {error.message}</p>
+				<p className="text-danger">Error: {error.message}</p>
 			</Wrapper>
 		);
 	}

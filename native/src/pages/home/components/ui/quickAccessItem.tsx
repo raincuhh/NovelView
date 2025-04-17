@@ -3,6 +3,7 @@ import { Cover, CoverImage } from "@/shared/components/ui/cover";
 import PlaceholderLibraryCover from "@/features/libraries/components/ui/placeholderLibraryCover";
 import Skeleton from "react-loading-skeleton";
 import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
+import { LibraryLink } from "@/features/libraries/components/ui/libraryLink";
 
 type QuickAccessItemProps = {
 	data: MostInteractedLibrary;
@@ -11,10 +12,8 @@ type QuickAccessItemProps = {
 export default function QuickAccessItem({ data }: QuickAccessItemProps) {
 	const { coverPath, loading } = useLibraryCover(data.id);
 
-	const Comp = "div";
-
 	return (
-		<Comp className="flex relative w-full">
+		<LibraryLink libraryId={data.id} className="flex relative w-full">
 			<div className="w-full h-full bg-secondary hover:bg-secondary-alt transition-discrete ease-in-out duration-100 rounded-sm">
 				<div className="flex w-full h-full">
 					<Cover
@@ -34,6 +33,6 @@ export default function QuickAccessItem({ data }: QuickAccessItemProps) {
 					</div>
 				</div>
 			</div>
-		</Comp>
+		</LibraryLink>
 	);
 }

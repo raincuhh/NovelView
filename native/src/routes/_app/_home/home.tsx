@@ -1,6 +1,5 @@
 import { useAuthStore } from "@/features/auth/authStore";
 import EmptyLibraries from "@/features/libraries/components/ui/emptyLibraries";
-import { getCombinedLibraries } from "@/features/libraries/libraryService";
 import { EpubInfo } from "@/features/parsing/types";
 import { parseEpub } from "@/features/parsing/lib/epubParser";
 import ActivityCalendar from "@/pages/home/components/ui/activityCalendar";
@@ -13,6 +12,8 @@ import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { logParsedEpubContents } from "@/features/parsing/lib/utils";
+import { TEST_EPUB_KTS_FILE_NAME } from "@/shared/lib/consts";
+import { getFirstLibrary } from "@/features/libraries/libraryService";
 
 export const Route = createFileRoute("/_app/_home/home")({
 	component: RouteComponent,
@@ -21,33 +22,25 @@ export const Route = createFileRoute("/_app/_home/home")({
 function RouteComponent() {
 	const userId = useAuthStore((state) => state.user?.auth.id);
 
-	const { data: libraries = [] } = useQuery({
+	const { data: libraries = [], isLoading } = useQuery({
 		queryKey: ["libraries", userId],
 		queryFn: async () => {
 			if (!userId) throw new Error("User ID is missing");
-			return getCombinedLibraries(userId);
+			return getFirstLibrary(userId);
 		},
 		enabled: !!userId,
 	});
 
-	const hasLibraries = libraries.length > 0;
+	const hasLibraries = libraries !== null;
 
-	// useEffect(() => {
-	// 	console.log("Libraries Data:", libraries);
-	// 	if (error) console.error("Query Error:", error);
-	// }, [libraries, error]);
-
-	// const epubObj = parseEpub("/assets/test/epubs/file-1.epub", { type: "path" });
-
-	// console.log("epub content: ", epubObj);
 	useEffect(() => {
-		const examplePath = "C:/Dev/Repos/NovelView/native/public/assets/test/epubs/Kill the Sun (1-384).epub";
+		const examplePath = TEST_EPUB_KTS_FILE_NAME;
 		console.log("parsing path: ", examplePath);
 
 		const fetchEpub = async () => {
 			try {
 				const obj: EpubInfo = await parseEpub(examplePath);
-				// logParsedEpubContents(obj);
+				logParsedEpubContents(obj);
 			} catch (err) {
 				console.error("Failed to parse EPUB:", err);
 			}
@@ -64,7 +57,9 @@ function RouteComponent() {
 			<div className={cn("flex flex-col relative h-full")}>
 				<HomeNavbar />
 				<div className="flex flex-col mt-2 h-full">
-					{hasLibraries ? (
+					{isLoading ? (
+						<div>loading...</div>
+					) : hasLibraries ? (
 						<div className="flex flex-col gap-12 h-[100dvh]">
 							<QuickAccess />
 							<Recents />

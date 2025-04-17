@@ -25,7 +25,7 @@ import { Route as AppSearchSearchImport } from './routes/_app/_search/search'
 import { Route as AppLibrariesLibrariesImport } from './routes/_app/_libraries/libraries'
 import { Route as AppHomeHomeImport } from './routes/_app/_home/home'
 import { Route as AppLibrariesLibraryRouteImport } from './routes/_app/_libraries/_library/route'
-import { Route as AppLibrariesLibraryLibraryIdImport } from './routes/_app/_libraries/_library/$libraryId'
+import { Route as AppLibrariesLibraryLibrariesLibraryIdImport } from './routes/_app/_libraries/_library/libraries.$libraryId'
 
 // Create/Update Routes
 
@@ -108,10 +108,10 @@ const AppLibrariesLibraryRouteRoute = AppLibrariesLibraryRouteImport.update({
   getParentRoute: () => AppRouteRoute,
 } as any)
 
-const AppLibrariesLibraryLibraryIdRoute =
-  AppLibrariesLibraryLibraryIdImport.update({
-    id: '/$libraryId',
-    path: '/$libraryId',
+const AppLibrariesLibraryLibrariesLibraryIdRoute =
+  AppLibrariesLibraryLibrariesLibraryIdImport.update({
+    id: '/libraries/$libraryId',
+    path: '/libraries/$libraryId',
     getParentRoute: () => AppLibrariesLibraryRouteRoute,
   } as any)
 
@@ -217,11 +217,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSearchSearchImport
       parentRoute: typeof AppSearchRouteImport
     }
-    '/_app/_libraries/_library/$libraryId': {
-      id: '/_app/_libraries/_library/$libraryId'
-      path: '/$libraryId'
-      fullPath: '/$libraryId'
-      preLoaderRoute: typeof AppLibrariesLibraryLibraryIdImport
+    '/_app/_libraries/_library/libraries/$libraryId': {
+      id: '/_app/_libraries/_library/libraries/$libraryId'
+      path: '/libraries/$libraryId'
+      fullPath: '/libraries/$libraryId'
+      preLoaderRoute: typeof AppLibrariesLibraryLibrariesLibraryIdImport
       parentRoute: typeof AppLibrariesLibraryRouteImport
     }
   }
@@ -254,12 +254,13 @@ const AppSearchRouteRouteWithChildren = AppSearchRouteRoute._addFileChildren(
 )
 
 interface AppLibrariesLibraryRouteRouteChildren {
-  AppLibrariesLibraryLibraryIdRoute: typeof AppLibrariesLibraryLibraryIdRoute
+  AppLibrariesLibraryLibrariesLibraryIdRoute: typeof AppLibrariesLibraryLibrariesLibraryIdRoute
 }
 
 const AppLibrariesLibraryRouteRouteChildren: AppLibrariesLibraryRouteRouteChildren =
   {
-    AppLibrariesLibraryLibraryIdRoute: AppLibrariesLibraryLibraryIdRoute,
+    AppLibrariesLibraryLibrariesLibraryIdRoute:
+      AppLibrariesLibraryLibrariesLibraryIdRoute,
   }
 
 const AppLibrariesLibraryRouteRouteWithChildren =
@@ -308,7 +309,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof AppHomeHomeRoute
   '/libraries': typeof AppLibrariesLibrariesRoute
   '/search': typeof AppSearchSearchRoute
-  '/$libraryId': typeof AppLibrariesLibraryLibraryIdRoute
+  '/libraries/$libraryId': typeof AppLibrariesLibraryLibrariesLibraryIdRoute
 }
 
 export interface FileRoutesByTo {
@@ -322,7 +323,7 @@ export interface FileRoutesByTo {
   '/home': typeof AppHomeHomeRoute
   '/libraries': typeof AppLibrariesLibrariesRoute
   '/search': typeof AppSearchSearchRoute
-  '/$libraryId': typeof AppLibrariesLibraryLibraryIdRoute
+  '/libraries/$libraryId': typeof AppLibrariesLibraryLibrariesLibraryIdRoute
 }
 
 export interface FileRoutesById {
@@ -341,7 +342,7 @@ export interface FileRoutesById {
   '/_app/_home/home': typeof AppHomeHomeRoute
   '/_app/_libraries/libraries': typeof AppLibrariesLibrariesRoute
   '/_app/_search/search': typeof AppSearchSearchRoute
-  '/_app/_libraries/_library/$libraryId': typeof AppLibrariesLibraryLibraryIdRoute
+  '/_app/_libraries/_library/libraries/$libraryId': typeof AppLibrariesLibraryLibrariesLibraryIdRoute
 }
 
 export interface FileRouteTypes {
@@ -357,7 +358,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/libraries'
     | '/search'
-    | '/$libraryId'
+    | '/libraries/$libraryId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -370,7 +371,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/libraries'
     | '/search'
-    | '/$libraryId'
+    | '/libraries/$libraryId'
   id:
     | '__root__'
     | '/'
@@ -387,7 +388,7 @@ export interface FileRouteTypes {
     | '/_app/_home/home'
     | '/_app/_libraries/libraries'
     | '/_app/_search/search'
-    | '/_app/_libraries/_library/$libraryId'
+    | '/_app/_libraries/_library/libraries/$libraryId'
   fileRoutesById: FileRoutesById
 }
 
@@ -482,7 +483,7 @@ export const routeTree = rootRoute
       "filePath": "_app/_libraries/_library/route.tsx",
       "parent": "/_app",
       "children": [
-        "/_app/_libraries/_library/$libraryId"
+        "/_app/_libraries/_library/libraries/$libraryId"
       ]
     },
     "/_app/_home/home": {
@@ -497,8 +498,8 @@ export const routeTree = rootRoute
       "filePath": "_app/_search/search.tsx",
       "parent": "/_app/_search"
     },
-    "/_app/_libraries/_library/$libraryId": {
-      "filePath": "_app/_libraries/_library/$libraryId.tsx",
+    "/_app/_libraries/_library/libraries/$libraryId": {
+      "filePath": "_app/_libraries/_library/libraries.$libraryId.tsx",
       "parent": "/_app/_libraries/_library"
     }
   }

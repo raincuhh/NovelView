@@ -1,7 +1,6 @@
-// this doesnt work on client side, so not tsx... had to refac to rust
-
 import { invoke } from "@tauri-apps/api/core";
 
+// this doesnt work on client side, so not tsx... had to refac to rust
 // import { exec } from "child_process";
 // import { promisify } from "util";
 // import { platform } from "os";
@@ -38,7 +37,7 @@ import { invoke } from "@tauri-apps/api/core";
 export async function hideFileOrFolder(path: string) {
 	try {
 		await invoke("hide_file_or_folder", { path });
-		console.log(`Hidden: ${path}`);
+		// console.log(`Hidden: ${path}`);
 	} catch (err) {
 		console.error(`Failed to hide '${path}':`, err);
 	}

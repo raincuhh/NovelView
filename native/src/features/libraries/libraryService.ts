@@ -189,3 +189,24 @@ export async function getCombinedMostInteractedLibraries(userId: string): Promis
 
 	return [...(local ?? []), ...((powersync.rows?._array as MostInteractedLibrary[]) ?? [])];
 }
+
+export async function getFirstLibrary(userId: string): Promise<Libraries | null> {
+	const powersyncLibraries = await powersyncDb.execute(`SELECT * FROM libraries WHERE user_id = ? LIMIT 1`, [
+		userId,
+	]);
+
+	const localLibraries = await localDb.select<Libraries[]>(
+		`SELECT * FROM libraries WHERE user_id = ? LIMIT 1`,
+		[userId]
+	);
+
+	if (powersyncLibraries && powersyncLibraries.rows?._array && powersyncLibraries.rows._array.length > 0) {
+		return powersyncLibraries.rows._array[0];
+	}
+
+	if (localLibraries.length > 0) {
+		return localLibraries[0];
+	}
+
+	return null;
+}

@@ -48,8 +48,6 @@ export default function SetupAppdata() {
 
 			for (const folder of foldersToHide) {
 				const fullPath = await join(basePath, folder);
-
-				if (foldersToHide) console.log(folder, " ", fullPath);
 				await hideFileOrFolder(fullPath);
 			}
 		};
