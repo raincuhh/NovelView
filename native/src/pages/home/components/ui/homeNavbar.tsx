@@ -1,4 +1,5 @@
 import Avatar from "@/shared/components/ui/avatar";
+import WelcomeUserMessage from "@/shared/components/ui/welcomeUserMessage";
 import { useMediaQuery } from "react-responsive";
 
 export default function HomeNavbar() {
@@ -18,8 +19,8 @@ export default function HomeNavbar() {
 							}}
 						/>
 					) : null}
-					<div className="flex gap-2 h-full flex-nowrap overflow-y-hidden overflow-x-scroll hide-scrollbar items-center justify-center">
-						{/* <h1 className="font-extrabold text-2xl">Home</h1> */}
+					<div className="flex items-center text-lg">
+						<WelcomeUserMessage />
 					</div>
 				</div>
 			</div>

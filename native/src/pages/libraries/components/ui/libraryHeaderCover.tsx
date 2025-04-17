@@ -11,7 +11,7 @@ export default function LibraryHeaderCover({ coverPath }: LibraryHeaderCoverProp
 	return (
 		<header className="w-full h-min flex justify-center items-center min-h-32 select-none">
 			<Cover
-				className="h-64 w-64 "
+				className="h-56 w-56"
 				style={{
 					boxShadow: "rgba(0, 0, 0, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
 				}}

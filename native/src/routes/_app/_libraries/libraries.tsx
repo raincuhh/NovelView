@@ -1,6 +1,5 @@
 import EmptyLibraries from "@/features/libraries/components/ui/emptyLibraries";
 import LibrariesNavbar from "@/pages/libraries/components/ui/librariesNavbar";
-import { cn } from "@/shared/lib/globalUtils";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_app/_libraries/libraries")({
@@ -10,7 +9,7 @@ export const Route = createFileRoute("/_app/_libraries/libraries")({
 function RouteComponent() {
 	return (
 		<div className="flex flex-col h-full">
-			<div className={cn("flex flex-col relative h-full pt-12")}>
+			<div className="flex flex-col relative h-full pt-12">
 				<LibrariesNavbar />
 				<div className="flex flex-col mt-2 h-full justify-center pb-48">
 					<EmptyLibraries />

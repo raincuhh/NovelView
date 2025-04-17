@@ -1,12 +1,18 @@
 import { Library } from "@/shared/lib/appSchema";
-import { createContext, PropsWithChildren, useContext, useMemo } from "react";
+import { createContext, PropsWithChildren, useContext, useMemo, useState } from "react";
 import { getLibraryById } from "./lib/selectLibrary";
 import { useQuery } from "@tanstack/react-query";
+
+type LibraryConfig = {
+	layout: "list" | "compact-list" | "grid" | "compact-grid";
+};
 
 type LibraryContextProps = {
 	library: Library | null;
 	isLoading: boolean;
 	isError: boolean;
+	config: LibraryConfig;
+	setConfig: (config: LibraryConfig) => void;
 };
 
 const LibraryContext = createContext<LibraryContextProps | null>(null);
@@ -28,11 +34,17 @@ export const LibraryProvider = ({ children, libraryId }: LibraryProviderProps) =
 		enabled: !!libraryId,
 	});
 
+	const [config, setConfig] = useState<LibraryConfig>({
+		layout: "list",
+	});
+
 	const value = useMemo(
 		() => ({
 			library: library ?? null,
 			isLoading,
 			isError,
+			config,
+			setConfig,
 		}),
 		[library, isLoading, isError]
 	);

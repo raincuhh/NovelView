@@ -6,7 +6,6 @@ import ActivityCalendar from "@/pages/home/components/ui/activityCalendar";
 import HomeNavbar from "@/pages/home/components/ui/homeNavbar";
 import QuickAccess from "@/pages/home/components/ui/quickAccess";
 import Recents from "@/pages/home/components/ui/recents";
-import WelcomeUserMessage from "@/shared/components/ui/welcomeUserMessage";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
@@ -32,28 +31,28 @@ function RouteComponent() {
 
 	const hasLibraries = libraries !== null;
 
-	// useEffect(() => {
-	// 	const examplePath = TEST_EPUB_KTS_FILE_NAME;
-	// 	console.log("parsing path: ", examplePath);
+	useEffect(() => {
+		const examplePath = TEST_EPUB_KTS_FILE_NAME;
+		console.log("parsing path: ", examplePath);
 
-	// 	const fetchEpub = async () => {
-	// 		try {
-	// 			const obj: EpubInfo = await parseEpub(examplePath);
-	// 			logParsedEpubContents(obj);
-	// 		} catch (err) {
-	// 			console.error("Failed to parse EPUB:", err);
-	// 		}
-	// 	};
+		const fetchEpub = async () => {
+			try {
+				const obj: EpubInfo = await parseEpub(examplePath);
+				logParsedEpubContents(obj);
+			} catch (err) {
+				console.error("Failed to parse EPUB:", err);
+			}
+		};
 
-	// 	fetchEpub();
-	// }, []);
+		fetchEpub();
+	}, []);
 
 	return (
 		<div className="flex flex-col h-full">
-			<div className="px-4 min-h-12 pt-4 max-w-full truncate overflow-hidden whitespace-nowrap flex items-center">
+			{/* <div className="px-4 min-h-12 pt-4 max-w-full truncate overflow-hidden whitespace-nowrap flex items-center">
 				<WelcomeUserMessage />
-			</div>
-			<div className="flex flex-col relative h-full">
+			</div> */}
+			<div className="flex flex-col relative h-full pt-12">
 				<HomeNavbar />
 				<div className="flex flex-col mt-2 h-full">
 					{isLoading ? (
