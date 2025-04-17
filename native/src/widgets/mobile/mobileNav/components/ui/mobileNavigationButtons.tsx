@@ -1,44 +1,17 @@
 import Icon from "@/shared/components/ui/icon";
 import MobileNavigationButton from "./mobileNavigationButton";
 import { Link, useRouter } from "@tanstack/react-router";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import RenderList from "@/shared/components/utils/renderList";
 import { cn } from "@/shared/lib/globalUtils";
+import { useHistoryStore } from "@/shared/stores/historyStore";
 
 export default function MobileNavigationButtons() {
 	const router = useRouter();
-
-	const [historyStack, setHistoryStack] = useState<string[]>(["/home"]);
-	const [currentIndex, setCurrentIndex] = useState(0);
+	const { navigateTo, goBack, goForward, currentIndex, historyStack } = useHistoryStore();
 
 	const canGoBack = currentIndex > 0;
 	const canGoForward = currentIndex < historyStack.length - 1;
-
-	const navigateTo = (path: string) => {
-		setHistoryStack((prev) => {
-			const trimmed = prev.slice(0, currentIndex + 1);
-			const updated = [...trimmed, path];
-			setCurrentIndex(updated.length - 1);
-			return updated;
-		});
-		router.navigate({ to: path });
-	};
-
-	const goBack = () => {
-		if (canGoBack) {
-			const newIndex = currentIndex - 1;
-			setCurrentIndex(newIndex);
-			router.navigate({ to: historyStack[newIndex] });
-		}
-	};
-
-	const goForward = () => {
-		if (canGoForward) {
-			const newIndex = currentIndex + 1;
-			setCurrentIndex(newIndex);
-			router.navigate({ to: historyStack[newIndex] });
-		}
-	};
 
 	const buttons = [
 		{
@@ -50,8 +23,8 @@ export default function MobileNavigationButtons() {
 
 				return <IconComponent className={iconClass} />;
 			})(),
-			to: "/home",
 			onclick: () => navigateTo("/home"),
+			to: "/home",
 		},
 		{
 			key: "back",
@@ -72,8 +45,8 @@ export default function MobileNavigationButtons() {
 
 				return <IconComponent className={iconClass} />;
 			})(),
-			to: "/search",
 			onclick: () => navigateTo("/search"),
+			to: "/search",
 		},
 		{
 			key: "libraries",
@@ -85,8 +58,8 @@ export default function MobileNavigationButtons() {
 					)}
 				/>
 			),
-			to: "/libraries",
 			onclick: () => navigateTo("/libraries"),
+			to: "/libraries",
 		},
 	];
 

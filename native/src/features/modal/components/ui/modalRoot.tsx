@@ -3,7 +3,7 @@ import RenderList from "@/shared/components/utils/renderList";
 import { Modal } from "../../types";
 
 export default function ModalRoot() {
-	const { modals } = useModalStore((state) => state);
+	const modals: Modal[] = useModalStore((s) => s.modals);
 
 	return (
 		<div>

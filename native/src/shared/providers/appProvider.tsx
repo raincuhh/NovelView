@@ -1,14 +1,18 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SystemProvider } from "./systemProvider";
 import AuthInitializer from "@/features/auth/components/utils/authInitializer";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { cn } from "../lib/globalUtils";
 import SetupAppdata from "@/features/filesystem/components/utils/setupAppdata";
+import { useRouter } from "@tanstack/react-router";
+import { useHistoryStore } from "../stores/historyStore";
 
 type AppProviderProps = PropsWithChildren;
 
 const AppProvider = ({ children }: AppProviderProps) => {
+	const router = useRouter();
+	const setRouter = useHistoryStore((s) => s.setRouter);
 	const [queryClient] = useState(
 		() =>
 			new QueryClient({
@@ -19,6 +23,10 @@ const AppProvider = ({ children }: AppProviderProps) => {
 				},
 			})
 	);
+
+	useEffect(() => {
+		setRouter(router);
+	}, [router]);
 
 	return (
 		<SystemProvider>

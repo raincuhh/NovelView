@@ -44,9 +44,11 @@ export default function QuickAccess() {
 	}
 
 	if (error) {
+		console.log(error.message);
+
 		return (
 			<Wrapper>
-				<p className="text-danger">Error: {error.message}</p>
+				<p className="text-danger text-center font-bold">Error fetching libraries.</p>
 			</Wrapper>
 		);
 	}

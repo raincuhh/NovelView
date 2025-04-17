@@ -1,7 +1,22 @@
 mod commands;
 
+// #[cfg_attr(mobile, tauri::mobile_entry_point)]
+// fn run() {
+//     run_impl()
+// }
+
+#[cfg(mobile)]
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    run_impl();
+}
+
+#[cfg(not(mobile))]
+pub fn run() {
+    run_impl();
+}
+
+fn run_impl() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_fs::init())

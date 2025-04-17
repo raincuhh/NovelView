@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { Modal } from "./types";
 
-type ModalState = {
+type ModalStoreState = {
 	modals: Modal[];
 	openModal: (modal: Modal) => void;
 	closeModal: () => void;
@@ -9,7 +9,7 @@ type ModalState = {
 	closeAllModals: () => void;
 };
 
-const useModalStore = create<ModalState>((set) => ({
+const useModalStore = create<ModalStoreState>((set) => ({
 	modals: [],
 
 	openModal: (modal: Modal) => {

@@ -1,7 +1,9 @@
+import { preventAuth } from "@/features/auth/lib/authGuard";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
 	component: RouteComponent,
+	beforeLoad: preventAuth,
 });
 
 function RouteComponent() {
