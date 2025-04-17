@@ -1,14 +1,10 @@
 import { isTauri as packageIsTauri } from "@tauri-apps/api/core";
 import { GenderType } from "./types";
+import { platform } from "@tauri-apps/plugin-os";
 
-export const isTauri = async (): Promise<boolean> => {
-	return packageIsTauri();
-};
+export const isTauri = async (): Promise<boolean> => packageIsTauri();
 
-export const getPlatform = async (): Promise<string> => {
-	if (await isTauri()) return "tauri-desktop";
-	return "web";
-};
+export const getPlatform = () => platform();
 
 export const genderEnumToFullWord = (gender: GenderType): string => {
 	switch (gender) {

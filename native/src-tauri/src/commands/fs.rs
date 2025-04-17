@@ -16,7 +16,10 @@ pub async fn hide_file_or_folder(path: String) -> Result<(), String> {
             .map_err(|e| e.to_string())?;
 
         if !output.status.success() {
-            return Err(format!("Failed to hide file: {}", String::from_utf8_lossy(&output.stderr)));
+            return Err(format!(
+                "Failed to hide file: {}",
+                String::from_utf8_lossy(&output.stderr)
+            ));
         }
     }
 

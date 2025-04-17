@@ -1,64 +1,67 @@
 {
-	"$schema": "../gen/schemas/desktop-schema.json",
-	"identifier": "default",
-	"description": "Capability for the main window",
-	"windows": ["main"],
-	"permissions": [
-		"core:default",
-		"opener:default",
-		"fs:default",
-		{
-			"identifier": "fs:allow-exists",
-			"allow": [
-				{
-					"path": "$APPDATA/**"
-				}
-			]
-		},
-		{
-			"identifier": "fs:allow-appdata-write",
-			"allow": [
-				{
-					"path": "$APPDATA/**"
-				}
-			]
-		},
-		{
-			"identifier": "fs:allow-localdata-write",
-			"allow": [
-				{
-					"path": "$APPLOCALDATA/**"
-				}
-			]
-		},
-		{
-			"identifier": "fs:allow-mkdir",
-			"allow": [
-				{
-					"path": "$APPLOCALDATA/**"
-				}
-			]
-		},
-		"shell:default",
-		{
-			"identifier": "shell:allow-execute",
-			"allow": [
-				{
-					"name": "hide_folders",
-					"cmd": "sh",
-					"args": [
-						"-c",
-						{
-							"validator": "\\S+"
-						}
-					]
-				}
-			]
-		},
-		"sql:default",
-		"sql:allow-load",
-		"sql:allow-execute",
-		"sql:allow-select",
-		"sql:allow-close"
-	]
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Capability for the main window",
+  "windows": [
+    "main"
+  ],
+  "permissions": [
+    "core:default",
+    "opener:default",
+    "fs:default",
+    {
+      "identifier": "fs:allow-exists",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-appdata-write",
+      "allow": [
+        {
+          "path": "$APPDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-localdata-write",
+      "allow": [
+        {
+          "path": "$APPLOCALDATA/**"
+        }
+      ]
+    },
+    {
+      "identifier": "fs:allow-mkdir",
+      "allow": [
+        {
+          "path": "$APPLOCALDATA/**"
+        }
+      ]
+    },
+    "shell:default",
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        {
+          "name": "hide_folders",
+          "cmd": "sh",
+          "args": [
+            "-c",
+            {
+              "validator": "\\S+"
+            }
+          ]
+        }
+      ]
+    },
+    "sql:default",
+    "sql:allow-load",
+    "sql:allow-execute",
+    "sql:allow-select",
+    "sql:allow-close",
+    "os:default"
+  ]
 }
