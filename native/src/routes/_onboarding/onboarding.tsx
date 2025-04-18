@@ -1,4 +1,4 @@
-import { ElementType } from "react";
+import { ElementType, useEffect } from "react";
 import { ViewTransitionProvider } from "@/shared/providers/viewTransitionProvider";
 import { createFileRoute } from "@tanstack/react-router";
 import { CombinedOnboardingViews } from "@/pages/onboarding/types";
@@ -43,6 +43,10 @@ export const Route = createFileRoute("/_onboarding/onboarding")({
 });
 
 function RouteComponent() {
+	useEffect(() => {
+		console.log("hi");
+	}, []);
+
 	return (
 		<div className="absolute h-screen w-screen flex flex-col">
 			<div className=" sm:mx-auto sm:w-full sm:max-w-sm h-full">

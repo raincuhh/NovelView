@@ -10,6 +10,7 @@ import {
 	DATA_FOLDER,
 	BACKUPS_FOLDER,
 	LOCAL_APPDATA,
+	BOOKS_FOLDER,
 } from "../../consts";
 import { hideFileOrFolder } from "../../lib/utils";
 import { appLocalDataDir, join } from "@tauri-apps/api/path";
@@ -24,6 +25,7 @@ export default function SetupAppdata() {
 			LOGS_FOLDER,
 			DATA_FOLDER,
 			BACKUPS_FOLDER,
+			BOOKS_FOLDER,
 		];
 
 		const setupFolders = async (): Promise<boolean> => {
@@ -34,6 +36,7 @@ export default function SetupAppdata() {
 
 				if (!existsAlready) {
 					await mkdir(folder, { baseDir: LOCAL_APPDATA });
+					console.log(folder);
 					// created.push(folder);
 				}
 			}

@@ -10,7 +10,7 @@ export default function HomeNavbar() {
 			<div className="relative">
 				<div className="absolute inset-0 bg-primary/80 backdrop-blur-md z-[-1]"></div>
 
-				<div className="flex px-4 py-3 gap-4 h-full w-full flex-nowrap max-w-full relative z-10">
+				<div className="flex px-4 py-3 gap-4 h-full w-full relative z-10">
 					{isMobile ? (
 						<Avatar
 							className="w-9 h-9"
@@ -19,7 +19,7 @@ export default function HomeNavbar() {
 							}}
 						/>
 					) : null}
-					<div className="flex items-center text-lg">
+					<div className="flex items-center text-lg h-full">
 						<WelcomeUserMessage />
 					</div>
 				</div>

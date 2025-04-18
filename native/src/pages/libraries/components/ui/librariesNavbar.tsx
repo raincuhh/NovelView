@@ -18,8 +18,8 @@ export default function LibrariesNavbar() {
 							}}
 						/>
 					) : null}
-					<div className="flex gap-2 h-full flex-nowrap overflow-y-hidden overflow-x-scroll hide-scrollbar items-center justify-center">
-						<h1 className="font-bold text-2xl">Your Libraries</h1>
+					<div className="flex h-full items-center">
+						<h1 className="font-bold text-lg">Your Libraries</h1>
 					</div>
 				</div>
 			</div>

@@ -161,16 +161,8 @@ export class SupabaseConnector
 
 			await transaction.complete();
 		} catch (ex: any) {
-			console.debug(ex);
+			console.error("Error occurred during transaction:", JSON.stringify(lastOp), JSON.stringify(ex));
 			if (typeof ex.code == "string" && FATAL_RESPONSE_CODES.some((regex) => regex.test(ex.code))) {
-				/**
-				 * Instead of blocking the queue with these errors,
-				 * discard the (rest of the) transaction.
-				 *
-				 * Note that these errors typically indicate a bug in the application.
-				 * If protecting against data loss is important, save the failing records
-				 * elsewhere instead of discarding, and/or notify the user.
-				 */
 				console.error("Data upload error - discarding:", lastOp, ex);
 				await transaction.complete();
 			} else {

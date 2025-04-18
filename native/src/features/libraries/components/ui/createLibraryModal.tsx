@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
-import { Modal, ModalControl } from "@/features/modal/components/ui/modal";
+import { Modal, ModalControl } from "@/features/modal/components/ui/modalOld";
 import ModalBackground from "@/features/modal/components/ui/modalBackground";
 import { Form, FormControl, FormItem, FormLabel, FormMessage } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
@@ -28,6 +28,7 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 	const [error, setError] = useState<string | null>(null);
 	const [isValid, setIsValid] = useState<boolean>(false);
 	const [synced, setSynced] = useState<boolean>(false);
+	const [submitting, setSubmitting] = useState<boolean>(false);
 
 	const queryClient = useQueryClient();
 
@@ -46,6 +47,8 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement | HTMLInputElement>) => {
 		e.preventDefault();
 
+		setSubmitting(true);
+
 		const result = libraryCreateFormSchema.safeParse({
 			name: libraryName,
 			file: image,
@@ -55,10 +58,10 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 		if (!result.success) {
 			const issues = result.error.flatten().fieldErrors;
 			setError(issues.name?.[0] ?? null);
+			setSubmitting(false);
 			return;
 		}
-		onClose();
-		console.log("Creating library with:", { name: libraryName, image, synced, userId });
+
 		if (userId) {
 			try {
 				await createLibrary({
@@ -69,10 +72,14 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 				});
 
 				queryClient.invalidateQueries({ queryKey: ["mostInteractedLibraries", userId] });
+
+				onClose();
 			} catch (err) {
 				console.error("Failed to create library:", err);
 			}
 		}
+
+		setSubmitting(false);
 	};
 
 	return (
@@ -132,17 +139,17 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 						</FormItem>
 					</div>
 					<ModalControl className="flex justify-center w-full gap-4">
-						<Button variant="outline" rounded="full" onClick={() => onClose()}>
+						<Button variant="outline" rounded="full" onClick={() => onClose()} disabled={submitting}>
 							Cancel
 						</Button>
 						<Button
 							variant="accent"
 							rounded="full"
 							className="text-normal"
-							disabled={!isValid}
+							disabled={!isValid || submitting}
 							type="submit"
 						>
-							Create
+							{submitting ? "Creating..." : "Create"}
 						</Button>
 					</ModalControl>
 				</Form>

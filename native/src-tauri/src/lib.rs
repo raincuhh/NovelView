@@ -5,16 +5,16 @@ mod commands;
 //     run_impl()
 // }
 
-#[cfg(mobile)]
+// #[cfg(mobile)]
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     run_impl();
 }
 
-#[cfg(not(mobile))]
-pub fn run() {
-    run_impl();
-}
+// #[cfg(not(mobile))]
+// pub fn run() {
+//     run_impl();
+// }
 
 fn run_impl() {
     tauri::Builder::default()

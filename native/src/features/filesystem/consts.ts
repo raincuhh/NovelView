@@ -7,6 +7,7 @@ export const TEMP_FOLDER = "temp";
 export const LOGS_FOLDER = "logs";
 export const DATA_FOLDER = "data";
 export const BACKUPS_FOLDER = "backups";
+export const BOOKS_FOLDER = "books";
 
 export enum LogSeverity {
 	normal,
