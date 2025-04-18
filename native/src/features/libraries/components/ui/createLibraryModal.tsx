@@ -70,8 +70,16 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 					type: synced ? "sync" : "local",
 					userId: userId,
 				});
+				console.log("creating library with: ", {
+					libraryName,
+					image,
+					type: synced ? "sync" : "local",
+					userId,
+				});
 
 				queryClient.invalidateQueries({ queryKey: ["mostInteractedLibraries", userId] });
+				queryClient.invalidateQueries({ queryKey: ["libraries", userId] });
+				queryClient.invalidateQueries({ queryKey: ["library", userId] });
 
 				onClose();
 			} catch (err) {

@@ -8,10 +8,10 @@ import { useHistoryStore } from "@/shared/stores/historyStore";
 
 export default function MobileNavigationButtons() {
 	const router = useRouter();
-	const { navigateTo, goBack, goForward, currentIndex, historyStack } = useHistoryStore();
+	const { navigateTo } = useHistoryStore(); // goBack, goForward, currentIndex, historyStack
 
-	const canGoBack = currentIndex > 0;
-	const canGoForward = currentIndex < historyStack.length - 1;
+	// const canGoBack = currentIndex > 0;
+	// const canGoForward = currentIndex < historyStack.length - 1;
 
 	const buttons = [
 		{
@@ -26,16 +26,16 @@ export default function MobileNavigationButtons() {
 			onclick: () => navigateTo("/home"),
 			to: "/home",
 		},
-		{
-			key: "back",
-			icon: <Icon.chevronLeft className={cn("h-7 w-7", canGoBack ? "fill-accent" : "fill-faint")} />,
-			onclick: goBack,
-		},
-		{
-			key: "forward",
-			icon: <Icon.chevronRight className={cn("h-7 w-7", canGoForward ? "fill-accent" : "fill-faint")} />,
-			onclick: goForward,
-		},
+		// {
+		// 	key: "back",
+		// 	icon: <Icon.chevronLeft className={cn("h-7 w-7", canGoBack ? "fill-accent" : "fill-faint")} />,
+		// 	onclick: goBack,
+		// },
+		// {
+		// 	key: "forward",
+		// 	icon: <Icon.chevronRight className={cn("h-7 w-7", canGoForward ? "fill-accent" : "fill-faint")} />,
+		// 	onclick: goForward,
+		// },
 		{
 			key: "search",
 			icon: (() => {
@@ -64,7 +64,7 @@ export default function MobileNavigationButtons() {
 	];
 
 	return (
-		<div className="flex w-full px-4 pt-4 pb-4 justify-between">
+		<div className="flex w-full px-8 pt-4 pb-2 justify-between">
 			<RenderList
 				data={buttons}
 				render={(item, i) => (

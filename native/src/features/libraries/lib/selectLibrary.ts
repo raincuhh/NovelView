@@ -3,15 +3,19 @@ import { localDb, powersyncDb } from "@/shared/providers/systemProvider";
 import { MostInteractedLibrary } from "../types";
 
 export async function getCombinedLibraries(userId: string): Promise<Library[]> {
-	const powersyncLibraries = await powersyncDb.execute(`SELECT * FROM libraries WHERE user_id = ?`, [
-		userId,
+	// const powersyncLibraries = await powersyncDb.execute(`SELECT * FROM libraries WHERE user_id = ?`, [
+	// 	userId,
+	// ]);
+	// const localLibraries = await localDb.select<Library[]>(`SELECT * FROM libraries WHERE user_id = ?`, [
+	// 	userId,
+	// ]);
+	// return [...(localLibraries ?? []), ...(powersyncLibraries.rows?._array ?? [])];
+	const [local, powersync] = await Promise.all([
+		localDb.select<Library[]>(`SELECT * FROM libraries WHERE user_id = ?`, [userId]),
+		powersyncDb.execute(`SELECT * FROM libraries WHERE user_id = ?`, [userId]),
 	]);
 
-	const localLibraries = await localDb.select<Library[]>(`SELECT * FROM libraries WHERE user_id = ?`, [
-		userId,
-	]);
-
-	return [...(localLibraries ?? []), ...(powersyncLibraries.rows?._array ?? [])];
+	return [...(local ?? []), ...(powersync.rows?._array ?? [])];
 }
 
 export async function getCombinedMostInteractedLibraries(userId: string): Promise<MostInteractedLibrary[]> {

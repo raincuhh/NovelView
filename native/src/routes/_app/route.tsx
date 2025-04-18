@@ -1,10 +1,12 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 // import { supabase } from "@/shared/providers/systemProvider";
 import { useMediaQuery } from "react-responsive";
 import Titlebar from "@/widgets/desktop/titlebar/components/ui/titlebar";
 import MobileNavigation from "@/widgets/mobile/mobileNav/components/ui/mobileNavigation";
 import DesktopLibraries from "@/widgets/desktop/desktopLibraries/components/ui/desktopLibraries";
 import { requireAuth } from "@/features/auth/lib/authGuard";
+import { useSupabase } from "@/shared/providers/systemProvider";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/_app")({
 	component: RouteComponent,
@@ -12,7 +14,23 @@ export const Route = createFileRoute("/_app")({
 });
 
 function RouteComponent() {
+	const supabase = useSupabase();
+	const navigate = useNavigate();
 	const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+
+	useEffect(() => {
+		const checkSession = async () => {
+			const session = await supabase?.getSession();
+			if (!session) {
+				navigate({
+					to: "/onboarding",
+					search: { redirect: window.location.href },
+					replace: true,
+				});
+			}
+		};
+		checkSession();
+	}, []);
 
 	return (
 		<div className="h-screen">

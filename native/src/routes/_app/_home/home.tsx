@@ -7,6 +7,9 @@ import Recents from "@/pages/home/components/ui/recents";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { getFirstLibrary } from "@/features/libraries/lib/selectLibrary";
+import InitUserTables from "@/features/auth/components/utils/initUserTables";
+import { useEffect } from "react";
+import { powersyncDb } from "@/shared/providers/systemProvider";
 
 // import { useEffect } from "react";
 // import { logParsedEpubContents } from "@/features/parsing/lib/utils";
@@ -22,7 +25,7 @@ function RouteComponent() {
 	const userId = useAuthStore((state) => state.user?.auth.id);
 
 	const { data: libraries, isLoading } = useQuery({
-		queryKey: ["libraries", userId],
+		queryKey: ["library", userId],
 		queryFn: async () => {
 			if (!userId) throw new Error("User ID is missing");
 			return getFirstLibrary(userId);
@@ -30,7 +33,11 @@ function RouteComponent() {
 		enabled: !!userId,
 	});
 
-	const hasLibraries = libraries !== null;
+	const hasLibraries = !!libraries;
+
+	useEffect(() => {
+		console.log("libraries: ", libraries);
+	}, [libraries]);
 
 	// useEffect(() => {
 	// 	const examplePath = TEST_EPUB_KTS_FILE_NAME;
@@ -50,6 +57,7 @@ function RouteComponent() {
 
 	return (
 		<div className="flex flex-col h-full">
+			<InitUserTables />
 			<div className="flex flex-col relative h-full pt-12">
 				<HomeNavbar />
 				<div className="flex flex-col mt-2 h-full">

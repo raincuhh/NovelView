@@ -4,7 +4,7 @@ import OnboardingViewContainer from "@/pages/onboarding/components/ui/onboarding
 import { Form, FormControl, FormItem, FormLabel, FormMessage } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
-import { powersyncDb, useSupabase } from "@/shared/providers/systemProvider";
+import { useSupabase } from "@/shared/providers/systemProvider";
 import { useNavigate } from "@tanstack/react-router";
 import { CombinedOnboardingViews } from "@/pages/onboarding/types";
 import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
@@ -63,49 +63,57 @@ export default function LoginForm() {
 			const userId = session.user.id;
 			console.log("Logged in as:", userId);
 
-			await powersyncDb.writeTransaction(async (tx) => {
-				const userSettingsExisted = await tx.getOptional(
-					"SELECT * FROM user_settings WHERE user_id = ?",
-					[userId]
-				);
-
-				const userProfileExisted = await tx.getOptional("SELECT * FROM profiles WHERE user_id = ?", [
-					userId,
-				]);
-
-				if (!userSettingsExisted) {
-					await tx.execute(
-						`INSERT INTO user_settings (
-								id,
-								user_id,
-								onboarding_completed,
-								app_theme,
-								app_accent,
-								font_size,
-								language,
-								notifications_enabled,
-								created_at,
-								updated_at
-						  ) VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, datetime(), datetime())`,
-						[userId, true, "default", "", 14, "en", true]
-					);
-					// console.log("seeded local user_settings row for:", userId);
-				}
-
-				if (!userProfileExisted) {
-					await tx.execute(
-						`INSERT INTO profiles (
-								id,
-								user_id,
-								username,
-								created_at,
-								updated_at
-						  ) VALUES (uuid(), ?, ?, datetime(), datetime())`,
-						[userId, session.user.email]
-					);
-					console.log("Seeded local profiles row for:", userId);
-				}
-			});
+			// const { data: existingRemoteProfile, error: profileError } = await supabase?.client
+			// 	.from("profiles")
+			// 	.select("id")
+			// 	.eq("user_id", userId)
+			// 	.single();
+			//
+			// const remoteProfileExists = !!existingRemoteProfile;
+			// if (profileError && profileError.code !== "PGRST116") {
+			// 	console.error("Error checking remote profile:", profileError);
+			// }
+			//
+			// await powersyncDb.writeTransaction(async (tx) => {
+			// const userSettingsExisted = await tx.getOptional(
+			// 	"SELECT * FROM user_settings WHERE user_id = ?",
+			// 	[userId]
+			// );
+			// const userProfileExisted = await tx.getOptional("SELECT * FROM profiles WHERE user_id = ?", [
+			// 	userId,
+			// ]);
+			// if (!userSettingsExisted) {
+			// 	await tx.execute(
+			// 		`INSERT INTO user_settings (
+			// 				id,
+			// 				user_id,
+			// 				onboarding_completed,
+			// 				app_theme,
+			// 				app_accent,
+			// 				font_size,
+			// 				language,
+			// 				notifications_enabled,
+			// 				created_at,
+			// 				updated_at
+			// 		  ) VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, datetime(), datetime())`,
+			// 		[userId, true, "default", "", 14, "en", true]
+			// 	);
+			// 	// console.log("seeded local user_settings row for:", userId);
+			// }
+			// if (!userProfileExisted) {
+			// 	await tx.execute(
+			// 		`INSERT INTO profiles (
+			// 				id,
+			// 				user_id,
+			// 				username,
+			// 				created_at,
+			// 				updated_at
+			// 		  ) VALUES (uuid(), ?, ?, datetime(), datetime())`,
+			// 		[userId, session.user.email]
+			// 	);
+			// 	console.log("Seeded local profiles row for:", userId);
+			// }
+			// });
 
 			navigate({ to: "/home" });
 		} catch (err: any) {

@@ -14,6 +14,7 @@ import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
 export default function RegisterFinish() {
 	const { viewSwitcherNavigate } = useViewTransition<CombinedOnboardingViews>();
 	const { formData } = useRegisterFormStore();
+	// const navigate = useNavigate();
 
 	const [isSticky, setIsSticky] = useState<boolean>(true);
 
@@ -45,6 +46,8 @@ export default function RegisterFinish() {
 
 			if (error) throw error;
 
+			console.log("signUp response:", data);
+
 			if (data.user) {
 				const user = data.user;
 
@@ -62,6 +65,7 @@ export default function RegisterFinish() {
 						) VALUES (uuid(), ?, ?, ?, ?, datetime(), datetime(), ?)`,
 						[user.id, formData.username, formData.gender, formData.DOB, null]
 					);
+					console.log("Inserted into profiles");
 
 					tx.execute(
 						`INSERT INTO user_settings (
@@ -78,10 +82,11 @@ export default function RegisterFinish() {
 						  ) VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, datetime(), datetime())`,
 						[user.id, true, "default", "default", 14, "en", true]
 					);
+					console.log("Inserted into user_settings");
 				});
 			}
 
-			viewSwitcherNavigate(CombinedOnboardingViews.registerVerifyEmail);
+			viewSwitcherNavigate(CombinedOnboardingViews.loginForm);
 		} catch (err: any) {
 			console.error("Registration failed: ", err);
 		}

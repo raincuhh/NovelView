@@ -7,9 +7,18 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import AppProvider from "@/shared/providers/appProvider";
 import ModalRoot from "@/features/modal/components/ui/modalRoot";
 import NotificationRoot from "@/features/notifications/components/ui/NotificationRoot";
+// import { ErrorBoundary } from "react-error-boundary";
+import { DefaultCatchBoundary } from "@/shared/components/ui/DefaultCatchBoundary";
 
 export const Route = createRootRoute({
 	component: RootComponent,
+	errorComponent: (props) => {
+		return (
+			<RootDocument>
+				<DefaultCatchBoundary {...props} />
+			</RootDocument>
+		);
+	},
 });
 
 function RootComponent() {

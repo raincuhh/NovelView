@@ -7,20 +7,18 @@ export default function RegisterVerifyEmail() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		let interval: NodeJS.Timeout;
-
-		const checkConfirmation = async () => {
-			const { data } = await supabase.client.auth.getUser();
-			if (data.user?.email_confirmed_at) {
-				clearInterval(interval);
+		const {
+			data: { subscription },
+		} = supabase.client.auth.onAuthStateChange(async (_, session) => {
+			console.log("verifyEmail checks: ", session?.user);
+			if (session?.user?.email_confirmed_at) {
 				navigate({ to: "/home" });
 			}
+		});
+
+		return () => {
+			subscription.unsubscribe();
 		};
-
-		checkConfirmation();
-		interval = setInterval(checkConfirmation, 4000);
-
-		return () => clearInterval(interval);
 	}, []);
 
 	return (

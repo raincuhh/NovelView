@@ -29,12 +29,20 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
 	},
 
 	init: async () => {
+		console.log("authStore init");
 		set({ loading: true });
+
+		supabase.client.auth.onAuthStateChange((_event, session) => {
+			console.log("Auth event:", _event);
+			get().setSession(session);
+		});
+
 		try {
 			if (!supabase) throw new Error("Supabase not initialized yet");
 
 			const session = await supabase.getSession();
 			if (session) {
+				console.log("refreshing user");
 				set({ session });
 				await get().refreshUser();
 			}
@@ -65,6 +73,8 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
 				},
 				loading: false,
 			});
+
+			console.log("user: ", get().user);
 		} else {
 			set({ user: null, loading: false });
 		}

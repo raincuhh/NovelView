@@ -31,12 +31,12 @@ const SystemProvider = ({ children }: { children: ReactNode }) => {
 
 		const l = connector.registerListener({
 			initialized: () => {
-				// console.log("Connector Initialized");
+				console.log("Connector Initialized");
 			},
 			sessionStarted: () => {
 				powerSync
 					.connect(connector, { connectionMethod: SyncStreamConnectionMethod.WEB_SOCKET })
-					// .then(() => console.log("Successfully connected"))
+					.then(() => console.log("Successfully connected"))
 					.catch((err: any) => {
 						console.error("Error connecting to PowerSync:", err);
 
