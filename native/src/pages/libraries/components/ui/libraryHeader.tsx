@@ -1,17 +1,30 @@
+import { useLibraryProvider } from "@/features/libraries/libraryProvider";
 import LibraryHeaderCover from "./libraryHeaderCover";
+import ShowMore from "@/shared/components/ui/showMore";
 
 type LibraryheaderProps = {
 	coverPath: string;
 };
 
 export default function LibraryHeader({ coverPath }: LibraryheaderProps) {
+	const { library } = useLibraryProvider();
+
 	return (
 		<div className="min-h-128 md:min-h-86 w-full">
 			<div className="flex flex-col gap-2 h-full">
-				<div>search</div>
 				<div className="flex flex-col md:flex-row">
 					<LibraryHeaderCover coverPath={coverPath} />
-					<div></div>
+					<div className="mt-6 px-4 flex flex-col">
+						<div className="flex w-full">
+							<h1 className="font-bold text-xl flex-grow truncate">{library?.name}</h1>
+							<div></div>
+						</div>
+						{library?.description ? (
+							<div className="flex w-full">
+								<ShowMore text={library?.description ?? ""} maxLength={112} />
+							</div>
+						) : null}
+					</div>
 				</div>
 			</div>
 		</div>
