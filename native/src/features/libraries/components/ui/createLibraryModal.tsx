@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
-import { Modal, ModalControl } from "@/features/modal/components/ui/modalOld";
+import { Modal, ModalControl } from "@/features/modal/components/ui/modal";
 import ModalBackground from "@/features/modal/components/ui/modalBackground";
 import { Form, FormControl, FormItem, FormLabel, FormMessage } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
