@@ -37,6 +37,7 @@
 		"react-loading-skeleton": "^3.5.0",
 		"react-responsive": "^10.0.1",
 		"react-scroll": "^1.9.3",
+		"react-spring-bottom-sheet": "3.5.0-alpha.0",
 		"zod": "^3.24.2",
 		"zustand": "^5.0.3"
 	},

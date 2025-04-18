@@ -27,7 +27,7 @@ const MobileNavigationRecentRead = forwardRef<
 
 	return (
 		<Comp {...(to ? { to } : {})} className="relative flex w-full h-17" ref={ref} {...props}>
-			<div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-center mx-2">
+			<div className="absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-center mx-3">
 				<div className="relative flex w-full h-full items-center gap-4 px-2 py-2 border border-border hover:border-border-hover rounded-md select-none">
 					<div className="absolute inset-0 z-0 overflow-hidden">
 						<img
