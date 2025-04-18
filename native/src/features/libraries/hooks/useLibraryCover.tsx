@@ -12,15 +12,7 @@ export function useLibraryCover(libraryId: string, fallbackUrl?: string, retryDe
 			setLoading(true);
 			try {
 				const path = await getLibraryCoverPath(libraryId, fallbackUrl);
-
 				setCoverPath(path);
-
-				// if (!path && retryDelay > 0) {
-				// 	timeout = setTimeout(async () => {
-				// 		const retryPath = await getLibraryCoverPath(libraryId);
-				// 		if (retryPath) setCoverPath(retryPath);
-				// 	}, retryDelay);
-				// }
 			} catch (err: any) {
 				console.error("Error loading cover: ", err);
 			} finally {

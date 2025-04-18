@@ -10,7 +10,7 @@ export default function LibraryHeader({ coverPath }: LibraryheaderProps) {
 	const { library } = useLibraryProvider();
 
 	return (
-		<div className="min-h-128 md:min-h-86 w-full">
+		<div className="w-full">
 			<div className="flex flex-col gap-2 h-full">
 				<div className="flex flex-col md:flex-row">
 					<LibraryHeaderCover coverPath={coverPath} />

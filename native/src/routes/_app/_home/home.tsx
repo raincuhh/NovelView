@@ -2,14 +2,14 @@ import { useAuthStore } from "@/features/auth/authStore";
 import EmptyLibraries from "@/features/libraries/components/ui/emptyLibraries";
 import ActivityCalendar from "@/pages/home/components/ui/activityCalendar";
 import HomeNavbar from "@/pages/home/components/ui/homeNavbar";
-import QuickAccess from "@/pages/home/components/ui/quickAccess";
 import Recents from "@/pages/home/components/ui/recents";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { getFirstLibrary } from "@/features/libraries/lib/selectLibrary";
 import InitUserTables from "@/features/auth/components/utils/initUserTables";
 import { useEffect } from "react";
-import { powersyncDb } from "@/shared/providers/systemProvider";
+import QuickAccessErrorBoundary from "@/pages/home/components/ui/quickAccessErrorBoundary";
+// import { powersyncDb } from "@/shared/providers/systemProvider";
 
 // import { useEffect } from "react";
 // import { logParsedEpubContents } from "@/features/parsing/lib/utils";
@@ -62,10 +62,10 @@ function RouteComponent() {
 				<HomeNavbar />
 				<div className="flex flex-col mt-2 h-full">
 					{isLoading ? (
-						<div>loading...</div>
+						<div></div>
 					) : hasLibraries ? (
 						<div className="flex flex-col gap-8 h-[100dvh]">
-							<QuickAccess />
+							<QuickAccessErrorBoundary />
 							<Recents />
 							<ActivityCalendar />
 						</div>

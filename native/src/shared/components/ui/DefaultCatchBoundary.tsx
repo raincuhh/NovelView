@@ -1,46 +1,31 @@
-import { ErrorComponent, Link, rootRouteId, useMatch, useRouter } from "@tanstack/react-router";
+import { ErrorComponent, useRouter } from "@tanstack/react-router";
 import type { ErrorComponentProps } from "@tanstack/react-router";
+import { Button } from "./button";
 
 export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
 	const router = useRouter();
-	const isRoot = useMatch({
-		strict: false,
-		select: (state) => state.id === rootRouteId,
-	});
 
 	console.error(error);
 
 	return (
-		<div className="min-w-0 flex-1 p-4 flex flex-col items-center justify-center gap-6">
-			<ErrorComponent error={error} />
-			<div className="flex gap-2 items-center flex-wrap">
-				<button
-					onClick={() => {
-						router.invalidate();
-					}}
-					className={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}
-				>
-					Try Again
-				</button>
-				{isRoot ? (
-					<Link
-						to="/"
-						className={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}
-					>
-						Home
-					</Link>
-				) : (
-					<Link
-						to="/"
-						className={`px-2 py-1 bg-gray-600 dark:bg-gray-700 rounded text-white uppercase font-extrabold`}
-						onClick={(e) => {
-							e.preventDefault();
-							window.history.back();
+		<div className="h-screen flex w-full">
+			<div className="flex w-full h-full justify-center items-center flex-col">
+				<ErrorComponent error={error} />
+				<div className="flex flex-col w-sm mx-auto px-4 items-center gap-2">
+					<div className="flex flex-col items-center">
+						<h1 className="font-bold text-xl">Woops!</h1>
+						<h1 className="font-bold text-xl">Something went wrong.</h1>
+					</div>
+					<Button
+						variant="link"
+						onClick={() => {
+							router.invalidate();
 						}}
+						className=" text-muted"
 					>
-						Go Back
-					</Link>
-				)}
+						Try Again
+					</Button>
+				</div>
 			</div>
 		</div>
 	);

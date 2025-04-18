@@ -50,6 +50,9 @@
 	--color-border: var(--color-base-30);
 	--color-border-hover: var(--color-base-35);
 	--color-border-focus: var(--color-base-40);
+	--color-border-danger: var(--color-danger-700);
+	--color-border-danger-hover: var(--color-danger-600);
+	--color-border-danger-focus: var(--color-danger-500);
 
 	--color-link-color: var(--color-text-accent);
 	--color-link-color-hover: var(--color-text-accent-hover);

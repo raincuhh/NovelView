@@ -1,8 +1,8 @@
 import { useAuthStore } from "@/features/auth/authStore";
-import LibraryBackground from "@/pages/libraries/components/ui/libraryBackground";
+import LibraryBackground from "@/pages/library/components/ui/libraryBackground";
 import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
-import LibraryHeader from "@/pages/libraries/components/ui/libraryHeader";
-import LibraryNavbar from "@/pages/libraries/components/ui/libraryNavbar";
+import LibraryHeader from "@/pages/library/components/ui/libraryHeader";
+import LibraryNavbar from "@/pages/library/components/ui/libraryNavbar";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, useParams } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";

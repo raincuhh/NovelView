@@ -9,26 +9,30 @@ type QuickAccessItemProps = {
 };
 
 export default function QuickAccessItem({ data, coverPath }: QuickAccessItemProps) {
+	// const  {coverPath}  = useLibraryCover(data.id);
 	const hasImage = Boolean(coverPath);
+
 	return (
-		<LibraryLink libraryId={data.id} className="flex relative w-full">
-			<div className="w-full h-full bg-secondary hover:bg-secondary-alt transition-discrete ease-in-out duration-100 rounded-sm">
-				<div className="flex w-full h-full">
-					<Cover
-						className="h-12 min-w-12 max-w-12 mr-2"
-						style={{ boxShadow: "5px 0px 15px rgba(0, 0, 0, 0.35)" }}
-					>
-						{hasImage ? (
-							<CoverImage src={coverPath!} alt="cover" className="rounded-l-sm rounded-r-none" />
-						) : (
-							<PlaceholderLibraryCover />
-						)}
-					</Cover>
-					<div className="flex w-full h-full items-center pr-2 overflow-hidden">
-						<div className="select-none text-sm font-extrabold flex-grow truncate">{data.name}</div>
+		<li>
+			<LibraryLink libraryId={data.id} className="flex relative w-full h-full">
+				<div className="w-full h-full bg-secondary hover:bg-secondary-alt transition-discrete ease-in-out duration-100 rounded-sm">
+					<div className="flex w-full h-full">
+						<Cover
+							className="h-12 min-w-12 max-w-12 mr-2"
+							style={{ boxShadow: "5px 0px 15px rgba(0, 0, 0, 0.35)" }}
+						>
+							{hasImage ? (
+								<CoverImage src={coverPath!} alt="cover" className="rounded-l-sm rounded-r-none" />
+							) : (
+								<PlaceholderLibraryCover />
+							)}
+						</Cover>
+						<div className="flex w-full h-full items-center pr-2 overflow-hidden">
+							<div className="select-none text-sm font-extrabold flex-grow truncate">{data.name}</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</LibraryLink>
+			</LibraryLink>
+		</li>
 	);
 }
