@@ -6,11 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { getFirstLibrary } from "@/features/libraries/lib/selectLibrary";
 import InitUserTables from "@/features/auth/components/utils/initUserTables";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import QuickAccessErrorBoundary from "@/pages/home/components/ui/quickAccessErrorBoundary";
 import RecentsErrorBoundary from "@/pages/home/components/ui/recentsErrorBoundary";
-// import { powersyncDb } from "@/shared/providers/systemProvider";
+import { Drawer } from "@/shared/components/ui/drawer";
 
+// import { powersyncDb } from "@/shared/providers/systemProvider";
 // import { useEffect } from "react";
 // import { logParsedEpubContents } from "@/features/parsing/lib/utils";
 // import { TEST_EPUB_KTS_FILE_NAME } from "@/shared/lib/consts";
@@ -55,6 +56,9 @@ function RouteComponent() {
 	// 	fetchEpub();
 	// }, []);
 
+	const [leftOpen, setLeftOpen] = useState<boolean>(false);
+	// const [rightOpen, setRightOpen] = useState<boolean>(false);
+
 	return (
 		<div className="flex flex-col h-full ">
 			<InitUserTables />
@@ -68,6 +72,15 @@ function RouteComponent() {
 							<QuickAccessErrorBoundary />
 							<RecentsErrorBoundary />
 							<ActivityCalendar />
+							<div className="flex flex-col">
+								<h1 onClick={() => setLeftOpen(true)}>test</h1>
+								<Drawer side="left" isOpen={leftOpen} onClose={() => setLeftOpen(false)}>
+									<div className="p-4">Left Drawer Content</div>
+								</Drawer>
+								{/* <Drawer side="right" isOpen={rightOpen} onClose={() => setRightOpen(false)}>
+									<div className="p-4">Right Drawer Content</div>
+								</Drawer> */}
+							</div>
 							<div className="flex flex-col gap-1">
 								{Array.from({ length: 50 }, (_, i) => (
 									<div key={i} className="bg-accent hover:bg-primary-alt px-4 rounded-md">

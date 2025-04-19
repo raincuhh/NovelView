@@ -93,7 +93,7 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 	return (
 		<ModalBackground>
 			<Modal
-				className="border-none mx-0 h-full flex flex-col justify-center w-full pb-48"
+				className="border-none mx-0 h-full flex flex-col justify-top pt-18 w-full"
 				innerClassName="w-full mx-auto flex flex-col gap-4"
 			>
 				<Form onSubmit={handleSubmit}>

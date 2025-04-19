@@ -28,7 +28,7 @@ export default function LibrarySettings() {
 				open={open}
 				onDismiss={() => setOpen(false)}
 				className="default-bottom-sheet"
-				snapPoints={({ maxHeight }: { maxHeight: number }) => [maxHeight / 2, maxHeight]}
+				snapPoints={({ maxHeight }: { maxHeight: number }) => [maxHeight / 2, maxHeight * 0.92]}
 				defaultSnap={({ snapPoints }) => snapPoints[0]}
 			>
 				<p className="p-4 text-normal">bottom sheet as sidebar.</p>

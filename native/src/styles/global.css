@@ -214,7 +214,7 @@
 .default-scroll > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle {
 	background-color: var(--color-normal);
 	opacity: 0.4;
-	border: 5px solid transparent;
+	border: 4px solid transparent;
 	border-radius: 9999px;
 	box-shadow: 4px 0px 0px 4px rgba(var(--color-normal), 0.25) inset;
 	transition: background-color 0.2s ease, box-shadow 0.2s ease;
@@ -223,6 +223,6 @@
 .default-scroll > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle:hover {
 	background-color: var(--color-normal);
 	opacity: 0.4;
-	border: 5px solid transparent;
+	border: 4px solid transparent;
 	box-shadow: none;
 }

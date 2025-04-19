@@ -27,6 +27,7 @@
 		"@tauri-apps/plugin-os": "~2.2.1",
 		"@tauri-apps/plugin-shell": "~2.2.1",
 		"@tauri-apps/plugin-sql": "~2.2.0",
+		"@use-gesture/react": "^10.3.1",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"framer-motion": "^12.6.3",
