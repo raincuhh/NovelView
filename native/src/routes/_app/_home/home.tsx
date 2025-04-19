@@ -69,7 +69,7 @@ function RouteComponent() {
 		<div className="flex flex-col h-full ">
 			<InitUserTables />
 			<div className="flex flex-col relative h-full pt-12">
-				<HomeNavbar />
+				<HomeNavbar isLoading={isLoading} />
 				<div className="flex flex-col mt-2 h-full">
 					{isLoading ? (
 						<div></div>
