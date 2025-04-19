@@ -112,8 +112,8 @@
 	--color-success-600: hsl(141, 40%, 40%);
 	--color-success-500: hsl(141, 45%, 52%);
 
-	--rgb-none: oklch(0 0 0);
-	--rgb-full: oklch(100 0 0);
+	--color-rgb-none: oklch(0 0 0);
+	--color-rgb-full: oklch(100 0 0);
 
 	--titlebar-height: 36px;
 
@@ -158,6 +158,17 @@
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		-webkit-text-size-adjust: 100%;
+		overflow: overlay;
+		scrollbar-width: none;
+
+		-ms-overflow-style: none;
+		::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
+	body::-webkit-scrollbar {
+		display: none;
 	}
 }
 
@@ -180,20 +191,38 @@
 	color: var(--rgb-full);
 }
 
-.scrollbar-hidden {
+.hide-scrollbar {
 	scrollbar-width: none;
 	-ms-overflow-style: none;
-}
-
-.scrollbar-hidden::-webkit-scrollbar {
-	display: none;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
 	display: none;
 }
 
-.hide-scrollbar {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
+.default-bottom-sheet {
+	z-index: 50;
+	--rsbs-backdrop-bg: rgba(0, 0, 0, 0.6);
+	--rsbs-bg: var(--color-secondary);
+	--rsbs-handle-bg: var(--color-muted);
+	--rsbs-overlay-rounded: 1rem;
+	--rsbs-max-w: auto;
+	--rsbs-ml: env(safe-area-inset-left);
+	--rsbs-mr: env(safe-area-inset-right);
+}
+
+.default-scroll > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle {
+	background-color: var(--color-normal);
+	opacity: 0.4;
+	border: 5px solid transparent;
+	border-radius: 9999px;
+	box-shadow: 4px 0px 0px 4px rgba(var(--color-normal), 0.25) inset;
+	transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.default-scroll > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle:hover {
+	background-color: var(--color-normal);
+	opacity: 0.4;
+	border: 5px solid transparent;
+	box-shadow: none;
 }

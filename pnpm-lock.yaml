@@ -73,6 +73,15 @@ importers:
       i18next:
         specifier: ^24.2.3
         version: 24.2.3(typescript@5.6.3)
+      overlayscrollbars:
+        specifier: ^2.11.1
+        version: 2.11.1
+      overlayscrollbars-react:
+        specifier: ^0.5.6
+        version: 0.5.6(overlayscrollbars@2.11.1)(react@18.3.1)
+      postcss-custom-properties-fallback:
+        specifier: ^1.0.2
+        version: 1.0.2(postcss@8.5.3)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -88,9 +97,6 @@ importers:
       react-responsive:
         specifier: ^10.0.1
         version: 10.0.1(react@18.3.1)
-      react-scroll:
-        specifier: ^1.9.3
-        version: 1.9.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-spring-bottom-sheet:
         specifier: 3.5.0-alpha.0
         version: 3.5.0-alpha.0(@react-three/fiber@9.1.2(@types/react@18.3.20)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react-native@0.79.1(@babel/core@7.26.10)(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)(three@0.175.0))(@types/react@18.3.20)(konva@9.3.20)(react-dom@18.3.1(react@18.3.1))(react-konva@18.2.10(@types/react@18.3.20)(konva@9.3.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-native@0.79.1(@babel/core@7.26.10)(@types/react@18.3.20)(react@18.3.1))(react-zdog@1.2.2)(react@18.3.1)(three@0.175.0)(zdog@1.1.3)
@@ -2114,6 +2120,10 @@ packages:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
     engines: {node: '>=0.12.0'}
 
+  is-url-superb@4.0.0:
+    resolution: {integrity: sha512-GI+WjezhPPcbM+tqE9LnmsY5qqjwHzTvjJ36wxYX5ujNXefSUJ/T17r5bqDV8yLhcgB59KTPNOc9O9cmHTPWsA==}
+    engines: {node: '>=10'}
+
   is-wsl@2.2.0:
     resolution: {integrity: sha512-fKzAra0rGJUUBwGBgNkHZuToZcn+TtXHpeCgmkMJMMYx1sQDYaCSyjJBSCa2nH1DGm7s3n1oBnohoVTBaN7Lww==}
     engines: {node: '>=8'}
@@ -2494,6 +2504,15 @@ packages:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
 
+  overlayscrollbars-react@0.5.6:
+    resolution: {integrity: sha512-E5To04bL5brn9GVCZ36SnfGanxa2I2MDkWoa4Cjo5wol7l+diAgi4DBc983V7l2nOk/OLJ6Feg4kySspQEGDBw==}
+    peerDependencies:
+      overlayscrollbars: ^2.0.0
+      react: '>=16.8.0'
+
+  overlayscrollbars@2.11.1:
+    resolution: {integrity: sha512-kogaNaBTIizRenQ2GTzt2cpkEH9B0nUBXseRxqQblH/YicJ3TaWuvn8E5TXPPfJCVoHYSgBYZzzva40kCERKHg==}
+
   p-limit@2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
     engines: {node: '>=6'}
@@ -2553,8 +2572,19 @@ packages:
     resolution: {integrity: sha512-TfySrs/5nm8fQJDcBDuUng3VOUKsd7S+zqvbOTiGXHfxX4wK31ard+hoNuvkicM/2YFzlpDgABOevKSsB4G/FA==}
     engines: {node: '>= 6'}
 
+  postcss-custom-properties-fallback@1.0.2:
+    resolution: {integrity: sha512-UrPr99bo03c1iX4iqjBBYo3W+EsXfxrozp2LNvRN34Y95n/7R2RupcMhGlc+C/RQxknDXiP+bptyhmb8nFYzeQ==}
+    peerDependencies:
+      postcss: ^8.0.0
+
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
+
+  postcss-values-parser@6.0.2:
+    resolution: {integrity: sha512-YLJpK0N1brcNJrs9WatuJFtHaV9q5aAOj+S4DI5S7jgHlRfm0PIbDCAFRYMQD5SHq7Fy6xsDhyutgS0QOAs0qw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      postcss: ^8.2.9
 
   postcss@8.5.3:
     resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==}
@@ -2588,6 +2618,9 @@ packages:
 
   queue@6.0.2:
     resolution: {integrity: sha512-iHZWu+q3IdFZFX36ro/lKBkSvfkztY5Y7HMiPlOUjhupPcG2JMfst2KKEpu5XndviX/3UhFbRngUPNKtgvtZiA==}
+
+  quote-unquote@1.0.0:
+    resolution: {integrity: sha512-twwRO/ilhlG/FIgYeKGFqyHhoEhqgnKVkcmqMKi2r524gz3ZbDTcyFt38E9xjJI2vT+KbRNHVbnJ/e0I25Azwg==}
 
   range-parser@1.2.1:
     resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}
@@ -2661,12 +2694,6 @@ packages:
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8.0'
-
-  react-scroll@1.9.3:
-    resolution: {integrity: sha512-xv7FXqF3k63aSLNu4/NjFvRNI0ge7DmmmsbeGarP7LZVAlJMSjUuW3dTtLxp1Afijyv0lS2qwC0GiFHvx1KBHQ==}
-    peerDependencies:
-      react: ^15.5.4 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      react-dom: ^15.5.4 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   react-spring-bottom-sheet@3.5.0-alpha.0:
     resolution: {integrity: sha512-iCuv+qq/2kIHLs75Z/5Tgh9/tc0hklFn/CW6XDX0GA2IKqZP/kYky+/yN1BJCD74dtnL6Dx3p+Seu1ifVnf2xQ==}
@@ -5134,6 +5161,8 @@ snapshots:
 
   is-number@7.0.0: {}
 
+  is-url-superb@4.0.0: {}
+
   is-wsl@2.2.0:
     dependencies:
       is-docker: 2.2.1
@@ -5621,6 +5650,13 @@ snapshots:
       type-check: 0.4.0
       word-wrap: 1.2.5
 
+  overlayscrollbars-react@0.5.6(overlayscrollbars@2.11.1)(react@18.3.1):
+    dependencies:
+      overlayscrollbars: 2.11.1
+      react: 18.3.1
+
+  overlayscrollbars@2.11.1: {}
+
   p-limit@2.3.0:
     dependencies:
       p-try: 2.2.0
@@ -5664,7 +5700,20 @@ snapshots:
 
   pirates@4.0.7: {}
 
+  postcss-custom-properties-fallback@1.0.2(postcss@8.5.3):
+    dependencies:
+      postcss: 8.5.3
+      postcss-value-parser: 4.2.0
+      postcss-values-parser: 6.0.2(postcss@8.5.3)
+
   postcss-value-parser@4.2.0: {}
+
+  postcss-values-parser@6.0.2(postcss@8.5.3):
+    dependencies:
+      color-name: 1.1.4
+      is-url-superb: 4.0.0
+      postcss: 8.5.3
+      quote-unquote: 1.0.0
 
   postcss@8.5.3:
     dependencies:
@@ -5699,6 +5748,8 @@ snapshots:
   queue@6.0.2:
     dependencies:
       inherits: 2.0.4
+
+  quote-unquote@1.0.0: {}
 
   range-parser@1.2.1: {}
 
@@ -5814,13 +5865,6 @@ snapshots:
       prop-types: 15.8.1
       react: 18.3.1
       shallow-equal: 3.1.0
-
-  react-scroll@1.9.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      lodash.throttle: 4.1.1
-      prop-types: 15.8.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
 
   react-spring-bottom-sheet@3.5.0-alpha.0(@react-three/fiber@9.1.2(@types/react@18.3.20)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react-native@0.79.1(@babel/core@7.26.10)(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)(three@0.175.0))(@types/react@18.3.20)(konva@9.3.20)(react-dom@18.3.1(react@18.3.1))(react-konva@18.2.10(@types/react@18.3.20)(konva@9.3.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-native@0.79.1(@babel/core@7.26.10)(@types/react@18.3.20)(react@18.3.1))(react-zdog@1.2.2)(react@18.3.1)(three@0.175.0)(zdog@1.1.3):
     dependencies:

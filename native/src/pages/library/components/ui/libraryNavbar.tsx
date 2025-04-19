@@ -12,8 +12,6 @@ import Icon from "@/shared/components/ui/icon";
 import { cn } from "@/shared/lib/globalUtils";
 import { useHistoryStore } from "@/shared/stores/historyStore";
 import { useNavigate } from "@tanstack/react-router";
-
-import { BottomSheet } from "react-spring-bottom-sheet";
 import LibrarySettings from "./librarySettings";
 
 type LibraryNavbarProps = {
@@ -28,7 +26,7 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 	const canGoBack = currentIndex > 0;
 
 	return (
-		<div className="sticky top-0 z-20 w-full bg-transparent">
+		<div className="sticky top-0 z-1 w-full bg-transparent">
 			<div className="flex w-full h-16 items-center px-4 justify-between">
 				<div className="flex h-full items-center overflow-hidden">
 					<div

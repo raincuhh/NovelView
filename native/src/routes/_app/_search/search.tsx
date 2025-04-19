@@ -10,6 +10,7 @@ import {
 import useModalStore from "@/features/modal/modalStore";
 import { Button } from "@/shared/components/ui/button";
 import ModalBackground from "@/features/modal/components/ui/modalBackground";
+import ScrollContainer from "@/shared/components/ui/scrollContainer";
 
 export const Route = createFileRoute("/_app/_search/search")({
 	component: RouteComponent,
@@ -61,11 +62,20 @@ function RouteComponent() {
 	};
 
 	return (
-		<div className="flex gap-2 flex-col">
+		<div className="flex gap-2 flex-col overflow-hidden h-dvh relative">
 			<div>Hello "/_app/_search/search"!</div>
 			<Button variant="accent" rounded="full" onClick={handleOpenModal}>
 				test open modal
 			</Button>
+			<ScrollContainer className="">
+				<div className="flex flex-col">
+					{Array.from({ length: 50 }, (_, i) => (
+						<div key={i} className="bg-primary hover:bg-primary-alt px-4 rounded-md">
+							Item #{i + 1}
+						</div>
+					))}
+				</div>
+			</ScrollContainer>
 		</div>
 	);
 }

@@ -8,10 +8,7 @@ import { useHistoryStore } from "@/shared/stores/historyStore";
 
 export default function MobileNavigationButtons() {
 	const router = useRouter();
-	const { navigateTo } = useHistoryStore(); // goBack, goForward, currentIndex, historyStack
-
-	// const canGoBack = currentIndex > 0;
-	// const canGoForward = currentIndex < historyStack.length - 1;
+	const { navigateTo } = useHistoryStore();
 
 	const buttons = [
 		{
@@ -84,4 +81,3 @@ export default function MobileNavigationButtons() {
 		</div>
 	);
 }
-//TODO: turn this into a global provider (specifically the history nagivation part.)

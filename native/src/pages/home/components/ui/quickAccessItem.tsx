@@ -9,7 +9,6 @@ type QuickAccessItemProps = {
 };
 
 export default function QuickAccessItem({ data, coverPath }: QuickAccessItemProps) {
-	// const  {coverPath}  = useLibraryCover(data.id);
 	const hasImage = Boolean(coverPath);
 
 	return (

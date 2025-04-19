@@ -2,13 +2,13 @@ import { useAuthStore } from "@/features/auth/authStore";
 import EmptyLibraries from "@/features/libraries/components/ui/emptyLibraries";
 import ActivityCalendar from "@/pages/home/components/ui/activityCalendar";
 import HomeNavbar from "@/pages/home/components/ui/homeNavbar";
-import Recents from "@/pages/home/components/ui/recents";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { getFirstLibrary } from "@/features/libraries/lib/selectLibrary";
 import InitUserTables from "@/features/auth/components/utils/initUserTables";
 import { useEffect } from "react";
 import QuickAccessErrorBoundary from "@/pages/home/components/ui/quickAccessErrorBoundary";
+import RecentsErrorBoundary from "@/pages/home/components/ui/recentsErrorBoundary";
 // import { powersyncDb } from "@/shared/providers/systemProvider";
 
 // import { useEffect } from "react";
@@ -56,7 +56,7 @@ function RouteComponent() {
 	// }, []);
 
 	return (
-		<div className="flex flex-col h-full">
+		<div className="flex flex-col h-full ">
 			<InitUserTables />
 			<div className="flex flex-col relative h-full pt-12">
 				<HomeNavbar />
@@ -64,10 +64,17 @@ function RouteComponent() {
 					{isLoading ? (
 						<div></div>
 					) : hasLibraries ? (
-						<div className="flex flex-col gap-8 h-[100dvh]">
+						<div className="flex flex-col gap-8">
 							<QuickAccessErrorBoundary />
-							<Recents />
+							<RecentsErrorBoundary />
 							<ActivityCalendar />
+							<div className="flex flex-col gap-1">
+								{Array.from({ length: 50 }, (_, i) => (
+									<div key={i} className="bg-accent hover:bg-primary-alt px-4 rounded-md">
+										Item #{i + 1}
+									</div>
+								))}
+							</div>
 						</div>
 					) : (
 						<div className="px-4 flex flex-col justify-center h-full pb-48">

@@ -14,7 +14,7 @@ const WelcomeUserMessage = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHea
 
 		return (
 			<h1 ref={ref} className={cn(className)} {...props}>
-				Hello <span className="font-bold">{username}!</span>
+				Good evening <span className="font-extrabold">{username}!</span>
 			</h1>
 		);
 	}

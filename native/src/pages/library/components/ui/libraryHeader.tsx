@@ -24,6 +24,7 @@ export default function LibraryHeader({ coverPath }: LibraryheaderProps) {
 								<ShowMore text={library?.description ?? ""} maxLength={112} />
 							</div>
 						) : null}
+						<div className="mt-2 w-full"></div>
 					</div>
 				</div>
 			</div>

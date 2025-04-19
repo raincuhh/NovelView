@@ -1,12 +1,12 @@
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuShortcut,
-	DropdownMenuTrigger,
-} from "@/shared/components/ui/dropdown";
+// import {
+// 	DropdownMenu,
+// 	DropdownMenuContent,
+// 	DropdownMenuItem,
+// 	DropdownMenuLabel,
+// 	DropdownMenuSeparator,
+// 	DropdownMenuShortcut,
+// 	DropdownMenuTrigger,
+// } from "@/shared/components/ui/dropdown";
 import Icon from "@/shared/components/ui/icon";
 import { useEffect, useRef, useState } from "react";
 import { BottomSheet } from "react-spring-bottom-sheet";
@@ -27,10 +27,11 @@ export default function LibrarySettings() {
 			<BottomSheet
 				open={open}
 				onDismiss={() => setOpen(false)}
-				className="!z-[9999] bg-secondary"
+				className="default-bottom-sheet"
 				snapPoints={({ maxHeight }: { maxHeight: number }) => [maxHeight / 2, maxHeight]}
+				defaultSnap={({ snapPoints }) => snapPoints[0]}
 			>
-				<p className="p-4">bottom sheet as sidebar.</p>
+				<p className="p-4 text-normal">bottom sheet as sidebar.</p>
 			</BottomSheet>
 		</>
 	);
