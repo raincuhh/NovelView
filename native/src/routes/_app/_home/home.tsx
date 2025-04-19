@@ -57,7 +57,7 @@ function RouteComponent() {
 	// }, []);
 
 	const [leftOpen, setLeftOpen] = useState<boolean>(false);
-	// const [rightOpen, setRightOpen] = useState<boolean>(false);
+	const [rightOpen, setRightOpen] = useState<boolean>(false);
 
 	return (
 		<div className="flex flex-col h-full ">
@@ -73,13 +73,14 @@ function RouteComponent() {
 							<RecentsErrorBoundary />
 							<ActivityCalendar />
 							<div className="flex flex-col">
-								<h1 onClick={() => setLeftOpen(true)}>test</h1>
+								<h1 onClick={() => setLeftOpen(true)}>open left drawer</h1>
+								<h1 onClick={() => setRightOpen(true)}>open right drawer</h1>
 								<Drawer side="left" isOpen={leftOpen} onClose={() => setLeftOpen(false)}>
 									<div className="p-4">Left Drawer Content</div>
 								</Drawer>
-								{/* <Drawer side="right" isOpen={rightOpen} onClose={() => setRightOpen(false)}>
+								<Drawer side="right" isOpen={rightOpen} onClose={() => setRightOpen(false)}>
 									<div className="p-4">Right Drawer Content</div>
-								</Drawer> */}
+								</Drawer>
 							</div>
 							<div className="flex flex-col gap-1">
 								{Array.from({ length: 50 }, (_, i) => (
