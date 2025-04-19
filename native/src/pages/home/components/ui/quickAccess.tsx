@@ -4,11 +4,11 @@ import { useAuthStore } from "@/features/auth/authStore";
 import { useQuery } from "@powersync/tanstack-react-query";
 import Skeleton from "react-loading-skeleton";
 import { getCombinedMostInteractedLibraries } from "@/features/libraries/lib/selectLibrary";
-// import { MostInteractedLibrary } from "@/features/libraries/types";
 import { cn } from "@/shared/lib/globalUtils";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getLibraryCoverPath } from "@/features/libraries/libraryService";
 // import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
+// import { MostInteractedLibrary } from "@/features/libraries/types";
 
 export default function QuickAccess() {
 	const userId = useAuthStore((state) => state.user?.auth.id);

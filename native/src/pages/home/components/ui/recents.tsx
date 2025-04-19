@@ -1,7 +1,6 @@
 import { MOCK_BOOKS } from "@/features/books/const";
 import RenderList from "@/shared/components/utils/renderList";
 import { Book } from "@/shared/lib/appSchema";
-import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import RecentsItem from "./recentsItem";
@@ -55,7 +54,7 @@ export default function Recents() {
 
 	return (
 		<RecentsWrapper>
-			<HomeSectionHeader label="Continue" SeeMoreto="/home/recents" />
+			<HomeSectionHeader label="Recents" SeeMoreto="/home/recents" />
 			<RecentsList books={books} coverPaths={coverPaths} />
 		</RecentsWrapper>
 	);
@@ -69,7 +68,7 @@ const RecentsList = ({ books, coverPaths }: { books: Book[]; coverPaths: Record<
 	const bookPairs = books.map((book) => [book, coverPaths[book.id]] as const);
 
 	return (
-		<div className="relative flex flex-col mt-2 gap-2 w-full">
+		<div className="relative flex flex-col gap-2 w-full">
 			<ul className="flex py-2 px-4 gap-4 snap-x snap-mandatory overflow-x-scroll">
 				<RenderList
 					data={bookPairs}
@@ -82,8 +81,8 @@ const RecentsList = ({ books, coverPaths }: { books: Book[]; coverPaths: Record<
 
 const RecentsSkeleton = () => (
 	<RecentsWrapper>
-		<HomeSectionHeader label="Continue" SeeMoreto="/home/recents" />
-		<div className="relative flex flex-col mt-2 gap-2 w-full">
+		<HomeSectionHeader label="Recents" SeeMoreto="/home/recents" />
+		<div className="relative flex flex-col gap-2 w-full">
 			<ul className="flex py-2 pr-4 snap-x snap-mandatory overflow-x-scroll">
 				{Array.from({ length: 16 }).map((_, i) => (
 					<li key={i} className="min-w-48 h-26 relative snap-start pl-4">

@@ -11,6 +11,7 @@ import RecentsErrorBoundary from "@/pages/home/components/ui/recentsErrorBoundar
 import { Drawer } from "@/features/drawer/components/ui/drawer";
 import { useDrawerStore } from "@/features/drawer/drawerStore";
 import { useEffect } from "react";
+import ReadingNowErrorBoundary from "@/pages/home/components/ui/readingNowErrorBoundary";
 
 // import { powersyncDb } from "@/shared/providers/systemProvider";
 // import {
@@ -75,6 +76,7 @@ function RouteComponent() {
 					) : hasLibraries ? (
 						<div className="flex flex-col gap-8">
 							<QuickAccessErrorBoundary />
+							<ReadingNowErrorBoundary />
 							<RecentsErrorBoundary />
 							<ActivityCalendar />
 							<div className="flex flex-col">

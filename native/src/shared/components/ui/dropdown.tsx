@@ -117,7 +117,6 @@ export function DropdownMenuContent({
 			position: "absolute",
 			top: `${top}px`,
 			left: `${left}px`,
-			zIndex: 1000,
 		});
 	}, [ctx?.open]);
 

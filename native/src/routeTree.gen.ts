@@ -28,6 +28,7 @@ import { Route as AppHomeHomeImport } from './routes/_app/_home/home'
 import { Route as AppLibraryLibraryIdRouteImport } from './routes/_app/library/$libraryId/route'
 import { Route as AppLibraryLibraryIdIndexImport } from './routes/_app/library/$libraryId/index'
 import { Route as AppHomeHomeRecentsImport } from './routes/_app/_home/home.recents'
+import { Route as AppHomeHomeAnalyticsImport } from './routes/_app/_home/home.analytics'
 
 // Create/Update Routes
 
@@ -125,6 +126,12 @@ const AppLibraryLibraryIdIndexRoute = AppLibraryLibraryIdIndexImport.update({
 const AppHomeHomeRecentsRoute = AppHomeHomeRecentsImport.update({
   id: '/recents',
   path: '/recents',
+  getParentRoute: () => AppHomeHomeRoute,
+} as any)
+
+const AppHomeHomeAnalyticsRoute = AppHomeHomeAnalyticsImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => AppHomeHomeRoute,
 } as any)
 
@@ -237,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSearchSearchImport
       parentRoute: typeof AppSearchRouteImport
     }
+    '/_app/_home/home/analytics': {
+      id: '/_app/_home/home/analytics'
+      path: '/analytics'
+      fullPath: '/home/analytics'
+      preLoaderRoute: typeof AppHomeHomeAnalyticsImport
+      parentRoute: typeof AppHomeHomeImport
+    }
     '/_app/_home/home/recents': {
       id: '/_app/_home/home/recents'
       path: '/recents'
@@ -257,10 +271,12 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AppHomeHomeRouteChildren {
+  AppHomeHomeAnalyticsRoute: typeof AppHomeHomeAnalyticsRoute
   AppHomeHomeRecentsRoute: typeof AppHomeHomeRecentsRoute
 }
 
 const AppHomeHomeRouteChildren: AppHomeHomeRouteChildren = {
+  AppHomeHomeAnalyticsRoute: AppHomeHomeAnalyticsRoute,
   AppHomeHomeRecentsRoute: AppHomeHomeRecentsRoute,
 }
 
@@ -359,6 +375,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof AppHomeHomeRouteWithChildren
   '/libraries': typeof AppLibrariesLibrariesRoute
   '/search': typeof AppSearchSearchRoute
+  '/home/analytics': typeof AppHomeHomeAnalyticsRoute
   '/home/recents': typeof AppHomeHomeRecentsRoute
   '/library/$libraryId/': typeof AppLibraryLibraryIdIndexRoute
 }
@@ -374,6 +391,7 @@ export interface FileRoutesByTo {
   '/home': typeof AppHomeHomeRouteWithChildren
   '/libraries': typeof AppLibrariesLibrariesRoute
   '/search': typeof AppSearchSearchRoute
+  '/home/analytics': typeof AppHomeHomeAnalyticsRoute
   '/home/recents': typeof AppHomeHomeRecentsRoute
   '/library/$libraryId': typeof AppLibraryLibraryIdIndexRoute
 }
@@ -395,6 +413,7 @@ export interface FileRoutesById {
   '/_app/_home/home': typeof AppHomeHomeRouteWithChildren
   '/_app/_libraries/libraries': typeof AppLibrariesLibrariesRoute
   '/_app/_search/search': typeof AppSearchSearchRoute
+  '/_app/_home/home/analytics': typeof AppHomeHomeAnalyticsRoute
   '/_app/_home/home/recents': typeof AppHomeHomeRecentsRoute
   '/_app/library/$libraryId/': typeof AppLibraryLibraryIdIndexRoute
 }
@@ -413,6 +432,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/libraries'
     | '/search'
+    | '/home/analytics'
     | '/home/recents'
     | '/library/$libraryId/'
   fileRoutesByTo: FileRoutesByTo
@@ -427,6 +447,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/libraries'
     | '/search'
+    | '/home/analytics'
     | '/home/recents'
     | '/library/$libraryId'
   id:
@@ -446,6 +467,7 @@ export interface FileRouteTypes {
     | '/_app/_home/home'
     | '/_app/_libraries/libraries'
     | '/_app/_search/search'
+    | '/_app/_home/home/analytics'
     | '/_app/_home/home/recents'
     | '/_app/library/$libraryId/'
   fileRoutesById: FileRoutesById
@@ -556,6 +578,7 @@ export const routeTree = rootRoute
       "filePath": "_app/_home/home.tsx",
       "parent": "/_app/_home",
       "children": [
+        "/_app/_home/home/analytics",
         "/_app/_home/home/recents"
       ]
     },
@@ -566,6 +589,10 @@ export const routeTree = rootRoute
     "/_app/_search/search": {
       "filePath": "_app/_search/search.tsx",
       "parent": "/_app/_search"
+    },
+    "/_app/_home/home/analytics": {
+      "filePath": "_app/_home/home.analytics.tsx",
+      "parent": "/_app/_home/home"
     },
     "/_app/_home/home/recents": {
       "filePath": "_app/_home/home.recents.tsx",

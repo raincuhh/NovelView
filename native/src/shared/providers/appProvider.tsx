@@ -12,6 +12,7 @@ import { useMediaQuery } from "react-responsive";
 type AppProviderProps = PropsWithChildren;
 
 const AppProvider = ({ children }: AppProviderProps) => {
+	// @ts-ignore
 	const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 	const router = useRouter();
 	const setRouter = useHistoryStore((s) => s.setRouter);

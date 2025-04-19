@@ -1,5 +1,4 @@
 import { Book } from "@/shared/lib/appSchema";
-import React from "react";
 
 type RecentsItemProps = {
 	book: Book;

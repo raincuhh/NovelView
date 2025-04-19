@@ -8,7 +8,7 @@ type HomeSectionHeaderProps = {
 
 export default function HomeSectionHeader({ label, SeeMoreto }: HomeSectionHeaderProps) {
 	return (
-		<div className="flex justify-between px-4 w-full items-end">
+		<div className="flex justify-between px-4 w-full items-end mb-2">
 			<h1 className="text-2xl font-semibold">{label}</h1>
 			{SeeMoreto ? (
 				<div className="font-semibold">
