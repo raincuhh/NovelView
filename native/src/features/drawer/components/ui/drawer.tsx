@@ -1,49 +1,49 @@
 import { motion, useMotionValue, useTransform, animate, PanInfo } from "framer-motion";
-import { cn } from "@/shared/lib/globalUtils";
-import { useDrag } from "@use-gesture/react";
-import { useEffect, forwardRef, PropsWithChildren, ReactNode, HTMLAttributes } from "react";
+import { useEffect, forwardRef, ReactNode, HTMLAttributes } from "react";
+import { useDrawerStore } from "../../drawerStore";
+import { DrawerID } from "../../types";
 
 type DrawerSide = "left" | "right";
 
 type DrawerProps = {
+	id: DrawerID;
 	side: DrawerSide;
-	isOpen: boolean;
-	onClose: () => void;
 	width?: number;
 	children: ReactNode;
 };
 
 export const Drawer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & DrawerProps>(
-	({ children, side, isOpen, onClose, width = 300, ...props }, ref) => {
+	({ children, side, id, width = 300 }, ref) => {
+		const { isOpen, closeDrawer } = useDrawerStore();
+		const open = isOpen(id);
+
 		const x = useMotionValue(side === "right" ? width : -width);
 		const overlayBackgroundOpacity = useTransform(x, [-width, 0, width], [0, 1, 0]);
 
 		useEffect(() => {
-			if (isOpen) {
+			if (open) {
 				animate(x, 0, { type: "spring", damping: 30, stiffness: 300 });
 			} else {
 				animate(x, side === "right" ? width : -width, { type: "spring", damping: 30, stiffness: 300 });
 			}
-		}, [isOpen]);
+		}, [open]);
 
 		useEffect(() => {
 			const handler = (e: KeyboardEvent) => {
-				if (e.key === "Escape") onClose();
+				if (e.key === "Escape") closeDrawer(id);
 			};
 			document.addEventListener("keydown", handler);
 			return () => document.removeEventListener("keydown", handler);
-		}, [onClose]);
-
-		// const ELASTIC_BUFFER = isOpen ? 40 : 0;
+		}, [closeDrawer, id]);
 
 		const handleOnDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
 			if (side === "left") {
 				if (info.offset.x < -75) {
-					onClose();
+					closeDrawer(id);
 				}
 			} else {
 				if (info.offset.x > 75) {
-					onClose();
+					closeDrawer(id);
 				}
 			}
 		};
@@ -65,12 +65,13 @@ export const Drawer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> 
 				<motion.div
 					style={{
 						opacity: overlayBackgroundOpacity,
-						pointerEvents: isOpen ? "auto" : "none",
+						pointerEvents: open ? "auto" : "none",
 					}}
 					className="fixed inset-0 bg-black bg-primary/50 z-40"
-					onClick={onClose}
+					onClick={() => closeDrawer(id)}
 				/>
 				<motion.div
+					ref={ref}
 					style={{
 						x,
 						width,

@@ -1,6 +1,5 @@
 import { create } from "zustand";
-
-type DrawerID = string;
+import { DrawerID } from "./types";
 
 type DrawerStore = {
 	openDrawers: Record<DrawerID, boolean>;

@@ -6,15 +6,22 @@ import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { getFirstLibrary } from "@/features/libraries/lib/selectLibrary";
 import InitUserTables from "@/features/auth/components/utils/initUserTables";
-import { useEffect, useState } from "react";
 import QuickAccessErrorBoundary from "@/pages/home/components/ui/quickAccessErrorBoundary";
 import RecentsErrorBoundary from "@/pages/home/components/ui/recentsErrorBoundary";
-import { Drawer } from "@/shared/components/ui/drawer";
+import { Drawer } from "@/features/drawer/components/ui/drawer";
+import { useDrawerStore } from "@/features/drawer/drawerStore";
+import { useEffect } from "react";
 
 // import { powersyncDb } from "@/shared/providers/systemProvider";
-// import { useEffect } from "react";
-// import { logParsedEpubContents } from "@/features/parsing/lib/utils";
-// import { TEST_EPUB_KTS_FILE_NAME } from "@/shared/lib/consts";
+// import {
+// 	logFullParsedEpubContentsWithoutChapters,
+// 	logParsedEpubContents,
+// } from "@/features/parsing/lib/utils";
+// import {
+// 	TEST_EPUB_KTS_FILE_NAME,
+// 	TEST_EPUB_RED_RISING_FILE_NAME,
+// 	TEST_EPUB_SHADOW_SLAVE_VOL_1_FILE_NAME,
+// } from "@/shared/lib/consts";
 // import { EpubInfo } from "@/features/parsing/types";
 // import { parseEpub } from "@/features/parsing/lib/epubParser";
 
@@ -24,6 +31,7 @@ export const Route = createFileRoute("/_app/_home/home")({
 
 function RouteComponent() {
 	const userId = useAuthStore((state) => state.user?.auth.id);
+	const { openDrawer } = useDrawerStore();
 
 	const { data: libraries, isLoading } = useQuery({
 		queryKey: ["library", userId],
@@ -41,23 +49,20 @@ function RouteComponent() {
 	}, [libraries]);
 
 	// useEffect(() => {
-	// 	const examplePath = TEST_EPUB_KTS_FILE_NAME;
+	// 	const examplePath = TEST_EPUB_SHADOW_SLAVE_VOL_1_FILE_NAME;
 	// 	console.log("parsing path: ", examplePath);
 
-	// 	const fetchEpub = async () => {
+	// 	const getParsedEpub = async () => {
 	// 		try {
 	// 			const obj: EpubInfo = await parseEpub(examplePath);
-	// 			logParsedEpubContents(obj);
+	// 			logFullParsedEpubContentsWithoutChapters(obj);
 	// 		} catch (err) {
 	// 			console.error("Failed to parse EPUB:", err);
 	// 		}
 	// 	};
 
-	// 	fetchEpub();
+	// 	getParsedEpub();
 	// }, []);
-
-	const [leftOpen, setLeftOpen] = useState<boolean>(false);
-	const [rightOpen, setRightOpen] = useState<boolean>(false);
 
 	return (
 		<div className="flex flex-col h-full ">
@@ -73,14 +78,8 @@ function RouteComponent() {
 							<RecentsErrorBoundary />
 							<ActivityCalendar />
 							<div className="flex flex-col">
-								<h1 onClick={() => setLeftOpen(true)}>open left drawer</h1>
-								<h1 onClick={() => setRightOpen(true)}>open right drawer</h1>
-								<Drawer side="left" isOpen={leftOpen} onClose={() => setLeftOpen(false)}>
-									<div className="p-4">Left Drawer Content</div>
-								</Drawer>
-								<Drawer side="right" isOpen={rightOpen} onClose={() => setRightOpen(false)}>
-									<div className="p-4">Right Drawer Content</div>
-								</Drawer>
+								<h1 onClick={() => openDrawer("profile")}>open left drawer</h1>
+								<h1 onClick={() => openDrawer("settings")}>open right drawer</h1>
 							</div>
 							<div className="flex flex-col gap-1">
 								{Array.from({ length: 50 }, (_, i) => (
@@ -97,6 +96,12 @@ function RouteComponent() {
 					)}
 				</div>
 			</div>
+			<Drawer side="left" id="profile">
+				<div className="p-4">Left Drawer Content</div>
+			</Drawer>
+			<Drawer side="right" id="settings">
+				<div className="p-4">Right Drawer Content</div>
+			</Drawer>
 		</div>
 	);
 }

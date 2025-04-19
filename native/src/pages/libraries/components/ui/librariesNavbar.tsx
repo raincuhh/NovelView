@@ -18,8 +18,8 @@ export default function LibrariesNavbar() {
 							}}
 						/>
 					) : null}
-					<div className="flex items-center text-lg font-bold h-full">
-						<h1 className="font-bold text-lg">Your libraries</h1>
+					<div className="flex items-center h-full">
+						<h1 className="font-bold text-xl">Your libraries</h1>
 					</div>
 				</div>
 			</div>

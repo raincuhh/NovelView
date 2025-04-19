@@ -7,10 +7,12 @@ import { cn } from "../lib/globalUtils";
 import SetupAppdata from "@/features/filesystem/components/utils/setupAppdata";
 import { useRouter } from "@tanstack/react-router";
 import { useHistoryStore } from "../stores/historyStore";
+import { useMediaQuery } from "react-responsive";
 
 type AppProviderProps = PropsWithChildren;
 
 const AppProvider = ({ children }: AppProviderProps) => {
+	const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 	const router = useRouter();
 	const setRouter = useHistoryStore((s) => s.setRouter);
 	const [queryClient] = useState(
@@ -31,7 +33,10 @@ const AppProvider = ({ children }: AppProviderProps) => {
 	return (
 		<SystemProvider>
 			<QueryClientProvider client={queryClient}>
-				<SkeletonTheme baseColor={cn("var(--color-base-10)")} highlightColor={cn("var(--color-base-25)")}>
+				<SkeletonTheme
+					baseColor={cn("var(--color-secondary)")}
+					highlightColor={cn("var(--color-secondary-alt)")}
+				>
 					<AuthInitializer />
 					<SetupAppdata />
 					{children}

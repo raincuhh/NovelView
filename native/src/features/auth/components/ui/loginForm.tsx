@@ -180,7 +180,7 @@ export default function LoginForm() {
 						<FormMessage error={errors.password} />
 						{firstTimeForgotPassword ? (
 							<span
-								className="text-accent font-semibold cursor-pointer hover:underline underline-offset-4 hover:text-accent-hover"
+								className="text-accent font-semibold cursor-pointer hover:underline underline-offset-2 hover:text-accent-hover"
 								onClick={() => viewSwitcherNavigate(CombinedOnboardingViews.forgotPasswordForm)}
 							>
 								Forgot Password?

@@ -20,3 +20,43 @@ export function logParsedEpubContents(epubObj: EpubInfo) {
 		console.log("First chapter content (full): ", epubObj.chapters[0].content);
 	}
 }
+
+export function logFullParsedEpubContentsWithoutChapters(epubObj: EpubInfo) {
+	console.log("Parsed EPUB info");
+	console.log("Title:", epubObj.title);
+	console.log("Author:", epubObj.author);
+	console.log("Cover:", epubObj.cover ? `Available (${epubObj.cover[1]})` : "None");
+
+	console.log("Resources:", epubObj.resources.length, "total");
+	console.log("All resources:", epubObj.resources);
+
+	const images = epubObj.resources.filter((r) => r.path.endsWith(".jpg") || r.path.endsWith(".png"));
+	const fonts = epubObj.resources.filter((r) => r.path.endsWith(".ttf") || r.path.endsWith(".otf"));
+	const htmlFiles = epubObj.resources.filter(
+		(r) =>
+			r.path.endsWith(".html") ||
+			r.path.endsWith(".htm") ||
+			r.path.endsWith(".xhtml") ||
+			r.path.endsWith(".xml") ||
+			r.path.endsWith(".opf") ||
+			r.path.endsWith(".ncx") ||
+			r.path.endsWith(".rss") ||
+			r.path.endsWith(".svg")
+	);
+
+	console.log("Images:", images);
+	console.log("Fonts:", fonts);
+	console.log("HTML Files:", htmlFiles);
+
+	console.log("Spine length:", epubObj.spine.length);
+	console.log("All spine entries:", epubObj.spine);
+
+	const chapterIds: string[] = [];
+
+	if (epubObj.chapters.length > 0) {
+		epubObj.chapters.forEach((chapter) => {
+			chapterIds.push(chapter.id);
+		});
+	}
+	console.log("All chapter ids: ", chapterIds);
+}

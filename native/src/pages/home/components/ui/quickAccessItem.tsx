@@ -23,7 +23,7 @@ export default function QuickAccessItem({ data, coverPath }: QuickAccessItemProp
 							{hasImage ? (
 								<CoverImage src={coverPath!} alt="cover" className="rounded-l-sm rounded-r-none" />
 							) : (
-								<PlaceholderLibraryCover />
+								<PlaceholderLibraryCover className="rounded-l-sm" />
 							)}
 						</Cover>
 						<div className="flex w-full h-full items-center pr-2 overflow-hidden">

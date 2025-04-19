@@ -38,7 +38,7 @@ export default function RegisterOptions() {
 				<div className="mb-2 text-sm text-muted text-center">
 					Have an account?{" "}
 					<span
-						className="text-muted font-semibold cursor-pointer hover:underline underline-offset-4"
+						className="text-muted font-semibold cursor-pointer hover:underline underline-offset-2"
 						onClick={() => viewSwitcherNavigate(CombinedOnboardingViews.loginOptions)}
 					>
 						Log in now

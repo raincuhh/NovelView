@@ -19,7 +19,7 @@ const ShowMore = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphEl
 				{isTruncated && (
 					<span
 						onClick={toggleDescription}
-						className="text-faint cursor-pointer ml-1 hover:underline underline-offset-4"
+						className="text-faint cursor-pointer ml-1 hover:underline underline-offset-2"
 					>
 						{isExpanded ? "Show less" : "Show more"}
 					</span>

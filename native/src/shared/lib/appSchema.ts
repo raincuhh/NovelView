@@ -129,10 +129,10 @@ export const Tables = {
 export type Database = (typeof AppSchema)["types"];
 export type TableRow<T extends keyof typeof Tables> = RowType<(typeof Tables)[T]>;
 
-export type Profiles = TableRow<"profiles">;
+export type Profile = TableRow<"profiles">;
 export type UserSettings = TableRow<"user_settings">;
 export type Library = TableRow<"libraries">;
-export type PremiumSubscriptions = TableRow<"premium_subscriptions">;
-export type Books = TableRow<"books">;
+export type PremiumSubscription = TableRow<"premium_subscriptions">;
+export type Book = TableRow<"books">;
 export type BookContents = TableRow<"book_contents">;
 export type ReaderState = TableRow<"reader_state">;
