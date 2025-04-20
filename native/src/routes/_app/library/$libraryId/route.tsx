@@ -1,4 +1,4 @@
-import { LibraryProvider } from "@/features/libraries/libraryProvider";
+import { LibraryProvider } from "@/features/library/libraryProvider";
 import MobilePadding from "@/shared/components/ui/mobilePadding";
 import { createFileRoute, Outlet, useParams } from "@tanstack/react-router";
 

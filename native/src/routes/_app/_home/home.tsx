@@ -4,7 +4,7 @@ import ActivityCalendar from "@/pages/home/components/ui/activityCalendar";
 import HomeNavbar from "@/pages/home/components/ui/homeNavbar";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { getFirstLibrary } from "@/features/libraries/lib/selectLibrary";
+import { getFirstLibrary } from "@/features/libraries/lib/selectLibraries";
 import InitUserTables from "@/features/auth/components/utils/initUserTables";
 import QuickAccessErrorBoundary from "@/pages/home/components/ui/quickAccessErrorBoundary";
 import RecentsErrorBoundary from "@/pages/home/components/ui/recentsErrorBoundary";
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/_app/_home/home")({
 });
 
 function RouteComponent() {
-	const userId = useAuthStore((state) => state.user?.auth.id);
+	const userId = useAuthStore((state) => state.user?.profile.userId);
 	const { openDrawer } = useDrawerStore();
 
 	const { data: libraries, isLoading } = useQuery({

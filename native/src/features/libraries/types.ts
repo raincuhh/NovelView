@@ -1,7 +1,18 @@
-export type LibraryType = "sync" | "local";
-export type MostInteractedLibrary = {
+import { Timestamp } from "@/shared/database/types";
+
+export type LibraryType = "local" | "sync";
+
+// synced
+export interface Library {
 	id: string;
+	userId: string;
 	name: string;
-	cover_url: string | null;
-	read_count: number;
-};
+	description?: string;
+	coverUrl?: string;
+	type: LibraryType;
+
+	createdAt: Timestamp;
+	updatedAt: Timestamp;
+}
+
+export type MostInteractedLibrary = Pick<Library, "id" | "name" | "coverUrl">;

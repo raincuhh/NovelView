@@ -1,7 +1,7 @@
-import { Session } from "@supabase/supabase-js";
+import { Provider, Session } from "@supabase/supabase-js";
 import { create } from "zustand";
 import { powersyncDb, supabase } from "@/shared/providers/systemProvider";
-import { Profile, User } from "./types";
+import { UserProfile, User, AuthUser } from "./types";
 
 type AuthStoreState = {
 	session: Session | null;
@@ -59,10 +59,18 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
 			return;
 		}
 
-		const baseUser = session.user;
-		const profile = await powersyncDb.getOptional<Profile>(
+		const sessionUser = session.user;
+		const baseUser: AuthUser = {
+			userId: sessionUser.id,
+			email: sessionUser.email,
+			provider: sessionUser.app_metadata?.provider as Provider,
+			accessToken: session.access_token,
+			refreshToken: session.refresh_token,
+		};
+
+		const profile = await powersyncDb.getOptional<UserProfile>(
 			"SELECT user_id, username, gender, dob FROM profiles WHERE user_id = ?",
-			[baseUser.id]
+			[baseUser.userId]
 		);
 
 		if (profile) {

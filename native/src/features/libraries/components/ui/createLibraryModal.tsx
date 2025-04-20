@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Switch } from "@/shared/components/ui/switch";
 import { useAuthStore } from "@/features/auth/authStore";
 import Label from "@/shared/components/ui/label";
-import { createLibrary } from "../../libraryService";
+import { createNewLibrary } from "../../lib/insertLibraries";
 import { useQueryClient } from "@tanstack/react-query";
 
 const libraryCreateFormSchema = z.object({
@@ -32,7 +32,7 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 
 	const queryClient = useQueryClient();
 
-	const userId = useAuthStore((state) => state.user?.auth.id);
+	const userId = useAuthStore((state) => state.user?.profile.userId);
 
 	const handleLibraryNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -64,7 +64,7 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 
 		if (userId) {
 			try {
-				await createLibrary({
+				await createNewLibrary({
 					name: libraryName,
 					cover: image,
 					type: synced ? "sync" : "local",

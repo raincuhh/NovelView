@@ -3,7 +3,7 @@ import QuickAccessItem from "./quickAccessItem";
 import { useAuthStore } from "@/features/auth/authStore";
 import { useQuery } from "@powersync/tanstack-react-query";
 import Skeleton from "react-loading-skeleton";
-import { getCombinedMostInteractedLibraries } from "@/features/libraries/lib/selectLibrary";
+import { getCombinedMostInteractedLibraries } from "@/features/libraries/lib/selectLibraries";
 import { cn } from "@/shared/lib/globalUtils";
 import { useEffect, useState } from "react";
 import { getLibraryCoverPath } from "@/features/libraries/libraryService";

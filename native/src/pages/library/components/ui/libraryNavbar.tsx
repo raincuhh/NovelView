@@ -1,4 +1,4 @@
-import { useLibraryProvider } from "@/features/libraries/libraryProvider";
+import { useLibraryProvider } from "@/features/library/libraryProvider";
 import {
 	DropdownMenu,
 	DropdownMenuContent,

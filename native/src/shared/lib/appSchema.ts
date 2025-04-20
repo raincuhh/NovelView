@@ -70,6 +70,7 @@ const booksTable = new Table(
 		format: column.text,
 		created_at: column.text,
 		updated_at: column.text,
+		last_opened_at: column.text,
 	},
 	{ indexes: {} }
 );

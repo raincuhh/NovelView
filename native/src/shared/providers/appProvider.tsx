@@ -4,7 +4,7 @@ import { SystemProvider } from "./systemProvider";
 import AuthInitializer from "@/features/auth/components/utils/authInitializer";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { cn } from "../lib/globalUtils";
-import SetupAppdata from "@/features/filesystem/components/utils/setupAppdata";
+import SetupAppdata from "@/features/fs/components/utils/setupAppdata";
 import { useRouter } from "@tanstack/react-router";
 import { useHistoryStore } from "../stores/historyStore";
 import { useMediaQuery } from "react-responsive";

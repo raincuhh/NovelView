@@ -1,6 +1,6 @@
-import { Library } from "@/shared/lib/appSchema";
+import { Library } from "../libraries/types";
 import { createContext, PropsWithChildren, useContext, useMemo, useState } from "react";
-import { getLibraryById } from "./lib/selectLibrary";
+import { getLibraryById } from "../libraries/lib/selectLibraries";
 import { useQuery } from "@tanstack/react-query";
 
 type LibraryConfig = {

@@ -1,30 +1,7 @@
-export type DateOfBirth = `${number}-${number}-${number}`;
-export type Timestamp = string;
-
-export enum Gender {
-	male = "male",
-	female = "female",
-	nonBinary = "nonBinary",
-	other = "other",
-	preferNotToSay = "preferNotToSay",
-}
-
-export type GenderType = keyof typeof Gender;
-
-export enum Theme {
-	light = "light",
-	dark = "dark",
-	system = "system",
-	custom = "custom",
-}
-
-export type ThemeType = keyof typeof Theme;
-
-export interface Metadata {
-	[key: string]: any;
-}
-
 // important for how the parser parses the content
+
+import { Metadata, Timestamp } from "@/shared/database/types";
+
 // and the structure of the content in appdata/books/{bookId}/
 export type BookFormats = "epub" | "webnovel" | "lightnovel" | "pdf" | "txt" | "Kindle";
 
@@ -42,6 +19,8 @@ export interface Book {
 
 	createdAt: Timestamp;
 	updatedAt: Timestamp;
+
+	lastOpenedAt?: Timestamp;
 }
 
 // synced if book is synced, same business.
@@ -71,22 +50,5 @@ export interface BookMetadata extends Metadata {
 	spine?: string[]; // from epub structure
 	metadataVersion?: number;
 
-	updatedAt: Timestamp;
-}
-
-export interface Chapter {
-	id: string;
-	bookId: string;
-	index: number; // reading order (0 based)
-	resourceUrl?: string; // maps to /$appdata/books/{bookId}/resources/{resourceId}/parsed.{ext};
-	sourceHref?: string; // if you imported/saved a novel from project gutenberg or royalroad.
-	title?: string;
-	snippet?: string; // used for readingNow in /home.
-	wordCount?: number; // optional word count.
-	estimatedReadingTime?: number; // estimated reading time.
-	isRead?: boolean;
-	isDownloaded?: boolean;
-
-	createdAt: Timestamp;
 	updatedAt: Timestamp;
 }

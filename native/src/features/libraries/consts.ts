@@ -1,1 +1,2 @@
 export const LINEAR_GRADIENT_HEIGHT_AMOUNT_BEFORE_TRANSITION = "60%";
+export const SUPABASE_LIBRARIES_COVER_PATH_TEMPLATE = "/{libraryId}/cover.{ext}";

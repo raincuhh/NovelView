@@ -48,32 +48,34 @@ pub fn setup_main_db() -> Vec<Migration> {
                   user_id TEXT,
                   title TEXT,
                   cover_image_url TEXT,
-                  is_saved TEXT,
-                  read_count INTEGER,
-                  last_read_at TEXT,
-                  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-                  updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
                   file_url TEXT,
-                  format TEXT
+                  format TEXT,
+                  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                  updated_at TEXT DEFAULT CURRENT_TIMESTAMP
               );
             ",
             kind: MigrationKind::Up,
         },
         Migration {
             version: 4,
-            description: "create local book_contents table",
+            description: "create local book_info table",
             sql: "
-            CREATE TABLE IF NOT EXISTS book_contents (
+            CREATE TABLE IF NOT EXISTS book_info (
                   id TEXT PRIMARY KEY,
                   book_id TEXT,
-                  content_json TEXT,
                   parsing_version INTEGER,
-                  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-                  updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
                   metadata TEXT,
-                  toc TEXT,
-                  content_position TEXT
+                  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                  updated_at TEXT DEFAULT CURRENT_TIMESTAMP
               );
+            ",
+            kind: MigrationKind::Up,
+        },
+        Migration {
+            version: 5,
+            description: "add last_opened_at column to books table",
+            sql: "
+            ALTER TABLE books ADD COLUMN last_opened_at TEXT;
             ",
             kind: MigrationKind::Up,
         },

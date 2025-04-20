@@ -9,15 +9,8 @@ export const DATA_FOLDER = "data";
 export const BACKUPS_FOLDER = "backups";
 export const BOOKS_FOLDER = "books";
 
-export enum LogSeverity {
-	normal,
-	warning,
-	error,
-	info,
-	debug,
-	success,
-	critical,
-}
-
 export const LOCAL_APPDATA = BaseDirectory.AppLocalData;
 export const APPDATA = BaseDirectory.AppData;
+
+export const FULL_BOOKS_FOLDER = LOCAL_APPDATA + "/" + BOOKS_FOLDER;
+export const FULL_LIBRARIES_FOLDER = LOCAL_APPDATA + "/" + LIBRARIES_FOLDER;
