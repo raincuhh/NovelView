@@ -62,20 +62,19 @@ function RouteComponent() {
 	};
 
 	return (
-		<div className="flex gap-2 flex-col overflow-hidden h-dvh relative">
+		<ScrollContainer className="h-full">
 			<div>Hello "/_app/_search/search"!</div>
 			<Button variant="accent" rounded="full" onClick={handleOpenModal}>
 				test open modal
 			</Button>
-			<ScrollContainer className="">
-				<div className="flex flex-col">
-					{Array.from({ length: 50 }, (_, i) => (
-						<div key={i} className="bg-primary hover:bg-primary-alt px-4 rounded-md">
-							Item #{i + 1}
-						</div>
-					))}
-				</div>
-			</ScrollContainer>
-		</div>
+
+			<div className="flex flex-col">
+				{Array.from({ length: 50 }, (_, i) => (
+					<div key={i} className="bg-primary hover:bg-primary-alt px-4 rounded-md">
+						Item #{i + 1}
+					</div>
+				))}
+			</div>
+		</ScrollContainer>
 	);
 }

@@ -26,8 +26,13 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 	const canGoBack = currentIndex > 0;
 
 	return (
-		<div className="sticky top-0 z-1 w-full bg-transparent">
-			<div className="flex w-full h-16 items-center px-4 justify-between">
+		<div
+			className={cn(
+				"sticky top-0 z-1 w-full bg-transparent transition-colors ease-in-out duration-100",
+				isScrolled ? "bg-primary" : ""
+			)}
+		>
+			<div className="flex w-full h-14 items-center px-4 justify-between">
 				<div className="flex h-full items-center overflow-hidden">
 					<div
 						onClick={() => {

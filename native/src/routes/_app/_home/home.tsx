@@ -12,6 +12,8 @@ import { Drawer } from "@/features/drawer/components/ui/drawer";
 import { useDrawerStore } from "@/features/drawer/drawerStore";
 import { useEffect } from "react";
 import ReadingNowErrorBoundary from "@/pages/home/components/ui/readingNowErrorBoundary";
+import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
+import ScrollContainer from "@/shared/components/ui/scrollContainer";
 
 // import { powersyncDb } from "@/shared/providers/systemProvider";
 // import {
@@ -74,11 +76,11 @@ function RouteComponent() {
 	// }, []);
 
 	return (
-		<div className="flex flex-col h-full ">
+		<ScrollContainer className="h-full">
 			<InitUserTables />
-			<div className="flex flex-col relative h-full pt-12">
+			<div className="relative flex flex-col h-full pt-12">
 				<HomeNavbar isLoading={isLoading} />
-				<div className="flex flex-col mt-2 h-full">
+				<div className="flex flex-col h-full mt-2">
 					{isLoading ? (
 						<div></div>
 					) : hasLibraries ? (
@@ -87,6 +89,7 @@ function RouteComponent() {
 							<ReadingNowErrorBoundary />
 							<RecentsErrorBoundary />
 							<ActivityCalendar />
+							<MobileBottomPadding />
 						</div>
 					) : (
 						<div className="px-4 flex flex-col justify-center h-full pb-48">
@@ -98,6 +101,6 @@ function RouteComponent() {
 			<Drawer side="left" id="profile">
 				<div className="p-4">Left Drawer Content</div>
 			</Drawer>
-		</div>
+		</ScrollContainer>
 	);
 }

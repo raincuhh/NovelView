@@ -7,6 +7,7 @@ import DesktopLibraries from "@/widgets/desktop/desktopLibraries/components/ui/d
 import { requireAuth } from "@/features/auth/lib/authGuard";
 import { useSupabase } from "@/shared/providers/systemProvider";
 import { useEffect } from "react";
+import MobilePadding from "@/shared/components/ui/mobileBottomPadding";
 
 export const Route = createFileRoute("/_app")({
 	component: RouteComponent,
@@ -69,9 +70,7 @@ function MobileLayout() {
 	return (
 		<div className="flex flex-col h-full w-full">
 			<div className="flex relative flex-col h-full w-full overflow-hidden">
-				<div className="flex-1 overflow-auto">
-					<Outlet />
-				</div>
+				<Outlet />
 				<MobileNavigation />
 			</div>
 		</div>

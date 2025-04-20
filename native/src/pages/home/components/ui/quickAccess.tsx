@@ -83,8 +83,8 @@ export default function QuickAccess() {
 }
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
-	<div className="px-4">
-		<div className="flex flex-col">{children}</div>
+	<div className="flex flex-col">
+		<div className="px-4 flex flex-col">{children}</div>
 	</div>
 );
 

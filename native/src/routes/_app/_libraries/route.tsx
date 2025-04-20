@@ -1,4 +1,4 @@
-import MobilePadding from "@/shared/components/ui/mobilePadding";
+import MobilePadding from "@/shared/components/ui/mobileBottomPadding";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_app/_libraries")({
@@ -7,11 +7,9 @@ export const Route = createFileRoute("/_app/_libraries")({
 
 function RouteComponent() {
 	return (
-		<>
-			<div className="flex flex-col">
-				<Outlet />
-				<MobilePadding />
-			</div>
-		</>
+		<div className="">
+			<Outlet />
+			<MobilePadding />
+		</div>
 	);
 }

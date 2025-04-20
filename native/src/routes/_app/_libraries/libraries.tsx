@@ -8,7 +8,7 @@ export const Route = createFileRoute("/_app/_libraries/libraries")({
 
 function RouteComponent() {
 	return (
-		<div className="flex flex-col h-full">
+		<div className="">
 			<div className="flex flex-col relative h-full pt-12">
 				<LibrariesNavbar />
 				<div className="flex flex-col mt-2 h-full justify-center pb-48">
