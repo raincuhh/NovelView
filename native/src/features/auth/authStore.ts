@@ -1,7 +1,7 @@
 import { Provider, Session } from "@supabase/supabase-js";
 import { create } from "zustand";
 import { powersyncDb, supabase } from "@/shared/providers/systemProvider";
-import { UserProfile, User, AuthUser } from "./types";
+import { UserProfile, User, AuthUser } from "../user/types";
 
 type AuthStoreState = {
 	session: Session | null;

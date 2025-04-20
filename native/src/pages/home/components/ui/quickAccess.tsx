@@ -6,12 +6,13 @@ import Skeleton from "react-loading-skeleton";
 import { getCombinedMostInteractedLibraries } from "@/features/libraries/lib/selectLibraries";
 import { cn } from "@/shared/lib/globalUtils";
 import { useEffect, useState } from "react";
-import { getLibraryCoverPath } from "@/features/libraries/libraryService";
+import { getLibraryCoverPath } from "@/features/libraries/lib/utils";
+import { Library } from "@/features/libraries/types";
 // import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
 // import { MostInteractedLibrary } from "@/features/libraries/types";
 
 export default function QuickAccess() {
-	const userId = useAuthStore((state) => state.user?.auth.id);
+	const userId = useAuthStore((state) => state.user?.profile.userId);
 	const {
 		data: libraries,
 		isLoading,
@@ -34,7 +35,7 @@ export default function QuickAccess() {
 		const loadCovers = async () => {
 			setLoadingCovers(true);
 			const entries = await Promise.all(
-				libraries.map(async (lib) => {
+				libraries.map(async (lib: Library) => {
 					const cover = await getLibraryCoverPath(lib?.id);
 					return [lib.id, cover] as const;
 				})

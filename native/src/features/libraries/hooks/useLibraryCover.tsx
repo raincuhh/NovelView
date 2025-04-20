@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getLibraryCoverPath } from "@/features/libraries/libraryService";
+import { getLibraryCoverPath } from "../lib/utils";
 
 export function useLibraryCover(libraryId: string, fallbackUrl?: string, retryDelay = 250) {
 	const [coverPath, setCoverPath] = useState<string | null>(null);
