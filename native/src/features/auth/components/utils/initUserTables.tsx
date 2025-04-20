@@ -5,7 +5,7 @@ import { useAuthStore } from "@/features/auth/authStore";
 import { useRegisterFormStore } from "@/pages/onboarding/registerFormStore";
 
 export default function InitUserTables() {
-	const userId = useAuthStore.getState().user?.profile.userId;
+	const userId = useAuthStore.getState().user?.profile.id;
 	const { formData } = useRegisterFormStore();
 
 	useEffect(() => {

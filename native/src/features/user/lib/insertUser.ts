@@ -9,14 +9,14 @@ export const insertNewUser = async (formData: RegisterFormData, auth: { userId: 
 		const { userId } = auth;
 
 		const userProfileData: UserProfile = {
-			userId,
+			id: userId,
 			username,
 			createdAt: new Date().toISOString(),
 			updatedAt: new Date().toISOString(),
 		};
 
 		const userSettingsData: UserSettings = {
-			userId,
+			id: userId,
 			metadata: { language: "en" },
 			theme: "dark",
 			createdAt: new Date().toISOString(),

@@ -61,31 +61,37 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
 
 		const sessionUser = session.user;
 		const baseUser: AuthUser = {
-			userId: sessionUser.id,
+			id: sessionUser.id,
 			email: sessionUser.email,
 			provider: sessionUser.app_metadata?.provider as Provider,
 			accessToken: session.access_token,
 			refreshToken: session.refresh_token,
 		};
 
-		const profile = await powersyncDb.getOptional<UserProfile>(
-			"SELECT id, username, gender, dob FROM user_profiles WHERE id = ?",
-			[baseUser.userId]
-		);
+		try {
+			const profile = await powersyncDb.getOptional<UserProfile>(
+				"SELECT * FROM user_profiles WHERE id = ?",
+				[baseUser.id]
+			);
 
-		if (profile) {
-			set({
-				user: {
-					auth: baseUser,
-					profile: profile,
-				},
-				loading: false,
-			});
+			console.log(profile, baseUser);
 
-			console.log("user: ", get().user);
-			console.log("session", get().session);
-		} else {
-			set({ user: null, loading: false });
+			if (profile) {
+				set({
+					user: {
+						auth: baseUser,
+						profile: profile,
+					},
+					loading: false,
+				});
+
+				console.log("user: ", get().user);
+				console.log("session", get().session);
+			} else {
+				set({ user: null, loading: false });
+			}
+		} catch (err: any) {
+			console.error("Error updating user: ", err);
 		}
 	},
 

@@ -37,13 +37,13 @@ export interface UserReadingPrefsMetadata extends Metadata {
 
 // user reading prefs table
 export interface UserReadingPrefs {
-	userId: string;
+	id: string;
 	prefs: UserReadingPrefsMetadata;
 }
 
 // inferred off of supabase session and user off of login.
 export interface AuthUser {
-	userId: string; // auth.user.id
+	id: string; // auth.user.id
 	email?: string;
 	provider?: Provider; // default is email;
 	accessToken?: string;
@@ -60,7 +60,7 @@ export interface User {
 
 // user settings table.
 export interface UserSettings {
-	userId: string; // auth.user.id
+	id: string; // auth.user.id
 	metadata: UserMetadata;
 	theme: ThemeType; // defaults to dark, can be switched.
 
@@ -70,7 +70,7 @@ export interface UserSettings {
 
 // user profile.
 export interface UserProfile {
-	userId: string; // auth.user.id
+	id: string; // auth.user.id
 	username: string;
 	gender?: GenderType;
 	dob?: DateOfBirth;

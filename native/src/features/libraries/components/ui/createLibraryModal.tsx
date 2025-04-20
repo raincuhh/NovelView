@@ -31,8 +31,7 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 	const [submitting, setSubmitting] = useState<boolean>(false);
 
 	const queryClient = useQueryClient();
-
-	const userId = useAuthStore((state) => state.user?.profile.userId);
+	const user = useAuthStore((state) => state.user);
 
 	const handleLibraryNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -46,7 +45,6 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement | HTMLInputElement>) => {
 		e.preventDefault();
-
 		setSubmitting(true);
 
 		const result = libraryCreateFormSchema.safeParse({
@@ -61,8 +59,13 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 			setSubmitting(false);
 			return;
 		}
+		const userId = user?.profile.id;
+
+		console.log("doing things.", user);
+		console.log("user: ", userId);
 
 		if (userId) {
+			console.log("user id here:");
 			try {
 				await createNewLibrary({
 					name: libraryName,
