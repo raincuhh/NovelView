@@ -1,42 +1,59 @@
 import { MOCK_BOOKS } from "@/features/books/const";
-import { Book } from "@/shared/lib/appSchema";
+import { Book } from "@/features/books/types";
 import { useEffect, useState } from "react";
 import HomeSectionHeader from "./homeSectionHeader";
 import Skeleton from "react-loading-skeleton";
 import Icon from "@/shared/components/ui/icon";
-import { getTimeAgo } from "@/shared/lib/globalUtils";
 import { Cover, CoverImage } from "@/shared/components/ui/cover";
 import { PLACEHOLDER_RECENTLY_READ_URL } from "@/shared/lib/consts";
+import { useAuthStore } from "@/features/auth/authStore";
+import { useQuery } from "@tanstack/react-query";
+import { getRecentlyOpenedBooks } from "@/features/books/lib/selectBook";
+import Separator from "@/shared/components/ui/separator";
+import TodaysReadingProgress from "@/shared/components/ui/todaysReadingProgress";
 
 export default function ReadingNow() {
-	const book: Book = MOCK_BOOKS[0];
-	const isLoading: boolean = true;
-	const error: Error | null = null;
+	const userId = useAuthStore((s) => s.user?.auth.id);
+
+	const {
+		data: book,
+		isLoading,
+		error,
+	} = useQuery({
+		queryKey: ["mostRecentlyReadBook", userId],
+		queryFn: () => {
+			if (!userId) throw new Error("User ID is missing");
+			return getRecentlyOpenedBooks(userId, 1);
+		},
+		// enabled: !!userId,
+	});
 
 	const [coverPath, setCoverPath] = useState<Record<string, string | null>>({});
 	const [loadingCover, setLoadingCover] = useState<boolean>(true);
 
-	//TODO: implemenet querying most recently read/reading now book.
-
 	useEffect(() => {
 		if (!book) return;
 
-		const loadCover = async () => {
+		const fetchCover = async () => {
 			setLoadingCover(true);
-			const cover = book?.cover_image_url;
-			setCoverPath({ [book.id]: cover });
+			try {
+				const cover = book[0]?.coverImageUrl ?? null;
+				setCoverPath({ [book[0].id]: cover });
+			} catch (err: any) {
+				console.error("Error fetching cover: ", err);
+			} finally {
+				setLoadingCover(false);
+			}
 		};
 
-		loadCover();
-		setLoadingCover(false);
+		fetchCover();
 	}, [book]);
 
 	const isFullyloading = isLoading || loadingCover;
-	const hasBook = !!book;
+	const hasBook = !!book && !!book[0];
 
 	if (isFullyloading) return <ReadingNowSkeleton />;
 	if (error) {
-		// @ts-expect-error
 		console.log(error.message);
 		return (
 			<ReadingNowWrapper>
@@ -50,7 +67,9 @@ export default function ReadingNow() {
 	return (
 		<ReadingNowWrapper>
 			<HomeSectionHeader label="Reading Now" />
-			<ReadingNowDisplay book={book} coverPath={coverPath} />
+
+			<Separator orientation="vertical" />
+			<ReadingNowDisplay book={book[0]} coverPath={coverPath} />
 		</ReadingNowWrapper>
 	);
 }
@@ -64,12 +83,12 @@ const ReadingNowWrapper = ({ children }: { children: React.ReactNode }) => (
 
 // @ts-ignore
 const ReadingNowDisplay = ({ book, coverPath }: { book: Book; coverPath: Record<string, string | null> }) => {
-	const totalChapters = 729; // mock
-	const readCount = book.read_count || 0;
-	const percentage = ((readCount / totalChapters) * 100).toFixed(1); // mock
-	const progress = `${readCount} / ${totalChapters} (${percentage}%)`;
+	// const totalChapters = 729; // mock
+	// const readCount = book.read_count || 0;
+	// const percentage = ((readCount / totalChapters) * 100).toFixed(1); // mock
+	// const progress = `${readCount} / ${totalChapters} (${percentage}%)`;
 
-	const timeAgo = book.last_read_at ? getTimeAgo(new Date(book.last_read_at)) : "Unknown";
+	// const timeAgo = book.last_read_at ? getTimeAgo(new Date(book.last_read_at)) : "Unknown";
 
 	return (
 		<div className="flex flex-col w-full px-4">
@@ -83,9 +102,7 @@ const ReadingNowDisplay = ({ book, coverPath }: { book: Book; coverPath: Record<
 			<aside className="flex flex-col mt-4">
 				<h2>{book.title}</h2>
 				<div className="w-full flex justify-between">
-					<span className="text-muted text-sm">
-						{progress} · {timeAgo}
-					</span>
+					<span className="text-muted text-sm">{/* {progress} · {timeAgo} */}</span>
 
 					<div className="p-2 -m-2 cursor-pointer">
 						<Icon.dottedHorizontalRounded className="fill-muted" />
@@ -99,6 +116,7 @@ const ReadingNowDisplay = ({ book, coverPath }: { book: Book; coverPath: Record<
 const ReadingNowSkeleton = () => (
 	<ReadingNowWrapper>
 		<HomeSectionHeader label="Reading Now" />
+		<TodaysReadingProgress />
 		<div className="flex flex-col w-full px-4">
 			<header className="w-full h-min flex justify-center items-center min-h-32 select-none">
 				<div className="relative select-none h-48 w-full">

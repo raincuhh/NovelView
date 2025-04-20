@@ -1,5 +1,4 @@
-import { Metadata, ThemeType, Timestamp } from "@/shared/database/types";
-import { DateOfBirth, GenderType } from "@/shared/lib/types";
+import { DateOfBirth, GenderType, Metadata, ThemeType, Timestamp } from "@/shared/lib/types";
 import { Provider } from "@supabase/supabase-js";
 
 export interface UserMetadata extends Metadata {

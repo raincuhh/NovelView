@@ -1,4 +1,4 @@
-import { Timestamp } from "@/shared/database/types";
+import { Timestamp } from "@/shared/lib/types";
 
 // synced table
 export interface PremiumSubscription {

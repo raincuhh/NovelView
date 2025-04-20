@@ -1,5 +1,5 @@
 import { localDb, powersyncDb } from "@/shared/providers/systemProvider";
-import { Book } from "../type";
+import { Book, BookInfo } from "../types";
 
 export async function getBooksByLibraryId(libraryId: string): Promise<Book[]> {
 	const query = `SELECT * FROM books WHERE library_id = ?`;
@@ -26,7 +26,7 @@ export async function getRecentlyOpenedBooks(userId: string, limit: number = 5):
 		SELECT b.*
 		FROM books b
 		LEFT JOIN book_state bs ON b.id = bs.book_id
-		WHERE b.id = ?
+		WHERE b.user_id = ?
 		ORDER BY bs.last_opened_at DESC
 		LIMIT ?
 	`;
@@ -70,4 +70,18 @@ export async function getMostInteractedBooksInLibrary(libraryId: string, limit: 
 	]);
 
 	return [...(localRes ?? []), ...(remoteRes.rows?._array ?? [])];
+}
+
+export async function getBookInfoByBookId(bookId: string): Promise<BookInfo | null> {
+	const query = `SELECT * FROM book_info WHERE book_id = ?`;
+
+	const [localRes, remoteRes] = await Promise.all([
+		localDb.select<BookInfo[]>(query, [bookId]),
+		powersyncDb.execute(query, [bookId]),
+	]);
+
+	const localMatch = localRes?.[0];
+	const remoteMatch = remoteRes.rows?._array?.[0];
+
+	return localMatch ?? remoteMatch ?? null;
 }

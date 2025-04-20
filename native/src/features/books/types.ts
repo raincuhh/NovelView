@@ -1,6 +1,6 @@
 // important for how the parser parses the content
 
-import { Metadata, Timestamp } from "@/shared/database/types";
+import { Metadata, Timestamp } from "@/shared/lib/types";
 
 // and the structure of the content in appdata/books/{bookId}/
 export type BookFormats = "epub" | "webnovel" | "lightnovel" | "pdf" | "txt" | "Kindle";

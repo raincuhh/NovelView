@@ -88,6 +88,9 @@ importers:
       react:
         specifier: ^18.3.1
         version: 18.3.1
+      react-circular-progressbar:
+        specifier: ^2.2.0
+        version: 2.2.0(react@18.3.1)
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
@@ -2636,6 +2639,11 @@ packages:
   range-parser@1.2.1:
     resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}
     engines: {node: '>= 0.6'}
+
+  react-circular-progressbar@2.2.0:
+    resolution: {integrity: sha512-cgyqEHOzB0nWMZjKfWN3MfSa1LV3OatcDjPz68lchXQUEiBD5O1WsAtoVK4/DSL0B4USR//cTdok4zCBkq8X5g==}
+    peerDependencies:
+      react: '>=0.14.0'
 
   react-devtools-core@6.1.1:
     resolution: {integrity: sha512-TFo1MEnkqE6hzAbaztnyR5uLTMoz6wnEWwWBsCUzNt+sVXJycuRJdDqvL078M4/h65BI/YO5XWTaxZDWVsW0fw==}
@@ -5770,6 +5778,10 @@ snapshots:
   quote-unquote@1.0.0: {}
 
   range-parser@1.2.1: {}
+
+  react-circular-progressbar@2.2.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   react-devtools-core@6.1.1:
     dependencies:

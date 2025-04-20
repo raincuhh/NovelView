@@ -4,9 +4,9 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { routeTree } from "@/routeTree.gen";
 import "@/styles/global.css";
 import "react-loading-skeleton/dist/skeleton.css";
-// import "@styles/reactSpringBottomSheet.css";
 import "react-spring-bottom-sheet/dist/style.css";
 import "overlayscrollbars/overlayscrollbars.css";
+import "react-circular-progressbar/dist/styles.css";
 
 const router = createRouter({ routeTree });
 
