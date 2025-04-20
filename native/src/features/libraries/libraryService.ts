@@ -32,8 +32,7 @@ export async function createLibrary({ name, cover, type, userId, description }: 
 			await saveLibraryCover(localDir, cover);
 
 			if (type === "sync") {
-				//TODO: implement uploading/ doing attatchmentqueue
-				// to upload cover to supabase storage bucket.
+				//TODO, actually dont need to do anything, cover always gonna be local
 			} else {
 				coverUrl = coverPath;
 			}

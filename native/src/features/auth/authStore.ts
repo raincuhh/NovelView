@@ -75,6 +75,7 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
 			});
 
 			console.log("user: ", get().user);
+			console.log("session", get().session);
 		} else {
 			set({ user: null, loading: false });
 		}

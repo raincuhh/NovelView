@@ -1,4 +1,5 @@
 import { LibraryProvider } from "@/features/libraries/libraryProvider";
+import MobilePadding from "@/shared/components/ui/mobilePadding";
 import { createFileRoute, Outlet, useParams } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_app/library/$libraryId")({
@@ -10,7 +11,10 @@ function RouteComponent() {
 
 	return (
 		<LibraryProvider libraryId={libraryId}>
-			<Outlet />
+			<div className="flex flex-col">
+				<Outlet />
+			</div>
+			<MobilePadding />
 		</LibraryProvider>
 	);
 }

@@ -50,6 +50,8 @@ export const getTimeAgo = (date: Date): string => {
 	return "Just now";
 };
 
+export const newer = (a: string, b: string): boolean => !older(a, b) && !equal(a, b);
+
 export const formatTextWithLineBreaks = (text: string): string => {
 	return text.replace(/\n+/g, '<span class="block mb-4"></span>');
 };
@@ -60,4 +62,40 @@ export const cn = (...inputs: ClassValue[]) => {
 
 export const censorStr = (str: string) => {
 	return str.replace(/./g, "*");
+};
+
+export const older = (a: string, b: string): boolean => {
+	a = a.replace(/[^\d.]/g, "");
+	b = b.replace(/[^\d.]/g, "");
+	const arrA = a.split(".").map((value) => Number(value));
+	const arrB = b.split(".").map((value) => Number(value));
+	try {
+		for (let i = 0; i < Math.min(arrA.length, arrB.length); i++) {
+			if (arrA[i] < arrB[i]) {
+				return true;
+			}
+			if (arrA[i] > arrB[i]) {
+				return false;
+			}
+		}
+	} catch (e: any) {
+		return arrA.length < arrB.length;
+	}
+	return false;
+};
+
+export const equal = (a: string, b: string): boolean => {
+	a = a.replace(/[^\d.]/g, "");
+	b = b.replace(/[^\d.]/g, "");
+	const arrA = a.split(".").map((value) => Number(value));
+	const arrB = b.split(".").map((value) => Number(value));
+	if (arrA.length !== arrB.length) {
+		return false;
+	}
+	for (let i = 0; i < arrA.length; i++) {
+		if (arrA[i] !== arrB[i]) {
+			return false;
+		}
+	}
+	return true;
 };

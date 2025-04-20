@@ -79,7 +79,7 @@ function RouteComponent() {
 							<ReadingNowErrorBoundary />
 							<RecentsErrorBoundary />
 							<ActivityCalendar />
-							<div className="flex flex-col">
+							{/* <div className="flex flex-col">
 								<h1 onClick={() => openDrawer("profile")}>open left drawer</h1>
 								<h1 onClick={() => openDrawer("settings")}>open right drawer</h1>
 							</div>
@@ -89,7 +89,7 @@ function RouteComponent() {
 										Item #{i + 1}
 									</div>
 								))}
-							</div>
+							</div> */}
 						</div>
 					) : (
 						<div className="px-4 flex flex-col justify-center h-full pb-48">

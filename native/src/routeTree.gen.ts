@@ -22,9 +22,11 @@ import { Route as OnboardingOnboardingImport } from './routes/_onboarding/onboar
 import { Route as AppSearchRouteImport } from './routes/_app/_search/route'
 import { Route as AppLibrariesRouteImport } from './routes/_app/_libraries/route'
 import { Route as AppHomeRouteImport } from './routes/_app/_home/route'
+import { Route as AppBrowseRouteImport } from './routes/_app/_browse/route'
 import { Route as AppSearchSearchImport } from './routes/_app/_search/search'
 import { Route as AppLibrariesLibrariesImport } from './routes/_app/_libraries/libraries'
 import { Route as AppHomeHomeImport } from './routes/_app/_home/home'
+import { Route as AppBrowseBrowseImport } from './routes/_app/_browse/browse'
 import { Route as AppLibraryLibraryIdRouteImport } from './routes/_app/library/$libraryId/route'
 import { Route as AppLibraryLibraryIdIndexImport } from './routes/_app/library/$libraryId/index'
 import { Route as AppHomeHomeRecentsImport } from './routes/_app/_home/home.recents'
@@ -93,6 +95,11 @@ const AppHomeRouteRoute = AppHomeRouteImport.update({
   getParentRoute: () => AppRouteRoute,
 } as any)
 
+const AppBrowseRouteRoute = AppBrowseRouteImport.update({
+  id: '/_browse',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+
 const AppSearchSearchRoute = AppSearchSearchImport.update({
   id: '/search',
   path: '/search',
@@ -109,6 +116,12 @@ const AppHomeHomeRoute = AppHomeHomeImport.update({
   id: '/home',
   path: '/home',
   getParentRoute: () => AppHomeRouteRoute,
+} as any)
+
+const AppBrowseBrowseRoute = AppBrowseBrowseImport.update({
+  id: '/browse',
+  path: '/browse',
+  getParentRoute: () => AppBrowseRouteRoute,
 } as any)
 
 const AppLibraryLibraryIdRouteRoute = AppLibraryLibraryIdRouteImport.update({
@@ -174,6 +187,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UnauthorizedImport
       parentRoute: typeof rootRoute
     }
+    '/_app/_browse': {
+      id: '/_app/_browse'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppBrowseRouteImport
+      parentRoute: typeof AppRouteImport
+    }
     '/_app/_home': {
       id: '/_app/_home'
       path: ''
@@ -223,6 +243,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLibraryLibraryIdRouteImport
       parentRoute: typeof AppRouteImport
     }
+    '/_app/_browse/browse': {
+      id: '/_app/_browse/browse'
+      path: '/browse'
+      fullPath: '/browse'
+      preLoaderRoute: typeof AppBrowseBrowseImport
+      parentRoute: typeof AppBrowseRouteImport
+    }
     '/_app/_home/home': {
       id: '/_app/_home/home'
       path: '/home'
@@ -269,6 +296,18 @@ declare module '@tanstack/react-router' {
 }
 
 // Create and export the route tree
+
+interface AppBrowseRouteRouteChildren {
+  AppBrowseBrowseRoute: typeof AppBrowseBrowseRoute
+}
+
+const AppBrowseRouteRouteChildren: AppBrowseRouteRouteChildren = {
+  AppBrowseBrowseRoute: AppBrowseBrowseRoute,
+}
+
+const AppBrowseRouteRouteWithChildren = AppBrowseRouteRoute._addFileChildren(
+  AppBrowseRouteRouteChildren,
+)
 
 interface AppHomeHomeRouteChildren {
   AppHomeHomeAnalyticsRoute: typeof AppHomeHomeAnalyticsRoute
@@ -334,6 +373,7 @@ const AppLibraryLibraryIdRouteRouteWithChildren =
   )
 
 interface AppRouteRouteChildren {
+  AppBrowseRouteRoute: typeof AppBrowseRouteRouteWithChildren
   AppHomeRouteRoute: typeof AppHomeRouteRouteWithChildren
   AppLibrariesRouteRoute: typeof AppLibrariesRouteRouteWithChildren
   AppSearchRouteRoute: typeof AppSearchRouteRouteWithChildren
@@ -341,6 +381,7 @@ interface AppRouteRouteChildren {
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppBrowseRouteRoute: AppBrowseRouteRouteWithChildren,
   AppHomeRouteRoute: AppHomeRouteRouteWithChildren,
   AppLibrariesRouteRoute: AppLibrariesRouteRouteWithChildren,
   AppSearchRouteRoute: AppSearchRouteRouteWithChildren,
@@ -372,6 +413,7 @@ export interface FileRoutesByFullPath {
   '/legal/privacy-policy': typeof LegalPrivacyPolicyRoute
   '/legal/tos': typeof LegalTosRoute
   '/library/$libraryId': typeof AppLibraryLibraryIdRouteRouteWithChildren
+  '/browse': typeof AppBrowseBrowseRoute
   '/home': typeof AppHomeHomeRouteWithChildren
   '/libraries': typeof AppLibrariesLibrariesRoute
   '/search': typeof AppSearchSearchRoute
@@ -388,6 +430,7 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingOnboardingRoute
   '/legal/privacy-policy': typeof LegalPrivacyPolicyRoute
   '/legal/tos': typeof LegalTosRoute
+  '/browse': typeof AppBrowseBrowseRoute
   '/home': typeof AppHomeHomeRouteWithChildren
   '/libraries': typeof AppLibrariesLibrariesRoute
   '/search': typeof AppSearchSearchRoute
@@ -403,6 +446,7 @@ export interface FileRoutesById {
   '/_onboarding': typeof OnboardingRouteRouteWithChildren
   '/test': typeof TestRoute
   '/unauthorized': typeof UnauthorizedRoute
+  '/_app/_browse': typeof AppBrowseRouteRouteWithChildren
   '/_app/_home': typeof AppHomeRouteRouteWithChildren
   '/_app/_libraries': typeof AppLibrariesRouteRouteWithChildren
   '/_app/_search': typeof AppSearchRouteRouteWithChildren
@@ -410,6 +454,7 @@ export interface FileRoutesById {
   '/legal/privacy-policy': typeof LegalPrivacyPolicyRoute
   '/legal/tos': typeof LegalTosRoute
   '/_app/library/$libraryId': typeof AppLibraryLibraryIdRouteRouteWithChildren
+  '/_app/_browse/browse': typeof AppBrowseBrowseRoute
   '/_app/_home/home': typeof AppHomeHomeRouteWithChildren
   '/_app/_libraries/libraries': typeof AppLibrariesLibrariesRoute
   '/_app/_search/search': typeof AppSearchSearchRoute
@@ -429,6 +474,7 @@ export interface FileRouteTypes {
     | '/legal/privacy-policy'
     | '/legal/tos'
     | '/library/$libraryId'
+    | '/browse'
     | '/home'
     | '/libraries'
     | '/search'
@@ -444,6 +490,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/legal/privacy-policy'
     | '/legal/tos'
+    | '/browse'
     | '/home'
     | '/libraries'
     | '/search'
@@ -457,6 +504,7 @@ export interface FileRouteTypes {
     | '/_onboarding'
     | '/test'
     | '/unauthorized'
+    | '/_app/_browse'
     | '/_app/_home'
     | '/_app/_libraries'
     | '/_app/_search'
@@ -464,6 +512,7 @@ export interface FileRouteTypes {
     | '/legal/privacy-policy'
     | '/legal/tos'
     | '/_app/library/$libraryId'
+    | '/_app/_browse/browse'
     | '/_app/_home/home'
     | '/_app/_libraries/libraries'
     | '/_app/_search/search'
@@ -518,6 +567,7 @@ export const routeTree = rootRoute
     "/_app": {
       "filePath": "_app/route.tsx",
       "children": [
+        "/_app/_browse",
         "/_app/_home",
         "/_app/_libraries",
         "/_app/_search",
@@ -535,6 +585,13 @@ export const routeTree = rootRoute
     },
     "/unauthorized": {
       "filePath": "unauthorized.tsx"
+    },
+    "/_app/_browse": {
+      "filePath": "_app/_browse/route.tsx",
+      "parent": "/_app",
+      "children": [
+        "/_app/_browse/browse"
+      ]
     },
     "/_app/_home": {
       "filePath": "_app/_home/route.tsx",
@@ -573,6 +630,10 @@ export const routeTree = rootRoute
       "children": [
         "/_app/library/$libraryId/"
       ]
+    },
+    "/_app/_browse/browse": {
+      "filePath": "_app/_browse/browse.tsx",
+      "parent": "/_app/_browse"
     },
     "/_app/_home/home": {
       "filePath": "_app/_home/home.tsx",
