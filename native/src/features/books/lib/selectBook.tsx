@@ -26,7 +26,7 @@ export async function getRecentlyOpenedBooks(userId: string, limit: number = 5):
 		SELECT b.*
 		FROM books b
 		LEFT JOIN book_state bs ON b.id = bs.book_id
-		WHERE b.user_id = ?
+		WHERE b.id = ?
 		ORDER BY bs.last_opened_at DESC
 		LIMIT ?
 	`;

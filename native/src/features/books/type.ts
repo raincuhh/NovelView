@@ -20,7 +20,7 @@ export interface Book {
 	createdAt: Timestamp;
 	updatedAt: Timestamp;
 
-	lastOpenedAt?: Timestamp;
+	lastReadAt?: Timestamp;
 }
 
 // synced if book is synced, same business.

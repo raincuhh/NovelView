@@ -27,35 +27,29 @@ export const insertNewUser = async (formData: RegisterFormData, auth: { userId: 
 
 		await powersyncDb.writeTransaction(async (tx) => {
 			// user profile
-			const profileExists = await tx.getOptional("SELECT * FROM user_profiles WHERE user_id = ?", [
-				userId,
-			]);
+			const profileExists = await tx.getOptional("SELECT * FROM user_profiles WHERE id = ?", [userId]);
 			if (!profileExists) {
 				await tx.execute(
-					"INSERT INTO user_profiles (user_id, username, gender, dob, avatar_url, created_at, updated_at) VALUES (?, ?, ?, ?, datetime(), datetime())",
+					"INSERT INTO user_profiles (id, username, gender, dob, avatar_url, created_at, updated_at) VALUES (?, ?, ?, ?, ?, datetime(), datetime())",
 					[userId, userProfileData.username, gender, DOB, userProfileData.avatarUrl]
 				);
 				console.log("Seeded local user profile for:", userId);
 			}
 
 			// user settings
-			const settingsExists = await tx.getOptional("SELECT * FROM user_settings WHERE user_id = ?", [
-				userId,
-			]);
+			const settingsExists = await tx.getOptional("SELECT * FROM user_settings WHERE id = ?", [userId]);
 			if (!settingsExists) {
 				await tx.execute(
-					"INSERT INTO user_settings (user_id, theme, metadata, created_at, updated_at) VALUES (?, ?, ?, datetime(), datetime())",
+					"INSERT INTO user_settings (id, theme, metadata, created_at, updated_at) VALUES (?, ?, ?, datetime(), datetime())",
 					[userId, userSettingsData.theme, JSON.stringify(userSettingsData.metadata)]
 				);
 				console.log("Seeded local user settings for:", userId);
 			}
 
 			// user reading preferences
-			const prefsExists = await tx.getOptional("SELECT * FROM user_reading_prefs WHERE user_id = ?", [
-				userId,
-			]);
+			const prefsExists = await tx.getOptional("SELECT * FROM user_reading_prefs WHERE id = ?", [userId]);
 			if (!prefsExists) {
-				await tx.execute("INSERT INTO user_reading_prefs (user_id, prefs) VALUES (?, ?)", [
+				await tx.execute("INSERT INTO user_reading_prefs (id, prefs) VALUES (?, ?)", [
 					userId,
 					JSON.stringify(userReadingPrefsData),
 				]);

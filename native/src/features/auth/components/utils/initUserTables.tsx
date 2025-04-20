@@ -13,9 +13,9 @@ export default function InitUserTables() {
 
 		const init = async () => {
 			const [profile, settings, prefs] = await Promise.all([
-				powersyncDb.getOptional("SELECT id FROM user_profiles WHERE user_id = ?", [userId]),
-				powersyncDb.getOptional("SELECT id FROM user_settings WHERE user_id = ?", [userId]),
-				powersyncDb.getOptional("SELECT id FROM user_reading_prefs WHERE user_id = ?", [userId]),
+				powersyncDb.getOptional("SELECT id FROM user_profiles WHERE id = ?", [userId]),
+				powersyncDb.getOptional("SELECT id FROM user_settings WHERE id = ?", [userId]),
+				powersyncDb.getOptional("SELECT id FROM user_reading_prefs WHERE id = ?", [userId]),
 			]);
 
 			const isInitialized = profile && settings && prefs;
@@ -29,9 +29,9 @@ export default function InitUserTables() {
 				// user profiles
 				tx.execute(
 					`INSERT INTO user_profiles (
-						id, user_id, username, gender, dob, created_at, updated_at, avatar_url
+						id, username, gender, dob, created_at, updated_at, avatar_url
 					) VALUES (
-						uuid(), ?, ?, ?, ?, datetime(), datetime(), ?
+						?, ?, ?, ?, datetime(), datetime(), ?
 					)`,
 					[userId, formData.username, formData.gender, formData.DOB, null]
 				);
@@ -39,9 +39,9 @@ export default function InitUserTables() {
 				// user settings
 				tx.execute(
 					`INSERT INTO user_settings (
-						id, user_id, metadata, theme, created_at, updated_at
+						id, metadata, theme, created_at, updated_at
 					) VALUES (
-						uuid(), ?, ?, ?, datetime(), datetime()
+						?, ?, ?, datetime(), datetime()
 					)`,
 					[userId, JSON.stringify({}), "default"]
 				);
@@ -49,9 +49,9 @@ export default function InitUserTables() {
 				// user prefs
 				tx.execute(
 					`INSERT INTO user_reading_prefs (
-						id, user_id, prefs
+						id, prefs
 					) VALUES (
-						uuid(), ?, ?
+						?, ?
 					)`,
 					[
 						userId,

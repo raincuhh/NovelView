@@ -69,7 +69,7 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
 		};
 
 		const profile = await powersyncDb.getOptional<UserProfile>(
-			"SELECT user_id, username, gender, dob FROM profiles WHERE user_id = ?",
+			"SELECT id, username, gender, dob FROM user_profiles WHERE id = ?",
 			[baseUser.userId]
 		);
 

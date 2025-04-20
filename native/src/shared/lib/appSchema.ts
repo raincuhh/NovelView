@@ -3,7 +3,7 @@ import { column, RowType, Schema, Table } from "@powersync/web";
 const userProfilesTable = new Table(
 	{
 		// id column (text) is automatically included
-		user_id: column.text,
+		username: column.text,
 		gender: column.text,
 		dob: column.text,
 		avatar_url: column.text,
@@ -16,7 +16,6 @@ const userProfilesTable = new Table(
 export const userSettingsTable = new Table(
 	{
 		// id column (text) is automatically included
-		user_id: column.text,
 		metadata: column.text, // Usermetadata type
 		theme: column.text,
 		created_at: column.text,
@@ -27,7 +26,6 @@ export const userSettingsTable = new Table(
 
 const userReadingPrefsTable = new Table(
 	{
-		user_id: column.text,
 		prefs: column.text, // UserReadingPrefsMetadata
 	},
 	{ indexes: {} }
@@ -36,7 +34,6 @@ const userReadingPrefsTable = new Table(
 export const premiumSubscriptionsTable = new Table(
 	{
 		// id column (text) is automatically included
-		user_id: column.text,
 		start_date: column.text,
 		end_date: column.text,
 		created_at: column.text,
