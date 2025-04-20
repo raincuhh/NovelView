@@ -1,5 +1,3 @@
-import { Session } from "@supabase/supabase-js";
-
 export const isValidEmail = (email: string): boolean => {
 	return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 };
@@ -14,23 +12,6 @@ export const formatAuthError = (error: any): string => {
 	return "Authentication failed. Please try again.";
 };
 
-export const extractUserInfo = (session: Session) => {
-	if (!session?.user) return null;
-
-	const { id, email } = session.user;
-	return { id, email };
-};
-
 export const sanitizeInput = (input: string): string => {
 	return input.replace(/[<>]/g, "");
-};
-
-export const isAuthenticated = (session: Session | null): boolean => {
-	return !!session?.user;
-};
-
-export const getUserInitials = (name: string): string => {
-	if (!name) return "";
-	const parts = name.split(" ");
-	return parts.map((part) => part[0].toUpperCase()).join("");
 };

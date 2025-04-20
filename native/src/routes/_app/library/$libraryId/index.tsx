@@ -6,6 +6,7 @@ import LibraryNavbar from "@/pages/library/components/ui/libraryNavbar";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, useParams } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { getBooksByLibraryId } from "@/features/books/lib/selectBook";
 
 export const Route = createFileRoute("/_app/library/$libraryId/")({
 	beforeLoad: ({ location }) => {
@@ -17,8 +18,8 @@ export const Route = createFileRoute("/_app/library/$libraryId/")({
 			bookQueryOptions: {
 				queryKey: ["books", userId, libraryId],
 				queryFn: async () => {
-					if (!userId && !libraryId) throw new Error("User ID & Library ID is missing");
-					return null; //TODO: make the getlibrarybookDisplays here.
+					if (!userId || !libraryId) throw new Error("User ID & Library ID is missing");
+					return getBooksByLibraryId(libraryId);
 				},
 			},
 		};
@@ -62,6 +63,14 @@ function RouteComponent() {
 		};
 	}, []);
 
+	useEffect(() => {
+		console.log("$libraryid route mounted");
+		if (!userId) console.warn("No userId yet");
+		if (isLoading) console.log("Still loading books...");
+		else if (hasBooks) console.log("User has books");
+		else console.log("No books found — showing EmptyBooks");
+	}, [userId, books, isLoading]);
+
 	return (
 		<div className="flex flex-col h-full">
 			<div className="relative flex flex-col h-full">
@@ -74,7 +83,7 @@ function RouteComponent() {
 							{isLoading ? (
 								<div>loading...</div>
 							) : hasBooks ? (
-								<div className="flex flex-col gap-12"></div>
+								<div className="flex flex-col gap-12">Books.</div>
 							) : (
 								<div className="">No books?</div>
 							)}

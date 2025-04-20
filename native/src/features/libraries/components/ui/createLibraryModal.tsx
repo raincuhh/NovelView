@@ -11,6 +11,7 @@ import { useAuthStore } from "@/features/auth/authStore";
 import Label from "@/shared/components/ui/label";
 import { createNewLibrary } from "../../lib/insertLibraries";
 import { useQueryClient } from "@tanstack/react-query";
+import { LIBRARY_COVER_MAX_SIZE } from "../../consts";
 
 const libraryCreateFormSchema = z.object({
 	name: z.string().min(1, "Library name must be at least 1 character"),
@@ -70,13 +71,13 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 				await createNewLibrary({
 					name: libraryName,
 					cover: image,
-					type: synced ? "sync" : "local",
+					type: synced ? "synced" : "local",
 					userId: userId,
 				});
 				console.log("creating library with: ", {
 					libraryName,
 					image,
-					type: synced ? "sync" : "local",
+					type: synced ? "synced" : "local",
 					userId,
 				});
 
@@ -113,8 +114,8 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 							<CoverPicker
 								onValidImage={setImage}
 								inputId="libraryCover"
-								maxWidth={800}
-								maxHeight={800}
+								maxWidth={LIBRARY_COVER_MAX_SIZE}
+								maxHeight={LIBRARY_COVER_MAX_SIZE}
 							/>
 						</FormItem>
 						<FormItem className="w-full gap-4">

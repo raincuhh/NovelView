@@ -12,7 +12,7 @@ import { getFullMostInteractedLibraries } from "@/features/libraries/lib/selectL
 // import { MostInteractedLibrary } from "@/features/libraries/types";
 
 export default function QuickAccess() {
-	const userId = useAuthStore((state) => state.user?.profile.userId);
+	const userId = useAuthStore((state) => state.user?.profile.id);
 	const {
 		data: libraries,
 		isLoading,
@@ -23,8 +23,12 @@ export default function QuickAccess() {
 			if (!userId) throw new Error("User ID is missing");
 			return getFullMostInteractedLibraries(userId);
 		},
-		enabled: !!userId,
+		// enabled: !!userId,
 	});
+
+	useEffect(() => {
+		console.log("userId updated in QuickAccess:", userId);
+	}, [userId]);
 
 	const [coverPaths, setCoverPaths] = useState<Record<string, string | null>>({});
 	const [loadingCovers, setLoadingCovers] = useState<boolean>(true);

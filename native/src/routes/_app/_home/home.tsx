@@ -31,7 +31,8 @@ export const Route = createFileRoute("/_app/_home/home")({
 });
 
 function RouteComponent() {
-	const userId = useAuthStore((state) => state.user?.profile.userId);
+	const userId = useAuthStore((s) => s.user?.auth.id);
+	// @ts-ignore
 	const { openDrawer } = useDrawerStore();
 
 	const { data: libraries, isLoading } = useQuery({
@@ -41,13 +42,20 @@ function RouteComponent() {
 			return getFirstLibrary(userId);
 		},
 		enabled: !!userId,
+		refetchInterval: 60 * 1000,
+		refetchIntervalInBackground: true,
+		refetchOnWindowFocus: true,
 	});
 
 	const hasLibraries = !!libraries;
 
 	useEffect(() => {
-		console.log("libraries: ", libraries);
-	}, [libraries]);
+		console.log("Home route mounted");
+		if (!userId) console.warn("No userId yet");
+		if (isLoading) console.log("Still loading libraries...");
+		else if (hasLibraries) console.log("User has libraries");
+		else console.log("No libraries found — showing EmptyLibraries");
+	}, [userId, libraries, isLoading]);
 
 	// useEffect(() => {
 	// 	const examplePath = TEST_EPUB_SHADOW_SLAVE_VOL_1_FILE_NAME;
@@ -79,17 +87,6 @@ function RouteComponent() {
 							<ReadingNowErrorBoundary />
 							<RecentsErrorBoundary />
 							<ActivityCalendar />
-							{/* <div className="flex flex-col">
-								<h1 onClick={() => openDrawer("profile")}>open left drawer</h1>
-								<h1 onClick={() => openDrawer("settings")}>open right drawer</h1>
-							</div>
-							<div className="flex flex-col gap-1">
-								{Array.from({ length: 50 }, (_, i) => (
-									<div key={i} className="bg-accent hover:bg-primary-alt px-4 rounded-md">
-										Item #{i + 1}
-									</div>
-								))}
-							</div> */}
 						</div>
 					) : (
 						<div className="px-4 flex flex-col justify-center h-full pb-48">
@@ -100,9 +97,6 @@ function RouteComponent() {
 			</div>
 			<Drawer side="left" id="profile">
 				<div className="p-4">Left Drawer Content</div>
-			</Drawer>
-			<Drawer side="right" id="settings">
-				<div className="p-4">Right Drawer Content</div>
 			</Drawer>
 		</div>
 	);

@@ -1,6 +1,6 @@
 import { Timestamp } from "@/shared/database/types";
 
-export type LibraryType = "local" | "sync";
+export type LibraryType = "local" | "synced";
 
 // synced
 export interface Library {

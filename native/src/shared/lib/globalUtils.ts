@@ -49,9 +49,6 @@ export const getTimeAgo = (date: Date): string => {
 	}
 	return "Just now";
 };
-
-export const newer = (a: string, b: string): boolean => !older(a, b) && !equal(a, b);
-
 export const formatTextWithLineBreaks = (text: string): string => {
 	return text.replace(/\n+/g, '<span class="block mb-4"></span>');
 };
@@ -99,3 +96,16 @@ export const equal = (a: string, b: string): boolean => {
 	}
 	return true;
 };
+
+export const newer = (a: string, b: string): boolean => !older(a, b) && !equal(a, b);
+
+export const sleep = (time: number): Promise<void> =>
+	new Promise((resolve) => setTimeout(() => resolve(), time));
+
+export function debounce<T extends (...args: any[]) => void>(fn: T, delay: number) {
+	let timer: NodeJS.Timeout;
+	return (...args: Parameters<T>) => {
+		clearTimeout(timer);
+		timer = setTimeout(() => fn(...args), delay);
+	};
+}

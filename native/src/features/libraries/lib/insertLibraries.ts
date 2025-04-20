@@ -35,7 +35,7 @@ export async function createNewLibrary({ name, cover, type, userId, description 
 		await createLibraryMetadata(localDir, { name, type, coverUrl });
 
 		switch (type) {
-			case "sync":
+			case "synced":
 				await powersyncDb.writeTransaction(async (tx) => {
 					tx.execute(
 						`INSERT INTO libraries (
@@ -51,7 +51,6 @@ export async function createNewLibrary({ name, cover, type, userId, description 
 						[id, userId, name, description, coverUrl, type]
 					);
 				});
-
 				break;
 			case "local":
 				localDb.execute(
