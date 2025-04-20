@@ -5,63 +5,68 @@ import { useAuthStore } from "@/features/auth/authStore";
 import { useRegisterFormStore } from "@/pages/onboarding/registerFormStore";
 
 export default function InitUserTables() {
-	const user = useAuthStore((state) => state.user?.auth);
+	const userId = useAuthStore.getState().user?.profile.userId;
 	const { formData } = useRegisterFormStore();
 
 	useEffect(() => {
-		if (!user) return;
+		if (!userId) return;
 
 		const init = async () => {
-			const userId = user.id;
-			console.log("initializing user tables");
+			const [profile, settings, prefs] = await Promise.all([
+				powersyncDb.getOptional("SELECT id FROM user_profiles WHERE user_id = ?", [userId]),
+				powersyncDb.getOptional("SELECT id FROM user_settings WHERE user_id = ?", [userId]),
+				powersyncDb.getOptional("SELECT id FROM user_reading_prefs WHERE user_id = ?", [userId]),
+			]);
 
-			const existing = await powersyncDb.getOptional<{ id: string }>(
-				"SELECT id FROM profiles WHERE user_id = ?",
-				[userId]
-			);
+			const isInitialized = profile && settings && prefs;
 
-			if (existing?.id) {
-				console.log("User already initialized");
+			if (isInitialized) {
+				console.log("User fully initialized");
 				return;
 			}
 
 			await powersyncDb.writeTransaction(async (tx) => {
+				// user profiles
 				tx.execute(
-					`INSERT INTO profiles (
-            				id,
-            				user_id,
-            				username,
-            				gender,
-            				dob,
-            				created_at,
-            				updated_at,
-            				avatar_url
-            			) VALUES (uuid(), ?, ?, ?, ?, datetime(), datetime(), ?)`,
-					[user.id, formData.username, formData.gender, formData.DOB, null]
+					`INSERT INTO user_profiles (
+						id, user_id, username, gender, dob, created_at, updated_at, avatar_url
+					) VALUES (
+						uuid(), ?, ?, ?, ?, datetime(), datetime(), ?
+					)`,
+					[userId, formData.username, formData.gender, formData.DOB, null]
 				);
-				console.log("Inserted into profiles");
 
+				// user settings
 				tx.execute(
 					`INSERT INTO user_settings (
-            					id,
-            					user_id,
-            					onboarding_completed,
-            					app_theme,
-            					app_accent,
-            					font_size,
-            					language,
-            					notifications_enabled,
-            					created_at,
-            					updated_at
-            			  ) VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, datetime(), datetime())`,
-					[user.id, true, "default", "default", 14, "en", true]
+						id, user_id, metadata, theme, created_at, updated_at
+					) VALUES (
+						uuid(), ?, ?, ?, datetime(), datetime()
+					)`,
+					[userId, JSON.stringify({}), "default"]
 				);
-				console.log("Inserted into user_settings");
+
+				// user prefs
+				tx.execute(
+					`INSERT INTO user_reading_prefs (
+						id, user_id, prefs
+					) VALUES (
+						uuid(), ?, ?
+					)`,
+					[
+						userId,
+						JSON.stringify({
+							font_size: 14,
+							language: "en",
+							notifications_enabled: true,
+						}),
+					]
+				);
 			});
 		};
 
 		init();
-	}, [user]);
+	}, [userId]);
 
 	return null;
 }

@@ -7,9 +7,10 @@ import { Link } from "@tanstack/react-router";
 import Separator from "@/shared/components/ui/separator";
 import { useRegisterFormStore } from "../../registerFormStore";
 import { cn } from "@/shared/lib/globalUtils";
-import { powersyncDb, supabase } from "@/shared/providers/systemProvider";
+import { supabase } from "@/shared/providers/systemProvider";
 import { CombinedOnboardingViews } from "../../types";
 import { useViewTransition } from "@/shared/providers/viewTransitionProvider";
+import { insertNewUser } from "@/features/user/lib/insertUser";
 
 export default function RegisterFinish() {
 	const { viewSwitcherNavigate } = useViewTransition<CombinedOnboardingViews>();
@@ -46,45 +47,9 @@ export default function RegisterFinish() {
 
 			if (error) throw error;
 
-			console.log("signUp response:", data);
+			console.log("Register response:", data);
 
-			if (data.user) {
-				const user = data.user;
-
-				await powersyncDb.writeTransaction(async (tx) => {
-					tx.execute(
-						`INSERT INTO profiles (
-							id,
-							user_id,
-							username,
-							gender,
-							dob,
-							created_at,
-							updated_at,
-							avatar_url
-						) VALUES (uuid(), ?, ?, ?, ?, datetime(), datetime(), ?)`,
-						[user.id, formData.username, formData.gender, formData.DOB, null]
-					);
-					console.log("Inserted into profiles");
-
-					tx.execute(
-						`INSERT INTO user_settings (
-								id,
-								user_id,
-								onboarding_completed,
-								app_theme,
-								app_accent,
-								font_size,
-								language,
-								notifications_enabled,
-								created_at,
-								updated_at
-						  ) VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, datetime(), datetime())`,
-						[user.id, true, "default", "default", 14, "en", true]
-					);
-					console.log("Inserted into user_settings");
-				});
-			}
+			if (data.user) await insertNewUser(formData, { userId: data.user.id, email: formData.email });
 
 			viewSwitcherNavigate(CombinedOnboardingViews.loginForm);
 		} catch (err: any) {

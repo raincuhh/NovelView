@@ -71,6 +71,7 @@ export interface UserSettings {
 // user profile.
 export interface UserProfile {
 	userId: string; // auth.user.id
+	username: string;
 	gender?: GenderType;
 	dob?: DateOfBirth;
 	avatarUrl?: string; // generated / uploaded

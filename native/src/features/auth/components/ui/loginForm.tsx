@@ -60,60 +60,12 @@ export default function LoginForm() {
 				return;
 			}
 
-			const userId = session.user.id;
-			console.log("Logged in as:", userId);
+			// const userId = session.user.id;
+			// const avatarUrl = session.user.user_metadata?.avatar_url ?? "";
 
-			// const { data: existingRemoteProfile, error: profileError } = await supabase?.client
-			// 	.from("profiles")
-			// 	.select("id")
-			// 	.eq("user_id", userId)
-			// 	.single();
-			//
-			// const remoteProfileExists = !!existingRemoteProfile;
-			// if (profileError && profileError.code !== "PGRST116") {
-			// 	console.error("Error checking remote profile:", profileError);
-			// }
-			//
-			// await powersyncDb.writeTransaction(async (tx) => {
-			// const userSettingsExisted = await tx.getOptional(
-			// 	"SELECT * FROM user_settings WHERE user_id = ?",
-			// 	[userId]
-			// );
-			// const userProfileExisted = await tx.getOptional("SELECT * FROM profiles WHERE user_id = ?", [
-			// 	userId,
-			// ]);
-			// if (!userSettingsExisted) {
-			// 	await tx.execute(
-			// 		`INSERT INTO user_settings (
-			// 				id,
-			// 				user_id,
-			// 				onboarding_completed,
-			// 				app_theme,
-			// 				app_accent,
-			// 				font_size,
-			// 				language,
-			// 				notifications_enabled,
-			// 				created_at,
-			// 				updated_at
-			// 		  ) VALUES (uuid(), ?, ?, ?, ?, ?, ?, ?, datetime(), datetime())`,
-			// 		[userId, true, "default", "", 14, "en", true]
-			// 	);
-			// 	// console.log("seeded local user_settings row for:", userId);
-			// }
-			// if (!userProfileExisted) {
-			// 	await tx.execute(
-			// 		`INSERT INTO profiles (
-			// 				id,
-			// 				user_id,
-			// 				username,
-			// 				created_at,
-			// 				updated_at
-			// 		  ) VALUES (uuid(), ?, ?, datetime(), datetime())`,
-			// 		[userId, session.user.email]
-			// 	);
-			// 	console.log("Seeded local profiles row for:", userId);
-			// }
-			// });
+			// await insertNewUser(userId, avatarUrl);
+
+			console.log("Logged in:", session);
 
 			navigate({ to: "/home" });
 		} catch (err: any) {

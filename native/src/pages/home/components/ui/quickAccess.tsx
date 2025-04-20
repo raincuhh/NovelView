@@ -3,11 +3,11 @@ import QuickAccessItem from "./quickAccessItem";
 import { useAuthStore } from "@/features/auth/authStore";
 import { useQuery } from "@powersync/tanstack-react-query";
 import Skeleton from "react-loading-skeleton";
-import { getCombinedMostInteractedLibraries } from "@/features/libraries/lib/selectLibraries";
 import { cn } from "@/shared/lib/globalUtils";
 import { useEffect, useState } from "react";
 import { getLibraryCoverPath } from "@/features/libraries/lib/utils";
-import { Library } from "@/features/libraries/types";
+import { MostInteractedLibrary } from "@/features/libraries/types";
+import { getFullMostInteractedLibraries } from "@/features/libraries/lib/selectLibraries";
 // import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
 // import { MostInteractedLibrary } from "@/features/libraries/types";
 
@@ -21,7 +21,7 @@ export default function QuickAccess() {
 		queryKey: ["mostInteractedLibraries", userId],
 		queryFn: () => {
 			if (!userId) throw new Error("User ID is missing");
-			return getCombinedMostInteractedLibraries(userId);
+			return getFullMostInteractedLibraries(userId);
 		},
 		enabled: !!userId,
 	});
@@ -35,7 +35,7 @@ export default function QuickAccess() {
 		const loadCovers = async () => {
 			setLoadingCovers(true);
 			const entries = await Promise.all(
-				libraries.map(async (lib: Library) => {
+				libraries.map(async (lib: MostInteractedLibrary) => {
 					const cover = await getLibraryCoverPath(lib?.id);
 					return [lib.id, cover] as const;
 				})

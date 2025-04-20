@@ -1,47 +1,71 @@
 import { powersyncDb } from "@/shared/providers/systemProvider";
 import { getDefaultUserReadingPrefs } from "./utils";
-import { ThemeType } from "@/shared/database/types";
+import { UserProfile, UserReadingPrefsMetadata, UserSettings } from "../types";
+import { RegisterFormData } from "@/pages/onboarding/registerFormStore";
 
-export async function insertUserData(
-	userId: string,
-	avatarUrl: string,
-	theme: ThemeType = "dark"
-): Promise<void> {
-	const defaultReadingPrefs = getDefaultUserReadingPrefs();
-	const now = new Date().toISOString();
+export const insertNewUser = async (formData: RegisterFormData, auth: { userId: string; email: string }) => {
+	try {
+		const { gender, DOB, username } = formData;
+		const { userId } = auth;
 
-	await powersyncDb.writeTransaction(async (tx) => {
-		// user profile
-		const profileExists = await tx.getOptional("SELECT * FROM user_profiles WHERE user_id = ?", [userId]);
+		const userProfileData: UserProfile = {
+			userId,
+			username,
+			createdAt: new Date().toISOString(),
+			updatedAt: new Date().toISOString(),
+		};
 
-		if (!profileExists) {
-			await tx.execute(
-				"INSERT INTO user_profiles (user_id, avatar_url, created_at, updated_at) VALUES (?, ?, ?, ?)",
-				[userId, avatarUrl, now, now]
-			);
-			console.log("Seeded local user profile for:", userId);
-		}
+		const userSettingsData: UserSettings = {
+			userId,
+			metadata: { language: "en" },
+			theme: "dark",
+			createdAt: new Date().toISOString(),
+			updatedAt: new Date().toISOString(),
+		};
 
-		// user settings
-		const settingsExists = await tx.getOptional("SELECT * FROM user_settings WHERE user_id = ?", [userId]);
+		const userReadingPrefsData: UserReadingPrefsMetadata = getDefaultUserReadingPrefs(); // Get default prefs
 
-		if (!settingsExists) {
-			await tx.execute(
-				"INSERT INTO user_settings (user_id, theme, metadata, created_at, updated_at) VALUES (?, ?, ?, ?, ?)",
-				[userId, theme, "{}", now, now]
-			);
-			console.log("Seeded local user settings for:", userId);
-		}
-
-		// reading prefs
-		const prefsExist = await tx.getOptional("SELECT * FROM user_reading_prefs WHERE user_id = ?", [userId]);
-
-		if (!prefsExist) {
-			await tx.execute("INSERT INTO user_reading_prefs (user_id, prefs) VALUES (?, ?)", [
+		await powersyncDb.writeTransaction(async (tx) => {
+			// user profile
+			const profileExists = await tx.getOptional("SELECT * FROM user_profiles WHERE user_id = ?", [
 				userId,
-				JSON.stringify(defaultReadingPrefs),
 			]);
-			console.log("Seeded local user reading prefs for:", userId);
-		}
-	});
-}
+			if (!profileExists) {
+				await tx.execute(
+					"INSERT INTO user_profiles (user_id, username, gender, dob, avatar_url, created_at, updated_at) VALUES (?, ?, ?, ?, datetime(), datetime())",
+					[userId, userProfileData.username, gender, DOB, userProfileData.avatarUrl]
+				);
+				console.log("Seeded local user profile for:", userId);
+			}
+
+			// user settings
+			const settingsExists = await tx.getOptional("SELECT * FROM user_settings WHERE user_id = ?", [
+				userId,
+			]);
+			if (!settingsExists) {
+				await tx.execute(
+					"INSERT INTO user_settings (user_id, theme, metadata, created_at, updated_at) VALUES (?, ?, ?, datetime(), datetime())",
+					[userId, userSettingsData.theme, JSON.stringify(userSettingsData.metadata)]
+				);
+				console.log("Seeded local user settings for:", userId);
+			}
+
+			// user reading preferences
+			const prefsExists = await tx.getOptional("SELECT * FROM user_reading_prefs WHERE user_id = ?", [
+				userId,
+			]);
+			if (!prefsExists) {
+				await tx.execute("INSERT INTO user_reading_prefs (user_id, prefs) VALUES (?, ?)", [
+					userId,
+					JSON.stringify(userReadingPrefsData),
+				]);
+				console.log("Seeded local user reading prefs for:", userId);
+			}
+		});
+
+		return { success: true };
+	} catch (error) {
+		console.error("Error inserting user data:", error);
+		throw new Error("Error inserting new user");
+	}
+};
