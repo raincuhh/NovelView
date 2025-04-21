@@ -116,7 +116,7 @@ const ReadingNowSkeleton = () => (
 		</div>
 		<div className="flex flex-col w-full px-4">
 			<header className="w-full h-min flex justify-center items-center min-h-32 select-none">
-				<div className="relative select-none h-48 w-38">
+				<div className="relative select-none h-48 w-full">
 					<Skeleton className="w-full h-full" />
 				</div>
 			</header>
