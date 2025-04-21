@@ -137,7 +137,7 @@ const Icon = {
 			<path d="M12.71 2.29a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42A1 1 0 0 0 3 13h1v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7h1a1 1 0 0 0 1-1 1 1 0 0 0-.29-.71zM6 20v-9.59l6-6 6 6V20z" />
 		</svg>
 	),
-	checkbox: ({ className }: IconProps) => (
+	check: ({ className }: IconProps) => (
 		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
 			<path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z" />
 		</svg>

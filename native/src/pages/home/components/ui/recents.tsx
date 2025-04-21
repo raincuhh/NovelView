@@ -1,6 +1,6 @@
 import { MOCK_BOOKS } from "@/features/books/const";
 import RenderList from "@/shared/components/utils/renderList";
-import { Book } from "@/shared/lib/appSchema";
+import { Book } from "@/features/books/types";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import RecentsItem from "./recentsItem";
@@ -8,7 +8,7 @@ import HomeSectionHeader from "./homeSectionHeader";
 
 export default function Recents() {
 	const books: Book[] = MOCK_BOOKS;
-	const isLoading: boolean = true;
+	const isLoading: boolean = false;
 	const error: Error | null = null;
 
 	const [coverPaths, setCoverPaths] = useState<Record<string, string | null>>({});
@@ -24,12 +24,13 @@ export default function Recents() {
 					// for now il just return the cover_book url if it has one.
 					// TODO: implement getting book cover image url.
 					// const cover = await getBookCoverPath(lib.id);
-					const cover = book?.cover_image_url;
+					const cover = book?.coverImageUrl;
+
 					return [book.id, cover] as const;
 				})
 			);
 
-			setCoverPaths(Object.fromEntries(entries));
+			setCoverPaths(Object.fromEntries(entries.map(([id, cover]) => [id, cover ?? null])));
 			setLoadingCovers(false);
 		};
 
@@ -69,10 +70,12 @@ const RecentsList = ({ books, coverPaths }: { books: Book[]; coverPaths: Record<
 
 	return (
 		<div className="relative flex flex-col gap-2 w-full">
-			<ul className="flex py-2 px-4 gap-4 snap-x snap-mandatory overflow-x-scroll">
+			<ul className="flex py-2 pr-4 snap-x snap-mandatory overflow-x-scroll">
 				<RenderList
 					data={bookPairs}
-					render={([book, coverPath]) => <RecentsItem key={book.id} book={book} coverPath={coverPath} />}
+					render={([book, coverPath], i: number) => (
+						<RecentsItem key={book.id + i} book={book} coverPath={coverPath} />
+					)}
 				/>
 			</ul>
 		</div>

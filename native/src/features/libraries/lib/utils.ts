@@ -4,6 +4,7 @@ import { appLocalDataDir, join } from "@tauri-apps/api/path";
 import { create, exists, writeFile } from "@tauri-apps/plugin-fs";
 import { SUPABASE_LIBRARIES_COVER_PATH_TEMPLATE } from "../consts";
 import { LibraryType } from "../types";
+import { getCoverPath } from "@/shared/lib/fs/getCoverPath";
 
 export async function saveLibraryCover(libraryId: string, cover: File) {
 	try {
@@ -20,42 +21,14 @@ export async function saveLibraryCover(libraryId: string, cover: File) {
 	}
 }
 
-const coverCache: { [libraryId: string]: string | null } = {};
+const libraryCoverCache: { [libraryId: string]: string | null } = {};
 
-export async function getLibraryCoverPath(libraryId: string, fallbackUrl?: string): Promise<string | null> {
-	if (coverCache[libraryId]) return coverCache[libraryId];
-
-	const possibleExtensions = ["jpg", "png", "webp", "jpeg"];
-	const baseDir = await appLocalDataDir();
-
-	for (const ext of possibleExtensions) {
-		try {
-			const relativePath = `${LIBRARIES_FOLDER}/${libraryId}/cover.${ext}`;
-			const fullPath = await join(baseDir, relativePath);
-			const fileExists = await exists(relativePath, { baseDir: LOCAL_APPDATA });
-
-			if (fileExists) {
-				const fileUrl = convertFileSrc(fullPath, "asset");
-
-				coverCache[libraryId] = fileUrl;
-				return fileUrl;
-			}
-		} catch (err: any) {
-			// do nothing
-		}
-	}
-
-	if (fallbackUrl) {
-		coverCache[libraryId] = fallbackUrl;
-		return fallbackUrl;
-	}
-
-	coverCache[libraryId] = null;
-	return null;
+export async function getLibraryCoverPath(libraryId: string, fallbackUrl?: string) {
+	return getCoverPath(libraryId, LIBRARIES_FOLDER, libraryCoverCache, fallbackUrl);
 }
 
 export function clearCoverCache(libraryId: string) {
-	delete coverCache[libraryId];
+	delete libraryCoverCache[libraryId];
 }
 
 export function getSupabaseLibraryCoverPath(libraryId: string, ext: string): string {

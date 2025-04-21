@@ -28,7 +28,7 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 	return (
 		<div
 			className={cn(
-				"sticky top-0 z-1 w-full bg-transparent transition-colors ease-in-out duration-100",
+				"sticky top-0 z-1 w-full bg-transparent transition-colors ease-in-out duration-200",
 				isScrolled ? "bg-primary" : ""
 			)}
 		>
