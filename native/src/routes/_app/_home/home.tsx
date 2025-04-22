@@ -92,7 +92,7 @@ function RouteComponent() {
 							<MobileBottomPadding />
 						</div>
 					) : (
-						<div className="px-4 flex flex-col justify-center h-full pb-48">
+						<div className="px-4 flex flex-col justify-center h-full">
 							<EmptyLibraries />
 						</div>
 					)}
