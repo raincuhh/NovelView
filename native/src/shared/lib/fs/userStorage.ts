@@ -1,9 +1,9 @@
-import { appDataDir } from "@tauri-apps/api/path";
+import { appLocalDataDir } from "@tauri-apps/api/path";
 
 let userStoragePath: string = ""; // is localappdata dir but yeah.
 
 export async function initUserStoragePath() {
-	userStoragePath = await appDataDir();
+	userStoragePath = await appLocalDataDir();
 	if (!userStoragePath.endsWith("/")) {
 		userStoragePath += "/";
 	}

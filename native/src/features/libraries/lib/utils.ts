@@ -57,6 +57,8 @@ export function getLocalLibraryCoverPath(libraryId: string, ext: string): string
 	return LOCAL_LIBRARY_COVER_PATH_TEMPLATE.replace("{libraryId}", libraryId).replace("{ext}", ext);
 }
 
-export function getRemoteLibraryCoverPath(libraryId: string, ext: string): string {
-	return REMOTE_LIBRARY_COVER_PATH_TEMPLATE.replace("{libraryId}", libraryId).replace("{ext}", ext);
+export function getRemoteLibraryCoverPath(userId: string, libraryId: string, ext: string): string {
+	return REMOTE_LIBRARY_COVER_PATH_TEMPLATE.replace("{userId}", userId)
+		.replace("{libraryId}", libraryId)
+		.replace("{ext}", ext);
 }

@@ -5,9 +5,9 @@ import { createContext, ReactNode, Suspense, useContext, useEffect, useState } f
 import { AppSchema } from "../lib/powersync/appSchema";
 import Database from "@tauri-apps/plugin-sql";
 import Logger from "js-logger";
-import { LibraryCoversAttachmentQueue } from "../lib/powersync/libraryCoversAttatchmentQueue";
-import { BookFilesAttachmentQueue } from "../lib/powersync/bookFilesAttatchmentQueue";
-import { AvatarsAttachmentQueue } from "../lib/powersync/avatarsAttatchmentQueue";
+import { LibraryCoversAttachmentQueue } from "../lib/powersync/libraryCoversAttachmentQueue";
+import { BookFilesAttachmentQueue } from "../lib/powersync/bookFilesAttachmentQueue";
+import { AvatarsAttachmentQueue } from "../lib/powersync/avatarsAttachmentQueue";
 
 Logger.useDefaults();
 
@@ -31,7 +31,7 @@ const powersyncDb = new PowerSyncDatabase({
 	},
 });
 
-// await powersyncDb.execute("DELETE FROM attachments"); // do not remove ts bruh, only testing to delete queue if faulty queue.
+// await powersyncDb.execute("DELETE FROM library_covers"); // do not remove ts bruh, only testing to delete queue if faulty queue.
 
 const localDb: Database = await Database.load("sqlite:local.db");
 const sessionDb: Database = await Database.load("sqlite:session.db");
@@ -42,6 +42,7 @@ const SystemProvider = ({ children }: { children: ReactNode }) => {
 
 	const [libraryCoversQueue] = useState<LibraryCoversAttachmentQueue | undefined>(() => {
 		return new LibraryCoversAttachmentQueue({
+			attachmentTableName: "library_covers",
 			powersync: powerSync,
 			storage: connector.libraryCoversStorage,
 		});
@@ -49,6 +50,7 @@ const SystemProvider = ({ children }: { children: ReactNode }) => {
 
 	const [bookFilesQueue] = useState<BookFilesAttachmentQueue | undefined>(() => {
 		return new BookFilesAttachmentQueue({
+			attachmentTableName: "book_files",
 			powersync: powerSync,
 			storage: connector.bookFilesStorage,
 		});
@@ -56,6 +58,7 @@ const SystemProvider = ({ children }: { children: ReactNode }) => {
 
 	const [avatarsQueue] = useState<AvatarsAttachmentQueue | undefined>(() => {
 		return new AvatarsAttachmentQueue({
+			attachmentTableName: "avatars",
 			powersync: powerSync,
 			storage: connector.avatarsStorage,
 		});

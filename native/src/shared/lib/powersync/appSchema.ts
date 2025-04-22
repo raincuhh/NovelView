@@ -1,8 +1,15 @@
 import { AttachmentTable } from "@powersync/attachments";
 import { column, RowType, Schema, Table } from "@powersync/web";
 
-const attachmentsTable = new AttachmentTable({
-	name: "attachments",
+const bookFilesTable = new AttachmentTable({
+	name: "book_files",
+});
+const libraryCoversTable = new AttachmentTable({
+	// attachmentDirectoryName: "customDir",
+	name: "library_covers",
+});
+const avatarsTable = new AttachmentTable({
+	name: "avatars",
 });
 
 const userProfilesTable = new Table(
@@ -97,7 +104,9 @@ export const AppSchema = new Schema({
 	libraries: librariesTable,
 	books: booksTable,
 	book_info: bookInfoTable,
-	attachments: attachmentsTable,
+	book_files: bookFilesTable,
+	avatars: avatarsTable,
+	library_covers: libraryCoversTable,
 });
 
 export const Tables = {
@@ -108,7 +117,9 @@ export const Tables = {
 	libraries: librariesTable,
 	books: booksTable,
 	book_info: bookInfoTable,
-	attachments: attachmentsTable,
+	book_files: bookFilesTable,
+	avatars: avatarsTable,
+	library_covers: libraryCoversTable,
 } as const;
 
 export type Database = (typeof AppSchema)["types"];

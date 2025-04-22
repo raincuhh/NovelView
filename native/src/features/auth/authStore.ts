@@ -42,7 +42,7 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
 
 			const session = await supabase.getSession();
 			if (session) {
-				console.log("refreshing user");
+				// console.log("refreshing user");
 				set({ session });
 				await get().refreshUser();
 			}
@@ -74,7 +74,7 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
 				[baseUser.id]
 			);
 
-			console.log(profile, baseUser);
+			// console.log(profile, baseUser);
 
 			if (profile) {
 				set({

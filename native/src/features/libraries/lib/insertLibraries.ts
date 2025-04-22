@@ -10,7 +10,7 @@ import {
 } from "./utils";
 import Database from "@tauri-apps/plugin-sql";
 import { PowerSyncDatabase, Transaction } from "@powersync/web";
-import { LibraryCoversAttachmentQueue } from "@/shared/lib/powersync/libraryCoversAttatchmentQueue";
+import { LibraryCoversAttachmentQueue } from "@/shared/lib/powersync/libraryCoversAttachmentQueue";
 import { fileToBase64 } from "@/shared/lib/fs/fileToBase64";
 import { getFileExtension } from "@/shared/lib/globalUtils";
 
@@ -43,7 +43,7 @@ export async function createNewLibrary({
 			const base64Data = await fileToBase64(cover);
 			const fileExtension = getFileExtension(cover.name);
 			const localFilePath = getLocalLibraryCoverPath(id, fileExtension);
-			const remotePath = getRemoteLibraryCoverPath(id, fileExtension);
+			const remotePath = getRemoteLibraryCoverPath(userId, id, fileExtension);
 
 			const attachment = await libraryCoversQueue.saveAttachment(
 				base64Data,

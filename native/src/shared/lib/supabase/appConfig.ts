@@ -5,6 +5,6 @@ export const AppConfig = {
 	buckets: {
 		bookFiles: import.meta.env.VITE_BUCKET_BOOK_FILES,
 		avatars: import.meta.env.VITE_BUCKET_AVATARS,
-		libraryCovers: import.meta.env.VITE_BUCKET_LIBRARY_COVERS,
+		libraries: import.meta.env.VITE_BUCKET_LIBRARIES,
 	},
 };
