@@ -61,7 +61,7 @@ export default function MobileNavigationButtons() {
 	];
 
 	return (
-		<div className="flex w-full px-8 pt-3 pb-2 justify-between">
+		<div className="flex w-full px-9 pt-3 pb-2 justify-between">
 			<RenderList
 				data={buttons}
 				render={(item, i) => (
