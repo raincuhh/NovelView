@@ -73,9 +73,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
-      color-js:
-        specifier: ^1.0.5
-        version: 1.0.5
+      color.js:
+        specifier: ^1.2.0
+        version: 1.2.0
       framer-motion:
         specifier: ^12.6.3
         version: 12.6.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1730,11 +1730,11 @@ packages:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
 
-  color-js@1.0.5:
-    resolution: {integrity: sha512-KgOTVz7fupb3lOXu4lixP6BR2CdMaTtCnGmLfHZWhq8NU3MABd6U9KjWtJVuYChGS/gIaoA8LakKKQfWhQgwYQ==}
-
   color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+
+  color.js@1.2.0:
+    resolution: {integrity: sha512-0ajlNgWWOR7EK9N6l2h0YKsZPzMCLQG5bheCoTGpGfhkR8tB5eQNItdua1oFHDTeq9JKgSzQJqo+Gp3V/xW+Lw==}
 
   comlink@4.4.2:
     resolution: {integrity: sha512-OxGdvBmJuNKSCMO4NTl1L47VRp6xn2wG4F/2hYzB6tiCb709otOxtEYCSvK80PtjODfXXZu8ds+Nw5kVCjqd2g==}
@@ -4802,9 +4802,9 @@ snapshots:
     dependencies:
       color-name: 1.1.4
 
-  color-js@1.0.5: {}
-
   color-name@1.1.4: {}
+
+  color.js@1.2.0: {}
 
   comlink@4.4.2: {}
 
