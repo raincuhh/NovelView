@@ -86,7 +86,6 @@ function RouteComponent() {
 					) : hasLibraries ? (
 						<div className="flex flex-col gap-8">
 							<QuickAccessErrorBoundary />
-
 							<ReadingNowErrorBoundary />
 							<RecentsErrorBoundary />
 							<ActivityCalendar />
