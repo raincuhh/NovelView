@@ -7,7 +7,7 @@ type RecentsItemProps = {
 };
 // @ts-ignore
 export default function RecentsItem({ book, coverPath }: RecentsItemProps) {
-	const { progress, timeAgo, isLoading } = useBookInfo(book, "percentage");
+	const { progress, timeAgo } = useBookInfo(book, "percentage");
 
 	return (
 		<li className="min-w-56 h-22 relative snap-start pl-4">

@@ -9,3 +9,11 @@ export const TEST_EPUB_RED_RISING_FILE_NAME =
 	localTestEpubFolderPath + "Red_Rising_Red_Rising_Saga_1_-_Pierce_Brown.epub";
 export const TEST_EPUB_SHADOW_SLAVE_VOL_1_FILE_NAME =
 	localTestEpubFolderPath + "Shadow Slave - Vol. 1 - Child of Shadows.epub";
+
+export const AVATARS_BUCKET_ALLOWED_MIMETYPE = "image/jpeg, image/png, image/svg, image/webp";
+export const LIBRARY_COVERS_BUCKET_ALLOWED_MIMETYPE = "image/jpeg, image/png, image/svg, image/webp";
+export const BOOK_FILES_BUCKET_ALLOWED_MIMETYPE = "application/epub+zip, application/pdf";
+
+export const AVATARS_BUCKET_ALLOWED_EXTENSIONS = ["jpeg", "jpg", "png", "svg", "webp"];
+export const LIBRARY_COVERS_BUCKET_ALLOWED_EXTENSIONS = ["jpeg", "jpg", "png", "svg", "webp"];
+export const BOOK_FILES_BUCKET_ALLOWED_EXTENSIONS = ["epub", "pdf"];

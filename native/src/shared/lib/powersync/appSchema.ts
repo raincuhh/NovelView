@@ -1,4 +1,9 @@
+import { AttachmentTable } from "@powersync/attachments";
 import { column, RowType, Schema, Table } from "@powersync/web";
+
+const attachmentsTable = new AttachmentTable({
+	name: "attachments",
+});
 
 const userProfilesTable = new Table(
 	{
@@ -92,6 +97,7 @@ export const AppSchema = new Schema({
 	libraries: librariesTable,
 	books: booksTable,
 	book_info: bookInfoTable,
+	attachments: attachmentsTable,
 });
 
 export const Tables = {
@@ -102,6 +108,7 @@ export const Tables = {
 	libraries: librariesTable,
 	books: booksTable,
 	book_info: bookInfoTable,
+	attachments: attachmentsTable,
 } as const;
 
 export type Database = (typeof AppSchema)["types"];

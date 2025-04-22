@@ -6,7 +6,10 @@ import {
 	UpdateType,
 } from "@powersync/web";
 import { Session, SupabaseClient, createClient } from "@supabase/supabase-js";
-import { env } from "./env";
+import { AppConfig } from "./appConfig";
+import { AvatarsStorageAdapter } from "./avatarsStorageAdapter";
+import { BookFilesStorageAdapter } from "./bookFilesStorageAdapter";
+import { LibraryCoversStorageAdapter } from "./libraryCoversStorageAdapter";
 
 export type SupabaseConfig = {
 	supabaseUrl: string;
@@ -31,6 +34,10 @@ export class SupabaseConnector
 	implements PowerSyncBackendConnector
 {
 	readonly client: SupabaseClient;
+	readonly bookFilesStorage: BookFilesStorageAdapter;
+	readonly avatarsStorage: AvatarsStorageAdapter;
+	readonly libraryCoversStorage: LibraryCoversStorageAdapter;
+
 	private readonly _config: SupabaseConfig;
 	private _ready: boolean = false;
 	private _currentSession: Session | null;
@@ -38,9 +45,9 @@ export class SupabaseConnector
 	constructor() {
 		super();
 		this._config = {
-			supabaseUrl: env.SUPABASE_URL,
-			powersyncUrl: env.POWERSYNC_URL,
-			supabaseAnonKey: env.SUPABASE_ANON_KEY,
+			supabaseUrl: AppConfig.supabaseUrl,
+			powersyncUrl: AppConfig.powersyncUrl,
+			supabaseAnonKey: AppConfig.supabaseAnonKey,
 		};
 
 		this.client = createClient(this._config.supabaseUrl, this._config.supabaseAnonKey, {
@@ -48,6 +55,11 @@ export class SupabaseConnector
 				persistSession: true,
 			},
 		});
+
+		this.bookFilesStorage = new BookFilesStorageAdapter({ client: this.client });
+		this.avatarsStorage = new AvatarsStorageAdapter({ client: this.client });
+		this.libraryCoversStorage = new LibraryCoversStorageAdapter({ client: this.client });
+
 		this._currentSession = null;
 		this._ready = false;
 	}

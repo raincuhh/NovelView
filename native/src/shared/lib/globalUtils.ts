@@ -109,3 +109,8 @@ export function debounce<T extends (...args: any[]) => void>(fn: T, delay: numbe
 		timer = setTimeout(() => fn(...args), delay);
 	};
 }
+
+export function getFileExtension(filename: string): string {
+	const parts = filename.split(".");
+	return parts.length > 1 ? parts.pop()?.toLowerCase() || "" : "";
+}

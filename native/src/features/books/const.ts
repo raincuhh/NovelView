@@ -49,3 +49,6 @@ export const MOCK_BOOKS: Book[] = [
 		format: "epub",
 	},
 ];
+
+export const LOCAL_BOOK_COVER_PATH_TEMPLATE = "books/{bookId}/cover.{ext}";
+export const REMOTE_BOOK_COVER_PATH_TEMPLATE = "{bookId}/cover.{ext}";

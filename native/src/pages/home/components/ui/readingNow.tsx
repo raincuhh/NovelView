@@ -8,7 +8,6 @@ import { PLACEHOLDER_RECENTLY_READ_URL } from "@/shared/lib/consts";
 import { useAuthStore } from "@/features/auth/authStore";
 import { useQuery } from "@tanstack/react-query";
 import { getRecentlyOpenedBooks } from "@/features/books/lib/selectBook";
-import TodaysReadingProgress from "@/shared/components/ui/todaysReadingProgress";
 import useBookInfo from "@/features/books/hooks/useBookInfo";
 
 export default function ReadingNow() {
@@ -66,7 +65,7 @@ export default function ReadingNow() {
 	return (
 		<ReadingNowWrapper>
 			<HomeSectionHeader label="Reading Now" />
-			<TodaysReadingProgress />
+
 			<ReadingNowDisplay book={book[0]} coverPath={coverPath} />
 		</ReadingNowWrapper>
 	);
@@ -111,9 +110,9 @@ const ReadingNowDisplay = ({ book, coverPath }: { book: Book; coverPath: string 
 const ReadingNowSkeleton = () => (
 	<ReadingNowWrapper>
 		<HomeSectionHeader label="Reading Now" />
-		<div className="px-4 mb-2 w-64">
+		{/* <div className="px-4 mb-2 w-64">
 			<Skeleton />
-		</div>
+		</div> */}
 		<div className="flex flex-col w-full px-4">
 			<header className="w-full h-min flex justify-center items-center min-h-32 select-none">
 				<div className="relative select-none h-48 w-full">

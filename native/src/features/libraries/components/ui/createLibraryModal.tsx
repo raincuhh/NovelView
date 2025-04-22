@@ -12,6 +12,7 @@ import Label from "@/shared/components/ui/label";
 import { createNewLibrary } from "../../lib/insertLibraries";
 import { useQueryClient } from "@tanstack/react-query";
 import { LIBRARY_COVER_MAX_SIZE } from "../../consts";
+import { useLibraryCoversQueue } from "@/shared/providers/systemProvider";
 
 const libraryCreateFormSchema = z.object({
 	name: z.string().min(1, "Library name must be at least 1 character"),
@@ -33,6 +34,7 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 
 	const queryClient = useQueryClient();
 	const user = useAuthStore((state) => state.user);
+	const libraryCoversQueue = useLibraryCoversQueue();
 
 	const handleLibraryNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -47,6 +49,12 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement | HTMLInputElement>) => {
 		e.preventDefault();
 		setSubmitting(true);
+
+		if (!libraryCoversQueue) {
+			console.error("Library covers queue not initialized");
+			setSubmitting(false);
+			return;
+		}
 
 		const result = libraryCreateFormSchema.safeParse({
 			name: libraryName,
@@ -73,6 +81,7 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 					cover: image,
 					type: synced ? "synced" : "local",
 					userId: userId,
+					libraryCoversQueue,
 				});
 				console.log("creating library with: ", {
 					libraryName,

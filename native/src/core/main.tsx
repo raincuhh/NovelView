@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { routeTree } from "@/routeTree.gen";
+import { initUserStoragePath } from "@/shared/lib/fs/userStorage";
 import "@/styles/global.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-spring-bottom-sheet/dist/style.css";
@@ -18,17 +19,21 @@ declare module "@tanstack/react-router" {
 
 const strictMode: boolean = false;
 
-const rootElement = document.getElementById("root")!;
-if (!rootElement.innerHTML) {
-	const root = ReactDOM.createRoot(rootElement);
+(async () => {
+	await initUserStoragePath();
 
-	if (strictMode) {
-		root.render(
-			<StrictMode>
-				<RouterProvider router={router} />
-			</StrictMode>
-		);
-	} else {
-		root.render(<RouterProvider router={router} />);
+	const rootElement = document.getElementById("root")!;
+	if (!rootElement.innerHTML) {
+		const root = ReactDOM.createRoot(rootElement);
+
+		if (strictMode) {
+			root.render(
+				<StrictMode>
+					<RouterProvider router={router} />
+				</StrictMode>
+			);
+		} else {
+			root.render(<RouterProvider router={router} />);
+		}
 	}
-}
+})();

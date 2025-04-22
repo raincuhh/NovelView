@@ -1,4 +1,5 @@
 import { UserReadingPrefsMetadata } from "@/features/user/types";
+import { LOCAL_AVATAR_PATH_TEMPLATE, REMOTE_AVATAR_PATH_TEMPLATE } from "../consts";
 
 export function getDefaultUserReadingPrefs(): UserReadingPrefsMetadata {
 	return {
@@ -22,4 +23,12 @@ export function getDefaultUserReadingPrefs(): UserReadingPrefsMetadata {
 		displayProgress: true, // Default display progress on
 		enableTTS: false, // Default TTS off
 	};
+}
+
+export function getLocalAvatarPath(userId: string, ext: string): string {
+	return LOCAL_AVATAR_PATH_TEMPLATE.replace("{userId}", userId).replace("{ext}", ext);
+}
+
+export function getRemoteAvatarPath(userId: string, ext: string): string {
+	return REMOTE_AVATAR_PATH_TEMPLATE.replace("{userId}", userId).replace("{ext}", ext);
 }

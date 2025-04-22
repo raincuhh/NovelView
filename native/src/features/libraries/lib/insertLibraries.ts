@@ -2,7 +2,17 @@ import { mkdir } from "@tauri-apps/plugin-fs";
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "@/features/fs/consts";
 import { powersyncDb, localDb } from "@/shared/providers/systemProvider";
 import { LibraryType } from "../types";
-import { createLibraryMetadata, saveLibraryCover } from "./utils";
+import {
+	createLibraryMetadata,
+	getLocalLibraryCoverPath,
+	getRemoteLibraryCoverPath,
+	saveLibraryCover,
+} from "./utils";
+import Database from "@tauri-apps/plugin-sql";
+import { PowerSyncDatabase, Transaction } from "@powersync/web";
+import { LibraryCoversAttachmentQueue } from "@/shared/lib/powersync/libraryCoversAttatchmentQueue";
+import { fileToBase64 } from "@/shared/lib/fs/fileToBase64";
+import { getFileExtension } from "@/shared/lib/globalUtils";
 
 type createLibraryProps = {
 	name: string;
@@ -10,9 +20,17 @@ type createLibraryProps = {
 	type: LibraryType;
 	userId: string;
 	description?: string;
+	libraryCoversQueue: LibraryCoversAttachmentQueue;
 };
 
-export async function createNewLibrary({ name, cover, type, userId, description }: createLibraryProps) {
+export async function createNewLibrary({
+	name,
+	cover,
+	type,
+	userId,
+	description,
+	libraryCoversQueue,
+}: createLibraryProps) {
 	const id = crypto.randomUUID();
 	const localDir = `${LIBRARIES_FOLDER}/${id}`;
 
@@ -21,57 +39,68 @@ export async function createNewLibrary({ name, cover, type, userId, description 
 
 		let coverUrl: string | null = null;
 
-		if (cover) {
+		if (cover && type === "synced") {
+			const base64Data = await fileToBase64(cover);
+			const fileExtension = getFileExtension(cover.name);
+			const localFilePath = getLocalLibraryCoverPath(id, fileExtension);
+			const remotePath = getRemoteLibraryCoverPath(id, fileExtension);
+
+			const attachment = await libraryCoversQueue.saveAttachment(
+				base64Data,
+				localFilePath,
+				id,
+				remotePath
+			);
+			coverUrl = attachment.id;
+			console.log("cover path: ", coverUrl);
+		} else if (cover && type === "local") {
 			const fileExtension = cover.name.split(".").pop();
 			const coverFileName = `cover.${fileExtension}`;
 			const coverPath = `${localDir}/${coverFileName}`;
-
 			await saveLibraryCover(id, cover);
-
 			coverUrl = coverPath;
 			console.log("cover path: ", coverUrl);
 		}
 
 		await createLibraryMetadata(localDir, { name, type, coverUrl });
 
-		switch (type) {
-			case "synced":
-				await powersyncDb.writeTransaction(async (tx) => {
-					tx.execute(
-						`INSERT INTO libraries (
-							id,
-							user_id,
-							name,
-							description,
-							cover_url,
-							type,
-							created_at,
-							updated_at
-						) VALUES (?, ?, ?, ?, ?, ?, datetime(), datetime())`,
-						[id, userId, name, description, coverUrl, type]
-					);
-				});
-				break;
-			case "local":
-				localDb.execute(
-					`INSERT INTO libraries (
-						id,
-						user_id,
-						name,
-						description,
-						cover_url,
-						type,
-						created_at,
-						updated_at
-					) VALUES (?, ?, ?, ?, ?, ?, datetime(), datetime())`,
-					[id, userId, name, description, coverUrl, type]
-				);
+		const data: LibraryInsertData = {
+			id,
+			userId,
+			name,
+			description,
+			coverUrl,
+			type,
+		};
 
-				break;
-			default:
-				throw new Error(`Unknown library type: ${type}`);
+		if (type === "synced") {
+			await powersyncDb.writeTransaction(async (tx) => insertLibrary(tx, data));
+		} else {
+			insertLibrary(localDb, data);
 		}
 	} catch (err: any) {
 		console.error("Error creating library:", err);
 	}
+}
+
+type LibraryInsertData = {
+	id: string;
+	userId: string;
+	name: string;
+	description?: string;
+	coverUrl: string | null;
+	type: LibraryType;
+};
+
+type ExecutableDb = Pick<Database | PowerSyncDatabase | Transaction, "execute">;
+
+function insertLibrary(db: ExecutableDb, data: LibraryInsertData) {
+	const { id, userId, name, description, coverUrl, type } = data;
+
+	db.execute(
+		`INSERT INTO libraries (
+			id, user_id, name, description, cover_url, type, created_at, updated_at
+		) VALUES (?, ?, ?, ?, ?, ?, datetime(), datetime())`,
+		[id, userId, name, description, coverUrl, type]
+	);
 }
