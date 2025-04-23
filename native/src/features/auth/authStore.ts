@@ -11,6 +11,7 @@ type AuthStoreState = {
 	init: () => Promise<void>;
 	refreshUser: () => Promise<void>;
 	signOut: () => Promise<void>;
+	getUserId: () => string;
 };
 
 export const useAuthStore = create<AuthStoreState>((set, get) => ({
@@ -102,5 +103,11 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
 			session: null,
 			user: null,
 		});
+	},
+
+	getUserId: () => {
+		const id = get().user?.auth.id;
+		if (!id) throw new Error("User Id missing");
+		return id;
 	},
 }));

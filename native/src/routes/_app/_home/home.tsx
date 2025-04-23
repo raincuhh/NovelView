@@ -32,7 +32,8 @@ export const Route = createFileRoute("/_app/_home/home")({
 });
 
 function RouteComponent() {
-	const userId = useAuthStore((s) => s.user?.auth.id);
+	const { getUserId } = useAuthStore();
+	const userId = getUserId();
 	// @ts-ignore
 	const { openDrawer } = useDrawerStore();
 

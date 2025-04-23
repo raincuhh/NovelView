@@ -9,10 +9,9 @@ import { useState } from "react";
 import { Switch } from "@/shared/components/ui/switch";
 import { useAuthStore } from "@/features/auth/authStore";
 import Label from "@/shared/components/ui/label";
-import { createNewLibrary } from "../../lib/insertLibraries";
-import { useQueryClient } from "@tanstack/react-query";
 import { LIBRARY_COVER_MAX_SIZE } from "../../consts";
 import { useLibraryCoversQueue } from "@/shared/providers/systemProvider";
+import { useCreateLibraryMutation } from "../../model/mutations/useLibrariesMutation";
 
 const libraryCreateFormSchema = z.object({
 	name: z.string().min(1, "Library name must be at least 1 character"),
@@ -30,11 +29,17 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 	const [error, setError] = useState<string | null>(null);
 	const [isValid, setIsValid] = useState<boolean>(false);
 	const [synced, setSynced] = useState<boolean>(false);
-	const [submitting, setSubmitting] = useState<boolean>(false);
 
-	const queryClient = useQueryClient();
-	const user = useAuthStore((state) => state.user);
+	const { getUserId } = useAuthStore();
+	const userId = getUserId();
 	const libraryCoversQueue = useLibraryCoversQueue();
+
+	const createLibrary = useCreateLibraryMutation({
+		onSuccess: () => onClose(),
+		onError: (err) => {
+			console.error("Failed to create library:", err);
+		},
+	});
 
 	const handleLibraryNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -48,11 +53,9 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement | HTMLInputElement>) => {
 		e.preventDefault();
-		setSubmitting(true);
 
 		if (!libraryCoversQueue) {
 			console.error("Library covers queue not initialized");
-			setSubmitting(false);
 			return;
 		}
 
@@ -65,42 +68,16 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 		if (!result.success) {
 			const issues = result.error.flatten().fieldErrors;
 			setError(issues.name?.[0] ?? null);
-			setSubmitting(false);
 			return;
 		}
-		const userId = user?.profile.id;
 
-		console.log("doing things.", user);
-		console.log("user: ", userId);
-
-		if (userId) {
-			console.log("user id here:");
-			try {
-				await createNewLibrary({
-					name: libraryName,
-					cover: image,
-					type: synced ? "synced" : "local",
-					userId: userId,
-					libraryCoversQueue,
-				});
-				console.log("creating library with: ", {
-					libraryName,
-					image,
-					type: synced ? "synced" : "local",
-					userId,
-				});
-
-				queryClient.invalidateQueries({ queryKey: ["mostInteractedLibraries", userId] });
-				queryClient.invalidateQueries({ queryKey: ["libraries", userId] });
-				queryClient.invalidateQueries({ queryKey: ["library", userId] });
-
-				onClose();
-			} catch (err) {
-				console.error("Failed to create library:", err);
-			}
-		}
-
-		setSubmitting(false);
+		await createLibrary.mutateAsync({
+			name: libraryName,
+			cover: image,
+			type: synced ? "synced" : "local",
+			userId,
+			libraryCoversQueue,
+		});
 	};
 
 	return (
@@ -160,17 +137,22 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 						</FormItem>
 					</div>
 					<ModalControl className="flex justify-center w-full gap-4">
-						<Button variant="outline" rounded="full" onClick={() => onClose()} disabled={submitting}>
+						<Button
+							variant="outline"
+							rounded="full"
+							onClick={() => onClose()}
+							disabled={createLibrary.isPending}
+						>
 							Cancel
 						</Button>
 						<Button
 							variant="accent"
 							rounded="full"
 							className="text-normal"
-							disabled={!isValid || submitting}
+							disabled={!isValid || createLibrary.isPending}
 							type="submit"
 						>
-							{submitting ? "Creating..." : "Create"}
+							{createLibrary.isPending ? "Creating..." : "Create"}
 						</Button>
 					</ModalControl>
 				</Form>

@@ -10,7 +10,8 @@ import useBookInfo from "@/features/books/hooks/useBookInfo";
 import { useMostRecentlyOpenedBookQuery } from "@/features/books/model/queries/useBookQuery";
 
 export default function ReadingNow() {
-	const userId = useAuthStore((s) => s.user?.auth.id);
+	const { getUserId } = useAuthStore();
+	const userId = getUserId();
 
 	const { data: book, isLoading, error } = useMostRecentlyOpenedBookQuery(userId);
 

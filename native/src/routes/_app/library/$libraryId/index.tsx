@@ -3,45 +3,24 @@ import LibraryBackground from "@/pages/library/components/ui/libraryBackground";
 import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
 import LibraryHeader from "@/pages/library/components/ui/libraryHeader";
 import LibraryNavbar from "@/pages/library/components/ui/libraryNavbar";
-import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, useParams } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { getBooksByLibraryId } from "@/features/books/lib/selectBook";
 import ScrollContainer from "@/shared/components/ui/scrollContainer";
 import type { OverlayScrollbarsComponentRef } from "overlayscrollbars-react";
 import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
+import { useBooksByLibraryIdQuery } from "@/features/books/model/queries/useBookQuery";
 
 export const Route = createFileRoute("/_app/library/$libraryId/")({
-	beforeLoad: ({ location }) => {
-		const libraryId = location.pathname.split("/").filter(Boolean).pop();
-		const userId = useAuthStore.getState().user?.auth.id;
-
-		return {
-			userId,
-			bookQueryOptions: {
-				queryKey: ["books", userId, libraryId],
-				queryFn: async () => {
-					if (!userId || !libraryId) throw new Error("User ID & Library ID is missing");
-					return getBooksByLibraryId(libraryId);
-				},
-				refetchInterval: 60 * 1000,
-				refetchIntervalInBackground: true,
-				refetchOnWindowFocus: true,
-			},
-		};
-	},
 	component: RouteComponent,
 });
 
 function RouteComponent() {
+	const userId = useAuthStore.getState().user?.auth.id;
+
 	const { libraryId } = useParams({ from: "/_app/library/$libraryId" });
 	const { coverPath } = useLibraryCover(libraryId);
 
-	const { bookQueryOptions, userId } = Route.useRouteContext();
-	const { data: books, isLoading } = useQuery({
-		...bookQueryOptions,
-		enabled: !!userId && !!libraryId,
-	});
+	const { data: books, isLoading } = useBooksByLibraryIdQuery(libraryId);
 
 	const hasBooks = books !== null;
 
@@ -50,10 +29,6 @@ function RouteComponent() {
 
 	const libraryHeaderRef = useRef<HTMLDivElement | null>(null);
 	const [scrollHeight, setScrollHeight] = useState<number>(225);
-
-	useEffect(() => {
-		console.log("books: ", books);
-	}, [books]);
 
 	useEffect(() => {
 		const ref = libraryHeaderRef.current;

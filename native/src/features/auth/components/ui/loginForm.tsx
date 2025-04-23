@@ -60,11 +60,6 @@ export default function LoginForm() {
 				return;
 			}
 
-			// const userId = session.user.id;
-			// const avatarUrl = session.user.user_metadata?.avatar_url ?? "";
-
-			// await insertNewUser(userId, avatarUrl);
-
 			console.log("Logged in:", session);
 
 			navigate({ to: "/home" });
