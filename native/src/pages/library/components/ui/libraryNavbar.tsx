@@ -13,6 +13,8 @@ import { cn } from "@/shared/lib/globalUtils";
 import { useHistoryStore } from "@/shared/stores/historyStore";
 import { useNavigate } from "@tanstack/react-router";
 import LibrarySettings from "./librarySettings";
+import useModalStore from "@/features/modal/modalStore";
+import { type Modal as ModalType } from "@/features/modal/types";
 
 type LibraryNavbarProps = {
 	isScrolled: boolean;
@@ -25,6 +27,18 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 	const { goBack, currentIndex } = useHistoryStore();
 	const canGoBack = currentIndex > 0;
 
+	const { openModal, closeModal } = useModalStore();
+
+	const handleOpenImportModal = () => {
+		const modal: ModalType = {
+			id: "import-book",
+			closable: true,
+			content: <>yokoso</>,
+		};
+
+		openModal(modal);
+	};
+
 	return (
 		<div
 			className={cn(
@@ -36,7 +50,7 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 				<div className="flex h-full items-center overflow-hidden">
 					<div
 						onClick={() => {
-							canGoBack ? goBack() : navigate({ to: "/libraries" });
+							canGoBack ? goBack() : navigate({ to: "/home" });
 						}}
 						className="p-3 -ml-3 cursor-pointer"
 					>
@@ -68,6 +82,9 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 							</DropdownMenuContent>
 						</DropdownMenu>
 						<LibrarySettings />
+						<div className="p-2 ml-2 gap-1" onClick={handleOpenImportModal}>
+							<Icon.bookImport />
+						</div>
 					</div>
 				</div>
 			</div>

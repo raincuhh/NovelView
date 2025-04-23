@@ -10,7 +10,7 @@ export default function ModalRoot() {
 			<RenderList
 				data={modals}
 				render={(modal: Modal, i: number) => (
-					<div key={i} className="w-screen h-screen absolute top-0 left-0">
+					<div key={modal.id + i} className="w-screen h-screen absolute top-0 left-0">
 						{modal.content}
 					</div>
 				)}

@@ -9,20 +9,22 @@ import ScrollContainer from "@/shared/components/ui/scrollContainer";
 import type { OverlayScrollbarsComponentRef } from "overlayscrollbars-react";
 import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
 import { useBooksByLibraryIdQuery } from "@/features/books/model/queries/useBookQuery";
+import EmptyLibrary from "@/pages/library/components/ui/emptyLibrary";
 
 export const Route = createFileRoute("/_app/library/$libraryId/")({
 	component: RouteComponent,
 });
 
 function RouteComponent() {
-	const userId = useAuthStore.getState().user?.auth.id;
+	const { getUserId } = useAuthStore();
+	const userId = getUserId();
 
 	const { libraryId } = useParams({ from: "/_app/library/$libraryId" });
 	const { coverPath } = useLibraryCover(libraryId);
 
 	const { data: books, isLoading } = useBooksByLibraryIdQuery(libraryId);
 
-	const hasBooks = books !== null;
+	const hasBooks = !!books && books.length > 0;
 
 	const [isScrolled, setIsScrolled] = useState(false);
 	const scrollContainerRef = useRef<OverlayScrollbarsComponentRef | null>(null);
@@ -42,7 +44,7 @@ function RouteComponent() {
 		console.log("/library/$libraryid route mounted");
 		if (!userId) console.warn("No userId yet");
 		if (isLoading) console.log("Still loading books...");
-		else if (hasBooks) console.log("User has books");
+		else if (hasBooks) console.log("User has books", books);
 		else console.log("No books found — showing EmptyBooks");
 	}, [userId, books, isLoading]);
 
@@ -59,20 +61,18 @@ function RouteComponent() {
 				<div className="relative flex flex-col">
 					<LibraryNavbar isScrolled={isScrolled} />
 					<LibraryHeader ref={libraryHeaderRef} coverPath={coverPath ?? ""} />
-					<div className="flex flex-col mt-2 h-full">
+					<div className="flex flex-col mt-2">
 						{isLoading ? (
 							<div></div>
 						) : hasBooks ? (
 							<div className="flex flex-col gap-8">
-								{Array.from({ length: 15 }, (_, i) => (
-									<div key={i} className="px-4">
-										Item {i + 1}
-									</div>
-								))}
 								<MobileBottomPadding />
 							</div>
 						) : (
-							<div className="">No books?</div>
+							<div className="flex flex-col">
+								<EmptyLibrary />
+								<MobileBottomPadding />
+							</div>
 						)}
 					</div>
 				</div>

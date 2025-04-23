@@ -11,7 +11,7 @@ export async function saveLibraryCover(libraryId: string, cover: File) {
 
 		if (!ext) throw new Error("Cover file has no extension.");
 
-		const coverFilePath = `${LIBRARIES_FOLDER}/${libraryId}/cover.${ext}`;
+		const coverFilePath = getLocalLibraryCoverPath(libraryId, ext);
 
 		await writeFile(coverFilePath, new Uint8Array(fileBytes), { baseDir: LOCAL_APPDATA });
 	} catch (err: any) {

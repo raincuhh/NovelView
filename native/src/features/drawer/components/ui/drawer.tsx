@@ -86,29 +86,6 @@ export const Drawer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> 
 				>
 					{children}
 				</motion.div>
-				{/* <div
-					className="fixed top-0 bottom-0 z-50 overflow-hidden"
-					style={{
-						[side]: -ELASTIC_BUFFER,
-						width: width + ELASTIC_BUFFER * 2,
-						pointerEvents: isOpen ? "auto" : "none",
-					}}
-				>
-					<motion.div
-						style={{
-							x,
-							width: width + ELASTIC_BUFFER * 2,
-						}}
-						className="h-full bg-secondary shadow-lg"
-						drag="x"
-						dragElastic={0.1}
-						dragConstraints={side === "left" ? { left: -width, right: 0 } : { left: 0, right: width }}
-					>
-						<div style={{ width }} className="h-full">
-							{children}
-						</div>
-					</motion.div>
-				</div> */}
 			</>
 		);
 	}

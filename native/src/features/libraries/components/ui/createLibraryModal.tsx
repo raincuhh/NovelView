@@ -1,7 +1,6 @@
 import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
 import { Modal, ModalControl } from "@/features/modal/components/ui/modal";
-import ModalBackground from "@/features/modal/components/ui/modalBackground";
 import { Form, FormControl, FormItem, FormLabel, FormMessage } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
 import CoverPicker from "@/shared/components/ui/coverPicker";
@@ -81,82 +80,81 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 	};
 
 	return (
-		<ModalBackground>
-			<Modal
-				className="border-none mx-0 h-full flex flex-col justify-top pt-18 w-full"
-				innerClassName="w-full mx-auto flex flex-col gap-4"
-			>
-				<Form onSubmit={handleSubmit}>
-					<div className="flex flex-col gap-8">
-						<FormItem className="w-full gap-4">
-							<FormLabel
-								id="libraryCoverLabel"
-								htmlFor="libraryCover"
-								className="text-center text-2xl font-bold"
-							>
-								Set your library cover
-								{/* <span className="text-sm text-muted">(optional)</span> */}
-							</FormLabel>
-							<CoverPicker
-								onValidImage={setImage}
-								inputId="libraryCover"
-								maxWidth={LIBRARY_COVER_MAX_SIZE}
-								maxHeight={LIBRARY_COVER_MAX_SIZE}
+		<Modal
+			onClose={onClose}
+			className="border-none mx-0 h-full flex flex-col justify-top pt-18 w-full"
+			innerClassName="w-full mx-auto flex flex-col gap-4"
+		>
+			<Form onSubmit={handleSubmit}>
+				<div className="flex flex-col gap-8">
+					<FormItem className="w-full gap-4">
+						<FormLabel
+							id="libraryCoverLabel"
+							htmlFor="libraryCover"
+							className="text-center text-2xl font-bold"
+						>
+							Set your library cover
+							{/* <span className="text-sm text-muted">(optional)</span> */}
+						</FormLabel>
+						<CoverPicker
+							onValidImage={setImage}
+							inputId="libraryCover"
+							maxWidth={LIBRARY_COVER_MAX_SIZE}
+							maxHeight={LIBRARY_COVER_MAX_SIZE}
+						/>
+					</FormItem>
+					<FormItem className="w-full gap-4">
+						<FormLabel
+							id="libraryNameLabel"
+							htmlFor="libraryName"
+							error={error}
+							className="text-center text-2xl font-bold"
+						>
+							Name your library
+						</FormLabel>
+						<FormControl className="w-full border-solid border-b border-border">
+							<Input
+								variant="ghost"
+								id="libraryName"
+								name="libraryName"
+								type="text"
+								placeholder="test"
+								className="text-center"
+								autoComplete="off"
+								aria-labelledby="libraryNameLabel"
+								value={libraryName}
+								onChange={handleLibraryNameChange}
 							/>
-						</FormItem>
-						<FormItem className="w-full gap-4">
-							<FormLabel
-								id="libraryNameLabel"
-								htmlFor="libraryName"
-								error={error}
-								className="text-center text-2xl font-bold"
-							>
-								Name your library
-							</FormLabel>
-							<FormControl className="w-full border-solid border-b border-border">
-								<Input
-									variant="ghost"
-									id="libraryName"
-									name="libraryName"
-									type="text"
-									placeholder="test"
-									className="text-center"
-									autoComplete="off"
-									aria-labelledby="libraryNameLabel"
-									value={libraryName}
-									onChange={handleLibraryNameChange}
-								/>
-							</FormControl>
-							<FormMessage error={error} />
-						</FormItem>
-						<FormItem>
-							<FormControl className="gap-2">
-								<Switch onCheckedChange={(checked) => setSynced(checked)} />
-								<Label className="font-bold">Synced Library</Label>
-							</FormControl>
-						</FormItem>
-					</div>
-					<ModalControl className="flex justify-center w-full gap-4">
-						<Button
-							variant="outline"
-							rounded="full"
-							onClick={() => onClose()}
-							disabled={createLibrary.isPending}
-						>
-							Cancel
-						</Button>
-						<Button
-							variant="accent"
-							rounded="full"
-							className="text-normal"
-							disabled={!isValid || createLibrary.isPending}
-							type="submit"
-						>
-							{createLibrary.isPending ? "Creating..." : "Create"}
-						</Button>
-					</ModalControl>
-				</Form>
-			</Modal>
-		</ModalBackground>
+						</FormControl>
+						<FormMessage error={error} />
+					</FormItem>
+					<FormItem>
+						<FormControl className="gap-2">
+							<Switch onCheckedChange={(checked) => setSynced(checked)} />
+							<Label className="font-bold">Synced Library</Label>
+						</FormControl>
+					</FormItem>
+				</div>
+				<ModalControl className="flex justify-center w-full gap-4">
+					<Button
+						variant="outline"
+						rounded="full"
+						onClick={() => onClose()}
+						disabled={createLibrary.isPending}
+					>
+						Cancel
+					</Button>
+					<Button
+						variant="accent"
+						rounded="full"
+						className="text-normal"
+						disabled={!isValid || createLibrary.isPending}
+						type="submit"
+					>
+						{createLibrary.isPending ? "Creating..." : "Create"}
+					</Button>
+				</ModalControl>
+			</Form>
+		</Modal>
 	);
 }

@@ -25,7 +25,8 @@
 			"@shared/*": ["src/shared/*"],
 			"@widgets/*": ["src/widgets/*"],
 			"@entities/*": ["src/entities/*"],
-			"@styles/*": ["src/styles/*"]
+			"@styles/*": ["src/styles/*"],
+			"@core/*": ["src/core/*"]
 		}
 	},
 	"include": ["src", "app", "vite.config.ts", "**/*.ts", "**/*.tsx"],

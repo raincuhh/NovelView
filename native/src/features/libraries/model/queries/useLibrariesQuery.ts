@@ -18,6 +18,6 @@ export const useMostInteractedLibrariesQuery = (userId: string) => {
 			if (!userId) throw new Error("User ID is missing");
 			return getMostInteractedLibraries(userId);
 		},
-		// enabled: !!userId,
+		enabled: !!userId,
 	});
 };

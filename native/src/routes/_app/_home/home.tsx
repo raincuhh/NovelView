@@ -6,7 +6,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import InitUserTables from "@/features/auth/components/utils/initUserTables";
 import QuickAccessErrorBoundary from "@/pages/home/components/ui/quickAccessErrorBoundary";
 import RecentsErrorBoundary from "@/pages/home/components/ui/recentsErrorBoundary";
-import { Drawer } from "@/features/drawer/components/ui/drawer";
 import { useDrawerStore } from "@/features/drawer/drawerStore";
 import { useEffect } from "react";
 import ReadingNowErrorBoundary from "@/pages/home/components/ui/readingNowErrorBoundary";
@@ -82,15 +81,12 @@ function RouteComponent() {
 							<MobileBottomPadding />
 						</div>
 					) : (
-						<div className="px-4 flex flex-col justify-center h-full">
+						<>
 							<EmptyLibraries />
-						</div>
+						</>
 					)}
 				</div>
 			</div>
-			<Drawer side="left" id="profile">
-				<div className="p-4">Left Drawer Content</div>
-			</Drawer>
 		</ScrollContainer>
 	);
 }

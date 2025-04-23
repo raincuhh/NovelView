@@ -39,7 +39,12 @@ export default function ReadingNow() {
 	const isFullyloading = isLoading || loadingCover;
 	const hasBook = !!book && !!book[0];
 
-	if (isFullyloading) return <ReadingNowSkeleton />;
+	if (isFullyloading)
+		return (
+			<>
+				<ReadingNowSkeleton />
+			</>
+		);
 	if (error) {
 		console.log(error.message);
 		return (
@@ -54,7 +59,6 @@ export default function ReadingNow() {
 	return (
 		<ReadingNowWrapper>
 			<HomeSectionHeader label="Reading Now" />
-
 			<ReadingNowDisplay book={book[0]} coverPath={coverPath} />
 		</ReadingNowWrapper>
 	);
@@ -108,7 +112,7 @@ const ReadingNowSkeleton = () => (
 					<Skeleton className="w-full h-full" />
 				</div>
 			</header>
-			<aside className="flex flex-col mt-4">
+			{/* <aside className="flex flex-col mt-4">
 				<h2>
 					<Skeleton width={"45%"} />
 				</h2>
@@ -120,7 +124,7 @@ const ReadingNowSkeleton = () => (
 						<Skeleton width={"2rem"} />
 					</div>
 				</div>
-			</aside>
+			</aside> */}
 		</div>
 	</ReadingNowWrapper>
 );

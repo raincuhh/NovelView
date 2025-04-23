@@ -9,8 +9,9 @@ import { MostInteractedLibrary } from "@/features/libraries/types";
 import { useMostInteractedLibrariesQuery } from "@/features/libraries/model/queries/useLibrariesQuery";
 
 export default function QuickAccess() {
-	const userId = useAuthStore((s) => s.user?.auth.id);
-	const { data: libraries, isLoading, error } = useMostInteractedLibrariesQuery(userId ?? "");
+	const { getUserId } = useAuthStore();
+	const userId = getUserId();
+	const { data: libraries, isLoading, error } = useMostInteractedLibrariesQuery(userId);
 
 	const [coverPaths, setCoverPaths] = useState<Record<string, string | null>>({});
 	const [loadingCovers, setLoadingCovers] = useState<boolean>(true);
@@ -56,7 +57,13 @@ export default function QuickAccess() {
 					data={libraries}
 					render={(library) => {
 						const coverPath = coverPaths[library.id] || "";
-						return <QuickAccessItem key={library.id} data={library} coverPath={coverPath} />;
+						return (
+							<QuickAccessItem
+								key={library.id + "-quick-access"}
+								data={library}
+								coverPath={coverPath}
+							/>
+						);
 					}}
 				/>
 			</Grid>
