@@ -26,6 +26,17 @@ export const useMostRecentlyOpenedBookQuery = (userId: string) => {
 	});
 };
 
+export const useRecentlyOpenedBooksQuery = (userId: string, limit: number = 16) => {
+	return useQuery({
+		queryKey: ["mostRecentlyReadBook", userId],
+		queryFn: () => getRecentlyOpenedBooks(userId, limit),
+		enabled: !!userId,
+		refetchInterval: DEFAULT_REFETCH_INTERVAL,
+		refetchIntervalInBackground: true,
+		refetchOnWindowFocus: true,
+	});
+};
+
 export const useBookInfoQuery = (bookId: string) => {
 	return useQuery({
 		queryKey: ["bookInfo", bookId],

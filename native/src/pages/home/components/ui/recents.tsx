@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import RecentsItem from "./recentsItem";
 import HomeSectionHeader from "./homeSectionHeader";
+import { useAuthStore } from "@/features/auth/authStore";
+import { useRecentlyOpenedBooksQuery } from "@/features/books/model/queries/useBookQuery";
 
 export default function Recents() {
-	const books: Book[] = MOCK_BOOKS;
-	const isLoading: boolean = false;
-	const error: Error | null = null;
+	const { getUserId } = useAuthStore();
+	const userId = getUserId();
+
+	const { data: books, isLoading, error } = useRecentlyOpenedBooksQuery(userId);
 
 	const [coverPaths, setCoverPaths] = useState<Record<string, string | null>>({});
 	const [loadingCovers, setLoadingCovers] = useState<boolean>(true);
@@ -42,7 +45,6 @@ export default function Recents() {
 
 	if (isFullyloading) return <RecentsSkeleton />;
 	if (error) {
-		// @ts-expect-error
 		console.log(error.message);
 		return (
 			<RecentsWrapper>
@@ -88,10 +90,10 @@ const RecentsSkeleton = () => (
 		<div className="relative flex flex-col gap-2 w-full">
 			<ul className="flex py-2 pr-4 snap-x snap-mandatory overflow-x-scroll">
 				{Array.from({ length: 16 }).map((_, i) => (
-					<li key={i} className="min-w-48 h-26 relative snap-start pl-4">
+					<li key={i} className="min-w-38 h-42 relative snap-start pl-4">
 						<Skeleton className="h-full w-full rounded-md" />
-						{/* <div className="absolute top-1/2 left-0 w-full px-4 translate-y-[-50%]">
-							<Skeleton className="w-6 h-6" />
+						{/* <div className="absolute bottom-[1px] left-2 w-full px-4">
+							<Skeleton className="h-6 w-full" />
 						</div> */}
 					</li>
 				))}

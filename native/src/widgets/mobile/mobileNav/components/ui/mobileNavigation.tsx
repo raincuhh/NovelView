@@ -1,5 +1,7 @@
+// @ts-ignore
 import MobileNavigationRecentRead from "./mobileRecentRead";
 import MobileNavigationButtons from "./mobileNavigationButtons";
+// @ts-ignore
 import { FileRouteTypes } from "@/routeTree.gen";
 
 export default function MobileNavigation() {
@@ -15,7 +17,7 @@ export default function MobileNavigation() {
 			/>
 
 			<div className="relative w-full flex flex-col">
-				<MobileNavigationRecentRead to={"/home" as FileRouteTypes["to"]} />
+				{/* <MobileNavigationRecentRead to={"/home" as FileRouteTypes["to"]} /> */}
 				<MobileNavigationButtons />
 			</div>
 		</div>

@@ -63,7 +63,7 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 						<DropdownMenu>
 							<DropdownMenuTrigger>
 								<div className="p-2 cursor-pointer">
-									<Icon.menu />
+									<Icon.menu className="hover:fill-muted" />
 								</div>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent className="w-42" shouldCloseOnClick={false}>
@@ -83,7 +83,7 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 						</DropdownMenu>
 						<LibrarySettings />
 						<div className="p-2 ml-2 gap-1" onClick={handleOpenImportModal}>
-							<Icon.bookImport />
+							<Icon.plus className="hover:fill-muted" />
 						</div>
 					</div>
 				</div>

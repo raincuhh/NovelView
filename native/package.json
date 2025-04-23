@@ -10,6 +10,7 @@
 		"tauri": "tauri"
 	},
 	"dependencies": {
+		"@fsoc/royalroadl-api": "^0.16.1",
 		"@journeyapps/wa-sqlite": "^1.2.2",
 		"@powersync/attachments": "^2.3.0",
 		"@powersync/common": "^1.26.0",

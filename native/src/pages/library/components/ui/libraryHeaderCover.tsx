@@ -20,7 +20,7 @@ export default function LibraryHeaderCover({ coverPath }: LibraryHeaderCoverProp
 					<CoverImage src={coverPath} alt="library cover" className="rounded-md" />
 				) : (
 					<div className="w-full h-full bg-secondary-alt rounded-md flex justify-center items-center-safe">
-						<Icon.book className="w-32 h-32 fill-faint" />
+						<Icon.book className="w-[50%] h-[50%] fill-faint" />
 					</div>
 				)}
 			</Cover>
