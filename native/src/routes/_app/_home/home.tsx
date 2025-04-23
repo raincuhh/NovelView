@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import ReadingNowErrorBoundary from "@/pages/home/components/ui/readingNowErrorBoundary";
 import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
 import ScrollContainer from "@/shared/components/ui/scrollContainer";
+import { useUserFirstLibraryQuery } from "@/features/books/model/queries/useBookQuery";
 
 // import { powersyncDb } from "@/shared/providers/systemProvider";
 // import {
@@ -37,17 +38,7 @@ function RouteComponent() {
 	// @ts-ignore
 	const { openDrawer } = useDrawerStore();
 
-	const { data: libraries, isLoading } = useQuery({
-		queryKey: ["library", userId],
-		queryFn: async () => {
-			if (!userId) throw new Error("User ID is missing");
-			return getFirstLibrary(userId);
-		},
-		enabled: !!userId,
-		refetchInterval: 60 * 1000,
-		refetchIntervalInBackground: true,
-		refetchOnWindowFocus: true,
-	});
+	const { data: libraries, isLoading } = useUserFirstLibraryQuery(userId);
 
 	const hasLibraries = !!libraries;
 
