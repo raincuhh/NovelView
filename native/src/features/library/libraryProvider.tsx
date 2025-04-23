@@ -1,7 +1,6 @@
 import { Library } from "../libraries/types";
 import { createContext, PropsWithChildren, useContext, useMemo, useState } from "react";
-import { getLibraryById } from "../libraries/lib/selectLibraries";
-import { useQuery } from "@tanstack/react-query";
+import { useLibraryByIdQuery } from "../libraries/model/queries/useLibrariesQuery";
 
 type LibraryConfig = {
 	layout: "list" | "compact-list" | "grid" | "compact-grid";
@@ -22,17 +21,7 @@ export type LibraryProviderProps = PropsWithChildren & {
 };
 
 export const LibraryProvider = ({ children, libraryId }: LibraryProviderProps) => {
-	const {
-		data: library,
-		isLoading,
-		isError,
-	} = useQuery({
-		queryKey: ["library", libraryId],
-		queryFn: () => getLibraryById(libraryId),
-		staleTime: 1000 * 60 * 5,
-		// cacheTime: 1000 * 60 * 10,
-		enabled: !!libraryId,
-	});
+	const { data: library, isLoading, isError } = useLibraryByIdQuery(libraryId);
 
 	const [config, setConfig] = useState<LibraryConfig>({
 		layout: "list",

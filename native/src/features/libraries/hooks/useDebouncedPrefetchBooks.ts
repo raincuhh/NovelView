@@ -14,7 +14,7 @@ export function useDebouncedPrefetchBooks(ms = 300) {
 					queryFn: () => getBooksByLibraryId(libraryId),
 					staleTime: 1000 * 60 * 5,
 				});
-				console.log("prefetching books");
+				// console.log("prefetching books");
 			}, ms),
 
 		[queryClient, ms]

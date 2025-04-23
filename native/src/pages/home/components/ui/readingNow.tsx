@@ -6,25 +6,13 @@ import Icon from "@/shared/components/ui/icon";
 import { Cover, CoverImage } from "@/shared/components/ui/cover";
 import { PLACEHOLDER_RECENTLY_READ_URL } from "@/shared/lib/consts";
 import { useAuthStore } from "@/features/auth/authStore";
-import { useQuery } from "@tanstack/react-query";
-import { getRecentlyOpenedBooks } from "@/features/books/lib/selectBook";
 import useBookInfo from "@/features/books/hooks/useBookInfo";
+import { useMostRecentlyOpenedBookQuery } from "@/features/books/model/queries/useBookQuery";
 
 export default function ReadingNow() {
 	const userId = useAuthStore((s) => s.user?.auth.id);
 
-	const {
-		data: book,
-		isLoading,
-		error,
-	} = useQuery({
-		queryKey: ["mostRecentlyReadBook", userId],
-		queryFn: () => {
-			if (!userId) throw new Error("User ID is missing");
-			return getRecentlyOpenedBooks(userId, 1);
-		},
-		// enabled: !!userId,
-	});
+	const { data: book, isLoading, error } = useMostRecentlyOpenedBookQuery(userId);
 
 	const [coverPath, setCoverPath] = useState<string | null>(null);
 	const [loadingCover, setLoadingCover] = useState<boolean>(true);

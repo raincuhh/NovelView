@@ -12,7 +12,7 @@ export async function getAllLibraries(userId: string): Promise<Library[]> {
 	return [...(localRes ?? []), ...remote];
 }
 
-export async function getFullMostInteractedLibraries(
+export async function getMostInteractedLibraries(
 	userId: string,
 	limit: number = 6
 ): Promise<MostInteractedLibrary[]> {
@@ -58,7 +58,7 @@ export async function getFullMostInteractedLibraries(
 		return [...(fallbackLocal ?? []), ...((fallbackRemote?.rows?._array as MostInteractedLibrary[]) ?? [])];
 	}
 
-	console.log("Returning final result →", [...(localRes ?? []), ...remote]);
+	// console.log("Returning final result →", [...(localRes ?? []), ...remote]);
 	return [...(localRes ?? []), ...remote];
 }
 

@@ -1,9 +1,6 @@
 import { forwardRef, HTMLAttributes } from "react";
 import { Link, LinkProps } from "@tanstack/react-router";
 import { useHistoryStore } from "@/shared/stores/historyStore";
-// import { useQueryClient } from "@tanstack/react-query";
-// import { useAuthStore } from "@/features/auth/authStore";
-// import { getBooksByLibraryId } from "@/features/books/lib/selectBook";
 import { useDebouncedPrefetchBooks } from "../../hooks/useDebouncedPrefetchBooks";
 
 export type LibraryLinkProps = LinkProps & {

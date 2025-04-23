@@ -1,10 +1,9 @@
-import { getBookInfoByBookId } from "../lib/selectBook";
 import { Book } from "../types";
 import { useEffect, useState } from "react";
 import { getTimeAgo } from "@/shared/lib/globalUtils";
-import { useQuery } from "@tanstack/react-query";
-//TODO: implement getting read count from book metadata
+import { useBookInfoQuery } from "../model/queries/useBookQuery";
 
+//TODO: implement getting read count from book metadata
 // TODO: getting chapters, chapters are set in book contents metadata.
 // or filesystem /books/{bookId}/metadata.json;
 
@@ -17,15 +16,7 @@ export default function useBookInfo(book: Book, progressDisplay: ProgressDisplay
 	const [progress, setProgress] = useState<string | null>(null);
 	const [timeAgo, setTimeAgo] = useState<string | null>(null);
 
-	const {
-		data: bookInfo,
-		isLoading,
-		error,
-	} = useQuery({
-		queryKey: ["bookInfo", book.id],
-		queryFn: () => getBookInfoByBookId(book.id),
-		enabled: !!book?.id,
-	});
+	const { data: bookInfo, isLoading, error } = useBookInfoQuery(book?.id);
 
 	useEffect(() => {
 		if (!bookInfo?.metadata) return;

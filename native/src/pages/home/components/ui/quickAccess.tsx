@@ -1,30 +1,16 @@
 import RenderList from "@/shared/components/utils/renderList";
 import QuickAccessItem from "./quickAccessItem";
 import { useAuthStore } from "@/features/auth/authStore";
-import { useQuery } from "@powersync/tanstack-react-query";
 import Skeleton from "react-loading-skeleton";
 import { cn } from "@/shared/lib/globalUtils";
 import { useEffect, useState } from "react";
 import { getLibraryCoverPath } from "@/features/libraries/lib/utils";
 import { MostInteractedLibrary } from "@/features/libraries/types";
-import { getFullMostInteractedLibraries } from "@/features/libraries/lib/selectLibraries";
-// import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
-// import { MostInteractedLibrary } from "@/features/libraries/types";
+import { useMostInteractedLibrariesQuery } from "@/features/libraries/model/queries/useLibrariesQuery";
 
 export default function QuickAccess() {
 	const userId = useAuthStore((s) => s.user?.auth.id);
-	const {
-		data: libraries,
-		isLoading,
-		error,
-	} = useQuery({
-		queryKey: ["mostInteractedLibraries", userId],
-		queryFn: () => {
-			if (!userId) throw new Error("User ID is missing");
-			return getFullMostInteractedLibraries(userId);
-		},
-		// enabled: !!userId,
-	});
+	const { data: libraries, isLoading, error } = useMostInteractedLibrariesQuery(userId ?? "");
 
 	const [coverPaths, setCoverPaths] = useState<Record<string, string | null>>({});
 	const [loadingCovers, setLoadingCovers] = useState<boolean>(true);
