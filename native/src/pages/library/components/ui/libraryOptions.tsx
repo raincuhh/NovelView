@@ -30,7 +30,7 @@ export default function LibraryOptions() {
 	return (
 		<>
 			<div className="p-2 -mr-2 cursor-pointer" onClick={() => setOpen((prev) => !prev)} ref={focusRef}>
-				<Icon.cog className="hover:fill-muted" />
+				<Icon.dottedVerticalRounded className="hover:fill-muted" />
 			</div>
 			<BottomSheet
 				open={open}

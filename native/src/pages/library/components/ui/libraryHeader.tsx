@@ -2,6 +2,8 @@ import { useLibraryProvider } from "@/features/library/libraryProvider";
 import LibraryHeaderCover from "./libraryHeaderCover";
 import ShowMore from "@/shared/components/ui/showMore";
 import { forwardRef, HTMLAttributes } from "react";
+import LibrarySettings from "./librarySettings";
+import LibraryOptions from "./libraryOptions";
 
 type LibraryheaderProps = {
 	coverPath: string;
@@ -17,8 +19,12 @@ const LibraryHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> 
 					<div className="flex flex-col md:flex-row">
 						<LibraryHeaderCover coverPath={coverPath} />
 						<div className="mt-6 px-4 flex flex-col gap-2">
-							<div className="flex w-full">
-								<h1 className="font-bold text-2xl flex-grow truncate">{library?.name}</h1>
+							<div className="flex w-full overflow-hidden justify-between">
+								<h1 className="font-bold text-3xl flex-grow truncate">{library?.name}</h1>
+								<div className="flex">
+									<LibrarySettings />
+									<LibraryOptions />
+								</div>
 							</div>
 							{library?.description ? (
 								<div className="flex w-full">

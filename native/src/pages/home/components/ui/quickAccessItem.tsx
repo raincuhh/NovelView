@@ -2,6 +2,7 @@ import { MostInteractedLibrary } from "@/features/libraries/types";
 import { Cover, CoverImage } from "@/shared/components/ui/cover";
 import PlaceholderLibraryCover from "@/features/libraries/components/ui/placeholderLibraryCover";
 import { LibraryLink } from "@/features/libraries/components/ui/libraryLink";
+import Icon from "@/shared/components/ui/icon";
 
 type QuickAccessItemProps = {
 	data: MostInteractedLibrary;
@@ -13,8 +14,8 @@ export default function QuickAccessItem({ data, coverPath }: QuickAccessItemProp
 
 	return (
 		<li>
-			<LibraryLink libraryId={data.id} className="flex relative w-full h-full">
-				<div className="w-full h-full bg-secondary hover:bg-secondary-alt transition-discrete ease-in-out duration-100 rounded-sm">
+			<LibraryLink libraryId={data.id} className="flex relative w-full h-full group">
+				<div className="w-full h-full bg-secondary group-hover:bg-secondary-alt transition-discrete ease-in-out duration-100 rounded-sm">
 					<div className="flex w-full h-full">
 						<Cover
 							className="h-12 min-w-12 max-w-12 mr-2"
@@ -26,9 +27,16 @@ export default function QuickAccessItem({ data, coverPath }: QuickAccessItemProp
 								<PlaceholderLibraryCover className="rounded-l-sm" />
 							)}
 						</Cover>
-						<div className="flex w-full h-full items-center pr-2 overflow-hidden">
-							<div className="select-none text-sm font-extrabold flex-grow truncate">
-								{data.name} {data.type}
+						<div className="flex w-full h-full items-center pr-2 overflow-hidden justify-between">
+							<div className="select-none text-sm font-extrabold w-full flex-grow truncate">
+								{data.name}
+							</div>
+							<div>
+								{data.type === "synced" ? (
+									<Icon.sync className="fill-faint w-5 h-5 group-hover:fill-muted" />
+								) : (
+									<Icon.local className="fill-faint w-5 h-5 group-hover:fill-muted" />
+								)}
 							</div>
 						</div>
 					</div>

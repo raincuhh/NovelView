@@ -88,12 +88,14 @@ const SystemProvider = ({ children }: { children: ReactNode }) => {
 			sessionStarted: () => {
 				powerSync
 					.connect(connector, { connectionMethod: SyncStreamConnectionMethod.WEB_SOCKET })
-					.then(() => console.log("Successfully connected"))
+					.then(() => {
+						// console.log("Successfully connected");
+					})
 					.catch((err: any) => {
 						console.error("Error connecting to PowerSync:", err);
 
 						setTimeout(() => {
-							console.log("retrying websocket connection");
+							// console.log("retrying websocket connection");
 							powerSync.connect(connector, {
 								connectionMethod: SyncStreamConnectionMethod.WEB_SOCKET,
 							});

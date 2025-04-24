@@ -126,7 +126,7 @@ export default function LibrarySettings() {
 							<div className="px-3 w-full py-1 rounded-md flex gap-2">{renderLayoutIcons()}</div>
 						</div>
 						<div className="mt-auto px-4 h-full pt-6">
-							<p className="text-xs text-faint font-semibold">Settings are local</p>
+							<p className="text-xs text-faint font-semibold">Library options is local</p>
 						</div>
 					</BottomSheet>
 				</>
