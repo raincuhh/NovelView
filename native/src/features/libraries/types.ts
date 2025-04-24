@@ -15,4 +15,4 @@ export interface Library {
 	updatedAt: Timestamp;
 }
 
-export type MostInteractedLibrary = Pick<Library, "id" | "name" | "coverUrl">;
+export type MostInteractedLibrary = Pick<Library, "id" | "name" | "coverUrl" | "type">;

@@ -21,6 +21,7 @@ export async function getMostInteractedLibraries(
 			l.id,
 			l.name,
 			l.cover_url,
+			l.type,
 			MAX(b.last_opened_at) AS lastOpened
 		FROM libraries l
 		LEFT JOIN books b ON b.library_id = l.id

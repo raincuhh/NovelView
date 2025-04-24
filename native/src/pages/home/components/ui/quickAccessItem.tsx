@@ -27,7 +27,9 @@ export default function QuickAccessItem({ data, coverPath }: QuickAccessItemProp
 							)}
 						</Cover>
 						<div className="flex w-full h-full items-center pr-2 overflow-hidden">
-							<div className="select-none text-sm font-extrabold flex-grow truncate">{data.name}</div>
+							<div className="select-none text-sm font-extrabold flex-grow truncate">
+								{data.name} {data.type}
+							</div>
 						</div>
 					</div>
 				</div>
