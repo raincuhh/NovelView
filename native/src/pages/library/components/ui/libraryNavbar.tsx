@@ -8,6 +8,7 @@ import LibrarySettings from "./librarySettings";
 import useModalStore from "@/features/modal/modalStore";
 import { type Modal as ModalType } from "@/features/modal/types";
 import LibraryOptions from "./libraryOptions";
+import ImportBookModal from "@/features/library/components/ui/importBookModal";
 
 type LibraryNavbarProps = {
 	isScrolled: boolean;
@@ -26,7 +27,7 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 		const modal: ModalType = {
 			id: "import-book",
 			closable: true,
-			content: <>yokoso</>,
+			content: <ImportBookModal onClose={closeModal} />,
 		};
 
 		openModal(modal);

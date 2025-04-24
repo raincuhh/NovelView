@@ -169,6 +169,18 @@ const Icon = {
 			<path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z" />
 		</svg>
 	),
+	compass: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z" />
+			<path d="m8 16 5.991-2L16 8l-6 2z" />
+		</svg>
+	),
+	compassFilled: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm3 13-8 2 2-8 8-2-2 8z" />
+			<circle cx="12" cy="12" r="2" />
+		</svg>
+	),
 	leftArrowAlt: ({ className }: IconProps) => (
 		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
 			<path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z" />

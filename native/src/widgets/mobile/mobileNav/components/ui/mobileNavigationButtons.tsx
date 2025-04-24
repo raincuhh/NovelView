@@ -34,6 +34,18 @@ export default function MobileNavigationButtons() {
 		// 	onclick: goForward,
 		// },
 		{
+			key: "browse",
+			icon: (() => {
+				const isActive = router.state.location.pathname === "/browse";
+				const IconComponent = isActive ? Icon.compassFilled : Icon.compass;
+				const iconClass = cn("h-7 w-7", isActive ? "fill-accent" : "fill-muted");
+
+				return <IconComponent className={iconClass} />;
+			})(),
+			onclick: () => navigateTo("/browse"),
+			to: "/browse",
+		},
+		{
 			key: "search",
 			icon: (() => {
 				const isActive = router.state.location.pathname === "/search";
