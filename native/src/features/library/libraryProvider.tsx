@@ -1,17 +1,18 @@
 import { Library } from "../libraries/types";
-import { createContext, PropsWithChildren, useContext, useMemo, useState } from "react";
+import { createContext, PropsWithChildren, useContext, useMemo } from "react";
 import { useLibraryByIdQuery } from "../libraries/model/queries/useLibrariesQuery";
+import { useLibraryCover } from "../libraries/hooks/useLibraryCover";
 
-type LibraryConfig = {
-	layout: "list" | "compact-list" | "grid" | "compact-grid";
-};
+// type LibraryConfig = {
+// 	layout: "list" | "compact-list" | "grid" | "compact-grid";
+// };
 
 type LibraryContextProps = {
 	library: Library | null;
 	isLoading: boolean;
 	isError: boolean;
-	config: LibraryConfig;
-	setConfig: (config: LibraryConfig) => void;
+	coverPath: string | null;
+	coverPathLoading: boolean;
 };
 
 const LibraryContext = createContext<LibraryContextProps | null>(null);
@@ -22,18 +23,15 @@ export type LibraryProviderProps = PropsWithChildren & {
 
 export const LibraryProvider = ({ children, libraryId }: LibraryProviderProps) => {
 	const { data: library, isLoading, isError } = useLibraryByIdQuery(libraryId);
-
-	const [config, setConfig] = useState<LibraryConfig>({
-		layout: "list",
-	});
+	const { coverPath, loading: coverPathLoading } = useLibraryCover(libraryId);
 
 	const value = useMemo(
 		() => ({
 			library: library ?? null,
 			isLoading,
 			isError,
-			config,
-			setConfig,
+			coverPath: coverPath ?? null,
+			coverPathLoading,
 		}),
 		[library, isLoading, isError]
 	);

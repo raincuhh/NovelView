@@ -16,9 +16,9 @@ const LibraryHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> 
 				<div className="flex flex-col gap-2 h-full">
 					<div className="flex flex-col md:flex-row">
 						<LibraryHeaderCover coverPath={coverPath} />
-						<div className="mt-6 px-4 flex flex-col">
+						<div className="mt-6 px-4 flex flex-col gap-2">
 							<div className="flex w-full">
-								<h1 className="font-bold text-xl flex-grow truncate">{library?.name}</h1>
+								<h1 className="font-bold text-2xl flex-grow truncate">{library?.name}</h1>
 							</div>
 							{library?.description ? (
 								<div className="flex w-full">

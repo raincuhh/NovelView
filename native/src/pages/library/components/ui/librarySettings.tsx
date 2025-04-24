@@ -7,7 +7,6 @@
 // 	DropdownMenuShortcut,
 // 	DropdownMenuTrigger,
 // } from "@/shared/components/ui/dropdown";
-import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
 import { useLibraryProvider } from "@/features/library/libraryProvider";
 import { Cover, CoverImage } from "@/shared/components/ui/cover";
 import Icon from "@/shared/components/ui/icon";
@@ -17,10 +16,10 @@ import { BottomSheet } from "react-spring-bottom-sheet";
 export default function LibrarySettings() {
 	const [open, setOpen] = useState<boolean>(false);
 	const focusRef = useRef<HTMLDivElement | null>(null);
-	const { library } = useLibraryProvider();
-	const cover = useLibraryCover(library?.id ?? "");
+	const { library, coverPath } = useLibraryProvider();
+	// const cover = useLibraryCover(library?.id ?? "");
 
-	const hasImage = Boolean(cover.coverPath);
+	const hasImage = Boolean(coverPath);
 
 	useEffect(() => {
 		focusRef.current?.focus();
@@ -41,7 +40,7 @@ export default function LibrarySettings() {
 					<div className="w-full text-start flex gap-2 items-center">
 						<Cover className="w-12 h-12 rounded-md ">
 							{hasImage ? (
-								<CoverImage src={cover.coverPath ?? ""} alt="library cover" className="rounded-md" />
+								<CoverImage src={coverPath ?? ""} alt="library cover" className="rounded-md" />
 							) : (
 								<div className="w-full h-full bg-secondary-alt rounded-md flex justify-center items-center-safe">
 									<Icon.book className="w-[50%] h-[50%] fill-faint" />
@@ -50,7 +49,7 @@ export default function LibrarySettings() {
 						</Cover>
 						<div className="flex flex-col justify-center h-full">
 							<header className="text-lg font-bold text-normal">{library?.name}</header>
-							<p className="text-sm text-muted">Local Library</p>
+							<p className="text-sm text-muted">{library?.type}</p>
 						</div>
 					</div>
 				}

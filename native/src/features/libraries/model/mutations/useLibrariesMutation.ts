@@ -1,10 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNewLibrary } from "../../lib/insertLibraries";
 import { LibraryCoversAttachmentQueue } from "@/shared/lib/powersync/libraryCoversAttachmentQueue";
+import { LibraryType } from "../../types";
 
 type CreateLibraryParams = {
 	name: string;
-	type: "local" | "synced";
+	type: LibraryType;
 	cover?: File | null;
 	userId: string;
 	libraryCoversQueue: LibraryCoversAttachmentQueue;

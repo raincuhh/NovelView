@@ -1,13 +1,5 @@
 import { useLibraryProvider } from "@/features/library/libraryProvider";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuShortcut,
-	DropdownMenuTrigger,
-} from "@/shared/components/ui/dropdown";
+
 import Icon from "@/shared/components/ui/icon";
 import { cn } from "@/shared/lib/globalUtils";
 import { useHistoryStore } from "@/shared/stores/historyStore";
@@ -15,6 +7,7 @@ import { useNavigate } from "@tanstack/react-router";
 import LibrarySettings from "./librarySettings";
 import useModalStore from "@/features/modal/modalStore";
 import { type Modal as ModalType } from "@/features/modal/types";
+import LibraryOptions from "./libraryOptions";
 
 type LibraryNavbarProps = {
 	isScrolled: boolean;
@@ -60,27 +53,7 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 				</div>
 				<div className="flex flex-col">
 					<div className={cn("flex", isScrolled ? "" : "")}>
-						<DropdownMenu>
-							<DropdownMenuTrigger>
-								<div className="p-2 cursor-pointer">
-									<Icon.menu className="hover:fill-muted" />
-								</div>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent className="w-42" shouldCloseOnClick={false}>
-								<DropdownMenuLabel>Options</DropdownMenuLabel>
-								<DropdownMenuItem onClick={() => console.log("clicked thing one.")}>
-									thing 1
-								</DropdownMenuItem>
-								<DropdownMenuItem onClick={() => console.log("clicked thing two.")}>
-									thing 2
-								</DropdownMenuItem>
-								<DropdownMenuSeparator />
-								<DropdownMenuItem>
-									<div>Logout</div>
-									<DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-								</DropdownMenuItem>
-							</DropdownMenuContent>
-						</DropdownMenu>
+						<LibraryOptions />
 						<LibrarySettings />
 						<div className="p-2 ml-2 gap-1" onClick={handleOpenImportModal}>
 							<Icon.plus className="hover:fill-muted" />

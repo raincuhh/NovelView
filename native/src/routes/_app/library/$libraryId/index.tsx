@@ -37,7 +37,7 @@ function RouteComponent() {
 		if (!ref) return;
 
 		setScrollHeight(ref.clientHeight);
-		console.log(ref.clientHeight);
+		// console.log(ref.clientHeight);
 	}, [libraryHeaderRef]);
 
 	useEffect(() => {

@@ -11,15 +11,36 @@ const Icon = {
 			<path d="M8 6h9v2H8z" />
 		</svg>
 	),
+	sync: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="m13 7.101.01.001a4.978 4.978 0 0 1 2.526 1.362 5.005 5.005 0 0 1 1.363 2.528 5.061 5.061 0 0 1-.001 2.016 4.976 4.976 0 0 1-1.363 2.527l1.414 1.414a7.014 7.014 0 0 0 1.908-3.54 6.98 6.98 0 0 0 0-2.819 6.957 6.957 0 0 0-1.907-3.539 6.97 6.97 0 0 0-2.223-1.5 6.921 6.921 0 0 0-1.315-.408c-.137-.028-.275-.043-.412-.063V2L9 6l4 4V7.101zm-7.45 7.623c.174.412.392.812.646 1.19.249.37.537.718.854 1.034a7.036 7.036 0 0 0 2.224 1.501c.425.18.868.317 1.315.408.167.034.338.056.508.078v2.944l4-4-4-4v3.03c-.035-.006-.072-.003-.107-.011a4.978 4.978 0 0 1-2.526-1.362 4.994 4.994 0 0 1 .001-7.071L7.051 7.05a7.01 7.01 0 0 0-1.5 2.224A6.974 6.974 0 0 0 5 12a6.997 6.997 0 0 0 .55 2.724z" />
+		</svg>
+	),
+	bookContent: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h7v14H4zm9 0V5h7l.001 14H13z" />
+			<path d="M15 7h3v2h-3zm0 4h3v2h-3z" />
+		</svg>
+	),
+	editAlt: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z" />
+		</svg>
+	),
 	upload: ({ className }: IconProps) => (
 		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
 			<path d="M11 15h2V9h3l-4-5-4 5h3z" />
 			<path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z" />
 		</svg>
 	),
-	bookImport: ({ className }: IconProps) => (
+	fileImport: ({ className }: IconProps) => (
 		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
 			<path d="M20 14V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4h-7v3l-5-4 5-4v3h7zM13 4l5 5h-5V4z" />
+		</svg>
+	),
+	fileExport: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M18 22a2 2 0 0 0 2-2v-5l-5 4v-3H8v-2h7v-3l5 4V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12zM13 4l5 5h-5V4z" />
 		</svg>
 	),
 	bell: ({ className }: IconProps) => (
@@ -76,13 +97,14 @@ const Icon = {
 		</svg>
 	),
 	eyeOpen: ({ className }: IconProps) => (
-		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 576 512">
-			<path d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256 63 286 89.6 328.5 128 364.3c41.2 38.1 94.8 67.7 160 67.7s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1 3.3 7.9 3.3 16.7 0 24.6-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80h-2c1.3 5.1 2 10.5 2 16 0 35.3-28.7 64-64 64-5.5 0-10.9-.7-16-2v2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z" />
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M12 9a3.02 3.02 0 0 0-3 3c0 1.642 1.358 3 3 3 1.641 0 3-1.358 3-3 0-1.641-1.359-3-3-3z" />
+			<path d="M12 5c-7.633 0-9.927 6.617-9.948 6.684L1.946 12l.105.316C2.073 12.383 4.367 19 12 19s9.927-6.617 9.948-6.684l.106-.316-.105-.316C21.927 11.617 19.633 5 12 5zm0 12c-5.351 0-7.424-3.846-7.926-5C4.578 10.842 6.652 7 12 7c5.351 0 7.424 3.846 7.926 5-.504 1.158-2.578 5-7.926 5z" />
 		</svg>
 	),
 	eyeClosed: ({ className }: IconProps) => (
-		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 640 512">
-			<path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2s-6.3 25.5 4.1 33.7l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7l-105.2-82.4c39.6-40.6 66.4-86.1 79.9-118.4 3.3-7.9 3.3-16.7 0-24.6-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zm151 118.3C226 97.7 269.5 80 320 80c65.2 0 118.8 29.6 159.9 67.7C518.4 183.5 545 226 558.6 256c-12.6 28-36.6 66.8-70.9 100.9l-53.8-42.2c9.1-17.6 14.2-37.5 14.2-58.7 0-70.7-57.3-128-128-128-32.2 0-61.7 11.9-84.2 31.5l-46.1-36.1zm205.1 160.8-81.5-63.9c4.2-8.5 6.6-18.2 6.6-28.3 0-5.5-.7-10.9-2-16h2c44.2 0 80 35.8 80 80 0 9.9-1.8 19.4-5.1 28.2zm9.4 130.3C378.8 425.4 350.7 432 320 432c-65.2 0-118.8-29.6-159.9-67.7C121.6 328.5 95 286 81.4 256c8.3-18.4 21.5-41.5 39.4-64.8l-37.7-29.7c-22.8 29.7-39.1 59.3-48.6 82.2-3.3 7.9-3.3 16.7 0 24.6 14.9 35.7 46.2 87.7 93 131.1 47 43.8 111.7 80.6 192.5 80.6 47.8 0 89.9-12.9 126.2-32.5l-41.9-33zM192 256c0 70.7 57.3 128 128 128 13.3 0 26.1-2 38.2-5.8L302 334c-23.5-5.4-43.1-21.2-53.7-42.3l-56.1-44.2c-.2 2.8-.3 5.6-.3 8.5z" />
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M12 19c.946 0 1.81-.103 2.598-.281l-1.757-1.757c-.273.021-.55.038-.841.038-5.351 0-7.424-3.846-7.926-5a8.642 8.642 0 0 1 1.508-2.297L4.184 8.305c-1.538 1.667-2.121 3.346-2.132 3.379a.994.994 0 0 0 0 .633C2.073 12.383 4.367 19 12 19zm0-14c-1.837 0-3.346.396-4.604.981L3.707 2.293 2.293 3.707l18 18 1.414-1.414-3.319-3.319c2.614-1.951 3.547-4.615 3.561-4.657a.994.994 0 0 0 0-.633C21.927 11.617 19.633 5 12 5zm4.972 10.558-2.28-2.28c.19-.39.308-.819.308-1.278 0-1.641-1.359-3-3-3-.459 0-.888.118-1.277.309L8.915 7.501A9.26 9.26 0 0 1 12 7c5.351 0 7.424 3.846 7.926 5-.302.692-1.166 2.342-2.954 3.558z" />
 		</svg>
 	),
 	fastForwardCircle: ({ className }: IconProps) => (
@@ -157,9 +179,84 @@ const Icon = {
 			<path d="M3 13h14.586l-5.293 5.293 1.414 1.414L21.414 12l-7.707-7.707-1.414 1.414L17.586 11H3z" />
 		</svg>
 	),
+	upArrowAlt: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M11 8.414V18h2V8.414l4.293 4.293 1.414-1.414L12 4.586l-6.707 6.707 1.414 1.414z" />
+		</svg>
+	),
+	downArrowAlt: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="m18.707 12.707-1.414-1.414L13 15.586V6h-2v9.586l-4.293-4.293-1.414 1.414L12 19.414z" />
+		</svg>
+	),
 	library: ({ className }: IconProps) => (
 		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
 			<path d="M7 3h2v18H7zM4 3h2v18H4zm6 0h2v18h-2zm9.062 17.792-6.223-16.89 1.877-.692 6.223 16.89z" />
+		</svg>
+	),
+	bookmarks: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M16.999 23V7c0-1.103-.897-2-2-2h-8c-1.103 0-2 .897-2 2v16l6-3.601 6 3.601z" />
+			<path d="M15.585 3h1.414c1.103 0 2 .897 2 2v10.443l2 2.489V3c0-1.103-.897-2-2-2h-8c-1.103 0-2 .897-2 2h6.586z" />
+		</svg>
+	),
+	bookmark: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M18 2H6c-1.103 0-2 .897-2 2v18l8-4.572L20 22V4c0-1.103-.897-2-2-2zm0 16.553-6-3.428-6 3.428V4h12v14.553z" />
+		</svg>
+	),
+	bookmarkPlus: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M13 14v-3h3V9h-3V6h-2v3H8v2h3v3z" />
+			<path d="M20 22V4c0-1.103-.897-2-2-2H6c-1.103 0-2 .897-2 2v18l8-4.572L20 22zM6 10V4h12v14.553l-6-3.428-6 3.428V10z" />
+		</svg>
+	),
+	bookmarkMinus: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M8 9h8v2H8z" />
+			<path d="M20 22V4c0-1.103-.897-2-2-2H6c-1.103 0-2 .897-2 2v18l8-4.572L20 22zM6 10V4h12v14.553l-6-3.428-6 3.428V10z" />
+		</svg>
+	),
+	bookmarked: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M12 11.222 14.667 13l-.89-3.111L16 8l-2.667-.333L12 5l-1.333 2.667L8 8l2.223 1.889L9.333 13z" />
+			<path d="M19 21.723V4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v17.723l7-4.571 7 4.571zM8 8l2.667-.333L12 5l1.333 2.667L16 8l-2.223 1.889.89 3.111L12 11.222 9.333 13l.89-3.111L8 8z" />
+		</svg>
+	),
+	filter: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M7 11h10v2H7zM4 7h16v2H4zm6 8h4v2h-4z" />
+		</svg>
+	),
+	sort: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M8 16H4l6 6V2H8zm6-11v17h2V8h4l-6-6z" />
+		</svg>
+	),
+	layout: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M19 3H5c-1.103 0-2 .897-2 2v4h18V5c0-1.103-.897-2-2-2zM3 19c0 1.103.897 2 2 2h8V11H3v8zm12 2h4c1.103 0 2-.897 2-2v-8h-6v10z" />
+		</svg>
+	),
+	alignLeft: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M4 19h16v2H4zm0-4h11v2H4zm0-4h16v2H4zm0-8h16v2H4zm0 4h11v2H4z" />
+		</svg>
+	),
+	alignMiddle: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M4 19h16v2H4zm3-4h10v2H7zm-3-4h16v2H4zm0-8h16v2H4zm3 4h10v2H7z" />
+		</svg>
+	),
+	alignRight: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="M4 19h16v2H4zm5-4h11v2H9zm-5-4h16v2H4zm0-8h16v2H4zm5 4h11v2H9z" />
+		</svg>
+	),
+	imageAdd: ({ className }: IconProps) => (
+		<svg xmlns="http://www.w3.org/2000/svg" className={cn(defaultStyling, className)} viewBox="0 0 24 24">
+			<path d="m9 13 3-4 3 4.5V12h4V5c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h8v-4H5l3-4 1 2z" />
+			<path d="M19 14h-2v3h-3v2h3v3h2v-3h3v-2h-3z" />
 		</svg>
 	),
 	linkExternal: ({ className }: IconProps) => (

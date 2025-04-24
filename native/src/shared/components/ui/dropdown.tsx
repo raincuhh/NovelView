@@ -135,12 +135,7 @@ export function DropdownMenuContent({
 	);
 }
 
-export function DropdownMenuItem({
-	children,
-	onClick,
-
-	...props
-}: HTMLAttributes<HTMLDivElement>) {
+export function DropdownMenuItem({ children, onClick, className, ...props }: HTMLAttributes<HTMLDivElement>) {
 	const ctx = useContext(DropdownMenuContext);
 
 	const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -155,7 +150,7 @@ export function DropdownMenuItem({
 			onClick={handleClick}
 			{...props}
 		>
-			<div className="px-2 w-full flex items-center">{children}</div>
+			<div className={cn("px-2 w-full flex items-center", className)}>{children}</div>
 		</div>
 	);
 }
