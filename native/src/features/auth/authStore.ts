@@ -30,11 +30,11 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
 	},
 
 	init: async () => {
-		console.log("authStore init");
+		// console.log("authStore init");
 		set({ loading: true });
 
 		supabase.client.auth.onAuthStateChange((_event, session) => {
-			console.log("Auth event:", _event);
+			// console.log("Auth event:", _event);
 			get().setSession(session);
 		});
 
@@ -86,8 +86,8 @@ export const useAuthStore = create<AuthStoreState>((set, get) => ({
 					loading: false,
 				});
 
-				console.log("user: ", get().user);
-				console.log("session", get().session);
+				// console.log("user: ", get().user);
+				// console.log("session", get().session);
 			} else {
 				set({ user: null, loading: false });
 			}

@@ -1,4 +1,3 @@
-import { MOCK_BOOKS } from "@/features/books/const";
 import RenderList from "@/shared/components/utils/renderList";
 import { Book } from "@/features/books/types";
 import { useEffect, useState } from "react";

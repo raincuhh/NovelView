@@ -9,7 +9,7 @@ interface LibrarySettingsState {
 	reset: () => void;
 }
 
-export const librarySettingsStore = create<LibrarySettingsState>()(
+export const useLibrarySettingsStore = create<LibrarySettingsState>()(
 	persist(
 		(set) => ({
 			settings: DEFAULT_LIBRARY_SETTINGS,

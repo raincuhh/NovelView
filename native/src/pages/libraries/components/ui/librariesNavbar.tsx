@@ -1,4 +1,4 @@
-import Avatar from "@/shared/components/ui/avatar";
+import Avatar from "@/features/user/components/ui/avatar";
 import { useMediaQuery } from "react-responsive";
 
 export default function LibrariesNavbar() {

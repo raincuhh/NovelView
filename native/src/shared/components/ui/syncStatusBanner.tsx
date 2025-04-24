@@ -12,12 +12,12 @@ export default function SyncStatusBanner() {
 		return <Wrapper>You’re offline.</Wrapper>;
 	}
 
-	return null;
+	return null; // <Wrapper>Your online.</Wrapper>
 }
 
 const Wrapper = ({ children }: PropsWithChildren) => {
 	return (
-		<div className="w-full text-xs px-4 py-1 text-normal bg-accent flex items-center justify-center">
+		<div className="w-full text-sm px-4 py-1 text-normal bg-accent flex items-center justify-center">
 			{children}
 		</div>
 	);

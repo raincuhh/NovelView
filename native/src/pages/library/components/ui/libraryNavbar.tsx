@@ -4,10 +4,10 @@ import Icon from "@/shared/components/ui/icon";
 import { cn } from "@/shared/lib/globalUtils";
 import { useHistoryStore } from "@/shared/stores/historyStore";
 import { useNavigate } from "@tanstack/react-router";
-import LibrarySettings from "./librarySettings";
+import LibraryOptions from "./libraryOptions";
 import useModalStore from "@/features/modal/modalStore";
 import { type Modal as ModalType } from "@/features/modal/types";
-import LibraryOptions from "./libraryOptions";
+import LibrarySettings from "./librarySettings";
 import ImportBookModal from "@/features/library/components/ui/importBookModal";
 
 type LibraryNavbarProps = {
@@ -41,21 +41,25 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 			)}
 		>
 			<div className="flex w-full h-14 items-center px-4 justify-between">
-				<div className="flex h-full items-center overflow-hidden">
+				<div className="flex h-full items-center overflow-hidden group">
 					<div
 						onClick={() => {
 							canGoBack ? goBack() : navigate({ to: "/home" });
 						}}
 						className="p-3 -ml-3 cursor-pointer"
 					>
-						<Icon.leftArrowAlt />
+						<Icon.leftArrowAlt className="group-hover:fill-muted" />
 					</div>
-					<span className="font-bold select-none flex-grow truncate">{library?.name}</span>
+					{isScrolled ? (
+						<span className="font-bold select-none flex-grow truncate group-hover:text-muted">
+							{library?.name}
+						</span>
+					) : null}
 				</div>
 				<div className="flex flex-col">
-					<div className={cn("flex", isScrolled ? "" : "")}>
-						<LibraryOptions />
+					<div className={cn("flex", isScrolled ? "block" : "hidden")}>
 						<LibrarySettings />
+						<LibraryOptions />
 						<div className="p-2 ml-2 gap-1" onClick={handleOpenImportModal}>
 							<Icon.plus className="hover:fill-muted" />
 						</div>

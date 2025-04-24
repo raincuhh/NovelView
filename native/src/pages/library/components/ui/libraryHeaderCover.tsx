@@ -13,14 +13,16 @@ export default function LibraryHeaderCover({ coverPath }: LibraryHeaderCoverProp
 			<Cover
 				className="h-56 w-56"
 				style={{
-					boxShadow: "rgba(0, 0, 0, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
+					boxShadow: hasImage
+						? "rgba(0, 0, 0, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px"
+						: "",
 				}}
 			>
 				{hasImage ? (
 					<CoverImage src={coverPath} alt="library cover" className="rounded-md" />
 				) : (
-					<div className="w-full h-full bg-secondary-alt rounded-md flex justify-center items-center-safe">
-						<Icon.book className="w-[50%] h-[50%] fill-faint" />
+					<div className="w-full h-full bg-transparent rounded-md flex justify-center items-center-safe">
+						<Icon.book className="w-[50%] h-[50%] fill-muted" />
 					</div>
 				)}
 			</Cover>

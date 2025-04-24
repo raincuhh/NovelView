@@ -45,7 +45,7 @@ function RouteComponent() {
 		if (!userId) console.warn("No userId yet");
 		if (isLoading) console.log("Still loading libraries...");
 		else if (hasLibraries) console.log("User has libraries");
-		else console.log("No libraries found — showing EmptyLibraries");
+		else console.log("No libraries found - showing EmptyLibraries");
 	}, [userId, libraries, isLoading]);
 
 	// useEffect(() => {

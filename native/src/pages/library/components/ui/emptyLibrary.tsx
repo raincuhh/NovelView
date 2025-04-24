@@ -1,3 +1,4 @@
+import ImportBookModal from "@/features/library/components/ui/importBookModal";
 import useModalStore from "@/features/modal/modalStore";
 import { type Modal as ModalType } from "@/features/modal/types";
 import { Button } from "@/shared/components/ui/button";
@@ -7,9 +8,9 @@ export default function EmptyLibrary() {
 
 	const handleOpenImportModal = () => {
 		const modal: ModalType = {
-			id: "create-library",
+			id: "import-book",
 			closable: true,
-			content: <>yokoso</>,
+			content: <ImportBookModal onClose={closeModal} />,
 		};
 
 		openModal(modal);

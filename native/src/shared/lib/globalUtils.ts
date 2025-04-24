@@ -114,3 +114,7 @@ export function getFileExtension(filename: string): string {
 	const parts = filename.split(".");
 	return parts.length > 1 ? parts.pop()?.toLowerCase() || "" : "";
 }
+
+export function getCurrentTimestamp(): string {
+	return new Date().toISOString();
+}

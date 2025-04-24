@@ -3,6 +3,7 @@ import MobileNavigationRecentRead from "./mobileRecentRead";
 import MobileNavigationButtons from "./mobileNavigationButtons";
 // @ts-ignore
 import { FileRouteTypes } from "@/routeTree.gen";
+import SyncStatusBanner from "@/shared/components/ui/syncStatusBanner";
 
 export default function MobileNavigation() {
 	return (
@@ -18,6 +19,7 @@ export default function MobileNavigation() {
 
 			<div className="relative w-full flex flex-col">
 				{/* <MobileNavigationRecentRead to={"/home" as FileRouteTypes["to"]} /> */}
+				<SyncStatusBanner />
 				<MobileNavigationButtons />
 			</div>
 		</div>

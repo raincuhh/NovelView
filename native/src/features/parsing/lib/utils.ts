@@ -1,4 +1,6 @@
-import { EpubInfo } from "../types";
+import { getCurrentTimestamp } from "@/shared/lib/globalUtils";
+import { EpubInfo, Chapter as ParsedChapter } from "../types";
+import { Chapter } from "@/features/chapter/types";
 
 export function logParsedEpubContents(epubObj: EpubInfo) {
 	console.log("Parsed EPUB info:");
@@ -59,4 +61,37 @@ export function logFullParsedEpubContentsWithoutChapters(epubObj: EpubInfo) {
 		});
 	}
 	console.log("All chapter ids: ", chapterIds);
+}
+
+/**
+ * Converts the parsed chapters from EPUB into the normalized Chapter format.
+ */
+export function convertParsedChaptersToAppChapters(
+	parsedChapters: ParsedChapter[],
+	bookId: string
+): Chapter[] {
+	const now = getCurrentTimestamp();
+
+	return parsedChapters.map((parsed, index): Chapter => {
+		const chapterId = crypto.randomUUID();
+
+		const wordCount = parsed.content?.split(/\s+/).length || 0;
+		const estimatedReadingTime = Math.ceil(wordCount / 250); // avg 250 wpm
+
+		return {
+			id: chapterId,
+			bookId,
+			index,
+			resourceUrl: `/books/${bookId}/resources/${chapterId}/parsed.html`,
+			sourceHref: undefined,
+			title: `Chapter ${index + 1}`,
+			snippet: parsed.content.slice(0, 200),
+			wordCount,
+			estimatedReadingTime,
+			isRead: false,
+			isDownloaded: true,
+			createdAt: now,
+			updatedAt: now,
+		};
+	});
 }

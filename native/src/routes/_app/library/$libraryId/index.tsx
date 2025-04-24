@@ -45,7 +45,7 @@ function RouteComponent() {
 		if (!userId) console.warn("No userId yet");
 		if (isLoading) console.log("Still loading books...");
 		else if (hasBooks) console.log("User has books", books);
-		else console.log("No books found — showing EmptyBooks");
+		else console.log("No books found - showing EmptyBooks");
 	}, [userId, books, isLoading]);
 
 	return (

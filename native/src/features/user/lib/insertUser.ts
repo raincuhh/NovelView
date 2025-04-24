@@ -1,6 +1,5 @@
 import { powersyncDb } from "@/shared/providers/systemProvider";
-import { getDefaultUserReadingPrefs } from "./utils";
-import { UserProfile, UserReadingPrefsMetadata, UserSettings } from "../types";
+import { UserProfile, UserSettings } from "../types";
 import { RegisterFormData } from "@/pages/onboarding/registerFormStore";
 
 export const insertNewUser = async (formData: RegisterFormData, auth: { userId: string; email: string }) => {
@@ -23,7 +22,7 @@ export const insertNewUser = async (formData: RegisterFormData, auth: { userId: 
 			updatedAt: new Date().toISOString(),
 		};
 
-		const userReadingPrefsData: UserReadingPrefsMetadata = getDefaultUserReadingPrefs(); // Get default prefs
+		// const userReadingPrefsData: UserReadingPrefsMetadata = getDefaultUserReadingPrefs();
 
 		await powersyncDb.writeTransaction(async (tx) => {
 			// user profile
@@ -41,7 +40,7 @@ export const insertNewUser = async (formData: RegisterFormData, auth: { userId: 
 			if (!settingsExists) {
 				await tx.execute(
 					"INSERT INTO user_settings (id, theme, metadata, created_at, updated_at) VALUES (?, ?, ?, datetime(), datetime())",
-					[userId, userSettingsData.theme, JSON.stringify(userSettingsData.metadata)]
+					[userId, userSettingsData.theme, JSON.stringify({})]
 				);
 				console.log("Seeded local user settings for:", userId);
 			}
@@ -51,7 +50,7 @@ export const insertNewUser = async (formData: RegisterFormData, auth: { userId: 
 			if (!prefsExists) {
 				await tx.execute("INSERT INTO user_reading_prefs (id, prefs) VALUES (?, ?)", [
 					userId,
-					JSON.stringify(userReadingPrefsData),
+					JSON.stringify({}),
 				]);
 				console.log("Seeded local user reading prefs for:", userId);
 			}
