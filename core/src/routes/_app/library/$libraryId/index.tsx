@@ -10,7 +10,7 @@ import type { OverlayScrollbarsComponentRef } from "overlayscrollbars-react";
 import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
 import { useBooksByLibraryIdQuery } from "@/features/books/model/queries/useBookQuery";
 import EmptyLibrary from "@/pages/library/components/ui/emptyLibrary";
-import TestList from "@/features/test/components/ui/testList";
+// import TestList from "@/features/test/components/ui/testList";
 
 export const Route = createFileRoute("/_app/library/$libraryId/")({
 	component: RouteComponent,
@@ -38,16 +38,15 @@ function RouteComponent() {
 		if (!ref) return;
 
 		setScrollHeight(ref.clientHeight);
-		// console.log(ref.clientHeight);
 	}, [libraryHeaderRef]);
 
-	useEffect(() => {
-		console.log("/library/$libraryid route mounted");
-		if (!userId) console.warn("No userId yet");
-		if (isLoading) console.log("Still loading books...");
-		else if (hasBooks) console.log("User has books", books);
-		else console.log("No books found - showing EmptyBooks");
-	}, [userId, books, isLoading]);
+	// useEffect(() => {
+	// 	console.log("/library/$libraryid route mounted");
+	// 	if (!userId) console.warn("No userId yet");
+	// 	if (isLoading) console.log("Still loading books...");
+	// 	else if (hasBooks) console.log("User has books", books);
+	// 	else console.log("No books found - showing EmptyBooks");
+	// }, [userId, books, isLoading]);
 
 	return (
 		<ScrollContainer

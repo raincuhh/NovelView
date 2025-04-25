@@ -21,7 +21,7 @@ export default function InitUserTables() {
 			const isInitialized = profile && settings && prefs;
 
 			if (isInitialized) {
-				console.log("User fully initialized");
+				// console.log("User fully initialized");
 				return;
 			}
 

@@ -3,11 +3,10 @@ import EmptyLibraries from "@/features/libraries/components/ui/emptyLibraries";
 import ActivityCalendar from "@/pages/home/components/ui/activityCalendar";
 import HomeNavbar from "@/pages/home/components/ui/homeNavbar";
 import { createFileRoute } from "@tanstack/react-router";
-import InitUserTables from "@/features/auth/components/utils/initUserTables";
+import InitUserTables from "@/features/user/components/utils/initUserTables";
 import QuickAccessErrorBoundary from "@/pages/home/components/ui/quickAccessErrorBoundary";
 import RecentsErrorBoundary from "@/pages/home/components/ui/recentsErrorBoundary";
 import { useDrawerStore } from "@/features/drawer/drawerStore";
-import { useEffect } from "react";
 import ReadingNowErrorBoundary from "@/pages/home/components/ui/readingNowErrorBoundary";
 import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
 import ScrollContainer from "@/shared/components/ui/scrollContainer";
@@ -40,13 +39,13 @@ function RouteComponent() {
 
 	const hasLibraries = !!libraries;
 
-	useEffect(() => {
-		console.log("Home route mounted");
-		if (!userId) console.warn("No userId yet");
-		if (isLoading) console.log("Still loading libraries...");
-		else if (hasLibraries) console.log("User has libraries");
-		else console.log("No libraries found - showing EmptyLibraries");
-	}, [userId, libraries, isLoading]);
+	// useEffect(() => {
+	// 	console.log("Home route mounted");
+	// 	if (!userId) console.warn("No userId yet");
+	// 	if (isLoading) console.log("Still loading libraries...");
+	// 	else if (hasLibraries) console.log("User has libraries");
+	// 	else console.log("No libraries found - showing EmptyLibraries");
+	// }, [userId, libraries, isLoading]);
 
 	// useEffect(() => {
 	// 	const examplePath = TEST_EPUB_SHADOW_SLAVE_VOL_1_FILE_NAME;

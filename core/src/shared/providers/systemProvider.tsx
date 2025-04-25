@@ -10,6 +10,7 @@ import { BookFilesAttachmentQueue } from "../lib/powersync/bookFilesAttachmentQu
 import { AvatarsAttachmentQueue } from "../lib/powersync/avatarsAttachmentQueue";
 
 Logger.useDefaults();
+Logger.setLevel(Logger.ERROR);
 
 const LibraryCoversQueueContext = createContext<LibraryCoversAttachmentQueue | undefined>(undefined);
 const BookFilesQueueContext = createContext<BookFilesAttachmentQueue | undefined>(undefined);
