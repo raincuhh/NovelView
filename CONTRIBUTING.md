@@ -48,6 +48,6 @@ Please adhere to the following guidelines when contributing code:
 
 ## License
 
-By contributing to this project, you agree that your contributions will be licensed under the same license as the project. Please see the [LICENSE](LICENSE) file for more information.
+By contributing to this project, you agree that your contributions will be licensed under the same license as the project. Please see the [LICENSE-MIT](LICENSE-MIT) and [LICENSE-APACHE-2.0](LICENSE-APACHE-2.0) files for more information.
 
 ---
