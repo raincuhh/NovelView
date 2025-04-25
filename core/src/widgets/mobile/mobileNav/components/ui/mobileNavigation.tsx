@@ -11,8 +11,8 @@ export default function MobileNavigation() {
 			<div
 				className="absolute inset-0 z-0"
 				style={{
-					WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,1) 5%, rgba(0,0,0,0) 100%)",
-					maskImage: "linear-gradient(to top, rgba(0,0,0,1) 5%, rgba(0,0,0,0) 100%)",
+					WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))",
+					maskImage: "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0))",
 					backgroundColor: "black",
 				}}
 			/>

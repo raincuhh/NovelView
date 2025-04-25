@@ -1,4 +1,3 @@
-import { useAuthStore } from "@/features/auth/authStore";
 import LibraryBackground from "@/pages/library/components/ui/libraryBackground";
 import { useLibraryCover } from "@/features/libraries/hooks/useLibraryCover";
 import LibraryHeader from "@/pages/library/components/ui/libraryHeader";
@@ -17,9 +16,6 @@ export const Route = createFileRoute("/_app/library/$libraryId/")({
 });
 
 function RouteComponent() {
-	const { getUserId } = useAuthStore();
-	const userId = getUserId();
-
 	const { libraryId } = useParams({ from: "/_app/library/$libraryId" });
 	const { coverPath } = useLibraryCover(libraryId);
 

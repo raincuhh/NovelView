@@ -15,13 +15,13 @@ Logger.setLevel(Logger.ERROR);
 const LibraryCoversQueueContext = createContext<LibraryCoversAttachmentQueue | undefined>(undefined);
 const BookFilesQueueContext = createContext<BookFilesAttachmentQueue | undefined>(undefined);
 const AvatarsQueueContext = createContext<AvatarsAttachmentQueue | undefined>(undefined);
+const SupabaseContext = createContext<SupabaseConnector | null>(null);
 
 const useLibraryCoversQueue = () => useContext(LibraryCoversQueueContext);
 const useBookFilesQueue = () => useContext(BookFilesQueueContext);
 const useAvatarsQueue = () => useContext(AvatarsQueueContext);
-
-const SupabaseContext = createContext<SupabaseConnector | null>(null);
 const useSupabase = () => useContext(SupabaseContext);
+
 const supabase: SupabaseConnector = new SupabaseConnector();
 
 const powersyncDb = new PowerSyncDatabase({
@@ -32,10 +32,11 @@ const powersyncDb = new PowerSyncDatabase({
 	},
 });
 
-// await powersyncDb.execute("DELETE FROM library_covers"); // do not remove ts bruh, only testing to delete queue if faulty queue.
+// do not remove ts bruh, only testing to delete queue if faulty queue.
+// await powersyncDb.execute("DELETE FROM library_covers");
 
 const localDb: Database = await Database.load("sqlite:local.db");
-const sessionDb: Database = await Database.load("sqlite:session.db");
+// const sessionDb: Database = await Database.load("sqlite:session.db");
 
 const SystemProvider = ({ children }: { children: ReactNode }) => {
 	const [connector] = useState<SupabaseConnector>(supabase);
@@ -135,7 +136,7 @@ export {
 	SystemProvider,
 	powersyncDb,
 	localDb,
-	sessionDb,
+	// sessionDb,
 	useLibraryCoversQueue,
 	useBookFilesQueue,
 	useAvatarsQueue,

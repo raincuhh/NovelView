@@ -11,7 +11,7 @@ export default function ModalRoot() {
 				data={modals}
 				render={(modal: Modal, i: number) => (
 					<div key={modal.id + i} className="w-screen h-screen absolute top-0 left-0">
-						{modal.content}
+						<div className="relative w-full h-full">{modal.content}</div>
 					</div>
 				)}
 			/>

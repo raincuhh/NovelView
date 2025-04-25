@@ -1,5 +1,4 @@
 import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
-// import { supabase } from "@/shared/providers/systemProvider";
 import { useMediaQuery } from "react-responsive";
 import Titlebar from "@/widgets/desktop/titlebar/components/ui/titlebar";
 import MobileNavigation from "@/widgets/mobile/mobileNav/components/ui/mobileNavigation";
@@ -7,7 +6,6 @@ import DesktopLibraries from "@/widgets/desktop/desktopLibraries/components/ui/d
 import { requireAuth } from "@/features/auth/lib/authGuard";
 import { useSupabase } from "@/shared/providers/systemProvider";
 import { useEffect } from "react";
-import MobilePadding from "@/shared/components/ui/mobileBottomPadding";
 
 export const Route = createFileRoute("/_app")({
 	component: RouteComponent,

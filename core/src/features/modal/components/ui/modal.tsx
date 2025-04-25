@@ -23,25 +23,15 @@ const Modal = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & ModalP
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
-					transition={{ duration: 0.1 }}
-					className="inset-0 bg-primary/50 z-40"
+					transition={{ duration: 0.2 }}
+					className="absolute inset-0 bg-primary/50 z-40 w-full h-full"
 				></motion.div>
-				{/* <div
-					ref={ref}
-					className={cn(
-						"bg-primary-alt px-4 py-6 rounded-md border border-border mx-4 pointer-events-none",
-						className
-					)}
-					{...props}
-				>
-					<div className={cn("flex flex-col pointer-events-auto", innerClassName)}>{children}</div>
-				</div> */}
 				<motion.div
 					initial={{ opacity: 0, scale: 0.95 }}
 					animate={{ opacity: 1, scale: 1 }}
 					exit={{ opacity: 0, scale: 0.95 }}
 					transition={{ duration: 0.2 }}
-					className=" flex justify-center items-center h-full"
+					className="absolute flex justify-center items-center z-41 h-full w-full"
 				>
 					<div
 						ref={ref}
@@ -52,7 +42,9 @@ const Modal = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & ModalP
 						onClick={(e) => e.stopPropagation()}
 						{...props}
 					>
-						<div className={cn("flex flex-col pointer-events-auto", innerClassName)}>{children}</div>
+						<div className={cn("flex flex-col pointer-events-auto text-normal", innerClassName)}>
+							{children}
+						</div>
 					</div>
 				</motion.div>
 			</AnimatePresence>

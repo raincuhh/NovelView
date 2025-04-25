@@ -1,4 +1,4 @@
-import ImportBookModal from "@/features/library/components/ui/importBookModal";
+import ImportBookModal from "@/features/books/components/ui/importBookModal";
 import useModalStore from "@/features/modal/modalStore";
 import { type Modal as ModalType } from "@/features/modal/types";
 import { Button } from "@/shared/components/ui/button";

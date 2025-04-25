@@ -80,7 +80,9 @@ export default function MobileNavigationButtons() {
 					<Fragment key={i}>
 						{item.to ? (
 							<Link to={item?.to} onClick={item.onclick}>
-								<MobileNavigationButton label={item.key}>{item.icon}</MobileNavigationButton>
+								<MobileNavigationButton aria-label={item.key} label={item.key}>
+									{item.icon}
+								</MobileNavigationButton>
 							</Link>
 						) : (
 							<MobileNavigationButton label={item.key} onClick={item.onclick}>

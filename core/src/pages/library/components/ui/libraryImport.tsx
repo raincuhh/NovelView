@@ -1,4 +1,4 @@
-import ImportBookModal from "@/features/library/components/ui/importBookModal";
+import ImportBookModal from "@/features/books/components/ui/importBookModal";
 import useModalStore from "@/features/modal/modalStore";
 import Icon from "@/shared/components/ui/icon";
 import { type Modal as ModalType } from "@/features/modal/types";
@@ -8,7 +8,7 @@ export default function LibraryImport() {
 
 	const handleOpenImportModal = () => {
 		const modal: ModalType = {
-			id: "import-book",
+			id: "import-book-from-library",
 			closable: true,
 			content: <ImportBookModal onClose={closeModal} />,
 		};
