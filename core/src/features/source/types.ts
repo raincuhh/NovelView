@@ -1,6 +1,8 @@
 import { BookMetadata } from "../books/types";
 import { Chapter } from "../chapter/types";
 
+export type SourceCategory = "webnovel" | "ebook" | "custom";
+
 export interface DownloadPayload {
 	metadata: BookMetadata;
 	chapters: Chapter[];
@@ -12,6 +14,7 @@ export interface SourceMetadata {
 	id: string;
 	name: string;
 	description?: string;
+	category: SourceCategory;
 	websiteUrl: string;
 	supportsSearch: boolean;
 	supportsDownload: boolean;

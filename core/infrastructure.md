@@ -49,16 +49,24 @@ then in the $appdata folder, therel be a resources.db table specifically for the
 
 ```
 $localappdata/
-├── local.db
+├── local.db   # main global db (libraries, preferences, etc.)
 ├── books/
-│   ├── {bookId}/
-│   │   ├── source.epub
-│   │   ├── cover.jpg
-│   │   ├── book.db
-│   │   └── resources/
-│           └── ...
+│   └── {bookId}/
+│       ├── source.epub
+│       ├── cover.jpg
+│       ├── book.db   # book specific metadata (spine, bookmarks, etc.)
+│       └── resources/
+│           ├── {chapterId}/
+│           │   └── parsed.html
+│           └── images/
+│               └── img123.jpg
 ├── libraries/
-│   ├── {libraryId}/
-│   │   ├── cover.jpg
-│   │   └── ...
+│   └── {libraryId}/
+│       ├── info.json
+│       └── cover.jpg
+
 ```
+
+## 4/25/2025, more thinkign on the external source implementation
+
+ok so yeah, plan is basically, the user can browse the differen sources, in browse, and itl have a selection of different novels, etc. clicking on a novel will show a book/{bookId} screen, and itl have the cover, title, ratings, metadata basically thats fetched from the source site. anyways, itl have a + button that lets the user add to their libraries (think spotify, but instead of songs for browsing, its the differen sources, and the user can optionally also import their own epubs to their libraries, thats my app). after the user adds to their libraries, im unsure if i should prompt them about downloading it locally at first or just doing it as as a background task or something. because like, maybe the user doesnt want to download the book, that means just having access to it while online. but then comes the problem of having book covers not locally made in filesystem to fetch while offline. etc. alot to think about. because generally, i was thinking that each book would have a book/{bookid} entry in localappdata when you import or add to a library. so that the app has access to the contents while offline.
