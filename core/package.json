@@ -7,7 +7,16 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"tauri": "tauri"
+		"tauri": "tauri",
+		"prepare": "husky"
+	},
+	"lint-staged": {
+		"*.{ts,tsx,js,jsx}": [
+			"eslint --fix"
+		],
+		"*.{ts,tsx,js,jsx,json,css,md}": [
+			"prettier --write"
+		]
 	},
 	"dependencies": {
 		"@fsoc/royalroadl-api": "^0.16.1",
@@ -28,20 +37,30 @@
 		"@tauri-apps/plugin-os": "~2.2.1",
 		"@tauri-apps/plugin-shell": "~2.2.1",
 		"@tauri-apps/plugin-sql": "~2.2.0",
+		"@typescript-eslint/eslint-plugin": "^8.31.0",
+		"@typescript-eslint/parser": "^8.31.0",
 		"@use-gesture/react": "^10.3.1",
 		"base64-arraybuffer": "^1.0.2",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"color.js": "^1.2.0",
+		"eslint": "^9.21.0",
+		"eslint-config-prettier": "^10.1.2",
+		"eslint-plugin-fsd": "^1.0.1",
+		"eslint-plugin-import": "^2.31.0",
+		"eslint-plugin-jsx-a11y": "^6.10.2",
 		"framer-motion": "^12.6.3",
+		"husky": "^9.1.7",
 		"i18next": "^24.2.3",
 		"i18next-browser-languagedetector": "^8.0.5",
 		"i18next-fs-backend": "^2.6.0",
 		"i18next-http-backend": "^3.0.2",
 		"js-logger": "^1.6.1",
+		"lint-staged": "^15.5.1",
 		"overlayscrollbars": "^2.11.1",
 		"overlayscrollbars-react": "^0.5.6",
 		"postcss-custom-properties-fallback": "^1.0.2",
+		"prettier": "^3.5.3",
 		"react": "^18.3.1",
 		"react-circular-progressbar": "^2.2.0",
 		"react-dom": "^18.3.1",

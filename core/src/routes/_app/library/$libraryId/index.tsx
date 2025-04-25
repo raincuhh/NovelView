@@ -64,7 +64,7 @@ function RouteComponent() {
 					<LibraryHeader ref={libraryHeaderRef} coverPath={coverPath ?? ""} />
 					<div className="flex flex-col mt-2">
 						{isLoading ? (
-							<div></div>
+							<div>loading...</div>
 						) : hasBooks ? (
 							<div className="flex flex-col gap-8">
 								<MobileBottomPadding />
@@ -72,7 +72,7 @@ function RouteComponent() {
 						) : (
 							<div className="flex flex-col">
 								<EmptyLibrary />
-								<TestList count={50} />
+								{/* <TestList count={50} /> */}
 								<MobileBottomPadding />
 							</div>
 						)}

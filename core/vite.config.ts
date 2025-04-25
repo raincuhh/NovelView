@@ -28,7 +28,7 @@ export default defineConfig({
 					protocol: "ws",
 					host,
 					port: 1421,
-			  }
+				}
 			: undefined,
 		watch: {
 			ignored: ["**/node_modules/**", "**/dist/**", "**/src-tauri/**"],
