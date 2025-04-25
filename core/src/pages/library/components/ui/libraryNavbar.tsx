@@ -5,10 +5,8 @@ import { cn } from "@/shared/lib/globalUtils";
 import { useHistoryStore } from "@/shared/stores/historyStore";
 import { useNavigate } from "@tanstack/react-router";
 import LibraryOptions from "./libraryOptions";
-import useModalStore from "@/features/modal/modalStore";
-import { type Modal as ModalType } from "@/features/modal/types";
 import LibrarySettings from "./librarySettings";
-import ImportBookModal from "@/features/library/components/ui/importBookModal";
+import LibraryImport from "./libraryImport";
 
 type LibraryNavbarProps = {
 	isScrolled: boolean;
@@ -20,18 +18,6 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 
 	const { goBack, currentIndex } = useHistoryStore();
 	const canGoBack = currentIndex > 0;
-
-	const { openModal, closeModal } = useModalStore();
-
-	const handleOpenImportModal = () => {
-		const modal: ModalType = {
-			id: "import-book",
-			closable: true,
-			content: <ImportBookModal onClose={closeModal} />,
-		};
-
-		openModal(modal);
-	};
 
 	return (
 		<div
@@ -57,12 +43,10 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 					) : null}
 				</div>
 				<div className="flex flex-col">
-					<div className={cn("flex", isScrolled ? "block" : "hidden")}>
+					<div className={cn("flex", isScrolled ? "flex" : "hidden")}>
 						<LibrarySettings />
 						<LibraryOptions />
-						<div className="p-2 ml-2 gap-1" onClick={handleOpenImportModal}>
-							<Icon.plus className="hover:fill-muted" />
-						</div>
+						<LibraryImport />
 					</div>
 				</div>
 			</div>

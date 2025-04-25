@@ -89,7 +89,7 @@ export default function LibrarySettings() {
 						open={open}
 						onDismiss={() => setOpen(false)}
 						className="default-bottom-sheet"
-						snapPoints={({ maxHeight }) => [maxHeight / 2.3]}
+						snapPoints={({ maxHeight }) => [maxHeight / 2]}
 						defaultSnap={({ snapPoints }) => snapPoints[0]}
 						scrollLocking={true}
 						header={
@@ -121,9 +121,9 @@ export default function LibrarySettings() {
 								</div>
 							))}
 						</div>
-						<div className="flex flex-col px-1 text-normal mt-1">
-							<h1 className="text-muted text-sm px-3 py-1">Layout</h1>
-							<div className="px-3 w-full py-1 rounded-md flex gap-2">{renderLayoutIcons()}</div>
+						<div className="flex flex-col px-4 text-normal mt-1">
+							<h1 className="text-muted text-sm py-1">Layout</h1>
+							<div className="w-full py-1 rounded-md flex gap-2">{renderLayoutIcons()}</div>
 						</div>
 						<div className="mt-auto px-4 h-full pt-6">
 							<p className="text-xs text-faint font-semibold">Library options is local</p>

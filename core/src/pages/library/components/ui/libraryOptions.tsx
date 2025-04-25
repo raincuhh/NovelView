@@ -29,7 +29,7 @@ export default function LibraryOptions() {
 
 	return (
 		<>
-			<div className="p-2 -mr-2 cursor-pointer" onClick={() => setOpen((prev) => !prev)} ref={focusRef}>
+			<div className="p-2 cursor-pointer" onClick={() => setOpen((prev) => !prev)} ref={focusRef}>
 				<Icon.dottedVerticalRounded className="hover:fill-muted" />
 			</div>
 			<BottomSheet
@@ -39,7 +39,7 @@ export default function LibraryOptions() {
 				snapPoints={({ maxHeight }: { maxHeight: number }) => [maxHeight / 2, maxHeight * 0.92]}
 				defaultSnap={({ snapPoints }) => snapPoints[0]}
 				header={
-					<div className="w-full text-start flex gap-2 items-center">
+					<div className="w-full text-start flex gap-2 items-center pb-1">
 						<Cover className="w-12 h-12">
 							{isFullyLoading ? (
 								<Skeleton className="w-full h-full rounded-md" />

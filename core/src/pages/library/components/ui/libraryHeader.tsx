@@ -4,6 +4,7 @@ import ShowMore from "@/shared/components/ui/showMore";
 import { forwardRef, HTMLAttributes } from "react";
 import LibrarySettings from "./librarySettings";
 import LibraryOptions from "./libraryOptions";
+import LibraryImport from "./libraryImport";
 
 type LibraryheaderProps = {
 	coverPath: string;
@@ -24,11 +25,12 @@ const LibraryHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> 
 								<div className="flex">
 									<LibrarySettings />
 									<LibraryOptions />
+									<LibraryImport />
 								</div>
 							</div>
 							{library?.description ? (
 								<div className="flex w-full">
-									<ShowMore text={library?.description ?? ""} maxLength={112} />
+									<ShowMore text={library?.description ?? ""} maxLength={100} />
 								</div>
 							) : null}
 							<div className="mt-2 w-full"></div>

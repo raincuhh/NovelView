@@ -10,6 +10,7 @@ import type { OverlayScrollbarsComponentRef } from "overlayscrollbars-react";
 import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
 import { useBooksByLibraryIdQuery } from "@/features/books/model/queries/useBookQuery";
 import EmptyLibrary from "@/pages/library/components/ui/emptyLibrary";
+import TestList from "@/features/test/components/ui/testList";
 
 export const Route = createFileRoute("/_app/library/$libraryId/")({
 	component: RouteComponent,
@@ -71,6 +72,7 @@ function RouteComponent() {
 						) : (
 							<div className="flex flex-col">
 								<EmptyLibrary />
+								<TestList count={50} />
 								<MobileBottomPadding />
 							</div>
 						)}

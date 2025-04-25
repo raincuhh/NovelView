@@ -8,7 +8,7 @@ importers:
 
   .: {}
 
-  native:
+  core:
     dependencies:
       '@fsoc/royalroadl-api':
         specifier: ^0.16.1

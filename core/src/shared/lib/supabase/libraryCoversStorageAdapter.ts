@@ -21,13 +21,13 @@ export class LibraryCoversStorageAdapter implements StorageAdapter {
 		}
 	): Promise<void> {
 		if (!AppConfig.buckets) {
-			console.error("Supabase bucket not configured in AppConfig.ts");
+			// console.error("Supabase bucket not configured in AppConfig.ts");
 			throw new Error("Supabase bucket not configured in AppConfig.ts");
 		}
 
 		const { mediaType = "image/jpeg" } = options ?? {};
 
-		console.log(`Uploading file:${filename} with media type: ${mediaType}`);
+		// console.log(`Uploading file:${filename} with media type: ${mediaType}`);
 		const blob = new Blob([data], { type: mediaType });
 
 		const res = await this.options.client.storage.from(AppConfig.buckets.libraries).upload(filename, blob, {
@@ -45,7 +45,7 @@ export class LibraryCoversStorageAdapter implements StorageAdapter {
 		if (!AppConfig.buckets) {
 			throw new Error("Supabase bucket not configured in AppConfig.ts");
 		}
-		console.log(`Downloading file from path:${filePath}`);
+		// console.log(`Downloading file from path:${filePath}`);
 		const { data, error } = await this.options.client.storage
 			.from(AppConfig.buckets.libraries)
 			.download(filePath);
@@ -68,7 +68,7 @@ export class LibraryCoversStorageAdapter implements StorageAdapter {
 	}
 
 	async readFile(fileURI: string): Promise<ArrayBuffer> {
-		console.log(`Reading file from URI:${fileURI}`);
+		// console.log(`Reading file from URI:${fileURI}`);
 		const fileExists = await exists(fileURI);
 		if (!fileExists) {
 			console.error(`File does not exist:${fileURI}`);
@@ -113,9 +113,10 @@ export class LibraryCoversStorageAdapter implements StorageAdapter {
 		const dirExists = await exists(uri);
 		if (!dirExists) {
 			await create(uri);
-			console.log(`Directory created at URI:${uri}`);
+			// console.log(`Directory created at URI:${uri}`);
 		} else {
-			console.log(`Directory already exists at URI:${uri}`);
+			// console.log(`Directory already exists at URI:${uri}`);
+			// do nothing
 		}
 	}
 
@@ -126,7 +127,7 @@ export class LibraryCoversStorageAdapter implements StorageAdapter {
 	getUserStorageDirectory(): string {
 		const userStoragePath = getUserStoragePathSync();
 
-		console.log(`User storage directory:${userStoragePath}`);
+		// console.log(`User storage directory:${userStoragePath}`);
 
 		return userStoragePath;
 	}
