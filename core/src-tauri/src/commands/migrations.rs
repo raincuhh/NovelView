@@ -83,6 +83,7 @@ pub fn setup_main_db() -> Vec<Migration> {
             version: 6,
             description: "create local library_books table",
             sql: "
+            ALTER TABLE BOOKS DROP COLUMN library_id
             CREATE TABLE IF NOT EXISTS library_books (
                 id TEXT PRIMARY KEY,
                 library_id TEXT NOT NULL,
