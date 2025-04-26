@@ -10,7 +10,6 @@ export type BookStatus = "ongoing" | "completed" | "hiatus";
 // synced if the library id join library.type is sync.
 export interface Book {
 	id: string;
-	libraryId: string;
 	userId: string;
 	title: string;
 	coverImageUrl?: string;

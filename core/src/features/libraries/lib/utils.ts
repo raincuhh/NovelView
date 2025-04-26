@@ -15,7 +15,7 @@ export async function saveLibraryCover(libraryId: string, cover: File) {
 
 		await writeFile(coverFilePath, new Uint8Array(fileBytes), { baseDir: LOCAL_APPDATA });
 	} catch (err: any) {
-		console.error("Error saving cover:", err);
+		console.error("Error saving cover: ", err);
 	}
 }
 

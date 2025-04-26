@@ -84,6 +84,17 @@ const booksTable = new Table(
 	{ indexes: {} }
 );
 
+const libraryBooksTable = new Table(
+	{
+		// id column (text) is automatically included
+		library_id: column.text,
+		book_id: column.text,
+		created_at: column.text,
+		updated_at: column.text,
+	},
+	{ indexes: {} }
+);
+
 const bookInfoTable = new Table(
 	{
 		// id column (text) is automatically included
@@ -107,6 +118,7 @@ export const AppSchema = new Schema({
 	book_files: bookFilesTable,
 	avatars: avatarsTable,
 	library_covers: libraryCoversTable,
+	library_books: libraryBooksTable,
 });
 
 export const Tables = {
@@ -120,6 +132,7 @@ export const Tables = {
 	book_files: bookFilesTable,
 	avatars: avatarsTable,
 	library_covers: libraryCoversTable,
+	library_books: libraryBooksTable,
 } as const;
 
 export type Database = (typeof AppSchema)["types"];

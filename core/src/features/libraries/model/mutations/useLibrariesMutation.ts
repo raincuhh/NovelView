@@ -11,12 +11,12 @@ type CreateLibraryParams = {
 	libraryCoversQueue: LibraryCoversAttachmentQueue;
 };
 
-type HookOptions = {
+type CreateLibraryHookOptions = {
 	onSuccess?: () => void;
 	onError?: (err: unknown) => void;
 };
 
-export function useCreateLibraryMutation(options?: HookOptions) {
+export function useCreateLibraryMutation(options?: CreateLibraryHookOptions) {
 	const queryClient = useQueryClient();
 
 	return useMutation({

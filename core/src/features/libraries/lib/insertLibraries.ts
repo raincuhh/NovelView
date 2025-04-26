@@ -14,7 +14,7 @@ import { LibraryCoversAttachmentQueue } from "@/shared/lib/powersync/libraryCove
 import { fileToBase64 } from "@/shared/lib/fs/fileToBase64";
 import { getFileExtension } from "@/shared/lib/globalUtils";
 
-type createLibraryProps = {
+type CreateNewLibraryProps = {
 	name: string;
 	cover: File | null;
 	type: LibraryType;
@@ -30,7 +30,7 @@ export async function createNewLibrary({
 	userId,
 	description,
 	libraryCoversQueue,
-}: createLibraryProps) {
+}: CreateNewLibraryProps) {
 	const id = crypto.randomUUID();
 	const localDir = `${LIBRARIES_FOLDER}/${id}`;
 
@@ -51,8 +51,8 @@ export async function createNewLibrary({
 				id,
 				remotePath
 			);
-			coverUrl = attachment.id;
-			console.log("cover path: ", coverUrl);
+			coverUrl = id;
+			console.log("file info: ", attachment);
 		} else if (cover && type === "local") {
 			const fileExtension = cover.name.split(".").pop();
 			const coverFileName = `cover.${fileExtension}`;
@@ -79,7 +79,7 @@ export async function createNewLibrary({
 			insertLibrary(localDb, data);
 		}
 	} catch (err: any) {
-		console.error("Error creating library:", err);
+		console.error("Error creating library: ", err);
 	}
 }
 

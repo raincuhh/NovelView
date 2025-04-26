@@ -79,5 +79,19 @@ pub fn setup_main_db() -> Vec<Migration> {
             ",
             kind: MigrationKind::Up,
         },
+        Migration {
+            version: 6,
+            description: "create local library_books table",
+            sql: "
+            CREATE TABLE IF NOT EXISTS library_books (
+                id TEXT PRIMARY KEY,
+                library_id TEXT NOT NULL,
+                book_id TEXT NOT NULL,
+                created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+            );
+            ",
+            kind: MigrationKind::Up,
+        },
     ]
 }

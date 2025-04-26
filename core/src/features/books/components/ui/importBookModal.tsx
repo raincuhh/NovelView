@@ -3,10 +3,11 @@ import { Modal } from "@/features/modal/components/ui/modal";
 import { useBookFilesQueue } from "@/shared/providers/systemProvider";
 import { useState } from "react";
 import { z } from "zod";
+import { useImportBookMutation } from "../../model/mutations/useBookMutation";
 
 const importBookFormSchema = z.object({
 	file: z.instanceof(File),
-})
+});
 
 type ImportBookModalProps = {
 	onClose: () => void;
@@ -17,16 +18,16 @@ export default function ImportBookModal({ onClose }: ImportBookModalProps) {
 	const [error, setError] = useState<string | null>(null);
 	const [isValid, setIsValid] = useState<boolean>(false);
 
-	const {getUserId} = useAuthStore();
+	const { getUserId } = useAuthStore();
 	const userId = getUserId();
 	const bookFilesQueue = useBookFilesQueue();
 
 	const importBook = useImportBookMutation({
 		onSuccess: () => onClose(),
 		onError: (err) => {
-			console.error("Failed to import book: ", err),
+			console.error("Failed to import book: ", err);
 		},
-	})
+	});
 
 	return (
 		<Modal onClose={onClose} className="w-full flex">

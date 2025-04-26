@@ -51,4 +51,8 @@ export const MOCK_BOOKS: Book[] = [
 ];
 
 export const LOCAL_BOOK_COVER_PATH_TEMPLATE = "books/{bookId}/cover.{ext}";
-export const REMOTE_BOOK_COVER_PATH_TEMPLATE = "{bookId}/cover.{ext}";
+export const REMOTE_BOOK_COVER_PATH_TEMPLATE = "{userId}/{bookId}/cover.{ext}";
+export const LOCAL_BOOK_FILES_PATH_TEMPLATE = "books/{bookId}/";
+export const LOCAL_BOOK_SOURCE_FILE_PATH_TEMPLATE = "books/{bookId}/source.{ext}";
+export const REMOTE_BOOK_FILES_PATH_TEMPLATE = "{userId}/{bookId}/";
+export const REMOTE_BOOK_SOURCE_FILE_PATH_TEMPLATE = "{userId}/{bookId}/source.{ext}";

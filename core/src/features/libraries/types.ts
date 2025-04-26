@@ -15,4 +15,12 @@ export interface Library {
 	updatedAt: Timestamp;
 }
 
+export interface LibraryBooks {
+	id: string;
+	libraryId: string;
+	bookId: string;
+	createdAt: Timestamp;
+	updatedAt: Timestamp;
+}
+
 export type MostInteractedLibrary = Pick<Library, "id" | "name" | "coverUrl" | "type">;
