@@ -7,6 +7,7 @@ type ImportBookParams = {
 	file: File;
 	userId: string;
 	bookFilesQueue: BookFilesAttachmentQueue;
+	sync: boolean;
 };
 
 type ImportBookHookOptions = {
@@ -23,6 +24,7 @@ export function useImportBookMutation(options?: ImportBookHookOptions) {
 				file: data.file,
 				userId: data.userId,
 				bookFilesQueue: data.bookFilesQueue,
+				sync: data.sync,
 			});
 		},
 	});

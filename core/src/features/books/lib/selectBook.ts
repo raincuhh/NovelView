@@ -1,8 +1,24 @@
 import { localDb, powersyncDb } from "@/shared/providers/systemProvider";
 import { Book, BookInfo } from "../types";
 
+// export async function getBooksByLibraryId(libraryId: string): Promise<Book[]> {
+// 	const query = `SELECT * FROM books WHERE library_id = ?`;
+// 	const [localRes, remoteRes] = await Promise.all([
+// 		localDb.select<Book[]>(query, [libraryId]),
+// 		powersyncDb.execute(query, [libraryId]),
+// 	]);
+
+// 	return [...(localRes ?? []), ...(remoteRes.rows?._array ?? [])];
+// }
+
 export async function getBooksByLibraryId(libraryId: string): Promise<Book[]> {
-	const query = `SELECT * FROM books WHERE library_id = ?`;
+	const query = `
+		SELECT b.*
+		FROM books b
+		INNER JOIN library_books lb ON lb.book_id = b.id
+		WHERE lb.library_id = ?
+	`;
+
 	const [localRes, remoteRes] = await Promise.all([
 		localDb.select<Book[]>(query, [libraryId]),
 		powersyncDb.execute(query, [libraryId]),
@@ -86,4 +102,39 @@ export async function getBookInfoByBookId(bookId: string): Promise<BookInfo | nu
 	console.log({ localMatch, remoteMatch });
 
 	return localMatch ?? remoteMatch ?? null;
+}
+
+export async function getRecentBooks(userId: string, limit: number = 10): Promise<Book[]> {
+	const query = `
+		SELECT b.*
+		FROM books b
+		WHERE b.user_id = ?
+		ORDER BY b.created_at DESC
+		LIMIT ?
+	`;
+
+	const [localRes, remoteRes] = await Promise.all([
+		localDb.select<Book[]>(query, [userId, limit]),
+		powersyncDb.execute(query, [userId, limit]),
+	]);
+
+	return [...(localRes ?? []), ...(remoteRes.rows?._array ?? [])];
+}
+
+export async function searchBooksInLibrary(libraryId: string, search: string): Promise<Book[]> {
+	const query = `
+		SELECT b.*
+		FROM books b
+		INNER JOIN library_books lb ON lb.book_id = b.id
+		WHERE lb.library_id = ? AND b.title LIKE ?
+	`;
+
+	const searchPattern = `%${search}%`;
+
+	const [localRes, remoteRes] = await Promise.all([
+		localDb.select<Book[]>(query, [libraryId, searchPattern]),
+		powersyncDb.execute(query, [libraryId, searchPattern]),
+	]);
+
+	return [...(localRes ?? []), ...(remoteRes.rows?._array ?? [])];
 }
