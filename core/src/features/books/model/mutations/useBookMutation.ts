@@ -27,5 +27,8 @@ export function useImportBookMutation(options?: ImportBookHookOptions) {
 				sync: data.sync,
 			});
 		},
+		onSuccess(_data, _variables) {
+			options?.onSuccess?.();
+		},
 	});
 }
