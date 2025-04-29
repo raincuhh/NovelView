@@ -21,7 +21,7 @@ const LibraryHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> 
 						<LibraryHeaderCover coverPath={coverPath} />
 						<div className="mt-6 px-4 flex flex-col gap-2">
 							<div className="flex w-full overflow-hidden justify-between">
-								<h1 className="font-bold text-3xl flex-grow truncate">{library?.name}</h1>
+								<h1 className="font-bold text-2xl flex-grow truncate">{library?.name}</h1>
 								<div className="flex">
 									<LibrarySettings />
 									<LibraryOptions />

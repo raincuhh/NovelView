@@ -8,7 +8,9 @@ import ScrollContainer from "@/shared/components/ui/scrollContainer";
 import type { OverlayScrollbarsComponentRef } from "overlayscrollbars-react";
 import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
 import { useBooksByLibraryIdQuery } from "@/features/books/model/queries/useBookQuery";
-import EmptyLibrary from "@/pages/library/components/ui/emptyLibrary";
+import EmptyLibrary from "@/features/library/components/ui/emptyLibrary";
+import { useLibraryProvider } from "@/features/library/libraryProvider";
+
 // import TestList from "@/features/test/components/ui/testList";
 
 export const Route = createFileRoute("/_app/library/$libraryId/")({
@@ -28,6 +30,7 @@ function RouteComponent() {
 
 	const libraryHeaderRef = useRef<HTMLDivElement | null>(null);
 	const [scrollHeight, setScrollHeight] = useState<number>(225);
+	const library = useLibraryProvider();
 
 	useEffect(() => {
 		const ref = libraryHeaderRef.current;
@@ -36,13 +39,13 @@ function RouteComponent() {
 		setScrollHeight(ref.clientHeight);
 	}, [libraryHeaderRef]);
 
-	// useEffect(() => {
-	// 	console.log("/library/$libraryid route mounted");
-	// 	if (!userId) console.warn("No userId yet");
-	// 	if (isLoading) console.log("Still loading books...");
-	// 	else if (hasBooks) console.log("User has books", books);
-	// 	else console.log("No books found - showing EmptyBooks");
-	// }, [userId, books, isLoading]);
+	useEffect(() => {
+		console.log("/library/$libraryid route mounted");
+
+		if (isLoading) console.log("Still loading books...");
+		else if (hasBooks) console.log("User has books", books);
+		else console.log("No books found - showing EmptyBooks");
+	}, [books, isLoading]);
 
 	return (
 		<ScrollContainer
@@ -62,11 +65,12 @@ function RouteComponent() {
 							<div>loading...</div>
 						) : hasBooks ? (
 							<div className="flex flex-col gap-8">
+								awdwa
 								<MobileBottomPadding />
 							</div>
 						) : (
 							<div className="flex flex-col">
-								<EmptyLibrary />
+								<EmptyLibrary type={library.library?.type ?? "local"} />
 								{/* <TestList count={50} /> */}
 								<MobileBottomPadding />
 							</div>

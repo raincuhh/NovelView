@@ -46,7 +46,7 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 		setLibraryName(value);
 
 		const result = libraryCreateFormSchema.safeParse({ name: value });
-		setError(result.success ? null : result.error.flatten().fieldErrors.name?.[0] ?? null);
+		setError(result.success ? null : (result.error.flatten().fieldErrors.name?.[0] ?? null));
 		setIsValid(result.success);
 	};
 
@@ -136,12 +136,7 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 					</FormItem>
 				</div>
 				<ModalControl className="flex justify-center w-full gap-4">
-					<Button
-						variant="outline"
-						rounded="full"
-						onClick={() => onClose()}
-						disabled={createLibrary.isPending}
-					>
+					<Button variant="outline" rounded="full" onClick={onClose} disabled={createLibrary.isPending}>
 						Cancel
 					</Button>
 					<Button
