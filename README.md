@@ -11,7 +11,7 @@
 ## Project Structure
 
 - `web/`: Contains the web application built with Next.js.
-- `native/`: main application, Desktop, Android, and ios built on top of Tauri.
+- `core/`: main application, Desktop, Android, and ios built on top of Tauri.
 
 ## Contributing
 
