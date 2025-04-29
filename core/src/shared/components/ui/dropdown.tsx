@@ -127,7 +127,7 @@ export function DropdownMenuContent({
 			ref={ctx.contentRef}
 			style={{ ...positionStyles }}
 			className={cn(
-				"absolute select-none mt-2 w-48 bg-secondary z-100 shadow-lg border border-border rounded-md pb-1",
+				"absolute select-none mt-2 w-48 bg-secondary z-100 shadow-lg rounded-md pb-1",
 				className
 			)}
 			{...props}
