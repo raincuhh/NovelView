@@ -70,7 +70,7 @@ function RouteComponent() {
 							</div>
 						) : (
 							<div className="flex flex-col">
-								<EmptyLibrary type={library.library?.type ?? "local"} />
+								<EmptyLibrary libraryType={library.library?.type ?? "local"} libraryId={libraryId} />
 								{/* <TestList count={50} /> */}
 								<MobileBottomPadding />
 							</div>

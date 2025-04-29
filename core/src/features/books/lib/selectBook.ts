@@ -24,6 +24,8 @@ export async function getBooksByLibraryId(libraryId: string): Promise<Book[]> {
 		powersyncDb.execute(query, [libraryId]),
 	]);
 
+	console.log("res: ", [localRes, remoteRes]);
+
 	return [...(localRes ?? []), ...(remoteRes.rows?._array ?? [])];
 }
 

@@ -16,9 +16,10 @@ const importBookFormSchema = z.object({
 type ImportBookModalProps = {
 	onClose: () => void;
 	libraryType: LibraryType;
+	libraryId: string;
 };
 
-export default function ImportBookModal({ onClose, libraryType }: ImportBookModalProps) {
+export default function ImportBookModal({ onClose, libraryType, libraryId }: ImportBookModalProps) {
 	const [file, setFile] = useState<File | null>(null);
 	const [error, setError] = useState<string | null>(null);
 	const [isValid, setIsValid] = useState<boolean>(false);
@@ -48,6 +49,7 @@ export default function ImportBookModal({ onClose, libraryType }: ImportBookModa
 			userId,
 			bookFilesQueue,
 			sync: libraryType === "synced",
+			libraryId,
 		});
 	};
 

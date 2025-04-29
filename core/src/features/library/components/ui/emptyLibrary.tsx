@@ -5,17 +5,18 @@ import { Button } from "@/shared/components/ui/button";
 import { LibraryType } from "@/features/libraries/types";
 
 type EmptyLibraryProps = {
-	type: LibraryType;
+	libraryType: LibraryType;
+	libraryId: string;
 };
 
-export default function EmptyLibrary({ type }: EmptyLibraryProps) {
+export default function EmptyLibrary({ libraryType, libraryId }: EmptyLibraryProps) {
 	const { openModal, closeModal } = useModalStore();
 
 	const handleOpenImportModal = () => {
 		const modal: ModalType = {
 			id: "import-book",
 			closable: true,
-			content: <ImportBookModal onClose={closeModal} libraryType={type} />,
+			content: <ImportBookModal onClose={closeModal} libraryType={libraryType} libraryId={libraryId} />,
 		};
 
 		openModal(modal);

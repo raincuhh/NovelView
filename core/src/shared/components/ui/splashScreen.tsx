@@ -1,4 +1,3 @@
-import React from "react";
 import Icon from "../ui/icon";
 
 export default function SplashScreen() {

@@ -7,6 +7,7 @@ type ImportBookParams = {
 	userId: string;
 	bookFilesQueue: BookFilesAttachmentQueue;
 	sync: boolean;
+	libraryId: string;
 };
 
 type ImportBookHookOptions = {
@@ -24,9 +25,13 @@ export function useImportBookMutation(options?: ImportBookHookOptions) {
 				userId: data.userId,
 				bookFilesQueue: data.bookFilesQueue,
 				sync: data.sync,
+				libraryId: data.libraryId,
 			});
 		},
-		onSuccess(_data, _variables) {
+		onSuccess(_data, variables) {
+			queryClient.invalidateQueries({ queryKey: ["books", variables.libraryId] });
+			queryClient.invalidateQueries({ queryKey: ["mostRecentlyReadBook", variables.userId] });
+			queryClient.invalidateQueries({ queryKey: ["library", variables.userId] });
 			options?.onSuccess?.();
 		},
 	});

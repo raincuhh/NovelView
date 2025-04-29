@@ -9,16 +9,23 @@ import Database from "@tauri-apps/plugin-sql";
 import { PowerSyncDatabase, Transaction } from "@powersync/web";
 import { localDb, powersyncDb } from "@/shared/providers/systemProvider";
 
+//TODO: bug: some kind of sync problem with library_books, and inserting into it and syncing from remote to the remote libs for some reason
+
 type ImportNewBookProps = {
 	file: File;
 	userId: string;
 	bookFilesQueue: BookFilesAttachmentQueue;
 	sync: boolean;
+	libraryId: string;
 };
 
-export async function importNewBook({ file, userId, bookFilesQueue, sync }: ImportNewBookProps) {
+export async function importNewBook({ file, userId, bookFilesQueue, sync, libraryId }: ImportNewBookProps) {
 	const bookId = crypto.randomUUID();
 	const localDir = `${BOOKS_FOLDER}/${bookId}`;
+
+	if (!libraryId) {
+		throw new Error("Cannot import book: libraryId is undefined");
+	}
 
 	try {
 		await mkdir(localDir, { baseDir: LOCAL_APPDATA });
@@ -41,13 +48,35 @@ export async function importNewBook({ file, userId, bookFilesQueue, sync }: Impo
 			updatedAt: new Date().toISOString(),
 		};
 
+		const newLibraryBookId = crypto.randomUUID();
+		const now = new Date().toISOString();
+
 		if (sync) {
-			await powersyncDb.writeTransaction(async (tx) => insertBook(tx, newBook));
+			await powersyncDb.writeTransaction(async (tx) => {
+				console.log("inserting libraryBook and book for remote");
+				insertBook(tx, newBook);
+				insertLibraryBook(tx, {
+					id: newLibraryBookId,
+					library_id: libraryId,
+					book_id: bookId,
+					created_at: now,
+					updated_at: now,
+				});
+			});
 		} else {
+			console.log("inserting libraryBook and book for local");
 			insertBook(localDb, newBook);
+			insertLibraryBook(localDb, {
+				id: newLibraryBookId,
+				library_id: libraryId,
+				book_id: bookId,
+				created_at: now,
+				updated_at: now,
+			});
 		}
 	} catch (err: any) {
-		console.error("Error importing new book: ", err);
+		// console.error("Error importing new book: ", err);
+		console.error("Error importing new book: ", err.message, err.stack);
 	}
 }
 
@@ -78,5 +107,22 @@ function insertBook(db: ExecutableDb, book: Book) {
       id, user_id, title, file_url, format, created_at, updated_at
     ) VALUES (?, ?, ?, ?, ?, ?, ?)`,
 		[book.id, book.userId, book.title, book.fileUrl, book.format, book.createdAt, book.updatedAt]
+	);
+}
+
+type LibraryBook = {
+	id: string;
+	library_id: string;
+	book_id: string;
+	created_at: string;
+	updated_at: string;
+};
+
+function insertLibraryBook(db: ExecutableDb, entry: LibraryBook) {
+	return db.execute(
+		`INSERT INTO library_books (
+      id, library_id, book_id, created_at, updated_at
+    ) VALUES (?, ?, ?, ?, ?)`,
+		[entry.id, entry.library_id, entry.book_id, entry.created_at, entry.updated_at]
 	);
 }
