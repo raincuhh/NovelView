@@ -58,7 +58,7 @@ const FilePicker = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & F
 				onDragLeave={() => setIsDragOver(false)}
 				className={cn(
 					"flex flex-col items-center justify-center gap-2 p-6 border-2 border-dashed rounded-md text-center transition-colors",
-					isDragOver ? "border-accent bg-accent-1" : "border-border bg-background",
+					isDragOver ? "border-interactive-input-border bg-interactive-accent" : "border-border",
 					className
 				)}
 				{...props}
@@ -66,6 +66,7 @@ const FilePicker = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & F
 				<p className="text-sm text-muted">
 					{label}{" "}
 					<Button
+						type="button"
 						variant="link"
 						size="default"
 						className="px-1"

@@ -2,6 +2,7 @@ import { AbstractAttachmentQueue, AttachmentRecord, AttachmentState } from "@pow
 import { AppConfig } from "../supabase/appConfig";
 import { Tables } from "./appSchema";
 import { BOOK_FILES_BUCKET_ALLOWED_MIMETYPE } from "../consts";
+import { getFileExtension } from "../globalUtils";
 
 export class BookFilesAttachmentQueue extends AbstractAttachmentQueue {
 	async init() {
@@ -21,10 +22,13 @@ export class BookFilesAttachmentQueue extends AbstractAttachmentQueue {
 
 	async newAttachmentRecord(record?: Partial<AttachmentRecord>): Promise<AttachmentRecord> {
 		const id = record?.id ?? crypto.randomUUID();
+		const ext = getFileExtension(record?.filename ?? "epub");
+		const isEpub = ext == "epub";
+
 		return {
 			id,
 			filename: record?.filename ?? `${id}.epub`,
-			media_type: BOOK_FILES_BUCKET_ALLOWED_MIMETYPE,
+			media_type: isEpub ? `application/${ext}+zip` : `application/${ext}`,
 			state: AttachmentState.QUEUED_UPLOAD,
 			...record,
 		};
@@ -37,11 +41,13 @@ export class BookFilesAttachmentQueue extends AbstractAttachmentQueue {
 		filename: string
 	): Promise<AttachmentRecord> {
 		await this.storage.writeFile(localFilePath, base64Data);
+		const ext = getFileExtension(filename ?? "epub");
+		const isEpub = ext == "epub";
 
 		const attachment = await this.newAttachmentRecord({
 			id,
 			filename,
-			media_type: BOOK_FILES_BUCKET_ALLOWED_MIMETYPE,
+			media_type: isEpub ? `application/${ext}+zip` : `application/${ext}`,
 			state: AttachmentState.QUEUED_UPLOAD,
 			local_uri: localFilePath,
 		});

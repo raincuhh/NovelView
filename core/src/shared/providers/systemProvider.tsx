@@ -34,6 +34,7 @@ const powersyncDb = new PowerSyncDatabase({
 
 // do not remove ts bruh, only testing to delete queue if faulty queue.
 // await powersyncDb.execute("DELETE FROM library_covers");
+// await powersyncDb.execute("DELETE FROM book_files");
 
 const localDb: Database = await Database.load("sqlite:local.db");
 // const sessionDb: Database = await Database.load("sqlite:session.db");

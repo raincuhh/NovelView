@@ -54,7 +54,7 @@ export class LibraryCoversStorageAdapter implements StorageAdapter {
 			console.error("Download error:", error);
 			throw error;
 		}
-		console.log("File downloaded successfully:", data);
+		console.log("File downloaded successfully: ", data);
 		return data as Blob;
 	}
 

@@ -24,7 +24,7 @@ export class BookFilesStorageAdapter implements StorageAdapter {
 			throw new Error("Supabase bucket not configured in AppConfig.ts");
 		}
 
-		const { mediaType = "application/octet-stream" } = options ?? {};
+		const { mediaType = "application/epub+zip" } = options ?? {};
 
 		const blob = new Blob([data], { type: mediaType });
 
@@ -51,6 +51,7 @@ export class BookFilesStorageAdapter implements StorageAdapter {
 			throw error;
 		}
 
+		console.log("Filedownloaded successfully: ", data);
 		return data as Blob;
 	}
 
