@@ -71,7 +71,6 @@ export const librariesTable = new Table(
 const booksTable = new Table(
 	{
 		// id column (text) is automatically included
-		library_id: column.text,
 		user_id: column.text,
 		title: column.text,
 		cover_image_url: column.text,

@@ -8,9 +8,7 @@ import { useLibraryCover } from "../libraries/hooks/useLibraryCover";
 // };
 
 type LibraryContextProps = {
-	library: Library | null;
-	isLoading: boolean;
-	isError: boolean;
+	library: Library;
 	coverPath: string | null;
 	coverPathLoading: boolean;
 };
@@ -25,11 +23,14 @@ export const LibraryProvider = ({ children, libraryId }: LibraryProviderProps) =
 	const { data: library, isLoading, isError } = useLibraryByIdQuery(libraryId);
 	const { coverPath, loading: coverPathLoading } = useLibraryCover(libraryId);
 
+	// if (isLoading) return null;
+	if (!library) {
+		throw new Error("Library data missing in suspense context");
+	}
+
 	const value = useMemo(
 		() => ({
-			library: library ?? null,
-			isLoading,
-			isError,
+			library: library,
 			coverPath: coverPath ?? null,
 			coverPathLoading,
 		}),

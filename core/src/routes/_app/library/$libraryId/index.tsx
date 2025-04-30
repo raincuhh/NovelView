@@ -10,6 +10,7 @@ import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
 import { useBooksByLibraryIdQuery } from "@/features/books/model/queries/useBookQuery";
 import EmptyLibrary from "@/features/library/components/ui/emptyLibrary";
 import { useLibraryProvider } from "@/features/library/libraryProvider";
+import { getAllBooks } from "@/features/books/lib/selectBook";
 
 // import TestList from "@/features/test/components/ui/testList";
 
@@ -30,7 +31,7 @@ function RouteComponent() {
 
 	const libraryHeaderRef = useRef<HTMLDivElement | null>(null);
 	const [scrollHeight, setScrollHeight] = useState<number>(225);
-	const library = useLibraryProvider();
+	const { library } = useLibraryProvider();
 
 	useEffect(() => {
 		const ref = libraryHeaderRef.current;
@@ -38,6 +39,14 @@ function RouteComponent() {
 
 		setScrollHeight(ref.clientHeight);
 	}, [libraryHeaderRef]);
+
+	useEffect(() => {
+		const test = () => {
+			console.log(getAllBooks());
+		};
+
+		test();
+	}, []);
 
 	useEffect(() => {
 		console.log("/library/$libraryid route mounted");
@@ -70,7 +79,7 @@ function RouteComponent() {
 							</div>
 						) : (
 							<div className="flex flex-col">
-								<EmptyLibrary libraryType={library.library?.type ?? "local"} libraryId={libraryId} />
+								<EmptyLibrary libraryType={library?.type ?? "local"} libraryId={libraryId} />
 								{/* <TestList count={50} /> */}
 								<MobileBottomPadding />
 							</div>

@@ -11,6 +11,13 @@ import { Book, BookInfo } from "../types";
 // 	return [...(localRes ?? []), ...(remoteRes.rows?._array ?? [])];
 // }
 
+export async function getAllBooks() {
+	const results = await powersyncDb.getAll("SELECT * FROM books");
+	const libraryBooks = await powersyncDb.getAll("SELECT * FROM library_books");
+	console.log("All books:", results, "library_book table: ", libraryBooks);
+	return results;
+}
+
 export async function getBooksByLibraryId(libraryId: string): Promise<Book[]> {
 	const query = `
 		SELECT b.*
@@ -21,22 +28,22 @@ export async function getBooksByLibraryId(libraryId: string): Promise<Book[]> {
 
 	const [localRes, remoteRes] = await Promise.all([
 		localDb.select<Book[]>(query, [libraryId]),
-		powersyncDb.execute(query, [libraryId]),
+		powersyncDb.getAll<Book>(query, [libraryId]),
 	]);
 
 	console.log("res: ", [localRes, remoteRes]);
 
-	return [...(localRes ?? []), ...(remoteRes.rows?._array ?? [])];
+	return [...(localRes ?? []), ...(remoteRes ?? [])];
 }
 
 export async function getAllBooksByUserId(userId: string): Promise<Book[]> {
 	const query = `SELECT * FROM books WHERE user_id = ?`;
 	const [localRes, remoteRes] = await Promise.all([
 		localDb.select<Book[]>(query, [userId]),
-		powersyncDb.execute(query, [userId]),
+		powersyncDb.getAll<Book>(query, [userId]),
 	]);
 
-	return [...(localRes ?? []), ...(remoteRes.rows?._array ?? [])];
+	return [...(localRes ?? []), ...(remoteRes ?? [])];
 }
 
 export async function getRecentlyOpenedBooks(userId: string, limit: number = 5): Promise<Book[]> {

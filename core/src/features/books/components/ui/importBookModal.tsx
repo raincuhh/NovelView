@@ -42,7 +42,8 @@ export default function ImportBookModal({ onClose, libraryType, libraryId }: Imp
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (!file || !bookFilesQueue) return;
+		if (!file || !bookFilesQueue || !libraryId) return;
+		console.log("importing new book from modal", libraryId);
 
 		await importBook.mutateAsync({
 			file,
