@@ -21,6 +21,7 @@ import { Route as LegalPrivacyPolicyImport } from './routes/legal/privacy-policy
 import { Route as OnboardingOnboardingImport } from './routes/_onboarding/onboarding'
 import { Route as AppSearchRouteImport } from './routes/_app/_search/route'
 import { Route as AppLibrariesRouteImport } from './routes/_app/_libraries/route'
+import { Route as AppHomeRouteImport } from './routes/_app/_home/route'
 import { Route as AppBrowseRouteImport } from './routes/_app/_browse/route'
 import { Route as AppSearchSearchImport } from './routes/_app/_search/search'
 import { Route as AppLibrariesLibrariesImport } from './routes/_app/_libraries/libraries'
@@ -89,6 +90,11 @@ const AppLibrariesRouteRoute = AppLibrariesRouteImport.update({
   getParentRoute: () => AppRouteRoute,
 } as any)
 
+const AppHomeRouteRoute = AppHomeRouteImport.update({
+  id: '/_home',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+
 const AppBrowseRouteRoute = AppBrowseRouteImport.update({
   id: '/_browse',
   getParentRoute: () => AppRouteRoute,
@@ -107,9 +113,9 @@ const AppLibrariesLibrariesRoute = AppLibrariesLibrariesImport.update({
 } as any)
 
 const AppHomeHomeRoute = AppHomeHomeImport.update({
-  id: '/_home/home',
+  id: '/home',
   path: '/home',
-  getParentRoute: () => AppRouteRoute,
+  getParentRoute: () => AppHomeRouteRoute,
 } as any)
 
 const AppBrowseBrowseRoute = AppBrowseBrowseImport.update({
@@ -188,6 +194,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppBrowseRouteImport
       parentRoute: typeof AppRouteImport
     }
+    '/_app/_home': {
+      id: '/_app/_home'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AppHomeRouteImport
+      parentRoute: typeof AppRouteImport
+    }
     '/_app/_libraries': {
       id: '/_app/_libraries'
       path: ''
@@ -242,7 +255,7 @@ declare module '@tanstack/react-router' {
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof AppHomeHomeImport
-      parentRoute: typeof AppRouteImport
+      parentRoute: typeof AppHomeRouteImport
     }
     '/_app/_libraries/libraries': {
       id: '/_app/_libraries/libraries'
@@ -296,6 +309,32 @@ const AppBrowseRouteRouteWithChildren = AppBrowseRouteRoute._addFileChildren(
   AppBrowseRouteRouteChildren,
 )
 
+interface AppHomeHomeRouteChildren {
+  AppHomeHomeAnalyticsRoute: typeof AppHomeHomeAnalyticsRoute
+  AppHomeHomeRecentsRoute: typeof AppHomeHomeRecentsRoute
+}
+
+const AppHomeHomeRouteChildren: AppHomeHomeRouteChildren = {
+  AppHomeHomeAnalyticsRoute: AppHomeHomeAnalyticsRoute,
+  AppHomeHomeRecentsRoute: AppHomeHomeRecentsRoute,
+}
+
+const AppHomeHomeRouteWithChildren = AppHomeHomeRoute._addFileChildren(
+  AppHomeHomeRouteChildren,
+)
+
+interface AppHomeRouteRouteChildren {
+  AppHomeHomeRoute: typeof AppHomeHomeRouteWithChildren
+}
+
+const AppHomeRouteRouteChildren: AppHomeRouteRouteChildren = {
+  AppHomeHomeRoute: AppHomeHomeRouteWithChildren,
+}
+
+const AppHomeRouteRouteWithChildren = AppHomeRouteRoute._addFileChildren(
+  AppHomeRouteRouteChildren,
+)
+
 interface AppLibrariesRouteRouteChildren {
   AppLibrariesLibrariesRoute: typeof AppLibrariesLibrariesRoute
 }
@@ -333,34 +372,20 @@ const AppLibraryLibraryIdRouteRouteWithChildren =
     AppLibraryLibraryIdRouteRouteChildren,
   )
 
-interface AppHomeHomeRouteChildren {
-  AppHomeHomeAnalyticsRoute: typeof AppHomeHomeAnalyticsRoute
-  AppHomeHomeRecentsRoute: typeof AppHomeHomeRecentsRoute
-}
-
-const AppHomeHomeRouteChildren: AppHomeHomeRouteChildren = {
-  AppHomeHomeAnalyticsRoute: AppHomeHomeAnalyticsRoute,
-  AppHomeHomeRecentsRoute: AppHomeHomeRecentsRoute,
-}
-
-const AppHomeHomeRouteWithChildren = AppHomeHomeRoute._addFileChildren(
-  AppHomeHomeRouteChildren,
-)
-
 interface AppRouteRouteChildren {
   AppBrowseRouteRoute: typeof AppBrowseRouteRouteWithChildren
+  AppHomeRouteRoute: typeof AppHomeRouteRouteWithChildren
   AppLibrariesRouteRoute: typeof AppLibrariesRouteRouteWithChildren
   AppSearchRouteRoute: typeof AppSearchRouteRouteWithChildren
   AppLibraryLibraryIdRouteRoute: typeof AppLibraryLibraryIdRouteRouteWithChildren
-  AppHomeHomeRoute: typeof AppHomeHomeRouteWithChildren
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppBrowseRouteRoute: AppBrowseRouteRouteWithChildren,
+  AppHomeRouteRoute: AppHomeRouteRouteWithChildren,
   AppLibrariesRouteRoute: AppLibrariesRouteRouteWithChildren,
   AppSearchRouteRoute: AppSearchRouteRouteWithChildren,
   AppLibraryLibraryIdRouteRoute: AppLibraryLibraryIdRouteRouteWithChildren,
-  AppHomeHomeRoute: AppHomeHomeRouteWithChildren,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
@@ -422,6 +447,7 @@ export interface FileRoutesById {
   '/test': typeof TestRoute
   '/unauthorized': typeof UnauthorizedRoute
   '/_app/_browse': typeof AppBrowseRouteRouteWithChildren
+  '/_app/_home': typeof AppHomeRouteRouteWithChildren
   '/_app/_libraries': typeof AppLibrariesRouteRouteWithChildren
   '/_app/_search': typeof AppSearchRouteRouteWithChildren
   '/_onboarding/onboarding': typeof OnboardingOnboardingRoute
@@ -479,6 +505,7 @@ export interface FileRouteTypes {
     | '/test'
     | '/unauthorized'
     | '/_app/_browse'
+    | '/_app/_home'
     | '/_app/_libraries'
     | '/_app/_search'
     | '/_onboarding/onboarding'
@@ -541,10 +568,10 @@ export const routeTree = rootRoute
       "filePath": "_app/route.tsx",
       "children": [
         "/_app/_browse",
+        "/_app/_home",
         "/_app/_libraries",
         "/_app/_search",
-        "/_app/library/$libraryId",
-        "/_app/_home/home"
+        "/_app/library/$libraryId"
       ]
     },
     "/_onboarding": {
@@ -564,6 +591,13 @@ export const routeTree = rootRoute
       "parent": "/_app",
       "children": [
         "/_app/_browse/browse"
+      ]
+    },
+    "/_app/_home": {
+      "filePath": "_app/_home/route.tsx",
+      "parent": "/_app",
+      "children": [
+        "/_app/_home/home"
       ]
     },
     "/_app/_libraries": {
@@ -603,7 +637,7 @@ export const routeTree = rootRoute
     },
     "/_app/_home/home": {
       "filePath": "_app/_home/home.tsx",
-      "parent": "/_app",
+      "parent": "/_app/_home",
       "children": [
         "/_app/_home/home/analytics",
         "/_app/_home/home/recents"

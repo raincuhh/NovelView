@@ -8,6 +8,7 @@ import SetupAppdata from "@/features/fs/components/utils/setupAppdata";
 import { useRouter } from "@tanstack/react-router";
 import { useHistoryStore } from "../stores/historyStore";
 import { useMediaQuery } from "react-responsive";
+import AuthGate from "@/features/auth/components/utils/authGate";
 
 type AppProviderProps = PropsWithChildren;
 
@@ -40,7 +41,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
 				>
 					<AuthInitializer />
 					<SetupAppdata />
-					{children}
+					<AuthGate>{children}</AuthGate>
 				</SkeletonTheme>
 			</QueryClientProvider>
 		</SystemProvider>

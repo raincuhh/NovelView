@@ -1,6 +1,6 @@
 import { useDrawerStore } from "@/features/drawer/drawerStore";
 import Avatar from "@/features/user/components/ui/avatar";
-import WelcomeUserMessage from "@/shared/components/ui/welcomeUserMessage";
+import WelcomeUserMessage from "@/pages/home/components/ui/welcomeUserMessage";
 import Skeleton from "react-loading-skeleton";
 import { useMediaQuery } from "react-responsive";
 

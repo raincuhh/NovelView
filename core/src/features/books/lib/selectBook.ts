@@ -15,6 +15,7 @@ export async function getAllBooks() {
 	const results = await powersyncDb.getAll("SELECT * FROM books");
 	const libraryBooks = await powersyncDb.getAll("SELECT * FROM library_books");
 	console.log("All books:", results, "library_book table: ", libraryBooks);
+
 	return results;
 }
 

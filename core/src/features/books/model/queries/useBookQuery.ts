@@ -1,14 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { getFirstLibrary } from "@/features/libraries/lib/selectLibraries";
 import { getBookInfoByBookId, getBooksByLibraryId, getRecentlyOpenedBooks } from "../../lib/selectBook";
 
 const DEFAULT_REFETCH_INTERVAL = 60 * 1000;
 
+//*
+// mostly used to just handle if the user has any libraries at all in stuff like /home and /libraries
+// */
 export const useUserFirstLibraryQuery = (userId: string) => {
-	return useQuery({
+	return useSuspenseQuery({
 		queryKey: ["library", userId],
 		queryFn: () => getFirstLibrary(userId),
-		enabled: !!userId,
 		refetchInterval: DEFAULT_REFETCH_INTERVAL,
 		refetchIntervalInBackground: true,
 		refetchOnWindowFocus: true,

@@ -1,4 +1,5 @@
 import { LibraryProvider } from "@/features/library/libraryProvider";
+import SuspenseLoaderFallback from "@/shared/components/ui/suspenseLoaderFallback";
 import { createFileRoute, Outlet, useParams } from "@tanstack/react-router";
 import { Suspense } from "react";
 
@@ -10,7 +11,7 @@ function RouteComponent() {
 	const { libraryId } = useParams({ from: "/_app/library/$libraryId" });
 
 	return (
-		<Suspense fallback={<div>loading...</div>}>
+		<Suspense fallback={<SuspenseLoaderFallback />}>
 			<LibraryProvider libraryId={libraryId}>
 				<Outlet />
 			</LibraryProvider>
