@@ -28,7 +28,7 @@ export const useMostRecentlyOpenedBookQuery = (userId: string) => {
 
 export const useRecentlyOpenedBooksQuery = (userId: string, limit: number = 16) => {
 	return useQuery({
-		queryKey: ["mostRecentlyReadBook", userId],
+		queryKey: ["mostRecentlyReadBooks", userId],
 		queryFn: () => getRecentlyOpenedBooks(userId, limit),
 		enabled: !!userId,
 		refetchInterval: DEFAULT_REFETCH_INTERVAL,
