@@ -1,7 +1,14 @@
 import { z } from "zod";
 import { Button } from "@/shared/components/ui/button";
 import { Modal, ModalControl } from "@/features/modal/components/ui/modal";
-import { Form, FormControl, FormItem, FormLabel, FormMessage } from "@/shared/components/ui/form";
+import {
+	Form,
+	FormControl,
+	FormDescription,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
 import CoverPicker from "@/shared/components/ui/coverPicker";
 import { useState } from "react";
@@ -133,6 +140,7 @@ export default function CreateLibraryModal({ onClose }: CreateLibraryModalProps)
 							<Switch onCheckedChange={(checked) => setSynced(checked)} />
 							<Label className="font-bold">Synced Library</Label>
 						</FormControl>
+						<FormDescription>Synchronise your library and its books remotely</FormDescription>
 					</FormItem>
 				</div>
 				<ModalControl className="flex justify-center w-full gap-4">
