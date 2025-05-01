@@ -21,6 +21,8 @@
 
 Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
+\* Currently, dockerfiles for setting up local development has not been setup, will do so soon.
+
 ## License
 
 This project is dual-licensed under the [Apache-2.0 License](LICENSE-APACHE-2.0) and the [MIT License](LICENSE-MIT).
