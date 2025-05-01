@@ -27,10 +27,10 @@ const Modal = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & ModalP
 					className="absolute inset-0 bg-primary/50 z-40 w-full h-full"
 				></motion.div>
 				<motion.div
-					initial={{ opacity: 0, scale: 0.95 }}
-					animate={{ opacity: 1, scale: 1 }}
-					exit={{ opacity: 0, scale: 0.95 }}
-					transition={{ duration: 0.2 }}
+					initial={{ opacity: 0, y: 16 }}
+					animate={{ opacity: 1, y: 0 }}
+					exit={{ opacity: 0, y: 16 }}
+					transition={{ duration: 0.2, ease: "easeInOut" }}
 					className="absolute flex justify-center items-center z-41 h-full w-full"
 				>
 					<div
