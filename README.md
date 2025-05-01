@@ -2,12 +2,6 @@
 
 **NovelView** is a cross-platform ebook reader designed for web novels (e.g., RoyalRoad) and general EPUB/classic book support. Currently a work-in-progress (WIP), it aims to provide a seamless reading experience across Android, iOS, and desktop platforms.
 
-## Basic Features
-
--  📚 **Web Novel Integration**: Support for platforms like RoyalRoad.
--  📖 **EPUB & Classic Book Support**: Read your favorite EPUB and traditional books. Ebook selection from sources like Project Gutenberg.
--  💻 **Cross-Platform Compatibility**: Available on Android, iOS, and desktop.
-
 ---
 
 > **⚠️🚧 Status: In Progress 🚧⚠️**
