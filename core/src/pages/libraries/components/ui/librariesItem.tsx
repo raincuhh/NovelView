@@ -11,7 +11,7 @@ type LibraryItemProps = {
 	layout: LibrariesLayoutOption;
 };
 
-export default function LibraryItem({ data, layout }: LibraryItemProps) {
+export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 	const { data: coverPath } = useLibraryCoverPath(data.id);
 	const { data: count } = useBookCountByLibraryIdQuery(data.id);
 	const hasImage = Boolean(coverPath);
