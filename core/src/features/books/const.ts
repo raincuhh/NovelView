@@ -3,7 +3,6 @@ import { Book } from "./types";
 export const MOCK_BOOKS: Book[] = [
 	{
 		id: "fc27d3fc-58cb-342f-be18-b49662b5650b",
-		libraryId: "da47c3fc-58cb-416f-be18-b33310d1080b",
 		userId: "user1",
 		title: "Shadow Slave",
 		coverImageUrl: "https://example.com/shadow-slave.jpg",
@@ -15,7 +14,6 @@ export const MOCK_BOOKS: Book[] = [
 	},
 	{
 		id: "fc27d3fc-58cb-342f-be18-b49662b5650b",
-		libraryId: "da47c3fc-58cb-416f-be18-b33310d1080b",
 		userId: "user1",
 		title: "Red Rising",
 		coverImageUrl: "https://example.com/red-rising.jpg",
@@ -27,7 +25,6 @@ export const MOCK_BOOKS: Book[] = [
 	},
 	{
 		id: "fc27d3fc-58cb-342f-be18-b49662b5650b",
-		libraryId: "da47c3fc-58cb-416f-be18-b33310d1080b",
 		userId: "user1",
 		title: "Golden Son",
 		coverImageUrl: "https://example.com/golden-son.jpg",
@@ -39,7 +36,6 @@ export const MOCK_BOOKS: Book[] = [
 	},
 	{
 		id: "fc27d3fc-58cb-342f-be18-b49662b5650b",
-		libraryId: "da47c3fc-58cb-416f-be18-b33310d1080b",
 		userId: "user1",
 		title: "Morning Star",
 		coverImageUrl: "https://example.com/morning-star.jpg",

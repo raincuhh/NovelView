@@ -1,5 +1,6 @@
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { getMostInteractedLibraries, getLibraryById } from "../../lib/selectLibraries";
+import { getLibraryCoverPath } from "../../lib/utils";
 
 export const useLibraryByIdQuery = (libraryId: string) => {
 	return useSuspenseQuery({
@@ -12,12 +13,18 @@ export const useLibraryByIdQuery = (libraryId: string) => {
 };
 
 export const useMostInteractedLibrariesQuery = (userId: string) => {
-	return useQuery({
+	return useSuspenseQuery({
 		queryKey: ["mostInteractedLibraries", userId],
 		queryFn: () => {
 			if (!userId) throw new Error("User ID is missing");
 			return getMostInteractedLibraries(userId);
 		},
-		enabled: !!userId,
 	});
 };
+
+export const useLibraryCoverPath = (libraryId: string) =>
+	useSuspenseQuery({
+		queryKey: ["libraryCoverPath", libraryId],
+		queryFn: () => getLibraryCoverPath(libraryId),
+		staleTime: Infinity,
+	});

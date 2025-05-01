@@ -1,22 +1,10 @@
 import { localDb, powersyncDb } from "@/shared/providers/systemProvider";
 import { Book, BookInfo } from "../types";
 
-// export async function getBooksByLibraryId(libraryId: string): Promise<Book[]> {
-// 	const query = `SELECT * FROM books WHERE library_id = ?`;
-// 	const [localRes, remoteRes] = await Promise.all([
-// 		localDb.select<Book[]>(query, [libraryId]),
-// 		powersyncDb.execute(query, [libraryId]),
-// 	]);
-
-// 	return [...(localRes ?? []), ...(remoteRes.rows?._array ?? [])];
-// }
-
-export async function getAllBooks() {
+export async function testLogStuff() {
 	const results = await powersyncDb.getAll("SELECT * FROM books");
 	const libraryBooks = await powersyncDb.getAll("SELECT * FROM library_books");
 	console.log("All books:", results, "library_book table: ", libraryBooks);
-
-	return results;
 }
 
 export async function getBooksByLibraryId(libraryId: string): Promise<Book[]> {
@@ -31,8 +19,6 @@ export async function getBooksByLibraryId(libraryId: string): Promise<Book[]> {
 		localDb.select<Book[]>(query, [libraryId]),
 		powersyncDb.getAll<Book>(query, [libraryId]),
 	]);
-
-	console.log("res: ", [localRes, remoteRes]);
 
 	return [...(localRes ?? []), ...(remoteRes ?? [])];
 }
@@ -49,11 +35,10 @@ export async function getAllBooksByUserId(userId: string): Promise<Book[]> {
 
 export async function getRecentlyOpenedBooks(userId: string, limit: number = 5): Promise<Book[]> {
 	const query = `
-		SELECT b.*
-		FROM books b
-		LEFT JOIN book_state bs ON b.id = bs.book_id
-		WHERE b.user_id = ?
-		ORDER BY bs.last_opened_at DESC
+		SELECT *
+		FROM books
+		WHERE user_id = ?
+		ORDER BY last_opened_at DESC
 		LIMIT ?
 	`;
 

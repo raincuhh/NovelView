@@ -1,6 +1,7 @@
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { getFirstLibrary } from "@/features/libraries/lib/selectLibraries";
 import { getBookInfoByBookId, getBooksByLibraryId, getRecentlyOpenedBooks } from "../../lib/selectBook";
+import { getBookCoverPath } from "../../lib/utils";
 
 const DEFAULT_REFETCH_INTERVAL = 60 * 1000;
 
@@ -18,10 +19,9 @@ export const useUserFirstLibraryQuery = (userId: string) => {
 };
 
 export const useMostRecentlyOpenedBookQuery = (userId: string) => {
-	return useQuery({
+	return useSuspenseQuery({
 		queryKey: ["mostRecentlyReadBook", userId],
 		queryFn: () => getRecentlyOpenedBooks(userId, 1),
-		enabled: !!userId,
 		refetchInterval: DEFAULT_REFETCH_INTERVAL,
 		refetchIntervalInBackground: true,
 		refetchOnWindowFocus: true,
@@ -48,7 +48,7 @@ export const useBookInfoQuery = (bookId: string) => {
 };
 
 export const useBooksByLibraryIdQuery = (libraryId: string) => {
-	return useQuery({
+	return useSuspenseQuery({
 		queryKey: ["books", libraryId],
 		queryFn: async () => getBooksByLibraryId(libraryId),
 		refetchInterval: DEFAULT_REFETCH_INTERVAL,
@@ -56,3 +56,10 @@ export const useBooksByLibraryIdQuery = (libraryId: string) => {
 		refetchOnWindowFocus: true,
 	});
 };
+
+export const useBookCoverPath = (bookId: string) =>
+	useSuspenseQuery({
+		queryKey: ["bookCoverPath", bookId],
+		queryFn: () => getBookCoverPath(bookId),
+		staleTime: Infinity,
+	});

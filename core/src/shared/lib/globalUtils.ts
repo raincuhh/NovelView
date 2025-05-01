@@ -118,3 +118,11 @@ export function getFileExtension(filename: string): string {
 export function getCurrentTimestamp(): string {
 	return new Date().toISOString();
 }
+
+export function assignRef<T>(ref: React.Ref<T> | undefined, value: T) {
+	if (typeof ref === "function") {
+		ref(value);
+	} else if (ref && typeof ref === "object") {
+		(ref as React.MutableRefObject<T>).current = value;
+	}
+}

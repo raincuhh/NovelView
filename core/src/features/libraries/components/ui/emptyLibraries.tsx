@@ -6,7 +6,7 @@ import CreateLibraryModal from "./createLibraryModal";
 export default function EmptyLibraries() {
 	const { openModal, closeModal } = useModalStore();
 
-	const handleOpenModal = () => {
+	const handleOpenCreatelibraryModel = () => {
 		const modal: ModalType = {
 			id: "create-library",
 			closable: true,
@@ -17,15 +17,16 @@ export default function EmptyLibraries() {
 	};
 
 	return (
-		<div className="mx-auto flex flex-col">
-			<div className="flex flex-col items-center mb-6 gap-2">
-				<h1 className="font-bold text-2xl">No libraries yet</h1>
-				{/* <p className="text-muted text-sm">Create your first one to get started.</p> */}
-			</div>
-			<div className="flex flex-col gap-2 px-4">
-				<Button variant="accent" onClick={handleOpenModal}>
-					Create a Library
-				</Button>
+		<div className=" flex flex-col justify-center">
+			<div className="mx-auto flex flex-col max-w-3xs">
+				<div className="flex flex-col items-center mb-6 gap-2">
+					<h1 className="font-bold text-xl">No Books in your library</h1>
+				</div>
+				<div className="flex flex-col gap-2 w-full px-4">
+					<Button variant="accent" onClick={handleOpenCreatelibraryModel}>
+						Create a library
+					</Button>
+				</div>
 			</div>
 		</div>
 	);

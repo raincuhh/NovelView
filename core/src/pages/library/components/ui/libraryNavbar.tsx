@@ -38,7 +38,7 @@ export default function LibraryNavbar({ isScrolled }: LibraryNavbarProps) {
 					</div>
 					{isScrolled ? (
 						<span className="font-bold select-none flex-grow truncate group-hover:text-muted">
-							{library?.name}
+							{library.name}
 						</span>
 					) : null}
 				</div>

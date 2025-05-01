@@ -17,10 +17,10 @@ import { BottomSheet } from "react-spring-bottom-sheet";
 export default function LibraryOptions() {
 	const [open, setOpen] = useState<boolean>(false);
 	const focusRef = useRef<HTMLDivElement | null>(null);
-	const { library, isLoading, coverPath, coverPathLoading } = useLibraryProvider();
+	const { library, coverPath, coverPathLoading } = useLibraryProvider();
 	// const cover = useLibraryCover(library?.id ?? "");
 
-	const isFullyLoading = isLoading || coverPathLoading;
+	const isFullyLoading = coverPathLoading;
 	const hasImage = Boolean(coverPath);
 
 	useEffect(() => {
@@ -52,8 +52,8 @@ export default function LibraryOptions() {
 							)}
 						</Cover>
 						<div className="flex flex-col justify-center h-full">
-							<header className="text-lg font-bold text-normal">{library?.name}</header>
-							<p className="text-sm text-muted">{library?.type}</p>
+							<header className="text-lg font-bold text-normal">{library.name}</header>
+							<p className="text-sm text-muted">{library.type}</p>
 						</div>
 					</div>
 				}

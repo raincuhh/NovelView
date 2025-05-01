@@ -6,11 +6,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import InitUserTables from "@/features/user/components/utils/initUserTables";
 import QuickAccessErrorBoundary from "@/pages/home/components/ui/quickAccessErrorBoundary";
 import RecentsErrorBoundary from "@/pages/home/components/ui/recentsErrorBoundary";
-import ReadingNowErrorBoundary from "@/pages/home/components/ui/readingNowErrorBoundary";
+// import ReadingNowErrorBoundary from "@/pages/home/components/ui/readingNowErrorBoundary";
 import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
 import ScrollContainer from "@/shared/components/ui/scrollContainer";
 import { useUserFirstLibraryQuery } from "@/features/books/model/queries/useBookQuery";
-import { useEffect } from "react";
 
 export const Route = createFileRoute("/_app/_home/home")({
 	component: RouteComponent,
@@ -20,34 +19,23 @@ function RouteComponent() {
 	const { getUserId } = useAuthStore();
 	const userId = getUserId();
 
-	const { data: libraries, isLoading } = useUserFirstLibraryQuery(userId);
-
+	const { data: libraries } = useUserFirstLibraryQuery(userId);
 	const hasLibraries = !!libraries;
-
-	useEffect(() => {
-		console.log("Home route mounted");
-		if (!userId) console.warn("No userId yet");
-		if (isLoading) console.log("Still loading libraries...");
-		else if (hasLibraries) console.log("User has libraries");
-		else console.log("No libraries found - showing EmptyLibraries");
-	}, [userId, libraries, isLoading]);
 
 	return (
 		<ScrollContainer className="h-full">
 			<InitUserTables />
 			<div className="relative flex flex-col h-full pt-12">
-				<HomeNavbar isLoading={isLoading} />
-				<div className="flex flex-col h-full mt-2">
-					{isLoading ? (
-						<div></div>
-					) : hasLibraries ? (
-						<div className="flex flex-col gap-8">
+				<HomeNavbar />
+				<div className="flex flex-col h-full mt-2 gap-8">
+					{hasLibraries ? (
+						<>
 							<QuickAccessErrorBoundary />
-							<ReadingNowErrorBoundary />
+							{/* <ReadingNowErrorBoundary /> */}
 							<RecentsErrorBoundary />
 							<ActivityCalendar />
 							<MobileBottomPadding />
-						</div>
+						</>
 					) : (
 						<>
 							<EmptyLibraries />

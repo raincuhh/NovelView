@@ -3,13 +3,14 @@ import { Cover, CoverImage } from "@/shared/components/ui/cover";
 import PlaceholderLibraryCover from "@/features/libraries/components/ui/placeholderLibraryCover";
 import { LibraryLink } from "@/features/libraries/components/ui/libraryLink";
 import Icon from "@/shared/components/ui/icon";
+import { useLibraryCoverPath } from "@/features/libraries/model/queries/useLibrariesQuery";
 
 type QuickAccessItemProps = {
 	data: MostInteractedLibrary;
-	coverPath: string | null;
 };
 
-export default function QuickAccessItem({ data, coverPath }: QuickAccessItemProps) {
+export default function QuickAccessItem({ data }: QuickAccessItemProps) {
+	const { data: coverPath } = useLibraryCoverPath(data.id);
 	const hasImage = Boolean(coverPath);
 
 	return (

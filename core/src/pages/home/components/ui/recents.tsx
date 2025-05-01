@@ -1,7 +1,5 @@
 import RenderList from "@/shared/components/utils/renderList";
 import { Book } from "@/features/books/types";
-import { useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
 import RecentsItem from "./recentsItem";
 import HomeSectionHeader from "./homeSectionHeader";
 import { useAuthStore } from "@/features/auth/authStore";
@@ -11,53 +9,15 @@ export default function Recents() {
 	const { getUserId } = useAuthStore();
 	const userId = getUserId();
 
-	const { data: books, isLoading, error } = useRecentlyOpenedBooksQuery(userId);
+	const { data: books } = useRecentlyOpenedBooksQuery(userId);
 
-	const [coverPaths, setCoverPaths] = useState<Record<string, string | null>>({});
-	const [loadingCovers, setLoadingCovers] = useState<boolean>(true);
-
-	useEffect(() => {
-		if (!books?.length) return;
-
-		const loadCovers = async () => {
-			setLoadingCovers(true);
-			const entries = await Promise.all(
-				books.map(async (book) => {
-					// for now il just return the cover_book url if it has one.
-					// TODO: implement getting book cover image url.
-					// const cover = await getBookCoverPath(lib.id);
-					const cover = book?.coverImageUrl;
-
-					return [book.id, cover] as const;
-				})
-			);
-
-			setCoverPaths(Object.fromEntries(entries.map(([id, cover]) => [id, cover ?? null])));
-			setLoadingCovers(false);
-		};
-
-		loadCovers();
-	}, [books]);
-
-	const isFullyloading = isLoading || loadingCovers;
 	const hasBooks = !!books && books.length > 0;
-
-	if (isFullyloading) return <RecentsSkeleton />;
-	if (error) {
-		console.log(error.message);
-		return (
-			<RecentsWrapper>
-				<p className="text-danger text-center font-bold">Error loading recent books.</p>
-			</RecentsWrapper>
-		);
-	}
-
 	if (!hasBooks) return null;
 
 	return (
 		<RecentsWrapper>
 			<HomeSectionHeader label="Recents" SeeMoreto="/home/recents" />
-			<RecentsList books={books} coverPaths={coverPaths} />
+			<RecentsList books={books} />
 		</RecentsWrapper>
 	);
 }
@@ -66,56 +26,15 @@ const RecentsWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div className="flex flex-col">{children}</div>
 );
 
-const RecentsList = ({ books, coverPaths }: { books: Book[]; coverPaths: Record<string, string | null> }) => {
-	const bookPairs = books.map((book) => [book, coverPaths[book.id]] as const);
-
+const RecentsList = ({ books }: { books: Book[] }) => {
 	return (
 		<div className="relative flex flex-col gap-2 w-full">
 			<ul className="flex py-2 pr-4 snap-x snap-mandatory overflow-x-scroll">
 				<RenderList
-					data={bookPairs}
-					render={([book, coverPath], i: number) => (
-						<RecentsItem key={book.id + i} book={book} coverPath={coverPath} />
-					)}
+					data={books}
+					render={(book: Book) => <RecentsItem key={`recents-${book.id}`} book={book} />}
 				/>
 			</ul>
 		</div>
 	);
 };
-
-const RecentsSkeleton = () => (
-	<RecentsWrapper>
-		<HomeSectionHeader label="Recents" SeeMoreto="/home/recents" />
-		<div className="relative flex flex-col gap-2 w-full">
-			<ul className="flex py-2 pr-4 snap-x snap-mandatory overflow-x-scroll">
-				{Array.from({ length: 16 }).map((_, i) => (
-					<li key={i} className="min-w-38 h-42 relative snap-start pl-4">
-						<Skeleton className="h-full w-full rounded-md" />
-						{/* <div className="absolute bottom-[1px] left-2 w-full px-4">
-							<Skeleton className="h-6 w-full" />
-						</div> */}
-					</li>
-				))}
-			</ul>
-		</div>
-	</RecentsWrapper>
-);
-
-{
-	/* {books.map((book) => (
-				<li key={book.id} className="bg-muted rounded-md p-2 flex gap-2 items-center">
-					<div className="w-10 h-14 bg-background rounded overflow-hidden">
-						{coverPaths[book.id] ? (
-							<img
-								src={coverPaths[book.id] || ""}
-								alt={book.title ?? "book cover"}
-								className="w-full h-full object-cover"
-							/>
-						) : (
-							<div className="bg-muted w-full h-full" />
-						)}
-					</div>
-					<p className="font-semibold text-sm">{book.title}</p>
-				</li>
-			))} */
-}
