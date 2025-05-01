@@ -21,7 +21,7 @@
 
 Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
 
-\* Currently, dockerfiles for setting up local development has not been setup, will do so soon.
+\* Currently, dockerfiles for setting up local development has not been setup.
 
 ## License
 

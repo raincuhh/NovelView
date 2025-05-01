@@ -49,8 +49,9 @@ function RouteComponent() {
 					) : (
 						<>
 							<FadeIn>
-								<EmptyLibraries />
+								<EmptyLibraries value="You have no libraries." />
 							</FadeIn>
+							<MobileBottomPadding />
 						</>
 					)}
 				</div>

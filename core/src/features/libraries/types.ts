@@ -24,3 +24,13 @@ export interface LibraryBooks {
 }
 
 export type MostInteractedLibrary = Pick<Library, "id" | "name" | "coverUrl" | "type">;
+
+export type LibrariesSortOption = "date" | "alphabetical";
+export type LibrariesSortDirection = "asc" | "desc";
+export type LibrariesLayoutOption = "grid" | "list";
+
+export interface LibrariesSettings {
+	sort: LibrariesSortOption;
+	direction: LibrariesSortDirection;
+	layout: LibrariesLayoutOption;
+}

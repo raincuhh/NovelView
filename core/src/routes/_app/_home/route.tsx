@@ -15,7 +15,7 @@ function RouteComponent() {
 	const userId = getUserId();
 
 	usePrefetchQuery({
-		queryKey: ["library", userId],
+		queryKey: ["haslibraries", userId],
 		queryFn: () => getFirstLibrary(userId),
 	});
 

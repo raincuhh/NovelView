@@ -32,12 +32,16 @@ export async function getMostInteractedLibraries(
 		LIMIT ?
 	`;
 
+	const abortController = new AbortController();
+
+	powersyncDb.watch(query, [userId, limit], { signal: abortController.signal });
+
 	let [localRes, powersyncRes] = await Promise.all([
 		localDb.select<MostInteractedLibrary[]>(query, [userId, limit]),
-		powersyncDb.execute(query, [userId, limit]),
+		powersyncDb.getAll<MostInteractedLibrary>(query, [userId, limit]),
 	]);
 
-	let remote = (powersyncRes?.rows?._array as MostInteractedLibrary[]) ?? [];
+	let remote = (powersyncRes as MostInteractedLibrary[]) ?? [];
 
 	if ((!localRes || localRes.length === 0) && remote.length === 0) {
 		const fallbackQuery = `
@@ -51,6 +55,8 @@ export async function getMostInteractedLibraries(
 			ORDER BY created_at DESC
 			LIMIT ?
 		`;
+
+		powersyncDb.watch(fallbackQuery, [userId, limit], { signal: abortController.signal });
 
 		const [fallbackLocal, fallbackRemote] = await Promise.all([
 			localDb.select<MostInteractedLibrary[]>(fallbackQuery, [userId, limit]),

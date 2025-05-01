@@ -1,6 +1,8 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+// import { useSuspenseQuery } from "@tanstack/react-query";
 import { getMostInteractedLibraries, getLibraryById } from "../../lib/selectLibraries";
 import { getLibraryCoverPath } from "../../lib/utils";
+import { useSuspenseQuery } from "@powersync/tanstack-react-query";
+import { MostInteractedLibrary } from "../../types";
 
 export const useLibraryByIdQuery = (libraryId: string) => {
 	return useSuspenseQuery({
@@ -10,16 +12,20 @@ export const useLibraryByIdQuery = (libraryId: string) => {
 	});
 };
 
+/**
+ * Used for fetching most interacted libraries,
+ * in stuff like libraries and home quickaccess.
+ */
 export const useMostInteractedLibrariesQuery = (userId: string) => {
 	return useSuspenseQuery({
 		queryKey: ["mostInteractedLibraries", userId],
-		queryFn: () => {
-			if (!userId) throw new Error("User ID is missing");
-			return getMostInteractedLibraries(userId);
-		},
+		queryFn: () => getMostInteractedLibraries(userId),
 	});
 };
 
+/**
+ * for fetching a specific librarys coverpath.
+ */
 export const useLibraryCoverPath = (libraryId: string) =>
 	useSuspenseQuery({
 		queryKey: ["libraryCoverPath", libraryId],

@@ -80,8 +80,8 @@
 	--accent-s: 0.35; saturation
 	--accent-l: 0.55; light */
 	--accent-l: 0.454;
-	--accent-c: 0.176;
-	--accent-h: 292.5;
+	--accent-c: 0.146;
+	--accent-h: 290.5;
 
 	--color-accent: oklch(var(--accent-l) var(--accent-c) var(--accent-h));
 
