@@ -2,6 +2,7 @@ import { useAuthStore } from "@/features/auth/authStore";
 import { useUserFirstLibraryQuery } from "@/features/books/model/queries/useBookQuery";
 import EmptyLibraries from "@/features/libraries/components/ui/emptyLibraries";
 import LibrariesHeader from "@/pages/libraries/components/ui/librariesHeader";
+import LibrariesList from "@/pages/libraries/components/ui/librariesList";
 import LibrariesNavbar from "@/pages/libraries/components/ui/librariesNavbar";
 import FadeIn from "@/shared/components/ui/fadeIn";
 import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
@@ -30,6 +31,9 @@ function RouteComponent() {
 						<>
 							<FadeIn>
 								<LibrariesHeader />
+							</FadeIn>
+							<FadeIn>
+								<LibrariesList />
 							</FadeIn>
 						</>
 					) : (

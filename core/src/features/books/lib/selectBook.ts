@@ -51,7 +51,12 @@ export async function getRecentlyOpenedBooks(userId: string, limit: number = 5):
 }
 
 export async function getBookCountByLibraryId(libraryId: string): Promise<number> {
-	const query = `SELECT COUNT(*) AS count FROM books WHERE library_id = ?`;
+	const query = `
+		SELECT COUNT(*) AS count
+		FROM books b
+		INNER JOIN library_books lb ON lb.book_id = b.id
+		WHERE lb.library_id = ?
+	`;
 
 	const [localCount, powersyncCount] = await Promise.all([
 		localDb.select<{ count: number }[]>(query, [libraryId]),

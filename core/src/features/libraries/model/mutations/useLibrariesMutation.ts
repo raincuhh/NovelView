@@ -33,6 +33,7 @@ export function useCreateLibraryMutation(options?: CreateLibraryHookOptions) {
 			queryClient.invalidateQueries({ queryKey: ["mostInteractedLibraries", variables.userId] });
 			queryClient.invalidateQueries({ queryKey: ["libraries", variables.userId] });
 			queryClient.invalidateQueries({ queryKey: ["library", variables.userId] });
+			queryClient.invalidateQueries({ queryKey: ["allLibraries", variables.userId] });
 			options?.onSuccess?.();
 		},
 		onError: (err) => {

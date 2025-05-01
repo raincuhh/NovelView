@@ -29,9 +29,7 @@ export default function QuickAccessItem({ data }: QuickAccessItemProps) {
 							)}
 						</Cover>
 						<div className="flex w-full h-full items-center pr-2 overflow-hidden justify-between">
-							<div className="select-none text-sm font-extrabold w-full flex-grow truncate">
-								{data.name}
-							</div>
+							<h1 className="select-none text-sm font-bold w-full flex-grow truncate">{data.name}</h1>
 							<div>
 								{data.type === "synced" ? (
 									<Icon.sync className="fill-faint w-5 h-5 group-hover:fill-muted" />

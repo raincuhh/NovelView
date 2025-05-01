@@ -1,7 +1,7 @@
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "@/features/fs/consts";
 import { create, writeFile } from "@tauri-apps/plugin-fs";
 import { LOCAL_LIBRARY_COVER_PATH_TEMPLATE, REMOTE_LIBRARY_COVER_PATH_TEMPLATE } from "../consts";
-import { LibraryType } from "../types";
+import { LibrariesSortDirection, LibrariesSortOption, Library, LibraryType } from "../types";
 import { getCoverPath } from "@/shared/lib/fs/getCoverPath";
 
 export async function saveLibraryCover(libraryId: string, cover: File) {
@@ -61,4 +61,22 @@ export function getRemoteLibraryCoverPath(userId: string, libraryId: string, ext
 	return REMOTE_LIBRARY_COVER_PATH_TEMPLATE.replace("{userId}", userId)
 		.replace("{libraryId}", libraryId)
 		.replace("{ext}", ext);
+}
+
+export function sortLibraries(
+	libraries: Library[],
+	sort: LibrariesSortOption,
+	direction: LibrariesSortDirection
+) {
+	const sorted = [...libraries].sort((a, b) => {
+		if (sort === "alphabetical") {
+			return a.name.localeCompare(b.name);
+		} else if (sort === "date") {
+			const dateA = new Date(a.createdAt || a.createdAt);
+			const dateB = new Date(b.createdAt || b.createdAt);
+			return dateA.getTime() - dateB.getTime();
+		}
+		return 0;
+	});
+	return direction === "desc" ? sorted.reverse() : sorted;
 }

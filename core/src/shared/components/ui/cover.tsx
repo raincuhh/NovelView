@@ -36,7 +36,7 @@ const CoverImage = forwardRef<
 					onLoad={onLoad}
 					onError={onError}
 					{...props}
-					className={cn("object-cover w-full h-full rounded-sm absolute", className)}
+					className={cn("object-cover w-full h-full absolute", className)}
 				/>
 			)}
 		</div>
