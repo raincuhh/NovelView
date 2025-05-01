@@ -9,6 +9,7 @@ import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
 import { useBooksByLibraryIdQuery } from "@/features/books/model/queries/useBookQuery";
 import EmptyLibrary from "@/features/library/components/ui/emptyLibrary";
 import { useLibraryProvider } from "@/features/library/libraryProvider";
+import FadeIn from "@/shared/components/ui/fadeIn";
 
 export const Route = createFileRoute("/_app/library/$libraryId/")({
 	component: RouteComponent,
@@ -42,8 +43,13 @@ function RouteComponent() {
 			<div className="relative flex flex-col h-full">
 				<LibraryBackground coverPath={coverPath ?? ""} />
 				<div className="relative flex flex-col">
-					<LibraryNavbar isScrolled={isScrolled} />
-					<LibraryHeader ref={libraryHeaderRef} coverPath={coverPath ?? ""} />
+					<FadeIn>
+						<LibraryNavbar isScrolled={isScrolled} />
+					</FadeIn>
+					<FadeIn>
+						<LibraryHeader ref={libraryHeaderRef} coverPath={coverPath ?? ""} />
+					</FadeIn>
+
 					<div className="flex flex-col mt-2">
 						{hasBooks ? (
 							<>
@@ -52,7 +58,9 @@ function RouteComponent() {
 							</>
 						) : (
 							<>
-								<EmptyLibrary />
+								<FadeIn>
+									<EmptyLibrary />
+								</FadeIn>
 								<MobileBottomPadding />
 							</>
 						)}

@@ -8,6 +8,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 import "react-spring-bottom-sheet/dist/style.css";
 import "overlayscrollbars/overlayscrollbars.css";
 import "react-circular-progressbar/dist/styles.css";
+import "ldrs/react/Orbit.css";
+import "ldrs/react/TailChase.css";
 
 const router = createRouter({ routeTree });
 

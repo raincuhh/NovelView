@@ -94,7 +94,7 @@ export async function getBookInfoByBookId(bookId: string): Promise<BookInfo | nu
 	const localMatch = localRes?.[0];
 	const remoteMatch = remoteRes.rows?._array?.[0];
 
-	console.log({ localMatch, remoteMatch });
+	// console.log({ localMatch, remoteMatch });
 
 	return localMatch ?? remoteMatch ?? null;
 }

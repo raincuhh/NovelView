@@ -43,6 +43,9 @@ importers:
       '@tanstack/react-router':
         specifier: ^1.114.34
         version: 1.116.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@tanstack/react-virtual':
+        specifier: ^3.13.6
+        version: 3.13.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tanstack/router':
         specifier: 0.0.1-beta.53
         version: 0.0.1-beta.53
@@ -121,6 +124,9 @@ importers:
       js-logger:
         specifier: ^1.6.1
         version: 1.6.1
+      ldrs:
+        specifier: ^1.1.7
+        version: 1.1.7
       lint-staged:
         specifier: ^15.5.1
         version: 15.5.1
@@ -1280,6 +1286,12 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
+  '@tanstack/react-virtual@3.13.6':
+    resolution: {integrity: sha512-WT7nWs8ximoQ0CDx/ngoFP7HbQF9Q2wQe4nh2NB+u2486eX3nZRE40P9g6ccCVq7ZfTSH5gFOuCoVH5DLNS/aA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   '@tanstack/router-core@1.115.3':
     resolution: {integrity: sha512-gynHs72LHVg05fuJTwZZYhDL4VNEAK0sXz7IqiBv7a3qsYeEmIZsGaFr9sVjTkuF1kbrFBdJd5JYutzBh9Uuhw==}
     engines: {node: '>=12'}
@@ -1340,6 +1352,9 @@ packages:
 
   '@tanstack/store@0.7.0':
     resolution: {integrity: sha512-CNIhdoUsmD2NolYuaIs8VfWM467RK6oIBAW4nPEKZhg1smZ+/CwtCdpURgp7nxSqOaV9oKkzdWD80+bC66F/Jg==}
+
+  '@tanstack/virtual-core@3.13.6':
+    resolution: {integrity: sha512-cnQUeWnhNP8tJ4WsGcYiX24Gjkc9ALstLbHcBj1t3E7EimN6n6kHH+DPV4PpDnuw00NApQp+ViojMj1GRdwYQg==}
 
   '@tanstack/virtual-file-routes@1.115.0':
     resolution: {integrity: sha512-XLUh1Py3AftcERrxkxC5Y5m5mfllRH3YR6YVlyjFgI2Tc2Ssy2NKmQFQIafoxfW459UJ8Dn81nWKETEIJifE4g==}
@@ -2953,6 +2968,9 @@ packages:
   language-tags@1.0.9:
     resolution: {integrity: sha512-MbjN408fEndfiQXbFQ1vnd+1NoLDsnQW41410oQBXiyXDMYH5z505juWa4KUE1LqxRC7DgOgZDbKLxHIwm27hA==}
     engines: {node: '>=0.10'}
+
+  ldrs@1.1.7:
+    resolution: {integrity: sha512-rZnfveeY1SeS3F3ifUVd9AVGTFHmQ0qzp5fuszAirnrVkjqJBLrm99vtr/Mxbby4XgadUYv+DsFqyk2p4FV40Q==}
 
   leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
@@ -5296,6 +5314,12 @@ snapshots:
       react-dom: 19.1.0(react@19.1.0)
       use-sync-external-store: 1.5.0(react@19.1.0)
 
+  '@tanstack/react-virtual@3.13.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@tanstack/virtual-core': 3.13.6
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
   '@tanstack/router-core@1.115.3':
     dependencies:
       '@tanstack/history': 1.115.0
@@ -5364,6 +5388,8 @@ snapshots:
       immer: 9.0.21
 
   '@tanstack/store@0.7.0': {}
+
+  '@tanstack/virtual-core@3.13.6': {}
 
   '@tanstack/virtual-file-routes@1.115.0': {}
 
@@ -7229,6 +7255,8 @@ snapshots:
   language-tags@1.0.9:
     dependencies:
       language-subtag-registry: 0.3.23
+
+  ldrs@1.1.7: {}
 
   leven@3.1.0: {}
 

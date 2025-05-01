@@ -11,16 +11,13 @@ import { useLibraryProvider } from "@/features/library/libraryProvider";
 import { Cover, CoverImage } from "@/shared/components/ui/cover";
 import Icon from "@/shared/components/ui/icon";
 import { useEffect, useRef, useState } from "react";
-import Skeleton from "react-loading-skeleton";
 import { BottomSheet } from "react-spring-bottom-sheet";
 
 export default function LibraryOptions() {
 	const [open, setOpen] = useState<boolean>(false);
 	const focusRef = useRef<HTMLDivElement | null>(null);
-	const { library, coverPath, coverPathLoading } = useLibraryProvider();
-	// const cover = useLibraryCover(library?.id ?? "");
+	const { library, coverPath } = useLibraryProvider();
 
-	const isFullyLoading = coverPathLoading;
 	const hasImage = Boolean(coverPath);
 
 	useEffect(() => {
@@ -41,9 +38,7 @@ export default function LibraryOptions() {
 				header={
 					<div className="w-full text-start flex gap-2 items-center pb-1">
 						<Cover className="w-12 h-12">
-							{isFullyLoading ? (
-								<Skeleton className="w-full h-full rounded-md" />
-							) : hasImage ? (
+							{hasImage ? (
 								<CoverImage src={coverPath ?? ""} alt="library cover" className="rounded-md" />
 							) : (
 								<div className="w-full h-full bg-secondary-alt rounded-md flex justify-center items-center-safe">

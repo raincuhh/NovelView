@@ -5,12 +5,11 @@ import { useAuthStore } from "@/features/auth/authStore";
 import { useRegisterFormStore } from "@/pages/onboarding/registerFormStore";
 
 export default function InitUserTables() {
-	const userId = useAuthStore.getState().getUserId();
+	const { getUserId } = useAuthStore();
+	const userId = getUserId();
 	const { formData } = useRegisterFormStore();
 
 	useEffect(() => {
-		if (!userId) return;
-
 		const init = async () => {
 			const [profile, settings, prefs] = await Promise.all([
 				powersyncDb.getOptional("SELECT id FROM user_profiles WHERE id = ?", [userId]),

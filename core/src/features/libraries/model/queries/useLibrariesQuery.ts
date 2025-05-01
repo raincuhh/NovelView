@@ -7,8 +7,6 @@ export const useLibraryByIdQuery = (libraryId: string) => {
 		queryKey: ["library", libraryId],
 		queryFn: () => getLibraryById(libraryId),
 		staleTime: 1000 * 60 * 5,
-		// cacheTime: 1000 * 60 * 10,
-		// enabled: !!libraryId,
 	});
 };
 

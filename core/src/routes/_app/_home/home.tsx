@@ -5,11 +5,14 @@ import HomeNavbar from "@/pages/home/components/ui/homeNavbar";
 import { createFileRoute } from "@tanstack/react-router";
 import InitUserTables from "@/features/user/components/utils/initUserTables";
 import QuickAccessErrorBoundary from "@/pages/home/components/ui/quickAccessErrorBoundary";
+// @ts-ignore
 import RecentsErrorBoundary from "@/pages/home/components/ui/recentsErrorBoundary";
-// import ReadingNowErrorBoundary from "@/pages/home/components/ui/readingNowErrorBoundary";
+// @ts-ignore
+import ReadingNowErrorBoundary from "@/pages/home/components/ui/readingNowErrorBoundary";
 import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
 import ScrollContainer from "@/shared/components/ui/scrollContainer";
 import { useUserFirstLibraryQuery } from "@/features/books/model/queries/useBookQuery";
+import FadeIn from "@/shared/components/ui/fadeIn";
 
 export const Route = createFileRoute("/_app/_home/home")({
 	component: RouteComponent,
@@ -26,19 +29,28 @@ function RouteComponent() {
 		<ScrollContainer className="h-full">
 			<InitUserTables />
 			<div className="relative flex flex-col h-full pt-12">
-				<HomeNavbar />
+				<FadeIn>
+					<HomeNavbar />
+				</FadeIn>
 				<div className="flex flex-col h-full mt-2 gap-8">
 					{hasLibraries ? (
 						<>
-							<QuickAccessErrorBoundary />
-							{/* <ReadingNowErrorBoundary /> */}
-							<RecentsErrorBoundary />
-							<ActivityCalendar />
+							<FadeIn>
+								<QuickAccessErrorBoundary />
+							</FadeIn>
+							{/* <FadeIn>
+								<RecentsErrorBoundary />
+							</FadeIn> */}
+							<FadeIn>
+								<ActivityCalendar />
+							</FadeIn>
 							<MobileBottomPadding />
 						</>
 					) : (
 						<>
-							<EmptyLibraries />
+							<FadeIn>
+								<EmptyLibraries />
+							</FadeIn>
 						</>
 					)}
 				</div>
