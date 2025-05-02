@@ -24,7 +24,7 @@ export default function LibrariesList() {
 
 	return (
 		<>
-			<div className={cn("w-full flex", settings.layout === "grid" ? "px-4 pt-4" : "")}>
+			<div className={cn("w-full flex", settings.layout === "grid" ? "px-4" : "")}>
 				<ul
 					className={cn(
 						"w-full",

@@ -21,6 +21,8 @@ import { cn } from "@/shared/lib/globalUtils";
 const SORT_OPTIONS: { label: string; value: LibrariesSortOption }[] = [
 	{ label: "Date", value: "date" },
 	{ label: "Alphabetical", value: "alphabetical" },
+	{ label: "Most (books)", value: "most" },
+	{ label: "Least (books)", value: "least" },
 ];
 
 const DIRECTION_OPTIONS: { label: string; value: LibrariesSortDirection }[] = [
@@ -31,6 +33,8 @@ const DIRECTION_OPTIONS: { label: string; value: LibrariesSortDirection }[] = [
 const LAYOUT_OPTIONS: { icon: JSX.Element; value: LibrariesLayoutOption }[] = [
 	{ icon: <Icon.grid />, value: "grid" },
 	{ icon: <Icon.menu />, value: "list" },
+	{ icon: <Icon.gridCompact />, value: "gridCompact" },
+	{ icon: <Icon.menuCompact />, value: "ListCompact" },
 ];
 
 export default function LibrariesSettings() {

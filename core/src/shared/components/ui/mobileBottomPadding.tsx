@@ -5,7 +5,7 @@ export default function MobileBottomPadding() {
 	// pb-28 with the recently read mobile widget navbar component
 	// pb-1
 
-	if (isMobile) return <div className="pb-10"></div>;
+	if (isMobile) return <div className="pb-36"></div>;
 
 	return null;
 }

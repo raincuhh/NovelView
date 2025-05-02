@@ -5,6 +5,7 @@ import { useLibraryCoverPath } from "@/features/libraries/model/queries/useLibra
 import { LibrariesLayoutOption, Library } from "@/features/libraries/types";
 import { Cover, CoverImage } from "@/shared/components/ui/cover";
 import { cn } from "@/shared/lib/globalUtils";
+import { useEffect } from "react";
 
 type LibraryItemProps = {
 	data: Library;
@@ -16,16 +17,20 @@ export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 	const { data: count } = useBookCountByLibraryIdQuery(data.id);
 	const hasImage = Boolean(coverPath);
 
+	useEffect(() => {
+		console.log(layout);
+	}, [layout]);
+
 	return (
 		<li className="pb-2">
 			<LibraryLink
 				libraryId={data.id}
-				className={cn("h-full w-full", layout === "grid" ? "aspect-[3/2]" : "flex items-center gap-3")}
+				className={cn("h-full w-full", layout === "grid" ? "" : "flex items-center gap-3")}
 			>
 				<div className={cn("w-full flex gap-2", layout === "grid" ? "flex-col" : "flex-row")}>
 					<Cover className={cn("", layout === "grid" ? " w-full h-24" : " w-full")}>
 						{hasImage ? (
-							<CoverImage src={coverPath!} alt="cover" className="w-full h-full" />
+							<CoverImage src={coverPath!} alt="cover" className="w-full h-24" />
 						) : (
 							<PlaceholderLibraryCover className="h-full w-full" />
 						)}

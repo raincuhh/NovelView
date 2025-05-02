@@ -1,6 +1,7 @@
 import { useAuthStore } from "@/features/auth/authStore";
 import { useUserFirstLibraryQuery } from "@/features/books/model/queries/useBookQuery";
 import EmptyLibraries from "@/features/libraries/components/ui/emptyLibraries";
+// @ts-ignore
 import TestList from "@/features/test/components/ui/testList";
 import LibrariesList from "@/pages/libraries/components/ui/librariesList";
 import LibrariesNavbar from "@/pages/libraries/components/ui/librariesNavbar";
@@ -29,17 +30,17 @@ function RouteComponent() {
 				<div className="h-full gap-8 flex flex-col">
 					{hasLibraries ? (
 						<>
-							<FadeIn className="flex flex-col h-full flex-1 flex-grow">
+							<FadeIn>
 								<LibrariesList />
 							</FadeIn>
-							<FadeIn>
+							{/* <FadeIn>
 								<TestList count={1000} />
-							</FadeIn>
+							</FadeIn> */}
 							<MobileBottomPadding />
 						</>
 					) : (
 						<>
-							<FadeIn>
+							<FadeIn className="h-full flex justify-center items-center w-full">
 								<EmptyLibraries value="You have no libraries." />
 							</FadeIn>
 							<MobileBottomPadding />
