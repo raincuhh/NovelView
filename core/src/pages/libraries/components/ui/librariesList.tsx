@@ -5,7 +5,8 @@ import { cn } from "@/shared/lib/globalUtils";
 import LibrariesItem from "./librariesItem";
 import { sortLibraries } from "@/features/libraries/lib/utils";
 import RenderList from "@/shared/components/utils/renderList";
-import { Library } from "@/features/libraries/types";
+import { Library, LibraryWithBookCount } from "@/features/libraries/types";
+import { useBookCountByLibraryIdQuery } from "@/features/books/model/queries/useBookQuery";
 // import { useVirtualizer } from "@tanstack/react-virtual";
 // import { OverlayScrollbarsComponentRef } from "overlayscrollbars-react";
 
@@ -18,7 +19,16 @@ export default function LibrariesList() {
 	const userId = getUserId();
 	const { data: libraries } = useAllLibrariesQuery(userId);
 	const { settings } = useLibrariesSettingsStore();
-	const sortedLibraries = sortLibraries(libraries, settings.sort, settings.direction);
+
+	const librariesWithCount: LibraryWithBookCount[] = libraries.map((lib) => {
+		const { data: count } = useBookCountByLibraryIdQuery(lib.id);
+		return {
+			...lib,
+			bookCount: count ?? 0,
+		};
+	});
+
+	const sortedLibraries = sortLibraries(librariesWithCount, settings.sort, settings.direction);
 
 	if (!libraries.length) return null;
 

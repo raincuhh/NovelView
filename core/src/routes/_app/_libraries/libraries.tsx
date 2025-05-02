@@ -7,6 +7,7 @@ import LibrariesList from "@/pages/libraries/components/ui/librariesList";
 import LibrariesNavbar from "@/pages/libraries/components/ui/librariesNavbar";
 import FadeIn from "@/shared/components/ui/fadeIn";
 import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
+import RefreshButton from "@/shared/components/ui/refreshButton";
 import ScrollContainer from "@/shared/components/ui/scrollContainer";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -33,19 +34,21 @@ function RouteComponent() {
 							<FadeIn>
 								<LibrariesList />
 							</FadeIn>
+							<FadeIn className="w-full flex justify-center">
+								<RefreshButton />
+							</FadeIn>
 							{/* <FadeIn>
 								<TestList count={1000} />
 							</FadeIn> */}
-							<MobileBottomPadding />
 						</>
 					) : (
 						<>
 							<FadeIn className="h-full flex justify-center items-center w-full">
 								<EmptyLibraries value="You have no libraries." />
 							</FadeIn>
-							<MobileBottomPadding />
 						</>
 					)}
+					<MobileBottomPadding />
 				</div>
 			</ScrollContainer>
 		</>

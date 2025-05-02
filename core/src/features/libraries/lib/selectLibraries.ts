@@ -20,7 +20,7 @@ export async function getAllLibraries(userId: string): Promise<Library[]> {
 
 export async function getMostInteractedLibraries(
 	userId: string,
-	limit: number = 6
+	limit: number = 8
 ): Promise<MostInteractedLibrary[]> {
 	const query = `
 		SELECT
@@ -35,16 +35,15 @@ export async function getMostInteractedLibraries(
 		WHERE l.user_id = ?
 		GROUP BY l.id
 		ORDER BY lastOpened DESC
-		LIMIT ?
 	`;
 
 	const abortController = new AbortController();
 
-	powersyncDb.watch(query, [userId, limit], { signal: abortController.signal });
+	powersyncDb.watch(query, [userId], { signal: abortController.signal });
 
 	let [localRes, powersyncRes] = await Promise.all([
-		localDb.select<MostInteractedLibrary[]>(query, [userId, limit]),
-		powersyncDb.getAll<MostInteractedLibrary>(query, [userId, limit]),
+		localDb.select<MostInteractedLibrary[]>(query, [userId]),
+		powersyncDb.getAll<MostInteractedLibrary>(query, [userId]),
 	]);
 
 	let remote = (powersyncRes as MostInteractedLibrary[]) ?? [];
@@ -59,21 +58,23 @@ export async function getMostInteractedLibraries(
 			FROM libraries
 			WHERE user_id = ?
 			ORDER BY created_at DESC
-			LIMIT ?
 		`;
 
-		powersyncDb.watch(fallbackQuery, [userId, limit], { signal: abortController.signal });
+		powersyncDb.watch(fallbackQuery, [userId], { signal: abortController.signal });
 
 		const [fallbackLocal, fallbackRemote] = await Promise.all([
-			localDb.select<MostInteractedLibrary[]>(fallbackQuery, [userId, limit]),
-			powersyncDb.execute(fallbackQuery, [userId, limit]),
+			localDb.select<MostInteractedLibrary[]>(fallbackQuery, [userId]),
+			powersyncDb.execute(fallbackQuery, [userId]),
 		]);
 
-		return [...(fallbackLocal ?? []), ...((fallbackRemote?.rows?._array as MostInteractedLibrary[]) ?? [])];
+		return [
+			...(fallbackLocal ?? []),
+			...((fallbackRemote?.rows?._array as MostInteractedLibrary[]).slice(0, limit) ?? []),
+		];
 	}
 
 	// console.log("Returning final result →", [...(localRes ?? []), ...remote]);
-	return [...(localRes ?? []), ...remote];
+	return [...(localRes ?? []), ...remote].slice(0, limit);
 }
 
 export async function getFirstLibrary(userId: string): Promise<Library | null> {
@@ -102,22 +103,6 @@ export async function getLibraryById(libraryId: string): Promise<Library | null>
 	const libraries = [...(localRes ?? []), remoteLibrary].filter(Boolean);
 
 	return libraries.length > 0 ? libraries[0] : null;
-}
-
-export async function getBookCountForLibrary(libraryId: string): Promise<number> {
-	const query = `
-		SELECT COUNT(*) as count
-		FROM library_books
-		WHERE library_id = ?
-	`;
-
-	const [localRes, remoteRes] = await Promise.all([
-		localDb.select<{ count: number }[]>(query, [libraryId]),
-		powersyncDb.execute(query, [libraryId]),
-	]);
-
-	const count = (localRes?.[0]?.count ?? 0) + (remoteRes.rows?._array?.[0]?.count ?? 0);
-	return count;
 }
 
 export async function getLibrariesByBookId(bookId: string): Promise<Library[]> {

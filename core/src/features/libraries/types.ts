@@ -23,6 +23,10 @@ export interface LibraryBooks {
 	updatedAt: Timestamp;
 }
 
+export interface LibraryWithBookCount extends Library {
+	bookCount: number;
+}
+
 export type MostInteractedLibrary = Pick<Library, "id" | "name" | "coverUrl" | "type">;
 
 export type LibrariesSortOption = "date" | "alphabetical" | "most" | "least";

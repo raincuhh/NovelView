@@ -1,7 +1,7 @@
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "@/features/fs/consts";
 import { create, writeFile } from "@tauri-apps/plugin-fs";
 import { LOCAL_LIBRARY_COVER_PATH_TEMPLATE, REMOTE_LIBRARY_COVER_PATH_TEMPLATE } from "../consts";
-import { LibrariesSortDirection, LibrariesSortOption, Library, LibraryType } from "../types";
+import { LibrariesSortDirection, LibrariesSortOption, LibraryType, LibraryWithBookCount } from "../types";
 import { getCoverPath } from "@/shared/lib/fs/getCoverPath";
 
 export async function saveLibraryCover(libraryId: string, cover: File) {
@@ -64,19 +64,23 @@ export function getRemoteLibraryCoverPath(userId: string, libraryId: string, ext
 }
 
 export function sortLibraries(
-	libraries: Library[],
+	libraries: LibraryWithBookCount[],
 	sort: LibrariesSortOption,
 	direction: LibrariesSortDirection
 ) {
 	const sorted = [...libraries].sort((a, b) => {
-		if (sort === "alphabetical") {
-			return a.name.localeCompare(b.name);
-		} else if (sort === "date") {
-			const dateA = new Date(a.createdAt || a.createdAt);
-			const dateB = new Date(b.createdAt || b.createdAt);
-			return dateA.getTime() - dateB.getTime();
+		switch (sort) {
+			case "alphabetical":
+				return a.name.localeCompare(b.name);
+			case "date":
+				return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+			case "most":
+				return (b.bookCount ?? 0) - (a.bookCount ?? 0);
+			case "least":
+				return (a.bookCount ?? 0) - (b.bookCount ?? 0);
+			default:
+				return 0;
 		}
-		return 0;
 	});
 	return direction === "desc" ? sorted.reverse() : sorted;
 }
