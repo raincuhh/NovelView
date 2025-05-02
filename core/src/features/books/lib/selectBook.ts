@@ -69,6 +69,27 @@ export async function getBookCountByLibraryId(libraryId: string): Promise<number
 	return localRes + remoteRes;
 }
 
+export async function getBookCountsForLibraries(
+	userId: string
+): Promise<{ libraryId: string; count: number }[]> {
+	const query = `
+		SELECT lb.library_id AS libraryId, COUNT(*) AS count
+		FROM library_books lb
+		INNER JOIN books b ON b.id = lb.book_id
+		INNER JOIN libraries l ON l.id = lb.library_id
+		WHERE l.user_id = ?
+		GROUP BY lb.library_id
+	`;
+
+	const [localCounts, remoteCounts] = await Promise.all([
+		localDb.select<{ libraryId: string; count: number }[]>(query, [userId]),
+		powersyncDb.execute(query, [userId]),
+	]);
+
+	const remoteArray = (remoteCounts.rows?._array as { libraryId: string; count: number }[]) ?? [];
+	return [...localCounts, ...remoteArray];
+}
+
 export async function getMostInteractedBooksInLibrary(libraryId: string, limit: number = 6): Promise<Book[]> {
 	const query = `
 		SELECT b.*, MAX(bs.last_opened_at) AS lastOpened

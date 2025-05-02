@@ -6,7 +6,10 @@ import LibrariesItem from "./librariesItem";
 import { sortLibraries } from "@/features/libraries/lib/utils";
 import RenderList from "@/shared/components/utils/renderList";
 import { Library, LibraryWithBookCount } from "@/features/libraries/types";
-import { useBookCountByLibraryIdQuery } from "@/features/books/model/queries/useBookQuery";
+import {
+	useBookCountByLibraryIdQuery,
+	useBookCountsForLibrariesQuery,
+} from "@/features/books/model/queries/useBookQuery";
 // import { useVirtualizer } from "@tanstack/react-virtual";
 // import { OverlayScrollbarsComponentRef } from "overlayscrollbars-react";
 
@@ -20,25 +23,33 @@ export default function LibrariesList() {
 	const { data: libraries } = useAllLibrariesQuery(userId);
 	const { settings } = useLibrariesSettingsStore();
 
-	const librariesWithCount: LibraryWithBookCount[] = libraries.map((lib) => {
-		const { data: count } = useBookCountByLibraryIdQuery(lib.id);
-		return {
-			...lib,
-			bookCount: count ?? 0,
-		};
-	});
+	const { data: counts } = useBookCountsForLibrariesQuery(userId);
 
-	const sortedLibraries = sortLibraries(librariesWithCount, settings.sort, settings.direction);
+	const librariesWithCounts = libraries.map((lib) => ({
+		...lib,
+		bookCount: counts.find((c) => c.libraryId === lib.id)?.count ?? 0,
+	}));
+
+	const sortedLibraries = sortLibraries(librariesWithCounts, settings.sort, settings.direction);
 
 	if (!libraries.length) return null;
 
 	return (
 		<>
-			<div className={cn("w-full flex", settings.layout === "grid" ? "px-4" : "")}>
+			<div
+				className={cn(
+					"w-full flex",
+					settings.layout === "grid" ? "px-4" : "",
+					settings.layout === "gridCompact" ? "px-4" : ""
+				)}
+			>
 				<ul
 					className={cn(
 						"w-full",
-						settings.layout === "grid" ? "grid grid-cols-3 gap-4 " : "flex flex-col h-full"
+						settings.layout === "grid"
+							? "grid grid-cols-3 sm:flex sm:flex-wrap gap-2 "
+							: "flex flex-col h-full",
+						settings.layout === "gridCompact" ? "grid grid-cols-3 gap-3" : ""
 					)}
 				>
 					<RenderList

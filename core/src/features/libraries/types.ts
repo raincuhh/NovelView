@@ -31,7 +31,7 @@ export type MostInteractedLibrary = Pick<Library, "id" | "name" | "coverUrl" | "
 
 export type LibrariesSortOption = "date" | "alphabetical" | "most" | "least";
 export type LibrariesSortDirection = "asc" | "desc";
-export type LibrariesLayoutOption = "grid" | "list" | "gridCompact" | "ListCompact";
+export type LibrariesLayoutOption = "grid" | "list" | "gridCompact" | "listCompact";
 
 export interface LibrariesSettings {
 	sort: LibrariesSortOption;

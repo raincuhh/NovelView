@@ -2,13 +2,14 @@ import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { getFirstLibrary } from "@/features/libraries/lib/selectLibraries";
 import {
 	getBookCountByLibraryId,
+	getBookCountsForLibraries,
 	getBookInfoByBookId,
 	getBooksByLibraryId,
 	getRecentlyOpenedBooks,
 } from "../../lib/selectBook";
 import { getBookCoverPath } from "../../lib/utils";
 
-const DEFAULT_REFETCH_INTERVAL = 60 * 1000;
+const DEFAULT_REFETCH_INTERVAL = 30 * 1000;
 
 /**
  * mostly used to just handle if the user has any libraries at all in stuff like /home and /libraries
@@ -73,5 +74,12 @@ export const useBookCountByLibraryIdQuery = (libraryId: string) => {
 	return useSuspenseQuery({
 		queryKey: ["bookCount", libraryId],
 		queryFn: () => getBookCountByLibraryId(libraryId),
+	});
+};
+
+export const useBookCountsForLibrariesQuery = (userId: string) => {
+	return useSuspenseQuery({
+		queryKey: ["bookCounts", userId],
+		queryFn: () => getBookCountsForLibraries(userId),
 	});
 };
