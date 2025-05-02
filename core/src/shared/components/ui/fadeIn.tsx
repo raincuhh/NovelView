@@ -1,5 +1,5 @@
 import { motion, type MotionProps } from "framer-motion";
-import { type PropsWithChildren } from "react";
+import { useEffect, useState, type PropsWithChildren } from "react";
 import { useMediaQuery } from "react-responsive";
 
 type FadeInProps = PropsWithChildren & {
@@ -19,15 +19,23 @@ export default function FadeIn({
 	motionProps = {},
 }: FadeInProps) {
 	const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+	const [hasMounted, setHasMounted] = useState<boolean>(false);
 
-	if (!isMobile) return children;
+	// to ensure animation plays even if firstload, remount, rerender issues.
+	useEffect(() => {
+		const timeout = setTimeout(() => setHasMounted(true), 0);
+		return () => clearTimeout(timeout);
+	}, []);
+
+	if (!isMobile) return <div className={className}>{children}</div>;
 
 	return (
 		<motion.div
 			className={className}
 			initial={{ opacity: 0, y: yOffset }}
-			animate={{ opacity: 1, y: 0 }}
+			animate={hasMounted ? { opacity: 1, y: 0 } : {}}
 			transition={{ delay, duration, ease: "easeInOut" }}
+			layout
 			{...motionProps}
 		>
 			{children}

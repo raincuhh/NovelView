@@ -1,7 +1,7 @@
 import { useAuthStore } from "@/features/auth/authStore";
 import { useUserFirstLibraryQuery } from "@/features/books/model/queries/useBookQuery";
 import EmptyLibraries from "@/features/libraries/components/ui/emptyLibraries";
-import LibrariesHeader from "@/pages/libraries/components/ui/librariesHeader";
+import TestList from "@/features/test/components/ui/testList";
 import LibrariesList from "@/pages/libraries/components/ui/librariesList";
 import LibrariesNavbar from "@/pages/libraries/components/ui/librariesNavbar";
 import FadeIn from "@/shared/components/ui/fadeIn";
@@ -21,20 +21,21 @@ function RouteComponent() {
 	const hasLibraries = !!libraries;
 
 	return (
-		<ScrollContainer className="h-full">
-			<div className="relative flex flex-col h-full pt-12">
-				<FadeIn>
-					<LibrariesNavbar />
-				</FadeIn>
-				<div className="flex flex-col h-full mt-2 gap-8">
+		<>
+			<FadeIn>
+				<LibrariesNavbar />
+			</FadeIn>
+			<ScrollContainer className="h-full pt-2">
+				<div className="h-full gap-8 flex flex-col">
 					{hasLibraries ? (
 						<>
-							<FadeIn>
-								<LibrariesHeader />
-							</FadeIn>
-							<FadeIn>
+							<FadeIn className="flex flex-col h-full flex-1 flex-grow">
 								<LibrariesList />
 							</FadeIn>
+							<FadeIn>
+								<TestList count={1000} />
+							</FadeIn>
+							<MobileBottomPadding />
 						</>
 					) : (
 						<>
@@ -45,7 +46,7 @@ function RouteComponent() {
 						</>
 					)}
 				</div>
-			</div>
-		</ScrollContainer>
+			</ScrollContainer>
+		</>
 	);
 }

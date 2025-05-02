@@ -13,6 +13,7 @@ import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
 import ScrollContainer from "@/shared/components/ui/scrollContainer";
 import { useUserFirstLibraryQuery } from "@/features/books/model/queries/useBookQuery";
 import FadeIn from "@/shared/components/ui/fadeIn";
+import TestList from "@/features/test/components/ui/testList";
 
 export const Route = createFileRoute("/_app/_home/home")({
 	component: RouteComponent,
@@ -26,13 +27,13 @@ function RouteComponent() {
 	const hasLibraries = !!libraries;
 
 	return (
-		<ScrollContainer className="h-full">
+		<>
 			<InitUserTables />
-			<div className="relative flex flex-col h-full pt-12">
-				<FadeIn>
-					<HomeNavbar />
-				</FadeIn>
-				<div className="flex flex-col h-full mt-2 gap-8">
+			<FadeIn>
+				<HomeNavbar />
+			</FadeIn>
+			<ScrollContainer className="h-full pt-2">
+				<div className="h-full gap-8 flex flex-col">
 					{hasLibraries ? (
 						<>
 							<FadeIn>
@@ -43,6 +44,9 @@ function RouteComponent() {
 							</FadeIn> */}
 							<FadeIn>
 								<ActivityCalendar />
+							</FadeIn>
+							<FadeIn>
+								<TestList count={50} />
 							</FadeIn>
 							<MobileBottomPadding />
 						</>
@@ -55,8 +59,8 @@ function RouteComponent() {
 						</>
 					)}
 				</div>
-			</div>
-		</ScrollContainer>
+			</ScrollContainer>
+		</>
 	);
 }
 

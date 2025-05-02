@@ -8,7 +8,7 @@ export default function HomeNavbar() {
 	const { openDrawer } = useDrawerStore();
 
 	return (
-		<div className="sticky top-0 z-1 w-full border-none border-border md:border-none">
+		<div className="top-0 z-1 w-full border-none border-border md:border-none">
 			<div className="flex px-4 py-3 gap-4 h-full w-full relative items-center bg-primary md:bg-primary-alt">
 				{isMobile && <Avatar className="w-9 h-9" onClick={() => openDrawer("profile")} />}
 				<div className="flex items-center text-xl h-full">

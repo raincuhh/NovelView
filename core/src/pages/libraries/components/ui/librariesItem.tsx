@@ -17,17 +17,17 @@ export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 	const hasImage = Boolean(coverPath);
 
 	return (
-		<li>
+		<li className="pb-2">
 			<LibraryLink
 				libraryId={data.id}
-				className={cn("", layout === "grid" ? "aspect-[3/2]" : "flex items-center gap-3")}
+				className={cn("h-full w-full", layout === "grid" ? "aspect-[3/2]" : "flex items-center gap-3")}
 			>
-				<div className="flex flex-col gap-2">
-					<Cover className={cn("", layout === "grid" ? "h-24 w-full" : "")}>
+				<div className={cn("w-full flex gap-2", layout === "grid" ? "flex-col" : "flex-row")}>
+					<Cover className={cn("", layout === "grid" ? " w-full h-24" : " w-full")}>
 						{hasImage ? (
-							<CoverImage src={coverPath!} alt="cover" className="" />
+							<CoverImage src={coverPath!} alt="cover" className="w-full h-full" />
 						) : (
-							<PlaceholderLibraryCover className="" />
+							<PlaceholderLibraryCover className="h-full w-full" />
 						)}
 					</Cover>
 					<div className="flex flex-col w-full overflow-hidden">
