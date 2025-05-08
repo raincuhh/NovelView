@@ -22,6 +22,9 @@ export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 		console.log(layout);
 	}, [layout]);
 
+	const isGrid = layout === "grid" || layout === "gridCompact";
+	const isCompact = layout === "gridCompact" || layout === "listCompact";
+
 	return (
 		<li>
 			<LibraryLink libraryId={data.id} className={cn("h-full w-full", layout === "grid" ? "" : "")}>

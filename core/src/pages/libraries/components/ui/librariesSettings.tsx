@@ -32,9 +32,9 @@ const DIRECTION_OPTIONS: { label: string; value: LibrariesSortDirection }[] = [
 
 const LAYOUT_OPTIONS: { icon: JSX.Element; value: LibrariesLayoutOption }[] = [
 	{ icon: <Icon.grid />, value: "grid" },
-	{ icon: <Icon.menu />, value: "list" },
 	{ icon: <Icon.gridCompact />, value: "gridCompact" },
-	{ icon: <Icon.menuCompact />, value: "ListCompact" },
+	{ icon: <Icon.menu />, value: "list" },
+	{ icon: <Icon.menuCompact />, value: "listCompact" },
 ];
 
 export default function LibrariesSettings() {
