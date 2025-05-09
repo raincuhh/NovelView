@@ -40,7 +40,10 @@ export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 					>
 						<div className="overflow-hidden w-full h-26 rounded-sm object-cover relative">
 							{hasImage ? (
-								<img src={coverPath!} alt="cover" className="w-full h-full" />
+								<Cover>
+									<img src={coverPath!} alt="cover" className="w-full h-full" />
+									<CoverImage src={coverPath!} alt="cover" />
+								</Cover>
 							) : (
 								<div className="w-full h-full rounded-sm bg-secondary-alt flex justify-center items-center">
 									<Icon.book className="fill-faint w-[50%] h-[50%]" />
