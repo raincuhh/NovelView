@@ -10,10 +10,7 @@ type FilePickerProps = {
 	label?: string;
 };
 const FilePicker = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & FilePickerProps>(
-	(
-		{ accept = ".epub", onValidFile, schema, label = "Drag and drop file, or", className, ...props },
-		ref
-	) => {
+	({ accept = ".epub", onValidFile, schema, label = "Drag and drop file, ", className, ...props }, ref) => {
 		const inputRef = useRef<HTMLInputElement>(null);
 		const [fileName, setFileName] = useState<string | null>(null);
 		const [error, setError] = useState<string | null>(null);
@@ -63,13 +60,14 @@ const FilePicker = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & F
 				)}
 				{...props}
 			>
-				<p className="text-sm text-muted">
-					{label}{" "}
+				<p className="text-sm text-muted py-4">
+					{label}
+					<div>or</div>
 					<Button
 						type="button"
 						variant="link"
 						size="default"
-						className="px-1"
+						className="px-1 py-1"
 						onClick={() => inputRef.current?.click()}
 					>
 						Select file
