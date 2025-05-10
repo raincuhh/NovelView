@@ -3,6 +3,7 @@ import { LibraryLink } from "@/features/libraries/components/ui/libraryLink";
 import PlaceholderLibraryCover from "@/features/libraries/components/ui/placeholderLibraryCover";
 import { useLibraryCoverPath } from "@/features/libraries/model/queries/useLibrariesQuery";
 import { LibrariesLayoutOption, Library } from "@/features/libraries/types";
+import SyncIcon from "@/features/library/components/ui/syncIcon";
 import { Cover, CoverImage } from "@/shared/components/ui/cover";
 import Icon from "@/shared/components/ui/icon";
 import { cn } from "@/shared/lib/globalUtils";
@@ -22,26 +23,31 @@ export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 		console.log(layout);
 	}, [layout]);
 
-	const isGrid = layout === "grid" || layout === "gridCompact";
+	const isGrid = layout === "grid";
 	const isCompact = layout === "gridCompact" || layout === "listCompact";
+	const isList = layout === "list";
 
 	return (
-		<li>
-			<LibraryLink libraryId={data.id} className={cn("h-full w-full", layout === "grid" ? "" : "")}>
+		<li className={cn(isList ? "px-4 mb-3" : "")}>
+			<LibraryLink libraryId={data.id} className={cn("h-full w-full")}>
 				<div className={cn("flex", layout === "grid" ? "flex-col" : "flex-row")}>
 					<div
 						className={cn(
-							" w-full",
-							layout === "grid" ? "flex flex-col" : "",
-							layout === "list" ? "flex flex-row" : "",
+							"w-full gap-2",
+							isGrid ? "flex flex-col" : "",
+							isList ? "flex flex-row" : "",
 							layout === "gridCompact" ? "" : "",
-							layout === "listCompact" ? "" : ""
+							layout === "listCompact" ? "flex flex-row" : ""
 						)}
 					>
-						<div className="overflow-hidden w-full h-26 rounded-sm object-cover relative">
+						<div
+							className={cn(
+								"overflow-hidden h-30 w-full rounded-sm object-cover relative border-border border hover:border-border-hover transition-discrete duration-100 ease-in-out",
+								isList ? "max-h-20 min-h-20 h-full max-w-20 min-w-20 w-full" : ""
+							)}
+						>
 							{hasImage ? (
-								<Cover>
-									<img src={coverPath!} alt="cover" className="w-full h-full" />
+								<Cover className="h-full w-full">
 									<CoverImage src={coverPath!} alt="cover" />
 								</Cover>
 							) : (
@@ -50,14 +56,34 @@ export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 								</div>
 							)}
 						</div>
-						<div
-							className={cn(
-								"",
-								layout === "grid" ? "flex flex-col" : "flex flex-row",
-								layout === "gridCompact" ? "flex flex-col" : "flex flex-row"
-							)}
-						>
-							{!(layout === "gridCompact") ? <div className={cn("flex")}>{data.name}</div> : null}
+						<div className={cn("w-full", isGrid ? "" : "")}>
+							{!(layout === "gridCompact") ? (
+								<div className="flex flex-col pb-4 h-full justify-center">
+									<div
+										className={cn(
+											"font-semibold w-full overflow-hidden",
+											isList ? "text-md" : "",
+											!isList ? "text-sm" : ""
+										)}
+									>
+										<div className="select-none w-full flex-grow truncate">{data.name}</div>
+										{/* <div className="truncate flex-grow overflow-hidden whitespace-nowrap text-ellipsis">
+											{data.name}
+										</div> */}
+									</div>
+									<div className="flex gap-1 items-center">
+										{data.type === "synced" ? (
+											<>
+												<div>
+													<SyncIcon type={data.type} />
+												</div>
+												<div className="w-[3px] h-[3px] rounded-full bg-muted"></div>
+											</>
+										) : null}
+										<div className="text-xs text-muted">{count}</div>
+									</div>
+								</div>
+							) : null}
 						</div>
 					</div>
 
