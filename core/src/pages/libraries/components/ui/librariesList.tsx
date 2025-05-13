@@ -5,11 +5,8 @@ import { cn } from "@/shared/lib/globalUtils";
 import LibrariesItem from "./librariesItem";
 import { sortLibraries } from "@/features/libraries/lib/utils";
 import RenderList from "@/shared/components/utils/renderList";
-import { Library, LibraryWithBookCount } from "@/features/libraries/types";
-import {
-	useBookCountByLibraryIdQuery,
-	useBookCountsForLibrariesQuery,
-} from "@/features/books/model/queries/useBookQuery";
+import { Library } from "@/features/libraries/types";
+import { useBookCountsForLibrariesQuery } from "@/features/books/model/queries/useBookQuery";
 // import { useVirtualizer } from "@tanstack/react-virtual";
 // import { OverlayScrollbarsComponentRef } from "overlayscrollbars-react";
 

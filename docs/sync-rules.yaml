@@ -1,0 +1,28 @@
+bucket_definitions:
+  user_data:
+    parameters: select request.user_id() as user_id
+    data:
+      - select * from user_profiles where id = bucket.user_id
+      - select * from user_settings where id = bucket.user_id  
+      - select * from user_reading_prefs where id = bucket.user_id
+
+  user_libraries:
+    parameters: select request.user_id() as user_id 
+    data:
+      - select * from libraries where "type" = 'synced' and user_id = bucket.user_id
+
+  library_books:
+    parameters: select id as library_id from libraries where user_id = request.user_id()
+    data:
+      - select * from library_books where library_id = bucket.library_id
+
+  book_info:
+    parameters: select id as book_id from books where user_id = request.user_id()
+    data:
+      - select * from books where id = bucket.book_id
+      - select * from book_info where book_id = bucket.book_id
+      
+  user_subscriptions:
+    parameters: select request.user_id() as user_id
+    data:
+        - select * from premium_subscriptions where id = bucket.user_id

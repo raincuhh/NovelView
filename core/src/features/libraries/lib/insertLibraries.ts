@@ -1,11 +1,12 @@
 import { mkdir } from "@tauri-apps/plugin-fs";
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "@/features/fs/consts";
 import { powersyncDb, localDb } from "@/shared/providers/systemProvider";
-import { LibraryType } from "../types";
+import { Library, LibraryType } from "../types";
 import {
 	createLibraryMetadata,
 	getLocalLibraryCoverPath,
 	getRemoteLibraryCoverPath,
+	libraryFolderExists,
 	saveLibraryCover,
 } from "./utils";
 import Database from "@tauri-apps/plugin-sql";
@@ -104,3 +105,31 @@ function insertLibrary(db: ExecutableDb, data: LibraryInsertData) {
 		[id, userId, name, description, coverUrl, type]
 	);
 }
+
+/**
+ * Syncs missing libraries in the localappdata folders for libraries synced with powersync.
+ *
+ */
+
+// async function syncMissingLibraries(remoteLibraries: Library[], userId: string) {
+// 	for (const library of remoteLibraries) {
+// 		const folderExists = await libraryFolderExists(library.id);
+// 		if (!folderExists) {
+// 			const localDir = `${LIBRARIES_FOLDER}/${library.id}`;
+// 			await mkdir(localDir, { baseDir: LOCAL_APPDATA });
+
+// 			if (library.coverUrl) {
+// 				await downloadAndSaveLibraryCover(library, userId);
+// 			}
+
+// 			// Save metadata (like name, type, etc.)
+// 			await createLibraryMetadata(localDir, {
+// 				name: library.name,
+// 				type: library.type,
+// 				coverUrl: library.coverUrl ?? null,
+// 			});
+
+// 			console.log(`Library folder created for: ${library.name}`);
+// 		}
+// 	}
+// }

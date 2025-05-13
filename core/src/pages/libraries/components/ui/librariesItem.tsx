@@ -1,6 +1,5 @@
 import { useBookCountByLibraryIdQuery } from "@/features/books/model/queries/useBookQuery";
 import { LibraryLink } from "@/features/libraries/components/ui/libraryLink";
-import PlaceholderLibraryCover from "@/features/libraries/components/ui/placeholderLibraryCover";
 import { useLibraryCoverPath } from "@/features/libraries/model/queries/useLibrariesQuery";
 import { LibrariesLayoutOption, Library } from "@/features/libraries/types";
 import SyncIcon from "@/features/library/components/ui/syncIcon";

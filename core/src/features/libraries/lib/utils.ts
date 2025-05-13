@@ -3,6 +3,7 @@ import { create, writeFile } from "@tauri-apps/plugin-fs";
 import { LOCAL_LIBRARY_COVER_PATH_TEMPLATE, REMOTE_LIBRARY_COVER_PATH_TEMPLATE } from "../consts";
 import { LibrariesSortDirection, LibrariesSortOption, LibraryType, LibraryWithBookCount } from "../types";
 import { getCoverPath } from "@/shared/lib/fs/getCoverPath";
+import { exists, mkdir } from "@tauri-apps/plugin-fs";
 
 export async function saveLibraryCover(libraryId: string, cover: File) {
 	try {
@@ -83,4 +84,12 @@ export function sortLibraries(
 		}
 	});
 	return direction === "desc" ? sorted.reverse() : sorted;
+}
+
+/**
+ * checks if a library folder exists.
+ */
+export async function libraryFolderExists(libraryId: string) {
+	const path = `${LIBRARIES_FOLDER}/${libraryId}`;
+	return await exists(path, { baseDir: LOCAL_APPDATA });
 }
