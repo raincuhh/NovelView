@@ -1,7 +1,13 @@
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "@/features/fs/consts";
 import { create, writeFile } from "@tauri-apps/plugin-fs";
 import { LOCAL_LIBRARY_COVER_PATH_TEMPLATE, REMOTE_LIBRARY_COVER_PATH_TEMPLATE } from "../consts";
-import { LibrariesSortDirection, LibrariesSortOption, LibraryType, LibraryWithBookCount } from "../types";
+import {
+	LibrariesSortDirection,
+	LibrariesSortOption,
+	Library,
+	LibraryType,
+	LibraryWithBookCount,
+} from "../types";
 import { getCoverPath } from "@/shared/lib/fs/getCoverPath";
 import { exists, mkdir } from "@tauri-apps/plugin-fs";
 

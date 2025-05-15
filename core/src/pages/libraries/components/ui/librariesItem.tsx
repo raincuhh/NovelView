@@ -19,7 +19,7 @@ export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 	const hasImage = Boolean(coverPath);
 
 	useEffect(() => {
-		console.log(layout);
+		// console.log(layout);
 	}, [layout]);
 
 	const isGrid = layout === "grid";

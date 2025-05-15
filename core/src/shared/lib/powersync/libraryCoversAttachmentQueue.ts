@@ -12,7 +12,7 @@ import {
 	getRemoteLibraryCoverPath,
 	libraryFolderExists,
 } from "@/features/libraries/lib/utils";
-import { mkdir } from "@tauri-apps/plugin-fs";
+import { exists, mkdir } from "@tauri-apps/plugin-fs";
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "@/features/fs/consts";
 
 export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
@@ -66,7 +66,7 @@ export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 
 	async downloadAttachment(localFilePath: string, id: string, filename: string): Promise<AttachmentRecord> {
 		const ext = getFileExtension(filename ?? "jpg");
-
+		// console.log("DOWNLAODING ATTACHMENT");
 		const attachment = await this.newAttachmentRecord({
 			id,
 			filename,
@@ -75,30 +75,84 @@ export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 			local_uri: localFilePath,
 		});
 
+		const blob = await this.storage.downloadFile(filename);
+		console.log("blob downlaoded: ", blob);
+
 		return this.saveToQueue(attachment);
 	}
 
 	async syncMissingLibraries(remoteLibraries: Library[], userId: string) {
-		console.log("syncing missing libraries");
 		for (const library of remoteLibraries) {
-			if (!(await libraryFolderExists(library.id))) {
+			console.log("======");
+			console.log("syncing: ", library);
+
+			const libraryExists = await libraryFolderExists(library.id);
+
+			if (!libraryExists) {
+				// folder doesnt exist locally, and we just make everything from scratch.
 				const localDir = `${LIBRARIES_FOLDER}/${library.id}`;
 				await mkdir(localDir, { baseDir: LOCAL_APPDATA });
 
-				if (library.coverUrl) {
-					const ext = getFileExtension(library.coverUrl ?? "jpg");
-					const localFilePath = getLocalLibraryCoverPath(library.id, ext);
-					const remotePath = getRemoteLibraryCoverPath(userId, library.id, ext);
-
-					await this.downloadAttachment(localFilePath, library.id, remotePath);
-				}
+				await this.tryDownloadCover(library, userId);
 
 				await createLibraryMetadata(localDir, {
 					name: library.name,
 					type: library.type,
 					coverUrl: library.coverUrl ?? null,
 				});
+			} else {
+				console.log("library folder exists for library: ", library.name);
+
+				if (library.coverUrl) {
+					const ext = "jpg";
+					const localCoverPath = getLocalLibraryCoverPath(library.id, ext);
+					console.log("local cover path:", localCoverPath);
+					const coverExists = await exists(localCoverPath, { baseDir: LOCAL_APPDATA });
+
+					if (!coverExists) {
+						console.log(`Cover file missing for library ${library.name}, downloading...`);
+
+						const remoteCoverPath = getRemoteLibraryCoverPath(userId, library.id, ext);
+
+						console.log(remoteCoverPath);
+
+						// await this.downloadAttachment(
+						// 	localCoverPath,
+						// 	library.id,
+						// 	getRemoteLibraryCoverPath(userId, library.id, ext)
+						// );
+					}
+				} else {
+					console.log(`No cover URL for library ${library.name}, skipping cover check`);
+				}
+
+				const metadataPath = `${LIBRARIES_FOLDER}/${library.id}/metadata.json`;
+				const metadataExists = await exists(metadataPath, { baseDir: LOCAL_APPDATA });
+				if (!metadataExists) {
+					console.log(`Metadata missing for ${library.name}, re-creating...`);
+					await createLibraryMetadata(`${LIBRARIES_FOLDER}/${library.id}`, {
+						name: library.name,
+						type: library.type,
+						coverUrl: library.coverUrl ?? null,
+					});
+				}
 			}
+		}
+	}
+
+	private async tryDownloadCover(library: Library, userId: string) {
+		if (library.coverUrl) {
+			const ext = getFileExtension(library.coverUrl);
+			const localPath = getLocalLibraryCoverPath(library.id, ext);
+			const remotePath = getRemoteLibraryCoverPath(userId, library.id, ext);
+
+			try {
+				await this.downloadAttachment(localPath, library.id, remotePath);
+			} catch (err) {
+				console.error(`Failed to download cover for ${library.id}:`, err);
+			}
+		} else {
+			console.log("No cover URL found for library:", library.id);
 		}
 	}
 }
