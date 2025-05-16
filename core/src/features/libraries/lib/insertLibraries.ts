@@ -42,6 +42,8 @@ export async function createNewLibrary({
 
 		if (cover && type === "synced") {
 			const base64Data = await fileToBase64(cover);
+			// 			const arrayBuffer = await cover.arrayBuffer();
+			// const uint8Array = new Uint8Array(arrayBuffer);
 			const fileExtension = getFileExtension(cover.name);
 			const fileName = `${id}.${fileExtension}`;
 			const localFilePath = getLocalLibraryCoverPath(id, fileExtension);

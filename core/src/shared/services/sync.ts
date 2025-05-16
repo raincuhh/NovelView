@@ -1,5 +1,4 @@
 import { Library } from "@/features/libraries/types";
-import { Tables } from "../lib/powersync/appSchema";
 import { PowerSyncDatabase } from "@powersync/web";
 import { LibraryCoversAttachmentQueue } from "../lib/powersync/libraryCoversAttachmentQueue";
 

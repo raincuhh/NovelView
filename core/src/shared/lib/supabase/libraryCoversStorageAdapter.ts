@@ -2,7 +2,7 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { decode as decodeBase64 } from "base64-arraybuffer";
 import { StorageAdapter } from "@powersync/attachments";
 import { AppConfig } from "./appConfig";
-import { copyFile, create, exists, readTextFile, remove, writeFile } from "@tauri-apps/plugin-fs";
+import { copyFile, create, exists, readFile, readTextFile, remove, writeFile } from "@tauri-apps/plugin-fs";
 import { LOCAL_APPDATA } from "@/features/fs/consts";
 import { getUserStoragePathSync } from "../fs/userStorage";
 
@@ -69,15 +69,22 @@ export class LibraryCoversStorageAdapter implements StorageAdapter {
 
 	async readFile(fileURI: string): Promise<ArrayBuffer> {
 		// console.log(`Reading file from URI:${fileURI}`);
+		// const fileExists = await exists(fileURI);
+		// if (!fileExists) {
+		// 	console.error(`File does not exist:${fileURI}`);
+		// 	throw new Error(`File does not exist: ${fileURI}`);
+		// }
+
+		// const content = await readTextFile(fileURI);
+		// console.log("File read successfully.");
+		// return this.stringToArrayBuffer(content);
 		const fileExists = await exists(fileURI);
 		if (!fileExists) {
-			console.error(`File does not exist:${fileURI}`);
 			throw new Error(`File does not exist: ${fileURI}`);
 		}
 
-		const content = await readTextFile(fileURI);
-		console.log("File read successfully.");
-		return this.stringToArrayBuffer(content);
+		const content = await readFile(fileURI, { baseDir: LOCAL_APPDATA });
+		return content.buffer;
 	}
 
 	async deleteFile(fileURI: string, options?: { filename?: string }): Promise<void> {

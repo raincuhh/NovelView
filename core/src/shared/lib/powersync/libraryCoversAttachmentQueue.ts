@@ -13,7 +13,7 @@ import {
 	libraryFolderExists,
 	mapLibraryRow,
 } from "@/features/libraries/lib/utils";
-import { exists, mkdir, writeFile, writeTextFile } from "@tauri-apps/plugin-fs";
+import { exists, mkdir, writeFile } from "@tauri-apps/plugin-fs";
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "@/features/fs/consts";
 
 export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
