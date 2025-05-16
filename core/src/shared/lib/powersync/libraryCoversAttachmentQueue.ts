@@ -1,12 +1,14 @@
 import { AbstractAttachmentQueue, AttachmentRecord, AttachmentState } from "@powersync/attachments";
 import { AppConfig } from "../supabase/appConfig";
 import { Tables } from "./appSchema";
+import { queryCLient } from "@tanstack/react-query";
 
 // @ts-ignore
 import { LIBRARY_COVERS_BUCKET_ALLOWED_MIMETYPE } from "../consts";
 import { getFileExtension } from "../globalUtils";
 import { Library } from "@/features/libraries/types";
 import {
+	clearCoverCache,
 	createLibraryMetadata,
 	getLocalLibraryCoverPath,
 	getRemoteLibraryCoverPath,
@@ -15,6 +17,7 @@ import {
 } from "@/features/libraries/lib/utils";
 import { exists, mkdir, writeFile } from "@tauri-apps/plugin-fs";
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "@/features/fs/consts";
+import { queryClient } from "../queryClient";
 
 export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 	async init() {
@@ -79,12 +82,15 @@ export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 		const blob = await this.storage.downloadFile(filename);
 		if (!blob) throw new Error(`No blob data received for ${filename}`);
 
-		console.log("blob downloaded: ", blob);
+		// console.log("blob downloaded: ", blob);
 
 		const arrayBuffer = await blob.arrayBuffer();
 		const contents = new Uint8Array(arrayBuffer);
 
 		await writeFile(localFilePath, contents, { baseDir: LOCAL_APPDATA });
+
+		clearCoverCache(id);
+		queryClient.invalidateQueries({ queryKey: ["libraryCoverPath", id] });
 
 		return this.saveToQueue(attachment);
 	}
@@ -92,8 +98,8 @@ export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 	async syncMissingLibraries(remoteLibraries: Library[], userId: string) {
 		for (const rawLibrary of remoteLibraries) {
 			const library = mapLibraryRow(rawLibrary);
-			console.log("======");
-			console.log("syncing: ", library);
+			// console.log("======");
+			// console.log("syncing: ", library);
 			// console.log("Library keys: ", Object.keys(library));
 
 			const libraryExists = await libraryFolderExists(library.id);
@@ -111,8 +117,8 @@ export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 					coverUrl: library.coverUrl ?? null,
 				});
 			} else {
-				console.log("library folder exists for library: ", library.name);
-				console.log(`coverUrl?: `, library.coverUrl);
+				// console.log("library folder exists for library: ", library.name);
+				// console.log(`coverUrl?: `, library.coverUrl);
 				if (library.coverUrl) {
 					const ext = getFileExtension(library.coverUrl);
 					const localCoverPath = getLocalLibraryCoverPath(library.id, ext);

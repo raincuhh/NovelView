@@ -41,5 +41,4 @@ export const useLibraryCoverPath = (libraryId: string) =>
 	useSuspenseQuery({
 		queryKey: ["libraryCoverPath", libraryId],
 		queryFn: () => getLibraryCoverPath(libraryId),
-		staleTime: Infinity,
 	});

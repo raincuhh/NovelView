@@ -9,7 +9,7 @@ import {
 	LibraryWithBookCount,
 } from "../types";
 import { getCoverPath } from "@/shared/lib/fs/getCoverPath";
-import { exists, mkdir } from "@tauri-apps/plugin-fs";
+import { exists } from "@tauri-apps/plugin-fs";
 
 export async function saveLibraryCover(libraryId: string, cover: File) {
 	try {

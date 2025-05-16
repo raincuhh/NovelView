@@ -10,6 +10,7 @@ import { useHistoryStore } from "../stores/historyStore";
 import { useMediaQuery } from "react-responsive";
 import AuthGate from "@/features/auth/components/utils/authGate";
 import SyncServiceProvider from "./syncServiceProvider";
+import { queryClient } from "../lib/queryClient";
 
 type AppProviderProps = PropsWithChildren;
 
@@ -18,16 +19,6 @@ const AppProvider = ({ children }: AppProviderProps) => {
 	const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 	const router = useRouter();
 	const setRouter = useHistoryStore((s) => s.setRouter);
-	const [queryClient] = useState(
-		() =>
-			new QueryClient({
-				defaultOptions: {
-					queries: {
-						staleTime: 60 * 1000,
-					},
-				},
-			})
-	);
 
 	useEffect(() => {
 		setRouter(router);
