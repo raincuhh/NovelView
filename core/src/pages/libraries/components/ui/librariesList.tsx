@@ -19,7 +19,6 @@ export default function LibrariesList() {
 	const userId = getUserId();
 	const { data: libraries } = useAllLibrariesQuery(userId);
 	const { settings } = useLibrariesSettingsStore();
-
 	const { data: counts } = useBookCountsForLibrariesQuery(userId);
 
 	const librariesWithCounts = libraries.map((lib) => ({

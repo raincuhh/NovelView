@@ -52,9 +52,9 @@ export async function importNewBook({ file, userId, bookFilesQueue, sync, librar
 		const now = new Date().toISOString();
 
 		if (sync) {
-			console.log("About to insert with libraryId:", libraryId);
+			// console.log("About to insert with libraryId:", libraryId);
 			await powersyncDb.writeTransaction(async (tx) => {
-				console.log("Inserting with libraryId:", libraryId);
+				// console.log("Inserting with libraryId:", libraryId);
 				insertBook(tx, newBook);
 				insertLibraryBook(tx, {
 					id: newLibraryBookId,

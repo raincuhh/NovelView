@@ -59,22 +59,6 @@ export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 								</div>
 							)}
 						</div>
-						{/* <div
-							className={cn(
-								"overflow-hidden h-30 w-full rounded-sm object-cover relative border-border border hover:border-border-hover transition-discrete duration-100 ease-in-out",
-								isList ? "max-h-20 min-h-20 h-full max-w-20 min-w-20 w-full" : ""
-							)}
-						>
-							{hasImage ? (
-								<Cover className="h-full w-full">
-									<CoverImage src={coverPath!} alt="cover" />
-								</Cover>
-							) : (
-								<div className="w-full h-full rounded-sm bg-secondary-alt flex justify-center items-center">
-									<Icon.book className="fill-faint w-[50%] h-[50%]" />
-								</div>
-							)}
-						</div> */}
 						<div className={cn("w-full", isGrid ? "" : "")}>
 							{!(layout === "gridCompact") ? (
 								<div className="flex flex-col pb-4 h-full justify-center">
@@ -102,18 +86,6 @@ export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 							) : null}
 						</div>
 					</div>
-
-					{/* <Cover className={cn("", layout === "grid" ? " w-full" : " w-full")}>
-						{hasImage ? (
-							<CoverImage src={coverPath!} alt="cover" className="w-12 h-12" />
-						) : (
-							<PlaceholderLibraryCover className="h-12 w-12" />
-						)}
-					</Cover>
-					<div className="flex flex-col w-full overflow-hidden">
-						<h1 className="select-none text-sm font-bold w-full flex-grow truncate">{data.name}</h1>
-						<p className="text-xs text-muted font-semibold">{count}</p>
-					</div> */}
 				</div>
 			</LibraryLink>
 		</li>
