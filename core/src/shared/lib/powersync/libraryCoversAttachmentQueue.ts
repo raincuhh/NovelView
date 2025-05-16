@@ -11,8 +11,9 @@ import {
 	getLocalLibraryCoverPath,
 	getRemoteLibraryCoverPath,
 	libraryFolderExists,
+	mapLibraryRow,
 } from "@/features/libraries/lib/utils";
-import { exists, mkdir } from "@tauri-apps/plugin-fs";
+import { exists, mkdir, writeFile, writeTextFile } from "@tauri-apps/plugin-fs";
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "@/features/fs/consts";
 
 export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
@@ -76,15 +77,24 @@ export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 		});
 
 		const blob = await this.storage.downloadFile(filename);
-		console.log("blob downlaoded: ", blob);
+		if (!blob) throw new Error(`No blob data received for ${filename}`);
+
+		console.log("blob downloaded: ", blob);
+
+		const arrayBuffer = await blob.arrayBuffer();
+		const contents = new Uint8Array(arrayBuffer);
+
+		await writeFile(localFilePath, contents, { baseDir: LOCAL_APPDATA });
 
 		return this.saveToQueue(attachment);
 	}
 
 	async syncMissingLibraries(remoteLibraries: Library[], userId: string) {
-		for (const library of remoteLibraries) {
+		for (const rawLibrary of remoteLibraries) {
+			const library = mapLibraryRow(rawLibrary);
 			console.log("======");
 			console.log("syncing: ", library);
+			// console.log("Library keys: ", Object.keys(library));
 
 			const libraryExists = await libraryFolderExists(library.id);
 
@@ -102,25 +112,16 @@ export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 				});
 			} else {
 				console.log("library folder exists for library: ", library.name);
-
+				console.log(`coverUrl?: `, library.coverUrl);
 				if (library.coverUrl) {
-					const ext = "jpg";
+					const ext = getFileExtension(library.coverUrl);
 					const localCoverPath = getLocalLibraryCoverPath(library.id, ext);
-					console.log("local cover path:", localCoverPath);
 					const coverExists = await exists(localCoverPath, { baseDir: LOCAL_APPDATA });
 
 					if (!coverExists) {
 						console.log(`Cover file missing for library ${library.name}, downloading...`);
-
-						const remoteCoverPath = getRemoteLibraryCoverPath(userId, library.id, ext);
-
-						console.log(remoteCoverPath);
-
-						// await this.downloadAttachment(
-						// 	localCoverPath,
-						// 	library.id,
-						// 	getRemoteLibraryCoverPath(userId, library.id, ext)
-						// );
+						const remotePath = getRemoteLibraryCoverPath(userId, library.id, ext);
+						await this.downloadAttachment(localCoverPath, library.id, remotePath);
 					}
 				} else {
 					console.log(`No cover URL for library ${library.name}, skipping cover check`);
@@ -143,12 +144,13 @@ export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 	private async tryDownloadCover(library: Library, userId: string) {
 		if (library.coverUrl) {
 			const ext = getFileExtension(library.coverUrl);
+			console.log("trying to download libCover:  ", library.coverUrl);
 			const localPath = getLocalLibraryCoverPath(library.id, ext);
 			const remotePath = getRemoteLibraryCoverPath(userId, library.id, ext);
 
 			try {
 				await this.downloadAttachment(localPath, library.id, remotePath);
-			} catch (err) {
+			} catch (err: any) {
 				console.error(`Failed to download cover for ${library.id}:`, err);
 			}
 		} else {

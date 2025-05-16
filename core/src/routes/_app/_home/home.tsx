@@ -52,7 +52,7 @@ function RouteComponent() {
 						</>
 					) : (
 						<>
-							<FadeIn>
+							<FadeIn className="h-full flex justify-center items-center">
 								<EmptyLibraries value="You have no libraries." />
 							</FadeIn>
 							<MobileBottomPadding />

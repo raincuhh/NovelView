@@ -99,3 +99,20 @@ export async function libraryFolderExists(libraryId: string) {
 	const path = `${LIBRARIES_FOLDER}/${libraryId}`;
 	return await exists(path, { baseDir: LOCAL_APPDATA });
 }
+
+/**
+ * maps library rows from snake_case to camelCase
+ */
+
+export function mapLibraryRow(row: any): Library {
+	return {
+		id: row.id,
+		userId: row.user_id,
+		name: row.name,
+		description: row.description,
+		coverUrl: row.cover_url,
+		type: row.type,
+		createdAt: row.created_at,
+		updatedAt: row.updated_at,
+	};
+}

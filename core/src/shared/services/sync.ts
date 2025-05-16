@@ -29,7 +29,7 @@ export default class SyncService {
 		const query = `SELECT * FROM libraries`;
 
 		for await (const update of this.powersync.watch(query, [])) {
-			console.log(update);
+			// console.log(update);
 			const libraries: Library[] = update.rows?._array ?? [];
 			await this.libraryCoversQueue.syncMissingLibraries(libraries, this.userId);
 			await this.initializeLibraryParsing(libraries);

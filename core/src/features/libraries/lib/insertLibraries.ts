@@ -43,16 +43,17 @@ export async function createNewLibrary({
 		if (cover && type === "synced") {
 			const base64Data = await fileToBase64(cover);
 			const fileExtension = getFileExtension(cover.name);
+			const fileName = `${id}.${fileExtension}`;
 			const localFilePath = getLocalLibraryCoverPath(id, fileExtension);
 			const remotePath = getRemoteLibraryCoverPath(userId, id, fileExtension);
 
 			const attachment = await libraryCoversQueue.saveAttachment(
 				base64Data,
 				localFilePath,
-				id,
+				fileName,
 				remotePath
 			);
-			coverUrl = id;
+			coverUrl = fileName;
 			console.log("file info: ", attachment);
 		} else if (cover && type === "local") {
 			const fileExtension = cover.name.split(".").pop();
