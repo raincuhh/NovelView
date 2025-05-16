@@ -41,6 +41,26 @@ export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 					>
 						<div
 							className={cn(
+								"relative w-full overflow-hidden rounded-sm border border-border hover:border-border-hover transition-all duration-100 ease-in-out",
+								"sm:min-w-42 sm:min-h-42",
+								// isCompact ? "max-w-[96px] max-h-[96px]" : "",
+								// isList ? "max-w-20 min-w-20 md:min-w-[80px] md:min-h-[80px]" : "",
+								isList ? "max-w-20 min-w-20" : ""
+							)}
+							style={{ aspectRatio: "1 / 1" }}
+						>
+							{hasImage ? (
+								<Cover className="absolute inset-0 w-full h-full">
+									<CoverImage src={coverPath!} alt="cover" className="object-cover w-full h-full" />
+								</Cover>
+							) : (
+								<div className="absolute inset-0 w-full h-full rounded-sm bg-secondary-alt flex justify-center items-center">
+									<Icon.book className="fill-faint w-[50%] h-[50%]" />
+								</div>
+							)}
+						</div>
+						{/* <div
+							className={cn(
 								"overflow-hidden h-30 w-full rounded-sm object-cover relative border-border border hover:border-border-hover transition-discrete duration-100 ease-in-out",
 								isList ? "max-h-20 min-h-20 h-full max-w-20 min-w-20 w-full" : ""
 							)}
@@ -54,7 +74,7 @@ export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 									<Icon.book className="fill-faint w-[50%] h-[50%]" />
 								</div>
 							)}
-						</div>
+						</div> */}
 						<div className={cn("w-full", isGrid ? "" : "")}>
 							{!(layout === "gridCompact") ? (
 								<div className="flex flex-col pb-4 h-full justify-center">
@@ -66,9 +86,6 @@ export default function LibrariesItem({ data, layout }: LibraryItemProps) {
 										)}
 									>
 										<div className="select-none w-full flex-grow truncate">{data.name}</div>
-										{/* <div className="truncate flex-grow overflow-hidden whitespace-nowrap text-ellipsis">
-											{data.name}
-										</div> */}
 									</div>
 									<div className="flex gap-1 items-center">
 										{data.type === "synced" ? (

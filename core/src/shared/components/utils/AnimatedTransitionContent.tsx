@@ -32,7 +32,7 @@ export const AnimatedTransitionContent = <T extends string | number | symbol>({
 
 	if (!Comp) {
 		console.error(`No component found for view: ${String(currentView)}`);
-		return <div className="text-center text-red-500">Error: View not found</div>;
+		return <div className="text-center text-danger">Error: View not found</div>;
 	}
 
 	return (

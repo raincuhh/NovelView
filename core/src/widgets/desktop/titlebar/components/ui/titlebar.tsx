@@ -58,13 +58,13 @@ export default function Titlebar() {
 							<TitlebarHelperButtons />
 							<RenderList
 								data={mappedButtons}
-								render={(button, i: number) => {
+								getKey={(i) => `titlebar-btn-${i}`}
+								render={(button) => {
 									const hoverStyle =
 										button.type === "close" ? "hover:bg-interactive-danger" : "hover:bg-secondary";
 
 									return (
 										<li
-											key={i}
 											className={cn(
 												"h-full px-2 pointer-events-auto cursor-pointer flex items-center group",
 												hoverStyle

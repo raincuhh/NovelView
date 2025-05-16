@@ -9,10 +9,9 @@ export default function NotificationRoot() {
 		<div>
 			<RenderList
 				data={notifications}
-				render={(notification: Notification, i: number) => (
-					<div key={notification.id + i} className="w-screen h-screen absolute top-0 left-0">
-						{notification.content}
-					</div>
+				getKey={(notification, i) => notification.id + i}
+				render={(notification: Notification) => (
+					<div className="w-screen h-screen absolute top-0 left-0">{notification.content}</div>
 				)}
 			/>
 		</div>

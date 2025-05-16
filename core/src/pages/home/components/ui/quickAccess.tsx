@@ -16,7 +16,8 @@ export default function QuickAccess() {
 			<Grid rows={Math.round(libraries.length / 2)}>
 				<RenderList
 					data={libraries}
-					render={(library) => <QuickAccessItem key={`quick-access-${library.id}`} data={library} />}
+					getKey={(library) => `quick-access-item-${library.id}`}
+					render={(library) => <QuickAccessItem data={library} />}
 				/>
 			</Grid>
 		</Wrapper>

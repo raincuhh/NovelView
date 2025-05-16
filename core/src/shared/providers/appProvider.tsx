@@ -1,5 +1,5 @@
-import { PropsWithChildren, useEffect, useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { PropsWithChildren, useEffect } from "react";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { SystemProvider } from "./systemProvider";
 import AuthInitializer from "@/features/auth/components/utils/authInitializer";
 import { SkeletonTheme } from "react-loading-skeleton";

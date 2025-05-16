@@ -1,12 +1,11 @@
 import { mkdir } from "@tauri-apps/plugin-fs";
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "@/features/fs/consts";
 import { powersyncDb, localDb } from "@/shared/providers/systemProvider";
-import { Library, LibraryType } from "../types";
+import { LibraryType } from "../types";
 import {
 	createLibraryMetadata,
 	getLocalLibraryCoverPath,
 	getRemoteLibraryCoverPath,
-	libraryFolderExists,
 	saveLibraryCover,
 } from "./utils";
 import Database from "@tauri-apps/plugin-sql";
@@ -42,8 +41,6 @@ export async function createNewLibrary({
 
 		if (cover && type === "synced") {
 			const base64Data = await fileToBase64(cover);
-			// 			const arrayBuffer = await cover.arrayBuffer();
-			// const uint8Array = new Uint8Array(arrayBuffer);
 			const fileExtension = getFileExtension(cover.name);
 			const fileName = `${id}.${fileExtension}`;
 			const localFilePath = getLocalLibraryCoverPath(id, fileExtension);

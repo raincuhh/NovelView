@@ -72,7 +72,6 @@ export default function RegisterGenderForm() {
 									// type="button"
 									variant={gender === formData.gender ? "accent" : "outline"}
 									rounded="full"
-									key={i}
 									onClick={() => switchGender(gender, i)}
 									tabIndex={i === focusedIndex ? 0 : -1}
 									ref={(el) => {

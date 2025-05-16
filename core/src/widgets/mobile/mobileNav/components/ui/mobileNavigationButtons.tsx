@@ -76,8 +76,9 @@ export default function MobileNavigationButtons() {
 		<div className="flex w-full px-9 pt-3 pb-2 justify-between">
 			<RenderList
 				data={buttons}
-				render={(item, i) => (
-					<Fragment key={i}>
+				getKey={(_, i) => `mobile-navigation-btn-${i}`}
+				render={(item) => (
+					<Fragment>
 						{item.to ? (
 							<Link to={item?.to} onClick={item.onclick}>
 								<MobileNavigationButton aria-label={item.key} label={item.key}>

@@ -32,7 +32,8 @@ const RecentsList = ({ books }: { books: Book[] }) => {
 			<ul className="flex py-2 pr-4 snap-x snap-mandatory overflow-x-scroll">
 				<RenderList
 					data={books}
-					render={(book: Book) => <RecentsItem key={`recents-${book.id}`} book={book} />}
+					getKey={(book) => `recents-${book.id}`}
+					render={(book: Book) => <RecentsItem book={book} />}
 				/>
 			</ul>
 		</div>

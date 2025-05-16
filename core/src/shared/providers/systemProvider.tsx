@@ -87,7 +87,7 @@ const SystemProvider = ({ children }: { children: ReactNode }) => {
 
 		const l = connector.registerListener({
 			initialized: () => {
-				console.log("Connector Initialized");
+				// console.log("Connector Initialized");
 			},
 			sessionStarted: () => {
 				powerSync

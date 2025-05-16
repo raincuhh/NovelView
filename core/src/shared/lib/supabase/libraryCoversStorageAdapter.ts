@@ -2,7 +2,7 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { decode as decodeBase64 } from "base64-arraybuffer";
 import { StorageAdapter } from "@powersync/attachments";
 import { AppConfig } from "./appConfig";
-import { copyFile, create, exists, readFile, readTextFile, remove, writeFile } from "@tauri-apps/plugin-fs";
+import { copyFile, create, exists, readFile, remove, writeFile } from "@tauri-apps/plugin-fs";
 import { LOCAL_APPDATA } from "@/features/fs/consts";
 import { getUserStoragePathSync } from "../fs/userStorage";
 
@@ -54,17 +54,17 @@ export class LibraryCoversStorageAdapter implements StorageAdapter {
 			console.error("Download error:", error);
 			throw error;
 		}
-		console.log("File downloaded successfully: ", data);
+		// console.log("File downloaded successfully: ", data);
 		return data as Blob;
 	}
 
 	async writeFile(fileURI: string, base64Data: string): Promise<void> {
-		console.log(`Writing file to URI:${fileURI}`);
+		// console.log(`Writing file to URI:${fileURI}`);
 		const buffer = await this.base64ToArrayBuffer(base64Data);
 		const uint8Buffer = new Uint8Array(buffer);
 		await writeFile(fileURI, uint8Buffer, { baseDir: LOCAL_APPDATA });
 
-		console.log("File written successfully.");
+		// console.log("File written successfully.");
 	}
 
 	async readFile(fileURI: string): Promise<ArrayBuffer> {

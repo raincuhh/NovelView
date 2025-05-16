@@ -109,6 +109,32 @@ export function DropdownMenuContent({
 		if (top + contentRect.height > windowHeight) {
 			top = triggerRect.top - contentRect.height;
 		}
+		// const triggerRect = ctx.triggerRef.current.getBoundingClientRect();
+		// const contentEl = ctx.contentRef.current;
+
+		// contentEl.style.visibility = "hidden";
+		// contentEl.style.display = "block";
+		// const contentRect = contentEl.getBoundingClientRect();
+		// contentEl.style.display = "";
+		// contentEl.style.visibility = "";
+
+		// const windowWidth = window.innerWidth;
+		// const windowHeight = window.innerHeight;
+
+		// let top = triggerRect.bottom;
+		// let left = triggerRect.left;
+
+		// if (left + contentRect.width > windowWidth - 14) {
+		// 	left = Math.max(14, windowWidth - contentRect.width - 14);
+		// }
+
+		// if (top + contentRect.height > windowHeight - 14) {
+		// 	if (triggerRect.top - contentRect.height > 14) {
+		// 		top = triggerRect.top - contentRect.height;
+		// 	} else {
+		// 		top = Math.max(14, windowHeight - contentRect.height - 14);
+		// 	}
+		// }
 
 		left = Math.max(14, left);
 		top = Math.max(14, top);

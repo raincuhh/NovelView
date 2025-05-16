@@ -1,7 +1,6 @@
 import { AbstractAttachmentQueue, AttachmentRecord, AttachmentState } from "@powersync/attachments";
 import { AppConfig } from "../supabase/appConfig";
 import { Tables } from "./appSchema";
-import { queryCLient } from "@tanstack/react-query";
 
 // @ts-ignore
 import { LIBRARY_COVERS_BUCKET_ALLOWED_MIMETYPE } from "../consts";

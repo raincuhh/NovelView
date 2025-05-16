@@ -9,8 +9,9 @@ export default function ModalRoot() {
 		<div>
 			<RenderList
 				data={modals}
-				render={(modal: Modal, i: number) => (
-					<div key={`${modal.id || "modal"}-${i}`} className="w-screen h-screen absolute top-0 left-0">
+				getKey={(modal, i) => `${modal.id || "modal"}-${i}`}
+				render={(modal: Modal) => (
+					<div className="w-screen h-screen absolute top-0 left-0">
 						<div className="relative w-full h-full overflow-hidden">{modal.content}</div>
 					</div>
 				)}

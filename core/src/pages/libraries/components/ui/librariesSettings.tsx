@@ -7,7 +7,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown";
 import Icon from "@/shared/components/ui/icon";
-import { useEffect, useRef, useState } from "react";
+import { cloneElement, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import { useLibrariesSettingsStore } from "@/features/libraries/librariesSettingsStore";
@@ -17,6 +17,7 @@ import type {
 	LibrariesLayoutOption,
 } from "@/features/libraries/types";
 import { cn } from "@/shared/lib/globalUtils";
+import RenderList from "@/shared/components/utils/renderList";
 
 const SORT_OPTIONS: { label: string; value: LibrariesSortOption }[] = [
 	{ label: "Date", value: "date" },
@@ -71,10 +72,15 @@ export default function LibrariesSettings() {
 		LAYOUT_OPTIONS.map(({ icon, value }) => (
 			<div
 				key={value}
-				className={cn("cursor-pointer", settings.layout === value ? "fill-muted" : "")}
+				className={cn("group cursor-pointer", settings.layout === value ? "fill-muted" : "")}
 				onClick={() => setSettings({ layout: value })}
 			>
-				{icon}
+				{cloneElement(icon, {
+					className: cn(
+						"transition-colors",
+						settings.layout === value ? "fill-accent" : "group-hover:fill-accent fill-muted/60"
+					),
+				})}
 			</div>
 		));
 
@@ -120,47 +126,54 @@ export default function LibrariesSettings() {
 					>
 						<div className="flex flex-col px-4 text-normal mt-1">
 							<h1 className="text-muted text-sm py-1">Sort by</h1>
-							{SORT_OPTIONS.map(({ label, value }) => (
-								<div
-									key={value}
-									className="w-full py-1 rounded-md group flex justify-between"
-									onClick={() => setSettings({ sort: value })}
-								>
-									<h1
-										className={cn(
-											"group-hover:text-muted",
-											settings.sort === value ? "text-accent group-hover:text-accent-hover" : ""
-										)}
+							<RenderList
+								data={SORT_OPTIONS}
+								render={(item) => (
+									<div
+										className="w-full py-1 rounded-md group flex justify-between"
+										onClick={() => setSettings({ sort: item.value })}
 									>
-										{label}
-									</h1>
-									{settings.sort === value && (
-										<Icon.check className="group-hover:fill-accent-hover fill-accent" />
-									)}
-								</div>
-							))}
+										<h1
+											className={cn(
+												"group-hover:text-muted",
+												settings.sort === item.value
+													? "text-accent group-hover:text-accent-hover"
+													: ""
+											)}
+										>
+											{item.label}
+										</h1>
+										{settings.sort === item.value && (
+											<Icon.check className="group-hover:fill-accent-hover fill-accent" />
+										)}
+									</div>
+								)}
+							/>
 							<h1 className="text-muted text-sm py-1">Direction</h1>
-							{DIRECTION_OPTIONS.map(({ label, value }) => (
-								<div
-									key={value}
-									className="w-full py-1 rounded-md group flex justify-between"
-									onClick={() => setSettings({ direction: value })}
-								>
-									<h1
-										className={cn(
-											"group-hover:text-muted",
-											settings.direction === value
-												? "text-accent group-hover:text-accent-hover"
-												: ""
-										)}
+							<RenderList
+								data={DIRECTION_OPTIONS}
+								render={(item) => (
+									<div
+										key={item.value}
+										className="w-full py-1 rounded-md group flex justify-between"
+										onClick={() => setSettings({ direction: item.value })}
 									>
-										{label}
-									</h1>
-									{settings.direction === value && (
-										<Icon.check className="group-hover:fill-accent-hover fill-accent" />
-									)}
-								</div>
-							))}
+										<h1
+											className={cn(
+												"group-hover:text-muted",
+												settings.direction === item.value
+													? "text-accent group-hover:text-accent-hover"
+													: ""
+											)}
+										>
+											{item.label}
+										</h1>
+										{settings.direction === item.value && (
+											<Icon.check className="group-hover:fill-accent-hover fill-accent" />
+										)}
+									</div>
+								)}
+							/>
 						</div>
 						<div className="flex flex-col px-4 text-normal mt-1">
 							<h1 className="text-muted text-sm py-1">Layout</h1>
