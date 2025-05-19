@@ -2,6 +2,9 @@ import { Library } from "../types";
 import { localDb, powersyncDb } from "@/shared/providers/systemProvider";
 import { MostInteractedLibrary } from "../types";
 
+/**
+ * fetches remote and local libraries.
+ */
 export async function getAllLibraries(userId: string): Promise<Library[]> {
 	const query = `SELECT * FROM libraries WHERE user_id = ?`;
 
@@ -16,6 +19,33 @@ export async function getAllLibraries(userId: string): Promise<Library[]> {
 
 	const remote = (powersyncRes?.rows?._array as Library[]) ?? [];
 	return [...(localRes ?? []), ...remote];
+}
+
+/**
+ * fetches local libraries.
+ */
+export async function getLocalLibraries(userId: string): Promise<Library[]> {
+	const query = `SELECT * FROM libraries WHERE user_id = ?`;
+
+	const localRes = localDb.select<Library[]>(query, [userId]);
+
+	return localRes;
+}
+
+/**
+ * fetches remote libraries
+ */
+export async function getRemoteLibraries(userId: string): Promise<Library[]> {
+	const query = `SELECT * FROM libraries WHERE user_id = ?`;
+
+	const remoteRes = powersyncDb.execute(query, [userId]);
+	const remote = (await remoteRes).rows?._array as Library[];
+
+	const abortController = new AbortController();
+
+	powersyncDb.watch(query, [userId], { signal: abortController.signal });
+
+	return remote;
 }
 
 export async function getMostInteractedLibraries(

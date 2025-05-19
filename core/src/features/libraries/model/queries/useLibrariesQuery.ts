@@ -1,5 +1,11 @@
 // import { useSuspenseQuery } from "@tanstack/react-query";
-import { getMostInteractedLibraries, getLibraryById, getAllLibraries } from "../../lib/selectLibraries";
+import {
+	getMostInteractedLibraries,
+	getLibraryById,
+	getAllLibraries,
+	getLocalLibraries,
+	getRemoteLibraries,
+} from "../../lib/selectLibraries";
 import { getLibraryCoverPath } from "../../lib/utils";
 import { useSuspenseQuery } from "@powersync/tanstack-react-query";
 
@@ -31,6 +37,26 @@ export const useAllLibrariesQuery = (userId: string) => {
 	return useSuspenseQuery({
 		queryKey: ["allLibraries", userId],
 		queryFn: () => getAllLibraries(userId),
+	});
+};
+
+/**
+ * fetch all local libraries.
+ */
+export const useLocalLibrariesQuery = (userId: string) => {
+	return useSuspenseQuery({
+		queryKey: ["localLibraries"],
+		queryFn: () => getLocalLibraries(userId),
+	});
+};
+
+/**
+ * fetch all remote libraries
+ */
+export const useRemoteLibrariesQuery = (userId: string) => {
+	return useSuspenseQuery({
+		queryKey: ["remoteLibraries"],
+		queryFn: () => getRemoteLibraries(userId),
 	});
 };
 
