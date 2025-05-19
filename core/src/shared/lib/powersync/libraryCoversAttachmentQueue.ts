@@ -8,15 +8,14 @@ import { getFileExtension } from "../globalUtils";
 import { Library } from "@/features/libraries/types";
 import {
 	clearCoverCache,
-	createLibraryMetadata,
 	getLocalLibraryCoverPath,
 	getRemoteLibraryCoverPath,
-	libraryFolderExists,
 	mapLibraryRow,
 } from "@/features/libraries/lib/utils";
-import { exists, mkdir, writeFile } from "@tauri-apps/plugin-fs";
-import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "@/features/fs/consts";
+import { writeFile } from "@tauri-apps/plugin-fs";
+import { LOCAL_APPDATA } from "@/features/fs/consts";
 import { queryClient } from "../queryClient";
+import { ensureLibraryExists, syncMissingLibrariesExternal } from "@/features/libraries/lib/insertLibraries";
 
 export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 	async init() {
@@ -69,7 +68,6 @@ export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 
 	async downloadAttachment(localFilePath: string, id: string, filename: string): Promise<AttachmentRecord> {
 		const ext = getFileExtension(filename ?? "jpg");
-		// console.log("DOWNLAODING ATTACHMENT");
 		const attachment = await this.newAttachmentRecord({
 			id,
 			filename,
@@ -80,8 +78,6 @@ export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 
 		const blob = await this.storage.downloadFile(filename);
 		if (!blob) throw new Error(`No blob data received for ${filename}`);
-
-		// console.log("blob downloaded: ", blob);
 
 		const arrayBuffer = await blob.arrayBuffer();
 		const contents = new Uint8Array(arrayBuffer);
@@ -94,62 +90,9 @@ export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 		return this.saveToQueue(attachment);
 	}
 
-	async syncMissingLibraries(remoteLibraries: Library[], userId: string) {
-		for (const rawLibrary of remoteLibraries) {
-			const library = mapLibraryRow(rawLibrary);
-			// console.log("======");
-			// console.log("syncing: ", library);
-			// console.log("Library keys: ", Object.keys(library));
-
-			const libraryExists = await libraryFolderExists(library.id);
-
-			if (!libraryExists) {
-				// folder doesnt exist locally, and we just make everything from scratch.
-				const localDir = `${LIBRARIES_FOLDER}/${library.id}`;
-				await mkdir(localDir, { baseDir: LOCAL_APPDATA });
-
-				await this.tryDownloadCover(library, userId);
-
-				await createLibraryMetadata(localDir, {
-					name: library.name,
-					type: library.type,
-					coverUrl: library.coverUrl ?? null,
-				});
-			} else {
-				// console.log("library folder exists for library: ", library.name);
-				// console.log(`coverUrl?: `, library.coverUrl);
-				if (library.coverUrl) {
-					const ext = getFileExtension(library.coverUrl);
-					const localCoverPath = getLocalLibraryCoverPath(library.id, ext);
-					const coverExists = await exists(localCoverPath, { baseDir: LOCAL_APPDATA });
-
-					if (!coverExists) {
-						console.log(`Cover file missing for library ${library.name}, downloading...`);
-						const remotePath = getRemoteLibraryCoverPath(userId, library.id, ext);
-						await this.downloadAttachment(localCoverPath, library.id, remotePath);
-					}
-				} else {
-					console.log(`No cover URL for library ${library.name}, skipping cover check`);
-				}
-
-				const metadataPath = `${LIBRARIES_FOLDER}/${library.id}/metadata.json`;
-				const metadataExists = await exists(metadataPath, { baseDir: LOCAL_APPDATA });
-				if (!metadataExists) {
-					console.log(`Metadata missing for ${library.name}, re-creating...`);
-					await createLibraryMetadata(`${LIBRARIES_FOLDER}/${library.id}`, {
-						name: library.name,
-						type: library.type,
-						coverUrl: library.coverUrl ?? null,
-					});
-				}
-			}
-		}
-	}
-
-	private async tryDownloadCover(library: Library, userId: string) {
+	async tryDownloadCover(library: Library, userId: string) {
 		if (library.coverUrl) {
 			const ext = getFileExtension(library.coverUrl);
-			console.log("trying to download libCover:  ", library.coverUrl);
 			const localPath = getLocalLibraryCoverPath(library.id, ext);
 			const remotePath = getRemoteLibraryCoverPath(userId, library.id, ext);
 

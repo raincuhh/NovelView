@@ -1,33 +1,42 @@
 import { Library } from "@/features/libraries/types";
 import { PowerSyncDatabase } from "@powersync/web";
 import { LibraryCoversAttachmentQueue } from "../lib/powersync/libraryCoversAttachmentQueue";
+import { BookFilesAttachmentQueue } from "../lib/powersync/bookFilesAttachmentQueue";
+import { AvatarsAttachmentQueue } from "../lib/powersync/avatarsAttachmentQueue";
+import { syncMissingLibraries } from "@/features/libraries/lib/insertLibraries";
 
 export default class SyncService {
 	private powersync: PowerSyncDatabase;
 	private libraryCoversQueue: LibraryCoversAttachmentQueue;
+	private bookFilesQueue: BookFilesAttachmentQueue;
+	private avatarsQueue: AvatarsAttachmentQueue;
 	private userId: string;
 
 	constructor(
 		powersync: PowerSyncDatabase,
 		libraryCoversQueue: LibraryCoversAttachmentQueue,
+		bookFilesQueue: BookFilesAttachmentQueue,
+		avatarsQueue: AvatarsAttachmentQueue,
 		userId: string
 	) {
 		this.powersync = powersync;
 		this.libraryCoversQueue = libraryCoversQueue;
+		this.bookFilesQueue = bookFilesQueue;
+		this.avatarsQueue = avatarsQueue;
 		this.userId = userId;
 	}
 
 	async init() {
-		this.watchLibraries();
+		this.sync();
 	}
 
-	private async watchLibraries() {
-		const query = `SELECT * FROM libraries`;
+	private async sync() {
+		const librariesQuery = `SELECT * FROM libraries`;
 
-		for await (const update of this.powersync.watch(query, [])) {
+		for await (const update of this.powersync.watch(librariesQuery, [])) {
 			const libraries: Library[] = update.rows?._array ?? [];
-			await this.libraryCoversQueue.syncMissingLibraries(libraries, this.userId);
-			await this.initializeLibraryParsing(libraries);
+			syncMissingLibraries(libraries, this.userId, this.libraryCoversQueue);
+			this.initializeLibraryParsing(libraries);
 		}
 	}
 

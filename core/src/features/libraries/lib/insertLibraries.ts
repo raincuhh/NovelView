@@ -1,11 +1,13 @@
-import { mkdir } from "@tauri-apps/plugin-fs";
+import { exists, mkdir } from "@tauri-apps/plugin-fs";
 import { LIBRARIES_FOLDER, LOCAL_APPDATA } from "@/features/fs/consts";
 import { powersyncDb, localDb } from "@/shared/providers/systemProvider";
-import { LibraryType } from "../types";
+import { Library, LibraryType } from "../types";
 import {
 	createLibraryMetadata,
 	getLocalLibraryCoverPath,
 	getRemoteLibraryCoverPath,
+	libraryFolderExists,
+	mapLibraryRow,
 	saveLibraryCover,
 } from "./utils";
 import Database from "@tauri-apps/plugin-sql";
@@ -107,29 +109,64 @@ function insertLibrary(db: ExecutableDb, data: LibraryInsertData) {
 }
 
 /**
- * Syncs missing libraries in the localappdata folders for libraries synced with powersync.
- *
+ * start process of syncing missing remote libraries to local appdata.
  */
 
-// async function syncMissingLibraries(remoteLibraries: Library[], userId: string) {
-// 	for (const library of remoteLibraries) {
-// 		const folderExists = await libraryFolderExists(library.id);
-// 		if (!folderExists) {
-// 			const localDir = `${LIBRARIES_FOLDER}/${library.id}`;
-// 			await mkdir(localDir, { baseDir: LOCAL_APPDATA });
+export async function syncMissingLibraries(
+	remoteLibraries: Library[],
+	userId: string,
+	queue: LibraryCoversAttachmentQueue
+) {
+	for (const rawLibrary of remoteLibraries) {
+		const library = mapLibraryRow(rawLibrary);
+		await ensureLibraryExists(library, userId, queue);
+	}
+}
 
-// 			if (library.coverUrl) {
-// 				await downloadAndSaveLibraryCover(library, userId);
-// 			}
+export async function ensureLibraryExists(
+	library: Library,
+	userId: string,
+	queue: LibraryCoversAttachmentQueue
+) {
+	const folderExists = await libraryFolderExists(library.id);
 
-// 			// Save metadata (like name, type, etc.)
-// 			await createLibraryMetadata(localDir, {
-// 				name: library.name,
-// 				type: library.type,
-// 				coverUrl: library.coverUrl ?? null,
-// 			});
+	if (!folderExists) {
+		const localDir = `${LIBRARIES_FOLDER}/${library.id}`;
+		await mkdir(localDir, { baseDir: LOCAL_APPDATA });
+		await queue.tryDownloadCover(library, userId);
+		await createLibraryMetadata(localDir, {
+			name: library.name,
+			type: library.type,
+			coverUrl: library.coverUrl ?? null,
+		});
+	} else {
+		await ensureCoverExists(queue, library, userId);
+		await ensureMetadataExists(library);
+	}
+}
 
-// 			console.log(`Library folder created for: ${library.name}`);
-// 		}
-// 	}
-// }
+async function ensureCoverExists(queue: LibraryCoversAttachmentQueue, library: Library, userId: string) {
+	if (!library.coverUrl) return;
+
+	const ext = library.coverUrl.split(".").pop() || "jpg";
+	const localCoverPath = getLocalLibraryCoverPath(library.id, ext);
+	const existsCover = await exists(localCoverPath, { baseDir: LOCAL_APPDATA });
+
+	if (!existsCover) {
+		const remotePath = getRemoteLibraryCoverPath(userId, library.id, ext);
+		await queue.downloadAttachment(localCoverPath, library.id, remotePath);
+	}
+}
+
+async function ensureMetadataExists(library: Library) {
+	const metadataPath = `${LIBRARIES_FOLDER}/${library.id}/metadata.json`;
+	const metadataExists = await exists(metadataPath, { baseDir: LOCAL_APPDATA });
+
+	if (!metadataExists) {
+		await createLibraryMetadata(`${LIBRARIES_FOLDER}/${library.id}`, {
+			name: library.name,
+			type: library.type,
+			coverUrl: library.coverUrl ?? null,
+		});
+	}
+}

@@ -70,6 +70,13 @@ export function getRemoteLibraryCoverPath(userId: string, libraryId: string, ext
 		.replace("{ext}", ext);
 }
 
+/**
+ * sorts librariesWithBookCount[] by date, most, least, alphabetical, and by ascending, descending.
+ * @param libraries
+ * @param sort
+ * @param direction
+ * @returns
+ */
 export function sortLibraries(
 	libraries: LibraryWithBookCount[],
 	sort: LibrariesSortOption,

@@ -39,15 +39,15 @@ function RouteComponent() {
 							<FadeIn>
 								<QuickAccessErrorBoundary />
 							</FadeIn>
-							{/* <FadeIn>
+							<FadeIn>
 								<RecentsErrorBoundary />
-							</FadeIn> */}
-							<FadeIn>
+							</FadeIn>
+							{/* <FadeIn>
 								<ActivityCalendar />
-							</FadeIn>
-							<FadeIn>
+							</FadeIn> */}
+							{/* <FadeIn>
 								<TestList count={50} />
-							</FadeIn>
+							</FadeIn> */}
 							<MobileBottomPadding />
 						</>
 					) : (

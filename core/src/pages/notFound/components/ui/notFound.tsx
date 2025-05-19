@@ -1,5 +1,4 @@
 import { useNavigate } from "@tanstack/react-router";
-import React from "react";
 
 export default function NotFound() {
 	const navigate = useNavigate();
