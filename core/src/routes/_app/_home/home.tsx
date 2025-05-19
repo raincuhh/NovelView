@@ -1,6 +1,5 @@
 import { useAuthStore } from "@/features/auth/authStore";
 import EmptyLibraries from "@/features/libraries/components/ui/emptyLibraries";
-import ActivityCalendar from "@/pages/home/components/ui/activityCalendar";
 import HomeNavbar from "@/pages/home/components/ui/homeNavbar";
 import { createFileRoute } from "@tanstack/react-router";
 import InitUserTables from "@/features/user/components/utils/initUserTables";
@@ -13,7 +12,6 @@ import MobileBottomPadding from "@/shared/components/ui/mobileBottomPadding";
 import ScrollContainer from "@/shared/components/ui/scrollContainer";
 import { useUserFirstLibraryQuery } from "@/features/books/model/queries/useBookQuery";
 import FadeIn from "@/shared/components/ui/fadeIn";
-import TestList from "@/features/test/components/ui/testList";
 
 export const Route = createFileRoute("/_app/_home/home")({
 	component: RouteComponent,

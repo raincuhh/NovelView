@@ -10,13 +10,10 @@ import {
 	clearCoverCache,
 	getLocalLibraryCoverPath,
 	getRemoteLibraryCoverPath,
-	mapLibraryRow,
 } from "@/features/libraries/lib/utils";
 import { writeFile } from "@tauri-apps/plugin-fs";
 import { LOCAL_APPDATA } from "@/features/fs/consts";
 import { queryClient } from "../queryClient";
-import { ensureLibraryExists, syncMissingLibrariesExternal } from "@/features/libraries/lib/insertLibraries";
-
 export class LibraryCoversAttachmentQueue extends AbstractAttachmentQueue {
 	async init() {
 		if (!AppConfig.buckets.libraries) {
